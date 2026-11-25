@@ -406,9 +406,13 @@
   .place-row{
     display:flex; gap:14px; align-items:center;
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
-    padding:14px 18px; cursor:pointer;
+    padding:14px 18px; cursor:pointer; text-decoration:none; color:inherit;
     transition:border-color .18s ease, background .18s ease;
   }
+  .place-open{
+    margin-left:auto; flex:0 0 auto; color:var(--rose); font-weight:700; font-size:1.05rem; line-height:1;
+  }
+  .place-row:hover .place-open{ color:var(--rose-deep) }
   .place-row:hover{ border-color:var(--rose-light) }
   .place-row:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
   .place-row.map-selected{ background:var(--rose-pale); border-color:var(--rose) }
@@ -573,7 +577,7 @@
   <section aria-labelledby="lugares-title">
     <div class="section-head">
       <h2 id="lugares-title">Nuestros lugares</h2>
-      <p>Algunos de los lugares donde dejamos huella de nuestro amor ♥ Toca un corazoncito en el mapa, o un lugar en la lista, y revive cada momento conmigo.</p>
+      <p>Algunos de los lugares donde dejamos huella de nuestro amor ♥ Toca un corazoncito en el mapa para verlo aquí, o toca un lugar de la lista para abrirlo en Google Maps y llegar hasta ahí conmigo.</p>
       <div class="divider" aria-hidden="true">♥</div>
     </div>
 
@@ -591,61 +595,85 @@
     </div>
 
     <ul class="places-list">
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">1</span>
-        <div>
-          <h3>Calle Maple, El Saucillo</h3>
-          <p>Pachuca, Hidalgo</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=20.06571,-98.73007" target="_blank" rel="noopener noreferrer" aria-label="Abrir Calle Maple, El Saucillo en Google Maps">
+          <span class="place-num" aria-hidden="true">1</span>
+          <div>
+            <h3>Calle Maple, El Saucillo</h3>
+            <p>Pachuca, Hidalgo</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">2</span>
-        <div>
-          <h3>Casa de los abuelitos de Naomi</h3>
-          <p>Ermita, Ciudad de México</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.35803,-99.14221" target="_blank" rel="noopener noreferrer" aria-label="Abrir Casa de los abuelitos de Naomi, en Ermita, en Google Maps">
+          <span class="place-num" aria-hidden="true">2</span>
+          <div>
+            <h3>Casa de los abuelitos de Naomi</h3>
+            <p>Ermita, Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">3</span>
-        <div>
-          <h3>Coyoacán</h3>
-          <p>Ciudad de México</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.34684,-99.16034" target="_blank" rel="noopener noreferrer" aria-label="Abrir Coyoacán en Google Maps">
+          <span class="place-num" aria-hidden="true">3</span>
+          <div>
+            <h3>Coyoacán</h3>
+            <p>Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">4</span>
-        <div>
-          <h3>Templo de Aragón</h3>
-          <p>Ciudad de México</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.46529,-99.08661" target="_blank" rel="noopener noreferrer" aria-label="Abrir Templo de Aragón en Google Maps">
+          <span class="place-num" aria-hidden="true">4</span>
+          <div>
+            <h3>Templo de Aragón</h3>
+            <p>Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">5</span>
-        <div>
-          <h3>Casa de los abuelitos de Hagot</h3>
-          <p>Cuautepec, Ciudad de México</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.53679,-99.14091" target="_blank" rel="noopener noreferrer" aria-label="Abrir Casa de los abuelitos de Hagot, en Cuautepec, en Google Maps">
+          <span class="place-num" aria-hidden="true">5</span>
+          <div>
+            <h3>Casa de los abuelitos de Hagot</h3>
+            <p>Cuautepec, Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">6</span>
-        <div>
-          <h3>Puerto de Veracruz</h3>
-          <p>Veracruz, Veracruz</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.20821,-96.14598" target="_blank" rel="noopener noreferrer" aria-label="Abrir Puerto de Veracruz en Google Maps">
+          <span class="place-num" aria-hidden="true">6</span>
+          <div>
+            <h3>Puerto de Veracruz</h3>
+            <p>Veracruz, Veracruz</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">7</span>
-        <div>
-          <h3>Playa de Veracruz</h3>
-          <p>Veracruz, Veracruz</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.21104,-96.18364" target="_blank" rel="noopener noreferrer" aria-label="Abrir Playa de Veracruz en Google Maps">
+          <span class="place-num" aria-hidden="true">7</span>
+          <div>
+            <h3>Playa de Veracruz</h3>
+            <p>Veracruz, Veracruz</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
-      <li class="place-row" tabindex="0">
-        <span class="place-num" aria-hidden="true">8</span>
-        <div>
-          <h3>Reserva Uno</h3>
-          <p>Veracruz, Veracruz</p>
-        </div>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.20252,-96.164" target="_blank" rel="noopener noreferrer" aria-label="Abrir Reserva Uno, Veracruz, en Google Maps">
+          <span class="place-num" aria-hidden="true">8</span>
+          <div>
+            <h3>Reserva Uno</h3>
+            <p>Veracruz, Veracruz</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
       </li>
     </ul>
 
@@ -860,7 +888,7 @@
       </div>
     </div>
     <div class="foot-meta">
-      <p>Última edición de esta página: <strong>martes 24 de noviembre de 2026</strong> ♥</p>
+      <p>Última edición de esta página: <strong>miércoles 25 de noviembre de 2026</strong> ♥</p>
       <p class="foot-copy">© <span id="copyYear">2026</span> <strong>Naomi Nazareth Carbajal Sánchez</strong>. Todos los derechos reservados.</p>
     </div>
   </div>

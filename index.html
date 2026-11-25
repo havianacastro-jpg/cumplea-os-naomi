@@ -341,6 +341,26 @@
   footer .foot-hearts{ color:var(--rose); letter-spacing:.5em; font-size:1rem; margin-bottom:10px}
   footer p{margin:4px 0; font-size:.95rem}
   footer .foot-name{font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:var(--ink)}
+  .foot-panel{
+    max-width:820px; margin:30px auto 0; text-align:left;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow); padding:26px 24px 22px; position:relative; overflow:hidden;
+  }
+  .foot-panel::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .foot-grid{ display:grid; gap:20px}
+  @media(min-width:700px){ .foot-grid{grid-template-columns:1.15fr 1fr} }
+  .foot-block h3{ margin:0 0 6px; font-family:"Playfair Display",serif; font-size:1.15rem; color:var(--ink); line-height:1.25}
+  .foot-block .foot-label{ display:block; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold); margin-bottom:5px}
+  .foot-weather-temp{ font-family:"Playfair Display",serif; font-weight:800; font-size:2.2rem; line-height:1; color:var(--rose-deep)}
+  .foot-weather-cond{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:var(--ink); margin-left:6px}
+  .foot-block p{ font-size:.92rem; line-height:1.55}
+  .foot-block a{ color:var(--rose-deep); font-weight:700}
+  .foot-clock{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.55rem; line-height:1.15; color:var(--rose-deep); font-variant-numeric:tabular-nums}
+  .foot-date{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.12rem; color:var(--ink); text-transform:capitalize}
+  .foot-meta{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); display:grid; gap:6px; text-align:center}
+  .foot-meta p{ font-size:.9rem}
+  .foot-copy{ font-size:.92rem; color:var(--ink)}
+  .foot-copy strong{ color:var(--rose-deep)}
 </style>
 </head>
 <body>
@@ -348,7 +368,7 @@
 <div id="heartsLayer" aria-hidden="true"></div>
 
 <header class="hero">
-  <img class="garland" src="images/foto-2.jpg" alt="Guirnalda de corazones rosas y rojos con rosas y estrellas doradas" />
+  <img class="garland" src="images/foto-1.jpg" alt="Guirnalda de corazones rosas y rojos con rosas y estrellas doradas" />
   <div class="hero-inner">
     <p class="for-you">Hoy es tu día, mi amor… y esto lo hice solo para ti</p>
     <h1>¡Feliz cumpleaños,<br><span class="name">Naomi!</span></h1>
@@ -406,7 +426,7 @@
 
     <div class="gallery">
       <figure class="polaroid">
-        <img src="images/foto-2.jpg" alt="Ilustración en acuarela de un ramo de rosas y peonías rosas con un moño" />
+        <img src="images/foto-3.jpg" alt="Ilustración en acuarela de un ramo de rosas y peonías rosas con un moño" />
         <figcaption>Flores para la más hermosa</figcaption>
       </figure>
 
@@ -421,7 +441,7 @@
       </figure>
 
       <figure class="polaroid">
-        <img src="images/foto-2.jpg" alt="Ilustración en acuarela del pastel de cumpleaños rosa con velitas y rosas" />
+        <img src="images/foto-4.jpg" alt="Ilustración en acuarela del pastel de cumpleaños rosa con velitas y rosas" />
         <figcaption>Pide un deseo, mi vida…</figcaption>
       </figure>
     </div>
@@ -579,7 +599,7 @@
   <!-- RAMO + DESEOS -->
   <section aria-labelledby="deseos-title">
     <div class="bouquet-row">
-      <img src="images/foto-2.jpg" alt="Ramo en acuarela de rosas y peonías rosas atado con un moño, con corazoncitos flotando" />
+      <img src="images/foto-5.jpg" alt="Ramo en acuarela de rosas y peonías rosas atado con un moño, con corazoncitos flotando" />
       <div class="bouquet-text">
         <h2 id="deseos-title">Todo lo que deseo para ti</h2>
         <p>Si pudiera envolverte un regalo con todo lo que siento, sería esto, mi amor:</p>
@@ -618,6 +638,29 @@
   <div class="foot-hearts" aria-hidden="true">♥ ♥ ♥</div>
   <p class="foot-name">Hecha con muchísimo amor, solo para ti, Naomi</p>
   <p>Te amo. Feliz cumpleaños, mi vida… y nos vemos el 19 de diciembre, para empezar nuestra eternidad.</p>
+
+  <div class="foot-panel">
+    <div class="foot-grid">
+      <div class="foot-block" aria-label="Clima en Pachuca, Hidalgo">
+        <span class="foot-label">♥ Nuestro rinconcito · Pachuca, Hidalgo</span>
+        <h3>El clima donde vivimos</h3>
+        <p style="margin:8px 0 4px"><span class="foot-weather-temp">11°C</span><span class="foot-weather-cond">Nublado</span></p>
+        <p>Humedad 88% · Viento del noreste a 8 km/h · Presión 1023 hPa · Salida del sol 6:49 a.m. · Puesta del sol 5:53 p.m.</p>
+        <p>Clima consultado el martes 24 de noviembre de 2026 a las 10:31 p.m. (hora de México). Fuente: <a href="https://weather.com/mx/hidalgo/city/pachuca/today" target="_blank" rel="noopener noreferrer">The Weather Channel</a></p>
+      </div>
+      <div class="foot-block" aria-label="Fecha y hora actuales">
+        <span class="foot-label">♥ Aquí y ahora</span>
+        <h3>Fecha y hora actuales</h3>
+        <p class="foot-date" id="liveDate" style="margin:8px 0 2px">Cargando fecha…</p>
+        <p class="foot-clock" id="liveClock" aria-live="off">--:--:--</p>
+        <p>Hora de Pachuca, Hidalgo (America/Mexico_City). El reloj se actualiza solo, segundo a segundo, para que siempre sepas qué hora es mientras lees esto, mi amor.</p>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <p>Última edición de esta página: <strong>martes 24 de noviembre de 2026</strong> ♥</p>
+      <p class="foot-copy">© <span id="copyYear">2026</span> <strong>Naomi Nazareth Carbajal Sánchez</strong>. Todos los derechos reservados.</p>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -734,6 +777,27 @@
   var cdTimer = null;
   tickAll();
   cdTimer = setInterval(tickAll, 1000);
+
+  // Live date & time — Pachuca, Hidalgo (America/Mexico_City), updates every second
+  var liveDate = document.getElementById('liveDate');
+  var liveClock = document.getElementById('liveClock');
+  var copyYear = document.getElementById('copyYear');
+  function updateClock(){
+    try{
+      var now = new Date();
+      if(liveDate){
+        liveDate.textContent = new Intl.DateTimeFormat('es-MX', { timeZone:'America/Mexico_City', weekday:'long', day:'numeric', month:'long', year:'numeric' }).format(now);
+      }
+      if(liveClock){
+        liveClock.textContent = new Intl.DateTimeFormat('es-MX', { timeZone:'America/Mexico_City', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true }).format(now);
+      }
+      if(copyYear){
+        copyYear.textContent = new Intl.DateTimeFormat('es-MX', { timeZone:'America/Mexico_City', year:'numeric' }).format(now);
+      }
+    }catch(e){}
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
 })();
 </script>
 </body>

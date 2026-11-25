@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Feliz cumpleaños, Naomi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF7F3;
+    --bg-soft:#FDECEF;
+    --surface:#FFFFFF;
+    --surface-warm:#FFF0E8;
+    --ink:#4A2330;
+    --ink-soft:#7A5561;
+    --rose:#C24365;
+    --rose-deep:#9E2F4E;
+    --rose-light:#F3A8BB;
+    --rose-pale:#FCE0E6;
+    --gold:#B98A2F;
+    --gold-soft:#EAD9A8;
+    --line:#F0CBD3;
+    --shadow:0 18px 40px rgba(158,47,78,.14);
+    --radius-lg:28px;
+    --radius-md:18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#241419;
+      --bg-soft:#2E1B22;
+      --surface:#332028;
+      --surface-warm:#3A232B;
+      --ink:#FDEDF0;
+      --ink-soft:#E8BFC8;
+      --rose:#F08AA6;
+      --rose-deep:#F6B0C2;
+      --rose-light:#8A4458;
+      --rose-pale:#4A2A35;
+      --gold:#E3C87E;
+      --gold-soft:#5A4A2A;
+      --line:#5A3542;
+      --shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Quicksand", system-ui, sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block}
+  button{min-height:44px}
+  a{min-height:32px}
+
+  /* Floating hearts layer */
+  #heartsLayer{
+    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+  }
+  .float-heart{
+    position:absolute; bottom:-40px;
+    color:var(--rose-light);
+    opacity:0;
+    animation:floatUp linear forwards;
+    user-select:none;
+  }
+  @keyframes floatUp{
+    0%{transform:translateY(0) rotate(0deg) scale(1); opacity:0}
+    10%{opacity:.75}
+    90%{opacity:.5}
+    100%{transform:translateY(-105vh) rotate(28deg) scale(1.15); opacity:0}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .float-heart{animation:none; display:none}
+    html{scroll-behavior:auto}
+  }
+
+  .wrap{max-width:980px; margin:0 auto; padding:0 20px; position:relative; z-index:2}
+
+  /* HERO */
+  .hero{ text-align:center; padding:18px 0 10px; position:relative}
+  .garland{ width:100%; height:auto; border-radius:0 0 24px 24px}
+  .hero-inner{padding:28px 20px 8px; max-width:760px; margin:0 auto}
+  .for-you{
+    font-family:"Cormorant Garamond", serif; font-style:italic;
+    font-size:1.35rem; color:var(--rose); letter-spacing:.02em; margin:0;
+  }
+  h1{
+    font-family:"Playfair Display", serif; font-weight:800;
+    font-size:clamp(2.6rem, 8vw, 4.6rem); line-height:1.02; margin:.18em 0 .25em;
+    color:var(--ink);
+  }
+  h1 .name{ color:var(--rose-deep); font-style:italic}
+  .hero-sub{ font-size:1.12rem; color:var(--ink-soft); max-width:560px; margin:0 auto 22px}
+  .hero-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--rose-deep); color:#fff; border:none; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 26px; border-radius:999px; box-shadow:var(--shadow);
+    transition:transform .18s ease, background .18s ease;
+  }
+  .hero-cta:hover{transform:translateY(-2px)}
+  .hero-cta:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+  @media (prefers-color-scheme: dark){ .hero-cta{color:#241419} }
+  .cake-figure{ max-width:640px; margin:30px auto 0; }
+  .cake-figure img{ border-radius:var(--radius-lg); box-shadow:var(--shadow); width:100%}
+
+  /* Sections */
+  section{padding:52px 0 8px}
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 28px}
+  .section-head h2{
+    font-family:"Playfair Display",serif; font-size:clamp(1.9rem,5vw,2.6rem);
+    margin:0 0 8px; line-height:1.15;
+  }
+  .section-head p{color:var(--ink-soft); margin:0}
+  .divider{ display:flex; align-items:center; justify-content:center; gap:10px; margin:14px auto 0; color:var(--rose)}
+  .divider::before,.divider::after{content:""; height:1px; width:56px; background:var(--line)}
+
+  /* Letter */
+  .letter{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow);
+    max-width:720px; margin:0 auto; padding:38px 34px 32px; position:relative;
+  }
+  .letter::before{
+    content:"♥"; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    width:46px; height:46px; border-radius:50%;
+    background:var(--rose-deep); color:#fff; display:grid; place-items:center;
+    font-size:1.25rem; box-shadow:var(--shadow);
+  }
+  @media (prefers-color-scheme: dark){ .letter::before{color:#241419} }
+  .letter p{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.75; margin:0 0 16px}
+  .letter p:first-of-type{margin-top:8px}
+  .letter .sign{
+    font-family:"Playfair Display",serif; font-style:italic; font-size:1.3rem;
+    text-align:right; color:var(--rose-deep); margin-top:22px;
+  }
+  .letter-toggle{
+    display:block; margin:20px auto 0; background:transparent; color:var(--rose-deep);
+    border:1.5px solid var(--rose-deep); border-radius:999px; padding:10px 22px;
+    font-family:"Quicksand",sans-serif; font-weight:700; cursor:pointer; font-size:.95rem;
+  }
+  .letter-more{display:none}
+  .letter.open .letter-more{display:block}
+  .letter.open .letter-toggle .when-closed{display:none}
+  .letter .when-open{display:none}
+  .letter.open .when-open{display:inline}
+  .letter-toggle .when-closed{display:inline}
+
+  /* Gallery / polaroids */
+  .gallery{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:22px; max-width:820px; margin:0 auto;
+  }
+  @media (min-width:760px){ .gallery{grid-template-columns:repeat(4,1fr); gap:18px} }
+  .polaroid{
+    background:var(--surface); padding:10px 10px 14px; border-radius:10px;
+    box-shadow:var(--shadow); border:1px solid var(--line);
+  }
+  .polaroid:nth-child(odd){transform:rotate(-2.2deg)}
+  .polaroid:nth-child(even){transform:rotate(2deg)}
+  .polaroid img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px}
+  .polaroid figcaption{
+    text-align:center; font-family:"Cormorant Garamond",serif; font-style:italic;
+    font-size:1.05rem; color:var(--ink-soft); padding-top:10px; line-height:1.35;
+  }
+  .photo-slot{
+    aspect-ratio:1/1; border-radius:6px;
+    background:var(--bg-soft);
+    border:2px dashed var(--rose-light);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    color:var(--rose); text-align:center; padding:14px;
+  }
+  .photo-slot .big-heart{font-size:2rem; line-height:1}
+  .photo-slot span{font-size:.82rem; font-weight:600; color:var(--ink-soft); line-height:1.4}
+  .gallery-note{ text-align:center; color:var(--ink-soft); font-size:.95rem; max-width:520px; margin:22px auto 0}
+
+  /* Gratitude list */
+  .thanks-list{ max-width:720px; margin:0 auto; display:grid; gap:14px}
+  .thanks-item{
+    display:flex; gap:16px; align-items:flex-start;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:18px 20px;
+  }
+  .thanks-item .heart-badge{
+    flex:0 0 auto; width:42px; height:42px; border-radius:50%;
+    background:var(--rose-pale); color:var(--rose-deep);
+    display:grid; place-items:center; font-size:1.15rem; margin-top:2px;
+  }
+  .thanks-item h3{ margin:0 0 4px; font-family:"Playfair Display",serif; font-size:1.18rem}
+  .thanks-item p{ margin:0; color:var(--ink-soft); font-size:.98rem}
+
+  /* Wishes */
+  .wishes{
+    background:var(--surface-warm); border:1px solid var(--line); border-radius:var(--radius-lg);
+    max-width:820px; margin:0 auto; padding:34px 28px;
+    display:grid; gap:8px;
+  }
+  @media(min-width:700px){ .wishes{grid-template-columns:1fr 1fr; gap:8px 32px} }
+  .wish{ display:flex; gap:12px; align-items:baseline; padding:8px 0; border-bottom:1px dashed var(--line)}
+  .wish:last-child{border-bottom:none}
+  .wish .star{color:var(--gold); flex:0 0 auto}
+  .wish p{margin:0}
+  .wish strong{font-family:"Playfair Display",serif}
+
+  .bouquet-row{
+    display:flex; flex-direction:column; align-items:center; gap:22px; max-width:820px; margin:0 auto;
+  }
+  @media(min-width:760px){ .bouquet-row{flex-direction:row; align-items:center} .bouquet-row img{width:44%} .bouquet-row .bouquet-text{flex:1} }
+  .bouquet-row img{ border-radius:var(--radius-lg); box-shadow:var(--shadow); width:min(420px,100%)}
+  .bouquet-text h2{font-family:"Playfair Display",serif; font-size:clamp(1.8rem,4.5vw,2.4rem); margin:0 0 10px; line-height:1.2}
+  .bouquet-text p{color:var(--ink-soft); margin:0 0 12px}
+
+  /* Surprise */
+  .surprise{ text-align:center; padding-bottom:20px}
+  .surprise-box{
+    max-width:640px; margin:0 auto; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:34px 26px;
+  }
+  .surprise-box h2{font-family:"Playfair Display",serif; margin:0 0 8px; font-size:1.9rem}
+  .surprise-box p{color:var(--ink-soft); margin:0 0 20px}
+  #rainBtn{
+    background:var(--rose-deep); color:#fff; border:none; border-radius:999px;
+    padding:14px 28px; font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+  @media (prefers-color-scheme: dark){ #rainBtn{color:#241419} }
+  #rainBtn:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+  #secretMsg{
+    display:none; margin-top:24px; padding-top:22px; border-top:1px dashed var(--line);
+    font-family:"Cormorant Garamond",serif; font-size:1.35rem; line-height:1.6;
+  }
+  #secretMsg.show{display:block}
+  #secretMsg .from{ display:block; margin-top:10px; font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep); font-size:1.15rem}
+
+  .rain-heart{ position:fixed; top:-40px; z-index:50; pointer-events:none; animation:rainFall linear forwards}
+  @keyframes rainFall{
+    to{ transform:translateY(108vh) rotate(320deg); }
+  }
+  @media (prefers-reduced-motion: reduce){ .rain-heart{animation-duration:.01s} }
+
+  /* Dates + wedding + eternity */
+  .dates{ display:grid; gap:16px; max-width:820px; margin:0 auto}
+  @media(min-width:700px){ .dates{grid-template-columns:1fr 1fr} }
+  .date-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    box-shadow:var(--shadow); padding:26px 24px; text-align:center;
+  }
+  .date-card .day{ font-family:"Playfair Display",serif; font-weight:800; font-size:3.1rem; line-height:1; color:var(--rose-deep)}
+  .date-card .month{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.35rem; color:var(--gold); margin:2px 0 10px}
+  .date-card h3{ margin:0 0 6px; font-family:"Playfair Display",serif; font-size:1.25rem}
+  .date-card p{ margin:0; color:var(--ink-soft); font-size:.98rem}
+  .eternity-text{ max-width:720px; margin:30px auto 0}
+  .eternity-text p{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.75; margin:0 0 16px}
+  .love-quote{
+    max-width:720px; margin:28px auto 0; background:var(--surface-warm);
+    border:1px solid var(--line); border-radius:var(--radius-lg); padding:34px 28px; text-align:center;
+  }
+  .love-quote .q-heart{ color:var(--rose); font-size:1.3rem; margin-bottom:10px}
+  .love-quote blockquote{ margin:0; font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.6rem; line-height:1.5; color:var(--ink)}
+  .love-quote cite{ display:block; margin-top:14px; font-family:"Quicksand",sans-serif; font-style:normal; font-weight:700; font-size:.88rem; letter-spacing:.06em; text-transform:uppercase; color:var(--rose-deep)}
+
+  /* Mensajes */
+  .messages-grid{ display:grid; gap:18px; max-width:820px; margin:0 auto}
+  @media(min-width:700px){ .messages-grid{grid-template-columns:1fr 1fr} }
+  .video-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    box-shadow:var(--shadow); padding:26px 24px; display:flex; flex-direction:column; gap:8px;
+  }
+  .video-card .video-tag{ font-size:.8rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold)}
+  .video-card h3{ margin:0; font-family:"Playfair Display",serif; font-size:1.35rem; line-height:1.25}
+  .video-card p{ margin:0; color:var(--ink-soft); font-size:.98rem; flex:1}
+  .video-link{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; margin-top:10px;
+    background:var(--rose-deep); color:#fff; text-decoration:none; font-weight:700; font-size:.98rem;
+    padding:13px 20px; border-radius:999px; min-height:48px;
+  }
+  @media (prefers-color-scheme: dark){ .video-link{color:#241419} }
+  .video-link:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+  .video-pending{
+    margin-top:10px; border:2px dashed var(--rose-light); border-radius:999px; padding:11px 20px;
+    text-align:center; color:var(--rose-deep); font-weight:700; font-size:.95rem; background:var(--bg-soft);
+  }
+  .video-link.alt{
+    background:transparent; color:var(--rose-deep); border:1.5px solid var(--rose-deep); margin-top:8px;
+  }
+  @media (prefers-color-scheme: dark){ .video-link.alt{color:var(--rose-deep)} }
+
+  footer{ text-align:center; padding:44px 20px 54px; color:var(--ink-soft); position:relative; z-index:2}
+  footer .foot-hearts{ color:var(--rose); letter-spacing:.5em; font-size:1rem; margin-bottom:10px}
+  footer p{margin:4px 0; font-size:.95rem}
+  footer .foot-name{font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div id="heartsLayer" aria-hidden="true"></div>
+
+<header class="hero">
+  <img class="garland" src="images/foto-1.jpg" alt="Guirnalda de corazones rosas y rojos con rosas y estrellas doradas" />
+  <div class="hero-inner">
+    <p class="for-you">Hoy es tu día, mi amor… y esto lo hice solo para ti</p>
+    <h1>¡Feliz cumpleaños,<br><span class="name">Naomi!</span></h1>
+    <p class="hero-sub">Te hice esta paginita con muchísimo amor, llena de corazoncitos, porque una tarjeta no me alcanzaba para decirte todo lo que siento por ti y lo agradecido que estoy de tenerte en mi vida. Y este diciembre es todavía más especial, mi amor: el 15 celebramos tu cumpleaños… y el 19, ¡nos casamos!</p>
+    <button class="hero-cta" id="toLetter" type="button">♥ &nbsp;Lee lo que te escribí</button>
+    <figure class="cake-figure">
+      <img src="images/foto-2.jpg" alt="Ilustración en acuarela de un pastel de cumpleaños rosa con velitas doradas, rodeado de rosas y corazones" />
+    </figure>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- CARTA -->
+  <section id="carta" aria-labelledby="carta-title">
+    <div class="section-head">
+      <h2 id="carta-title">Una cartita para ti, de corazón</h2>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <article class="letter" id="letterCard">
+      <p>Mi Naomi hermosa:</p>
+      <p>Hoy cumples años y yo solo puedo pensar en lo afortunado que soy de tenerte. De verdad, no sé ni por dónde empezar, porque es tanto lo que quiero decirte… pero lo primero, lo más importante, es esto: <strong>gracias por todo</strong>.</p>
+      <p>Gracias por estar, por quedarte, por tu forma tan bonita de quererme. Por tu sonrisa, que me cambia el día aunque haya sido un día pesado. Por tu cariño en los detallitos, en tus palabras, en cómo me escuchas y me entiendes. Contigo hasta lo más simple se siente especial, y personas como tú no se encuentran todos los días.</p>
+      <div class="letter-more">
+        <p>Gracias por tu paciencia conmigo, por apoyarme cuando más lo he necesitado, por creer en mí y por dar tanto sin esperar nada a cambio. Cada momento a tu lado lo guardo aquí, en el corazón, y no lo cambio por nada. Ojalá este año te devuelva, multiplicado, todo lo bueno que tú le das a los demás.</p>
+        <p>Mi deseo para ti es de corazón: que tengas salud, que se te cumplan esos sueños que tanto anhelas, que rías mucho, que te sientas amada todos los días — y que me dejes seguir siendo parte de todo eso. Te mereces lo mejor de lo mejor, mi amor, hoy y siempre.</p>
+        <p>Y ¿sabes qué es lo que más me emociona? Que cuatro días después de tu cumpleaños, el 19 de diciembre, me caso contigo. Todavía lo pienso y se me llena el corazón: voy a tomar tu mano, con Dios como testigo y en el centro de lo nuestro, y voy a prometerte que esto no es solo para esta vida. Yo no te quiero nada más por un ratito ni por unos años, mi amor: te quiero para siempre, por tiempo y por toda la eternidad.</p>
+        <p>Le doy gracias a nuestro Padre Celestial todos los días por ti, por haberte puesto en mi camino. Sueño con todo lo que viene para nosotros: con nuestro hogar, con caminar juntitos tomados de la mano, y con esa familia eterna que tanto anhelamos formar, con nuestros hijos, nuestro Nimrod y nuestra Liahona, creciendo en un hogar donde Dios esté presente y donde nunca falte el amor. Ese sueño, contigo y con Él guiándonos, es lo más bonito que tengo.</p>
+        <p>¡Feliz cumpleaños, Naomi! Te quiero con todo mi corazón, y quiero seguir celebrando muchísimos cumpleaños a tu lado… en esta vida y en la eternidad.</p>
+      </div>
+      <p class="sign">Con muchísimo amor, siempre tuyo,<br>Hagot</p>
+      <button class="letter-toggle" id="letterToggle" type="button" aria-expanded="false">
+        <span class="when-closed">Sigue leyendo, mi amor ♥</span>
+        <span class="when-open">Cerrar la cartita</span>
+      </button>
+    </article>
+  </section>
+
+  <!-- FOTOS -->
+  <section aria-labelledby="fotos-title">
+    <div class="section-head">
+      <h2 id="fotos-title">Nuestros momentitos</h2>
+      <p>Esos recuerdos que guardo con tanto cariño y que quiero seguir coleccionando contigo.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="gallery">
+      <figure class="polaroid">
+        <img src="images/foto-3.jpg" alt="Ilustración en acuarela de un ramo de rosas y peonías rosas con un moño" />
+        <figcaption>Flores para la más hermosa</figcaption>
+      </figure>
+
+      <figure class="polaroid">
+        <div class="photo-slot" role="img" aria-label="Espacio reservado para una foto de Naomi">
+          <div class="big-heart" aria-hidden="true">♥</div>
+          <span>Aquí va tu foto favorita, mi amor</span>
+        </div>
+        <figcaption>Esa sonrisa que amo</figcaption>
+      </figure>
+
+      <figure class="polaroid">
+        <div class="photo-slot" role="img" aria-label="Espacio reservado para una foto juntos">
+          <div class="big-heart" aria-hidden="true">♥</div>
+          <span>Aquí va una fotito de los dos</span>
+        </div>
+        <figcaption>Tú y yo, siempre</figcaption>
+      </figure>
+
+      <figure class="polaroid">
+        <img src="images/foto-4.jpg" alt="Ilustración en acuarela del pastel de cumpleaños rosa con velitas y rosas" />
+        <figcaption>Pide un deseo, mi vida…</figcaption>
+      </figure>
+    </div>
+
+    <p class="gallery-note">Aquí quiero poner tus fotos favoritas y una nuestra, de esas que más amo. En cuanto las tengamos, este rinconcito va a ser todavía más nuestro.</p>
+  </section>
+
+  <!-- GRACIAS -->
+  <section aria-labelledby="gracias-title">
+    <div class="section-head">
+      <h2 id="gracias-title">Gracias por tanto, mi amor</h2>
+      <p>Por todo lo que eres y por todo lo que me das, a veces sin darte ni cuenta.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="thanks-list">
+      <div class="thanks-item">
+        <div class="heart-badge" aria-hidden="true">♥</div>
+        <div>
+          <h3>Gracias por estar siempre</h3>
+          <p>Por no soltarme ni en los días buenos ni en los difíciles. Saber que estás tú me da una paz que no te puedo ni explicar.</p>
+        </div>
+      </div>
+      <div class="thanks-item">
+        <div class="heart-badge" aria-hidden="true">♥</div>
+        <div>
+          <h3>Gracias por tu sonrisa</h3>
+          <p>Por esa sonrisa tuya que me enamora y me alegra el alma. Te lo juro, es mi parte favorita de todos los días.</p>
+        </div>
+      </div>
+      <div class="thanks-item">
+        <div class="heart-badge" aria-hidden="true">♥</div>
+        <div>
+          <h3>Gracias por quererme así</h3>
+          <p>Por tu cariño tan bonito, por tus detalles, por tus abrazos y por esa forma tan tuya de hacerme sentir tan amado.</p>
+        </div>
+      </div>
+      <div class="thanks-item">
+        <div class="heart-badge" aria-hidden="true">♥</div>
+        <div>
+          <h3>Gracias por ser tú</h3>
+          <p>Por ser exactamente así, tan tú. No cambiaría nada de ti. Mi vida es muchísimo más bonita desde que estás en ella.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BODA + ETERNIDAD -->
+  <section aria-labelledby="boda-title">
+    <div class="section-head">
+      <h2 id="boda-title">Y lo más hermoso… viene enseguida</h2>
+      <p>Este diciembre no solo celebro que naciste, mi amor. Celebro que empieza lo nuestro, para siempre.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="dates">
+      <div class="date-card">
+        <div class="day">15</div>
+        <div class="month">de diciembre</div>
+        <h3>Tu cumpleaños, mi vida</h3>
+        <p>El día en que llegó al mundo la mujer más hermosa, la que me robó el corazón. Ese día te celebro a ti, con todo mi amor.</p>
+      </div>
+      <div class="date-card">
+        <div class="day">19</div>
+        <div class="month">de diciembre</div>
+        <h3>¡Nos casamos!</h3>
+        <p>Cuatro días después te tomo de la mano y empezamos nuestra historia como esposos. Mi regalo más grande eres tú, mi amor.</p>
+      </div>
+    </div>
+
+    <div class="eternity-text">
+      <p>Yo sé que lo nuestro no es casualidad. Le he orado tanto a Dios por ti, y Él, en Su infinito amor, te puso en mi vida. Por eso quiero que Él sea siempre el centro de nuestro matrimonio: que oremos juntos, que lo busquemos juntos, que le entreguemos nuestros planes y nuestros sueños.</p>
+      <p>Como miembros de La Iglesia de Jesucristo de los Santos de los Últimos Días, tú y yo creemos algo hermosísimo: que el matrimonio no tiene por qué terminar, que una familia puede ser eterna. Y eso es exactamente lo que yo quiero contigo, mi Naomi: no solo amarte aquí, sino seguir eligiéndote allá, por toda la eternidad.</p>
+      <p>Y en ese para siempre también viven nuestros sueños: formar nuestro hogar con Dios presente, y un día recibir a nuestros hijos, a nuestro Nimrod y a nuestra Liahona, para amarlos, enseñarles del Padre Celestial y caminar todos juntos, como una familia eterna. Nada me hace más feliz que imaginar esa vida a tu lado.</p>
+    </div>
+
+    <div class="love-quote">
+      <div class="q-heart" aria-hidden="true">♥</div>
+      <blockquote>“Así que no son ya más dos, sino una sola carne; por tanto, lo que Dios juntó, no lo separe el hombre”.</blockquote>
+      <cite>Mateo 19:6</cite>
+    </div>
+  </section>
+
+  <!-- MENSAJES -->
+  <section aria-labelledby="mensajes-title">
+    <div class="section-head">
+      <h2 id="mensajes-title">Mensajes para nosotros</h2>
+      <p>Estos mensajitos hablan justo de lo que tú y yo creemos del amor, mi vida. Quiero que los veamos juntitos.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="messages-grid">
+      <article class="video-card">
+        <span class="video-tag">Iglesia de Jesucristo</span>
+        <h3>Amor duradero</h3>
+        <p>Un mensaje precioso sobre ese amor que no se acaba, que se cuida, se alimenta y dura para siempre: una pareja que se demuestra amor puro y servicio en su matrimonio. Así, justo así, te quiero amar yo a ti.</p>
+        <a class="video-link" href="https://www.churchofjesuschrist.org/study/video/inspirational-messages/2013-06-010-enduring-love?lang=spa" target="_blank" rel="noopener noreferrer">▶ &nbsp;Ver el mensaje</a>
+        <a class="video-link alt" href="https://youtu.be/5G2iid3NiXI?si=MD0GQgy8MGoqJsvl" target="_blank" rel="noopener noreferrer">▶ &nbsp;Verlo en YouTube</a>
+      </article>
+
+      <article class="video-card">
+        <span class="video-tag">Canal Nefita · Mensajes SUD</span>
+        <h3>El amor — El gran mandamiento</h3>
+        <p>El mensaje del presidente Joseph B. Wirthlin sobre Mateo 22:37–40: amar es el mandamiento más grande que Dios nos dio, y tú, mi amor, eres la forma más bonita en la que yo lo vivo todos los días.</p>
+        <a class="video-link" href="https://youtu.be/eNv5WByg1Fs?si=RBefTMVa8aSHhpwv" target="_blank" rel="noopener noreferrer">▶ &nbsp;Ver el mensaje en YouTube</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- RAMO + DESEOS -->
+  <section aria-labelledby="deseos-title">
+    <div class="bouquet-row">
+      <img src="images/foto-5.jpg" alt="Ramo en acuarela de rosas y peonías rosas atado con un moño, con corazoncitos flotando" />
+      <div class="bouquet-text">
+        <h2 id="deseos-title">Todo lo que deseo para ti</h2>
+        <p>Si pudiera envolverte un regalo con todo lo que siento, sería esto, mi amor:</p>
+        <div class="wishes" style="box-shadow:none; padding:10px 0 0; background:transparent; border:none">
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Salud</strong>, para que estés bien y podamos compartir mil cosas más.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Alegría</strong> de esa que tú me das a mí, pero ahora para ti, multiplicada.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Tus sueños cumplidos</strong>, uno a uno — y yo ahí, apoyándote en cada paso.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Amor del bueno</strong>, del que yo quiero darte todos los días.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Más momentos juntos</strong>: más risas, más abrazos, más recuerdos nuestros.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Nuestra boda</strong> el 19 de diciembre, tan bonita como lo soñamos, con Dios en el centro de todo.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Una familia eterna</strong>: nuestro hogar, y un día nuestros hijos, Nimrod y Liahona, con el Padre Celestial guiándonos.</p></div>
+          <div class="wish"><span class="star" aria-hidden="true">★</span><p><strong>Una eternidad juntos</strong>, porque no me alcanzan los años de esta vida para amarte todo lo que te amo.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SORPRESA -->
+  <section class="surprise" aria-labelledby="sorpresa-title">
+    <div class="surprise-box">
+      <h2 id="sorpresa-title">Y antes de que se acabe tu día…</h2>
+      <p>Tengo una última cosita para ti. Cierra los ojos, pide un deseo y toca aquí…</p>
+      <button id="rainBtn" type="button">♥ &nbsp;Que lluevan corazones, mi amor</button>
+      <div id="secretMsg" role="status">
+        Naomi, mi amor: ojalá este año te trate tan bonito como tú tratas a todos, y como me tratas a mí.
+        Gracias por existir, por tanto amor, por ser tú. Gracias a Dios por ti, hoy y todos los días.
+        El 19 de diciembre empieza nuestro para siempre, y yo te prometo amarte y cuidarte en esta vida y por toda la eternidad.
+        <span class="from">¡Feliz cumpleaños, mi futura esposa! Con todo, todo mi amor — Hagot ♥</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-hearts" aria-hidden="true">♥ ♥ ♥</div>
+  <p class="foot-name">Hecha con muchísimo amor, solo para ti, Naomi</p>
+  <p>Te amo. Feliz cumpleaños, mi vida… y nos vemos el 19 de diciembre, para empezar nuestra eternidad.</p>
+</footer>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Floating hearts background
+  var layer = document.getElementById('heartsLayer');
+  var HEARTS = ['♥','♥','♥','♡'];
+  var COLORS = ['#F3A8BB','#E87A97','#C24365','#EAD9A8'];
+  function spawnHeart(){
+    if(!layer) return;
+    var el = document.createElement('span');
+    el.className = 'float-heart';
+    el.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+    el.style.left = (Math.random()*96) + 'vw';
+    el.style.fontSize = (14 + Math.random()*22) + 'px';
+    el.style.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    var dur = 7 + Math.random()*7;
+    el.style.animationDuration = dur + 's';
+    layer.appendChild(el);
+    setTimeout(function(){ el.remove(); }, dur*1000 + 200);
+  }
+  if(!reduceMotion){
+    for(var i=0;i<6;i++){ setTimeout(spawnHeart, i*450); }
+    setInterval(spawnHeart, 1400);
+  }
+
+  // Scroll to letter
+  var toLetter = document.getElementById('toLetter');
+  if(toLetter){
+    toLetter.addEventListener('click', function(){
+      var target = document.getElementById('carta');
+      if(target) target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'});
+    });
+  }
+
+  // Letter toggle
+  var letter = document.getElementById('letterCard');
+  var toggle = document.getElementById('letterToggle');
+  if(letter && toggle){
+    toggle.addEventListener('click', function(){
+      var open = letter.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // Heart rain + secret message
+  var rainBtn = document.getElementById('rainBtn');
+  var secret = document.getElementById('secretMsg');
+  function heartRain(){
+    var count = reduceMotion ? 8 : 42;
+    for(var i=0;i<count;i++){
+      (function(idx){
+        setTimeout(function(){
+          var h = document.createElement('span');
+          h.className = 'rain-heart';
+          h.textContent = Math.random() > .25 ? '♥' : '♡';
+          h.style.left = (Math.random()*96) + 'vw';
+          h.style.fontSize = (18 + Math.random()*30) + 'px';
+          h.style.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+          h.style.animationDuration = (1.6 + Math.random()*1.8) + 's';
+          document.body.appendChild(h);
+          setTimeout(function(){ h.remove(); }, 3800);
+        }, idx*55);
+      })(i);
+    }
+    if(secret) secret.classList.add('show');
+  }
+  if(rainBtn) rainBtn.addEventListener('click', heartRain);
+})();
+</script>
+</body>
+</html>

@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --bg:#FFF7F3;
@@ -381,6 +382,50 @@
   }
   .music-stop:focus-visible{ outline:3px solid var(--gold); outline-offset:3px}
 
+  /* Nuestros lugares — mapa */
+  .places-map-card{
+    max-width:820px; margin:0 auto; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:14px; position:relative; overflow:hidden;
+  }
+  .places-map-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)); z-index:5 }
+  .places-map{ width:100%; height:340px; border-radius:16px; overflow:hidden; background:var(--bg-soft) }
+  @media(min-width:700px){ .places-map{height:460px} }
+  .map-fallback img{ width:100%; height:auto; border-radius:16px }
+  .map-notices{ display:inline-block; margin-top:10px; font-size:.8rem; color:var(--ink-soft) }
+  .pin{
+    width:40px; height:40px; display:flex; align-items:flex-start; justify-content:center;
+    padding-top:8px; background:var(--rose-deep); color:#fff;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; line-height:1;
+    clip-path:path("M20 37C9 27.5 3 20.8 3 13.6 3 8 6.9 4 11.6 4 15.2 4 18.3 5.9 20 9 21.7 5.9 24.8 4 28.4 4 33.1 4 37 8 37 13.6 37 20.8 31 27.5 20 37Z");
+    filter:drop-shadow(0 3px 5px rgba(74,35,48,.35)); cursor:pointer;
+  }
+  .pin--on{ background:var(--gold); color:#4A2330 }
+  @media (prefers-color-scheme: dark){ .pin{color:#241419} }
+  .places-list{ list-style:none; margin:26px auto 0; padding:0; max-width:720px; display:grid; gap:12px }
+  @media(min-width:700px){ .places-list{grid-template-columns:1fr 1fr} }
+  .place-row{
+    display:flex; gap:14px; align-items:center;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:14px 18px; cursor:pointer;
+    transition:border-color .18s ease, background .18s ease;
+  }
+  .place-row:hover{ border-color:var(--rose-light) }
+  .place-row:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .place-row.map-selected{ background:var(--rose-pale); border-color:var(--rose) }
+  .place-num{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:var(--rose-pale); color:var(--rose-deep);
+    display:grid; place-items:center; font-weight:700; font-size:.95rem;
+  }
+  .place-row.map-selected .place-num{ background:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .place-row.map-selected .place-num{color:#241419} }
+  .place-row h3{ margin:0; font-family:"Playfair Display",serif; font-size:1.08rem; line-height:1.25 }
+  .place-row p{ margin:2px 0 0; color:var(--ink-soft); font-size:.9rem }
+  .places-more{
+    text-align:center; margin:28px auto 0; font-family:"Cormorant Garamond",serif; font-style:italic;
+    font-size:1.5rem; color:var(--rose-deep);
+  }
+
   footer{ text-align:center; padding:44px 20px 54px; color:var(--ink-soft); position:relative; z-index:2}
   footer .foot-hearts{ color:var(--rose); letter-spacing:.5em; font-size:1rem; margin-bottom:10px}
   footer p{margin:4px 0; font-size:.95rem}
@@ -412,14 +457,14 @@
 <div id="heartsLayer" aria-hidden="true"></div>
 
 <header class="hero">
-  <img class="garland" src="images/foto-1.jpg" alt="Guirnalda de corazones rosas y rojos con rosas y estrellas doradas" />
+  <img class="garland" src="images/foto-1.jpg"" alt="Guirnalda de corazones rosas y rojos con rosas y estrellas doradas" />
   <div class="hero-inner">
     <p class="for-you">Hoy es tu día, mi amor… y esto lo hice solo para ti</p>
     <h1>¡Feliz cumpleaños,<br><span class="name">Naomi!</span></h1>
     <p class="hero-sub">Te hice esta paginita con muchísimo amor, llena de corazoncitos, porque una tarjeta no me alcanzaba para decirte todo lo que siento por ti y lo agradecido que estoy de tenerte en mi vida. Y este diciembre es todavía más especial, mi amor: el 15 celebramos tu cumpleaños… y el 19, ¡nos casamos!</p>
     <button class="hero-cta" id="toLetter" type="button">♥ &nbsp;Lee lo que te escribí</button>
     <figure class="cake-figure">
-      <img src="images/foto-2.jpg" alt="Ilustración en acuarela de un pastel de cumpleaños rosa con velitas doradas, rodeado de rosas y corazones" />
+      <img src="images/foto-2.jpg"" alt="Ilustración en acuarela de un pastel de cumpleaños rosa con velitas doradas, rodeado de rosas y corazones" />
     </figure>
   </div>
 </header>
@@ -501,27 +546,105 @@
 
     <div class="gallery">
       <figure class="polaroid">
-        <img src="images/foto-3.jpg" alt="Ilustración en acuarela de un ramo de rosas y peonías rosas con un moño" />
+        <img src="images/foto-3.jpg"" alt="Ilustración en acuarela de un ramo de rosas y peonías rosas con un moño" />
         <figcaption>Flores para la más hermosa</figcaption>
       </figure>
 
       <figure class="polaroid">
-        <img src="images/foto-naomi-ramo.jpg" alt="Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo" style="object-position:center 28%" />
+        <img src="images/foto-naomi-ramo.jpg"" alt="Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo" style="object-position:center 28%" />
         <figcaption>Esa sonrisa que amo</figcaption>
       </figure>
 
       <figure class="polaroid">
-        <img src="images/foto-juntos-puente.jpg" alt="Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles" style="object-position:center 30%" />
+        <img src="images/foto-juntos-puente.jpg"" alt="Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles" style="object-position:center 30%" />
         <figcaption>Tú y yo, siempre</figcaption>
       </figure>
 
       <figure class="polaroid">
-        <img src="images/foto-4.jpg" alt="Ilustración en acuarela del pastel de cumpleaños rosa con velitas y rosas" />
+        <img src="images/foto-4.jpg"" alt="Ilustración en acuarela del pastel de cumpleaños rosa con velitas y rosas" />
         <figcaption>Pide un deseo, mi vida…</figcaption>
       </figure>
     </div>
 
     <p class="gallery-note">Y aquí, en este rinconcito, están dos fotos muy especiales: tu foto favorita, con tu ramo de rosas, y una de los dos en el puente, de esas que más amo. Todas las demás viven en nuestro álbum, juntitas.</p>
+  </section>
+
+  <!-- NUESTROS LUGARES -->
+  <section aria-labelledby="lugares-title">
+    <div class="section-head">
+      <h2 id="lugares-title">Nuestros lugares</h2>
+      <p>Cada foto de nuestro álbum nació en un lugar, mi amor. Aquí están los rinconcitos donde hemos vivido lo nuestro: toca un corazoncito en el mapa, o un lugar en la lista, y revive cada momento conmigo.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="places-map-card">
+      <div class="places-map" id="placesMap" role="application" aria-label="Mapa interactivo con los lugares de nuestras fotos"></div>
+      <div class="map-fallback" id="placesFallback" hidden>
+        <img src="images/mapa-lugares.png"" width="800" height="500" alt="Mapa con corazoncitos marcando nuestros lugares: Pachuca, la Ciudad de México y Veracruz" />
+        <a class="map-notices" href="https://www.facebook.com/maps/attribution_terms" target="_blank" rel="noopener">© OpenStreetMap contributors, Map Data Legal Notices</a>
+      </div>
+    </div>
+
+    <ul class="places-list">
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">1</span>
+        <div>
+          <h3>Calle Maple, El Saucillo</h3>
+          <p>Pachuca, Hidalgo</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">2</span>
+        <div>
+          <h3>Casa de los abuelitos de Naomi</h3>
+          <p>Ermita, Ciudad de México</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">3</span>
+        <div>
+          <h3>Coyoacán</h3>
+          <p>Ciudad de México</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">4</span>
+        <div>
+          <h3>Templo de Aragón</h3>
+          <p>Ciudad de México</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">5</span>
+        <div>
+          <h3>Casa de los abuelitos de Hagot</h3>
+          <p>Cuautepec, Ciudad de México</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">6</span>
+        <div>
+          <h3>Puerto de Veracruz</h3>
+          <p>Veracruz, Veracruz</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">7</span>
+        <div>
+          <h3>Playa de Veracruz</h3>
+          <p>Veracruz, Veracruz</p>
+        </div>
+      </li>
+      <li class="place-row" tabindex="0">
+        <span class="place-num" aria-hidden="true">8</span>
+        <div>
+          <h3>Reserva Uno</h3>
+          <p>Veracruz, Veracruz</p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="places-more">…y muchos otros lugares más ♥</p>
   </section>
 
   <!-- GRACIAS -->
@@ -674,7 +797,7 @@
   <!-- RAMO + DESEOS -->
   <section aria-labelledby="deseos-title">
     <div class="bouquet-row">
-      <img src="images/foto-5.jpg" alt="Ramo en acuarela de rosas y peonías rosas atado con un moño, con corazoncitos flotando" />
+      <img src="images/foto-5.jpg"" alt="Ramo en acuarela de rosas y peonías rosas atado con un moño, con corazoncitos flotando" />
       <div class="bouquet-text">
         <h2 id="deseos-title">Todo lo que deseo para ti</h2>
         <p>Si pudiera envolverte un regalo con todo lo que siento, sería esto, mi amor:</p>
@@ -737,6 +860,8 @@
     </div>
   </div>
 </footer>
+
+
 
 <script>
 (function(){
@@ -990,6 +1115,39 @@
       if(playerWrap) playerWrap.hidden = true;
       refreshMusicUI();
     });
+  }
+
+  // Nuestros lugares — mapa interactivo con un corazoncito en cada lugar
+  var placesMapEl = document.getElementById('placesMap');
+  var placesFallback = document.getElementById('placesFallback');
+  var places = [
+    { label: 'Calle Maple, El Saucillo', locality: 'Pachuca', region: 'Hidalgo', lat: 20.06571, lng: -98.73007 },
+    { label: 'Casa de los abuelitos de Naomi', locality: 'Ermita, Ciudad de México', lat: 19.35803, lng: -99.14221 },
+    { label: 'Coyoacán', locality: 'Ciudad de México', lat: 19.34684, lng: -99.16034 },
+    { label: 'Templo de Aragón', locality: 'Ciudad de México', lat: 19.46529, lng: -99.08661 },
+    { label: 'Casa de los abuelitos de Hagot', locality: 'Cuautepec, Ciudad de México', lat: 19.53679, lng: -99.14091 },
+    { label: 'Puerto de Veracruz', locality: 'Veracruz', region: 'Veracruz', lat: 19.20821, lng: -96.14598 },
+    { label: 'Playa de Veracruz', locality: 'Veracruz', region: 'Veracruz', lat: 19.21104, lng: -96.18364 },
+    { label: 'Reserva Uno', locality: 'Veracruz', region: 'Veracruz', lat: 19.20252, lng: -96.16400 }
+  ];
+  function showPlacesFallback(){
+    if(placesMapEl) placesMapEl.style.display = 'none';
+    if(placesFallback) placesFallback.hidden = false;
+  }
+  if(placesMapEl){
+    var placeRows = Array.prototype.slice.call(document.querySelectorAll('.place-row'));
+    placeRows.forEach(function(row){
+      row.addEventListener('keydown', function(ev){
+        if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); row.click(); }
+      });
+    });
+    if(window.MapHelpers){
+      try{
+        MapHelpers.mountPlaceListMap(placesMapEl, { places: places, rows: placeRows, baseStyle: 'light' }, showPlacesFallback);
+      }catch(e){ showPlacesFallback(); }
+    } else {
+      showPlacesFallback();
+    }
   }
 })();
 </script>

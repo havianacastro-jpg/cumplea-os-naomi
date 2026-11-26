@@ -780,6 +780,17 @@
   .capsule-sealed .capsule-lock{ font-size:2rem; line-height:1; display:block; margin-bottom:10px }
   .capsule-sealed h5{ font-family:"Playfair Display",serif; font-size:1.25rem; line-height:1.3; color:var(--rose-deep); margin:0 0 8px }
   .capsule-sealed p{ color:var(--ink-soft); margin:0 auto; max-width:440px }
+  .capsule-sealed .baby-ask{ margin-top:18px }
+  .baby-ask-btn{ font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; color:#fff; background:var(--rose-deep); border:none; border-radius:999px; padding:11px 24px; cursor:pointer }
+  .baby-ask-btn:hover{ opacity:.88 }
+  [data-baby-ask-btn][hidden]{ display:none }
+  .baby-upload-box{ margin-top:14px }
+  [data-baby-upload][hidden], [data-baby-done][hidden]{ display:none }
+  .baby-upload-label{ display:inline-block; margin-top:12px; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; color:var(--rose-deep); background:var(--rose-pale); border:2px dashed var(--gold); border-radius:999px; padding:11px 22px; cursor:pointer }
+  .baby-photo{ display:block; width:100%; max-width:340px; margin:4px auto 14px; border-radius:var(--radius-md); border:3px solid var(--gold) }
+  .baby-photo[hidden]{ display:none }
+  .capsule-letter .baby-photo{ max-width:420px; margin:6px auto 18px }
+  .baby-open-note{ font-weight:600; color:var(--rose-deep) !important; margin-bottom:14px !important }
 
   /* Mapa del tesoro */
   .treasure-progress{ display:flex; gap:8px; justify-content:center; margin-bottom:18px; color:var(--rose-light); font-size:1.15rem }
@@ -2350,12 +2361,19 @@
         <p style="color:var(--ink-soft); max-width:480px; margin:0 auto 20px">¡Llegó el día, mi amor! La cápsula está abierta y el mensaje es todo tuyo:</p>
         <button class="game-start-btn" id="capsuleOpenBtn" type="button">♥ Abrir la cápsula</button>
         <article class="letter capsule-letter" id="capsuleLetter" hidden>
-          <p>Mi Naomi hermosa:</p>
-          <p>Si estás leyendo esto, es porque por fin llegó el día que contamos juntos, segundo a segundo: tu cumpleaños… y en unos días, nuestra boda. Guardé este mensaje en esta cápsula porque quería que lo abrieras justo hoy, con el corazón llenito de todo lo que hemos vivido.</p>
-          <p>Quiero que sepas que le doy gracias a Dios por ti todos los días. Gracias por tu amor, por tu fe, por tu sonrisa y por elegir caminar conmigo. Lo que viene —nuestro hogar, nuestra familia, nuestro Nimrod y nuestra Liahona, y una eternidad entera tomados de la mano— es el sueño más bonito que tengo, y es contigo.</p>
-          <p>El 19 de diciembre te tomo de la mano para siempre. Hasta ese día y después de ese día, en esta vida y en la que sigue: te amo, te elijo y te vuelvo a elegir, siempre.</p>
-          <p>¡Feliz cumpleaños, mi futura esposa!</p>
-          <p class="sign">Con todo mi amor, por tiempo y por toda la eternidad,<br>Hagot</p>
+          <p>Hola, mi amor. No soy muy bueno escribiendo y siempre que tengo mi lápiz y una hoja de papel enfrente se me va toda la inspiración y nunca sé cómo comenzar una carta.</p>
+          <p>Lo siento mucho, pero estaba haciendo toda esta página web con el único afán de verte feliz, de que si en algún momento yo no estoy, o estoy enojado, o pues me muero, puedas tener esto siempre y siempre pueda quedar un registro de todo esto y lo puedas conservar por generaciones, si Dios así lo permite.</p>
+          <p>Dentro de esta página hay muchísimas cosas: hay muchísimas fotos, juegos, cartas, notas, efectos visuales, todo lo necesario para que si llego a faltar en algún momento siempre puedas recordar el inmenso amor que te tengo.</p>
+          <p>Te amo, mi amor, eres lo mejor que me ha pasado en la vida. Gracias por existir, gracias por elegirme y gracias por estar conmigo, soportarme, aguantarme.</p>
+          <p>En tu cumpleaños te deseo lo mejor. Deseo que puedas estar con bien. Deseo que puedas siempre sentir ese abrazo mío, ese amor. Gracias por todo, mi amor. Hoy es Thanksgiving, así que gracias por todo lo que haces. Te amo muchísimo.</p>
+          <p>No me aguanto ya las ganas de tener a Nimrod o Liahona corriendo por la casa haciendo travesuras, tenerle que cambiar el pañal y poder estar con ellos, contigo, por toda una eternidad.</p>
+          <p>Gracias, amor, por todo lo que haces: las desveladas, mi lunch. Te amo demasiado, eres muy especial y nunca te cambiaría.</p>
+          <p>Perdón por esos arranques, por las cosas feas que te digo. Te sigo amando a pesar de mis errores, te sigo amando a pesar de que esté enojado y te sigo amando sobre todas las cosas. Tal vez no las expreso de esa forma, pero quiero que tú sepas que siempre es así.</p>
+          <p>Perdóname por ser imperfecto, pero yo sé que contigo podemos juntos llegar a ser perfectos, junto con Dios. Es raro pensar que dos seres imperfectos puedan unirse para convertirse en seres perfectos, pero sé que no hay otra forma de hacerlo.</p>
+          <p>Te amo mucho, mi amor. Espero compartir mucha vida contigo, espero compartir risas, enojos, tristezas e ilusiones, momentos llenos de vida, de amor, como también momentos difíciles, porque sé que los momentos difíciles vendrán, pero es mejor si los pasamos juntos.</p>
+          <p>Te amo demasiado, mi amor. Espero que esta pequeña cartita te haya gustado y toda la página web también te haya gustado. No fue una mentira, también hay un calendario de Adviento. De hecho, lo agregué justo ayer cuando me lo dijiste; no estaba pensado eso. Gracias por la idea.</p>
+          <p>Te amo demasiado, mi amor. Cuídate. Espero que te encante todo. Bye.</p>
+          <p class="sign">Hagot</p>
         </article>
         <div id="capsuleFuture" hidden>
           <div class="capsule-future-head">
@@ -2424,19 +2442,46 @@
             <p>Y guardé dos cartas más, mi amor, pero estas sí van con candado: una para Nimrod y una para Liahona. Están selladas y no se abren hoy; se abrirán hasta que tú y yo seamos papás y ellos puedan leer cuánto los esperábamos desde antes de casarnos.</p>
           </div>
           <div class="capsule-sealed">
-            <span class="capsule-lock" aria-hidden="true">🔒</span>
+            <span class="capsule-lock" aria-hidden="true" data-baby-lock="nimrod">🔒</span>
             <h5>Para Nimrod Coriantumr Nabucodonosor Viana Carbajal</h5>
             <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestro hijo pueda leer, con sus propios ojitos, todo el amor con el que ya lo esperamos.</p>
+            <div class="baby-ask">
+              <button class="baby-ask-btn" type="button" data-baby-ask-btn="nimrod">¿Ya son papás?</button>
+              <div class="baby-upload-box" data-baby-upload="nimrod" hidden>
+                <p>¡Qué alegría, mi amor! Si ya son papás, suban una foto de ustedes con su bebé y el candado de esta carta se abrirá para que puedan leerla juntitos.</p>
+                <label class="baby-upload-label" for="babyPhotoNimrod">Subir la foto con el bebé ♥</label>
+                <input type="file" id="babyPhotoNimrod" accept="image/*" data-baby-file="nimrod" hidden>
+              </div>
+              <div data-baby-done="nimrod" hidden>
+                <img class="baby-photo" data-baby-img="nimrod" alt="Foto de Hagot y Naomi con su bebé" hidden>
+                <p class="baby-open-note">¡El candado se abrió, mi amor! Su foto quedó guardada aquí, en la carta de Nimrod. ♥</p>
+                <button class="baby-ask-btn" type="button" data-baby-read="nimrod">Leer la carta de Nimrod ♥</button>
+              </div>
+            </div>
           </div>
           <div class="capsule-sealed">
-            <span class="capsule-lock" aria-hidden="true">🔒</span>
+            <span class="capsule-lock" aria-hidden="true" data-baby-lock="liahona">🔒</span>
             <h5>Para Liahona Nazaret Viana Carbajal</h5>
             <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestra hija pueda leer, con sus propios ojitos, todo el amor con el que ya la esperamos.</p>
+            <div class="baby-ask">
+              <button class="baby-ask-btn" type="button" data-baby-ask-btn="liahona">¿Ya son papás?</button>
+              <div class="baby-upload-box" data-baby-upload="liahona" hidden>
+                <p>¡Qué alegría, mi amor! Si ya son papás, suban una foto de ustedes con su bebé y el candado de esta carta se abrirá para que puedan leerla juntitos.</p>
+                <label class="baby-upload-label" for="babyPhotoLiahona">Subir la foto con el bebé ♥</label>
+                <input type="file" id="babyPhotoLiahona" accept="image/*" data-baby-file="liahona" hidden>
+              </div>
+              <div data-baby-done="liahona" hidden>
+                <img class="baby-photo" data-baby-img="liahona" alt="Foto de Hagot y Naomi con su bebé" hidden>
+                <p class="baby-open-note">¡El candado se abrió, mi amor! Su foto quedó guardada aquí, en la carta de Liahona. ♥</p>
+                <button class="baby-ask-btn" type="button" data-baby-read="liahona">Leer la carta de Liahona ♥</button>
+              </div>
+            </div>
           </div>
         </div>
         <article class="letter capsule-letter" id="capsuleLetterNimrod" hidden>
           <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
           <p class="capsule-child-name">Para Nimrod Coriantumr Nabucodonosor Viana Carbajal</p>
+          <img class="baby-photo" data-baby-img="nimrod" alt="Foto de Hagot y Naomi con su bebé, la que subieron al abrir esta carta" hidden>
           <p>Mi querido Nimrod:</p>
           <p>Te escribo esta carta mucho antes de conocerte, cuando todavía eres un sueño que tu mamá y yo guardamos en el corazón. La dejé dentro de esta cápsula del tiempo, que sellamos en diciembre de 2026, unos días antes de casarnos, porque ya desde entonces te amábamos y ya te estábamos esperando.</p>
           <p>Tu nombre completo es Nimrod Coriantumr Nabucodonosor Viana Carbajal, y cada parte de él la elegimos con amor y con intención. Queremos que crezcas sabiendo que no llegas a este mundo por casualidad: eres parte del plan de nuestro Padre Celestial, y eres parte de nuestra familia eterna. Tu mamá Naomi y yo soñamos con sellarnos en el templo para ser esposos por tiempo y por toda la eternidad, y oramos para que tú crezcas bajo ese mismo convenio, en un hogar donde Dios siempre esté en el centro, donde se ore, se perdone y se crea en Jesucristo todos los días.</p>
@@ -2448,6 +2493,7 @@
         <article class="letter capsule-letter" id="capsuleLetterLiahona" hidden>
           <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
           <p class="capsule-child-name">Para Liahona Nazaret Viana Carbajal</p>
+          <img class="baby-photo" data-baby-img="liahona" alt="Foto de Hagot y Naomi con su bebé, la que subieron al abrir esta carta" hidden>
           <p>Mi querida Liahona:</p>
           <p>Te escribo esta carta mucho antes de conocerte, cuando todavía eres un sueño que tu mamá y yo guardamos en el corazón. La dejé dentro de esta cápsula del tiempo, que sellamos en diciembre de 2026, unos días antes de casarnos, porque ya desde entonces te amábamos y ya te estábamos esperando.</p>
           <p>Tu nombre completo es Liahona Nazaret Viana Carbajal, y es un nombre muy especial para nosotros. En el Libro de Mormón, la Liahona fue la guía que el Señor dio a la familia de Lehi para dirigirlos en su camino cuando obedecían y tenían fe. Oramos para que tú siempre permitas que Dios guíe tu vida, mi amor, y para que recuerdes que en nuestro hogar siempre vas a encontrar dirección, luz y amor. Eres parte del plan de nuestro Padre Celestial y parte de nuestra familia eterna: tu mamá Naomi y yo soñamos con un hogar sellado en el templo, por tiempo y por toda la eternidad, donde Jesucristo sea el centro de todo.</p>
@@ -4844,6 +4890,82 @@
     if(capsuleKids) capsuleKids.hidden = false;
     capsuleOpenBtn.hidden = true;
     if(capsuleLetter) capsuleLetter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  });
+
+  // --- Cartas para Nimrod y Liahona: el candado se abre cuando ya son papás, subiendo una foto con el bebé ---
+  var BABY_PHOTO_KEYS = { nimrod: 'foto-bebe-nimrod-naomi', liahona: 'foto-bebe-liahona-naomi' };
+  var BABY_LETTERS = { nimrod: document.getElementById('capsuleLetterNimrod'), liahona: document.getElementById('capsuleLetterLiahona') };
+  function setBabyPhoto(kid, src){
+    var imgs = document.querySelectorAll('[data-baby-img="' + kid + '"]');
+    for(var i = 0; i < imgs.length; i++){ imgs[i].src = src; imgs[i].hidden = false; }
+  }
+  function unlockBaby(kid, src, showLetter){
+    var askBtn = document.querySelector('[data-baby-ask-btn="' + kid + '"]');
+    if(askBtn) askBtn.hidden = true;
+    var box = document.querySelector('[data-baby-upload="' + kid + '"]');
+    if(box) box.hidden = true;
+    var done = document.querySelector('[data-baby-done="' + kid + '"]');
+    if(done) done.hidden = false;
+    var lock = document.querySelector('[data-baby-lock="' + kid + '"]');
+    if(lock) lock.textContent = '♥';
+    if(src) setBabyPhoto(kid, src);
+    var letter = BABY_LETTERS[kid];
+    if(showLetter && letter){
+      letter.hidden = false;
+      letter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    }
+  }
+  function handleBabyPhoto(kid, file){
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      var raw = String(reader.result);
+      var img = new Image();
+      img.onload = function(){
+        var maxSide = 1000;
+        var scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(img.width * scale));
+        canvas.height = Math.max(1, Math.round(img.height * scale));
+        var ctx = canvas.getContext('2d');
+        var dataUrl = raw;
+        if(ctx){
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          try{ dataUrl = canvas.toDataURL('image/jpeg', 0.85); }catch(e){}
+        }
+        try{ window.localStorage.setItem(BABY_PHOTO_KEYS[kid], dataUrl); }catch(e){}
+        unlockBaby(kid, dataUrl, true);
+      };
+      img.onerror = function(){
+        try{ window.localStorage.setItem(BABY_PHOTO_KEYS[kid], raw); }catch(e){}
+        unlockBaby(kid, raw, true);
+      };
+      img.src = raw;
+    };
+    reader.readAsDataURL(file);
+  }
+  ['nimrod', 'liahona'].forEach(function(kid){
+    var savedPhoto = null;
+    try{ savedPhoto = window.localStorage.getItem(BABY_PHOTO_KEYS[kid]); }catch(e){}
+    if(savedPhoto) unlockBaby(kid, savedPhoto, false);
+    var askBtn = document.querySelector('[data-baby-ask-btn="' + kid + '"]');
+    if(askBtn) askBtn.addEventListener('click', function(){
+      var box = document.querySelector('[data-baby-upload="' + kid + '"]');
+      if(box) box.hidden = false;
+      askBtn.hidden = true;
+    });
+    var fileInput = document.querySelector('[data-baby-file="' + kid + '"]');
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0]) handleBabyPhoto(kid, fileInput.files[0]);
+    });
+    var readBtn = document.querySelector('[data-baby-read="' + kid + '"]');
+    if(readBtn) readBtn.addEventListener('click', function(){
+      var letter = BABY_LETTERS[kid];
+      if(letter){
+        letter.hidden = false;
+        letter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    });
   });
 
   // --- Nuestro mapa del tesoro ---

@@ -1614,6 +1614,15 @@
   @media (prefers-color-scheme: dark){ .emerg-sticker{ color:#241A05 } }
   html[data-theme="night"] .emerg-sticker{ color:#241A05 }
   .emerg-sealed p{ color:var(--ink-soft); max-width:420px; margin:0 auto 18px }
+  .emerg-form{ text-align:left; max-width:440px; margin:0 auto 18px }
+  .emerg-who{ display:flex; gap:10px; margin-bottom:14px }
+  .emerg-who-btn{ flex:1; padding:12px 10px; min-height:48px; border:1.5px solid var(--line); border-radius:var(--radius-md); background:var(--surface-warm); color:var(--ink); font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; cursor:pointer }
+  .emerg-who-btn[aria-pressed="true"]{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff }
+  .emerg-who-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .emerg-break-btn[disabled]{ opacity:.45; cursor:not-allowed }
+  .emerg-sealed p.emerg-hint{ font-size:.88rem; margin:10px auto 0 }
+  .emerg-history{ margin-top:30px; border-top:1px solid var(--line); padding-top:22px }
+  .emerg-history h4{ text-align:center; color:var(--rose-deep); margin:0 0 6px; font-size:1.12rem }
 
   @media (prefers-reduced-motion: reduce){
     body::before, h1 .name, .hero-cta, .album-btn, .game-start-btn, #rainBtn,
@@ -3373,7 +3382,17 @@
         <div class="emerg-sealed" id="emergSealed">
           <span class="emerg-sticker">Romper o abrir en caso de emergencia</span>
           <p>Adentro hay un kit de emergencia para nosotros dos, mi amor: 30 ideítas para reconciliarnos, una por día, para cuando las palabras no nos alcancen. Está selladito… rómpelo solo en caso de emergencia. ♥</p>
-          <button class="game-start-btn" id="emergBreakBtn" type="button">Romper el sello ♥</button>
+          <div class="emerg-form">
+            <span class="diary-label" id="emergWhoLabel">Pero antes de romper el sello, dime: ¿quién escribe?</span>
+            <div class="emerg-who" role="group" aria-labelledby="emergWhoLabel">
+              <button class="emerg-who-btn" type="button" id="emergWhoNaomi" aria-pressed="false">Naomi</button>
+              <button class="emerg-who-btn" type="button" id="emergWhoHagot" aria-pressed="false">Hagot</button>
+            </div>
+            <label class="diary-label" for="emergReason">¿Por qué estamos enojados?</label>
+            <textarea class="diary-input" id="emergReason" rows="4" placeholder="Escríbelo aquí, con calma y con el corazón…"></textarea>
+          </div>
+          <button class="game-start-btn emerg-break-btn" id="emergBreakBtn" type="button" disabled>Romper el sello ♥</button>
+          <p class="emerg-hint" id="emergHint">Primero elige quién escribe y cuéntame el motivo, mi amor. ♥</p>
         </div>
         <div id="emergOpen" hidden>
           <h3 class="game-title" style="margin-top:4px">Kit de emergencia para reconciliarnos ♥</h3>
@@ -3411,6 +3430,11 @@
             <div class="week-day"><h4>Día 30 · Nunca dormirse enojados</h4><p>El cierre del kit y la regla de oro de nuestro hogar: no dormirse enojados. Antes de dormir, un «te amo, estamos bien» y un abrazo, pase lo que pase.</p></div>
           </div>
           <p class="game-final" style="margin-top:22px; margin-bottom:0">Treinta días, mi amor, y una sola meta: volver siempre el uno al otro. Enojados a veces, sí… pero jamás lejos. Te amo. ♥</p>
+          <div class="emerg-history">
+            <h4>Lo que hemos escrito antes de abrir el kit ♥</h4>
+            <p class="game-desc">Cada vez que rompemos el sello, primero escribimos por qué estamos enojados. Aquí quedan guardadas esas respuestas en este dispositivo, con su fecha y quién las escribió, para volver a leerlas cuando queramos.</p>
+            <div class="diary-list" id="emergHistoryList" style="margin-top:0"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -7631,39 +7655,130 @@
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function futPad(n){ return (n < 10 ? '0' : '') + n; }
 
-  // ===== Kit de emergencia (dentro de «Cuando estés enojada»): romper el sello =====
+  // ===== Kit de emergencia (dentro de «Cuando estés enojada»): antes de romper el sello hay que escribir por qué están enojados =====
+  // Las respuestas se guardan en este dispositivo (clave 'kit-emergencia-enojos'), como los demás recuerdos de la página,
+  // y se pueden volver a ver en el apartado de historial que está dentro del kit ya abierto.
+  var EMERG_KEY = 'kit-emergencia-enojos';
   var emergBreakBtn = document.getElementById('emergBreakBtn');
   var emergSealed = document.getElementById('emergSealed');
   var emergOpen = document.getElementById('emergOpen');
+  var emergWhoNaomi = document.getElementById('emergWhoNaomi');
+  var emergWhoHagot = document.getElementById('emergWhoHagot');
+  var emergReason = document.getElementById('emergReason');
+  var emergHint = document.getElementById('emergHint');
+  var emergHistoryList = document.getElementById('emergHistoryList');
+  var emergWho = '';
+  var emergEntries = [];
+  try{
+    var emergSaved = window.localStorage.getItem(EMERG_KEY);
+    if(emergSaved){
+      var emergParsed = JSON.parse(emergSaved);
+      if(emergParsed && emergParsed.length) emergEntries = emergParsed;
+    }
+  }catch(e){ emergEntries = []; }
+  function persistEmerg(){
+    try{ window.localStorage.setItem(EMERG_KEY, JSON.stringify(emergEntries)); }catch(e){}
+  }
+  function renderEmergHistory(){
+    if(!emergHistoryList) return;
+    emergHistoryList.innerHTML = '';
+    if(!emergEntries.length){
+      var empty = document.createElement('p');
+      empty.className = 'diary-empty';
+      empty.textContent = 'Todavía no hay respuestas guardadas, mi amor. La primera será la de hoy. ♥';
+      emergHistoryList.appendChild(empty);
+      return;
+    }
+    emergEntries.slice().reverse().forEach(function(entry){
+      var card = document.createElement('article');
+      card.className = 'diary-entry';
+      var head = document.createElement('div');
+      head.className = 'diary-entry-date';
+      var whoSpan = document.createElement('span');
+      whoSpan.textContent = 'Escribió: ' + entry.who;
+      var dateSpan = document.createElement('span');
+      var d = new Date(entry.t);
+      dateSpan.textContent = isNaN(d.getTime()) ? '' : d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + d.toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit' });
+      head.appendChild(whoSpan);
+      head.appendChild(dateSpan);
+      var body = document.createElement('p');
+      body.textContent = entry.reason;
+      card.appendChild(head);
+      card.appendChild(body);
+      emergHistoryList.appendChild(card);
+    });
+  }
+  function emergValidate(){
+    var ok = !!emergWho && !!emergReason && emergReason.value.trim().length > 0;
+    if(emergBreakBtn) emergBreakBtn.disabled = !ok;
+    if(emergHint) emergHint.hidden = ok;
+  }
+  function emergSetWho(who){
+    emergWho = who;
+    if(emergWhoNaomi) emergWhoNaomi.setAttribute('aria-pressed', who === 'Naomi' ? 'true' : 'false');
+    if(emergWhoHagot) emergWhoHagot.setAttribute('aria-pressed', who === 'Hagot' ? 'true' : 'false');
+    emergValidate();
+  }
+  if(emergWhoNaomi) emergWhoNaomi.addEventListener('click', function(){ emergSetWho('Naomi'); });
+  if(emergWhoHagot) emergWhoHagot.addEventListener('click', function(){ emergSetWho('Hagot'); });
+  if(emergReason) emergReason.addEventListener('input', emergValidate);
+  renderEmergHistory();
+  emergValidate();
   if(emergBreakBtn && emergSealed && emergOpen){
     emergBreakBtn.addEventListener('click', function(){
+      if(emergBreakBtn.disabled) return;
+      emergEntries.push({ t: Date.now(), who: emergWho, reason: emergReason.value.trim() });
+      persistEmerg();
+      renderEmergHistory();
       emergSealed.hidden = true;
       emergOpen.hidden = false;
       emergOpen.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     });
   }
 
-  // ===== Foto y video de perdón: aparecen solos en cuanto los archivos estén en el repo (imagenes/beso.jpg e imagenes/perdon.mp4); mientras no existan, no se muestra nada roto =====
+  // ===== Foto y video de perdón: aparecen solos en cuanto los archivos estén en el repo; mientras no existan, no se muestra nada roto =====
+  // Hagot los subió tal cual: imagenes/Beso.jpg.JPG e imagenes/Perdón.mp4.MP4 (la ó va codificada como %C3%B3 en la dirección).
+  // Como respaldo quedan los nombres limpios imagenes/beso.jpg e imagenes/perdon.mp4, por si luego los renombra bien.
+  // Las sondas prueban primero los nombres reales y luego los de respaldo.
   var sorryPhotoBox = document.querySelector('[data-sorry-photo]');
   var sorryImg = document.querySelector('[data-sorry-img]');
   if(sorryPhotoBox && sorryImg){
-    var sorryProbe = new Image();
-    sorryProbe.onload = function(){
-      sorryImg.src = 'imagenes/beso.jpg';
-      sorryPhotoBox.hidden = false;
+    var sorryPhotoCandidates = ['imagenes/Beso.jpg.JPG', 'imagenes/beso.jpg'];
+    var sorryPhotoTry = function(i){
+      if(i >= sorryPhotoCandidates.length) return;
+      var sorryProbe = new Image();
+      sorryProbe.onload = function(){
+        sorryImg.src = sorryPhotoCandidates[i];
+        sorryPhotoBox.hidden = false;
+      };
+      sorryProbe.onerror = function(){ sorryPhotoTry(i + 1); };
+      sorryProbe.src = sorryPhotoCandidates[i];
     };
-    sorryProbe.src = 'imagenes/beso.jpg';
+    sorryPhotoTry(0);
   }
   var sorryVideoBox = document.querySelector('[data-sorry-video]');
   var sorryVideoEl = document.querySelector('[data-sorry-video-el]');
   if(sorryVideoBox && sorryVideoEl){
-    var sorryVideoProbe = document.createElement('video');
-    sorryVideoProbe.preload = 'metadata';
-    sorryVideoProbe.addEventListener('loadedmetadata', function(){
-      sorryVideoEl.src = 'imagenes/perdon.mp4';
-      sorryVideoBox.hidden = false;
-    });
-    sorryVideoProbe.src = 'imagenes/perdon.mp4';
+    var sorryVideoCandidates = ['imagenes/Perd%C3%B3n.mp4.MP4', 'imagenes/perdon.mp4'];
+    var sorryVideoTry = function(i){
+      if(i >= sorryVideoCandidates.length) return;
+      var sorryVideoProbe = document.createElement('video');
+      sorryVideoProbe.preload = 'metadata';
+      var sorryVideoOk = false;
+      sorryVideoProbe.addEventListener('loadedmetadata', function(){
+        if(sorryVideoOk) return;
+        sorryVideoOk = true;
+        sorryVideoEl.src = sorryVideoCandidates[i];
+        sorryVideoBox.hidden = false;
+      });
+      sorryVideoProbe.addEventListener('error', function(){
+        if(sorryVideoOk) return;
+        sorryVideoOk = true;
+        sorryVideoTry(i + 1);
+      });
+      sorryVideoProbe.src = sorryVideoCandidates[i];
+    };
+    sorryVideoTry(0);
   }
 
   // ===== Para el futuro (dentro de la cápsula): candados de las cartas de 1 y 5 años =====

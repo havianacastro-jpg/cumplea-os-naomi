@@ -3310,7 +3310,7 @@
     });
   }
 
-  // --- Gesto: deslizar hacia la izquierda regresa un paso, igual que «← Volver» ---
+  // --- Gesto: deslizar hacia la izquierda o hacia la derecha regresa un paso, igual que «← Volver» ---
   // Se reconoce durante el propio movimiento (touchmove), no solo al soltar el
   // dedo: así funciona aunque el navegador se quede el gesto para desplazar la
   // página y cancele el toque antes del touchend. Los umbrales son tolerantes
@@ -3350,10 +3350,12 @@
       var t = e.touches[0];
       var dx = t.clientX - swipeX;
       var dy = t.clientY - swipeY;
-      // Ya en pleno gesto: al menos 64 px a la izquierda y el movimiento
-      // claramente horizontal (la deriva vertical puede ser hasta ~60% de lo
-      // avanzado). Sin límite de tiempo: un deslizamiento lento también cuenta.
-      if(dx <= -64 && Math.abs(dx) >= Math.abs(dy) * 1.6){
+      // Ya en pleno gesto: al menos 64 px en cualquier dirección horizontal
+      // (izquierda o derecha, los dos hacen exactamente lo mismo) y el
+      // movimiento claramente horizontal (la deriva vertical puede ser hasta
+      // ~60% de lo avanzado). Sin límite de tiempo: un deslizamiento lento
+      // también cuenta.
+      if(Math.abs(dx) >= 64 && Math.abs(dx) >= Math.abs(dy) * 1.6){
         swipeDone = true;
         goBack();
       }
@@ -3366,8 +3368,9 @@
       var dy = t.clientY - swipeY;
       swipeX = null;
       // Al soltar el dedo se acepta un gesto más corto o más diagonal:
-      // basta que avance 48 px a la izquierda y que lo horizontal gane a lo vertical.
-      if(dx <= -48 && Math.abs(dx) > Math.abs(dy)) goBack();
+      // basta que avance 48 px hacia cualquier lado (izquierda o derecha)
+      // y que lo horizontal gane a lo vertical.
+      if(Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy)) goBack();
     }, { passive: true });
   })();
 

@@ -1468,6 +1468,56 @@
     100%{ text-shadow:none }
   }
 
+  /* Nuestra historia: línea de tiempo */
+  .tl{ position:relative; max-width:600px; margin:0 auto; text-align:left }
+  .tl::before{ content:""; position:absolute; left:15px; top:8px; bottom:8px; width:2px; background:linear-gradient(var(--gold), var(--rose-pale)); border-radius:2px }
+  .tl-item{ position:relative; padding:0 0 22px 48px }
+  .tl-item:last-child{ padding-bottom:4px }
+  .tl-dot{ position:absolute; left:0; top:0; width:32px; height:32px; border-radius:50%; background:var(--surface); border:2px solid var(--gold); color:var(--rose); display:flex; align-items:center; justify-content:center; font-size:.95rem; line-height:1 }
+  .tl-item.pending .tl-dot{ border-style:dashed; color:var(--gold) }
+  .tl-date{ display:block; font-weight:700; color:var(--gold); font-size:.85rem; letter-spacing:.04em; text-transform:uppercase; margin-bottom:2px }
+  .tl-item h4{ margin:0 0 6px; color:var(--rose-deep); font-size:1.08rem }
+  .tl-item p{ margin:0; color:var(--ink-soft) }
+  .tl-badge{ display:inline-block; margin-top:8px; font-size:.78rem; font-weight:700; color:var(--gold); border:1px dashed var(--gold); border-radius:999px; padding:3px 10px }
+
+  /* Cartas para el futuro */
+  .fut-letter{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px 18px; max-width:560px; margin:0 auto 20px }
+  .fut-letter h4{ margin:0 0 6px; color:var(--rose-deep); font-size:1.12rem }
+  .fut-letter .fut-when{ color:var(--ink-soft); margin:0 auto 16px; max-width:440px }
+  .fut-letter .cd-timer{ max-width:440px; margin:0 auto }
+  .fut-sealed-note{ color:var(--ink-soft); margin:14px auto 0; max-width:440px; font-size:.95rem }
+  .fut-letter-body{ text-align:left; color:var(--ink-soft); max-width:480px; margin:0 auto }
+  .fut-letter-body p{ margin:0 0 12px }
+  .fut-letter-body p:last-child{ margin-bottom:0 }
+  .fut-letter-body .fut-sign{ color:var(--rose-deep); font-weight:700 }
+
+  /* Nuestro árbol familiar eterno */
+  .ft-couple{ display:flex; align-items:stretch; justify-content:center; gap:10px; max-width:600px; margin:0 auto }
+  .ft-card{ flex:1 1 0; background:var(--bg-soft); border:1px solid var(--gold); border-radius:var(--radius-md); padding:16px 12px; text-align:center }
+  .ft-card .ft-role{ display:block; font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin-bottom:6px }
+  .ft-card .ft-name{ display:block; font-weight:700; color:var(--rose-deep); font-size:1.02rem; line-height:1.35 }
+  .ft-heart{ align-self:center; color:var(--rose); font-size:1.5rem; line-height:1 }
+  .ft-sealed{ text-align:center; color:var(--ink-soft); margin:12px auto 0; max-width:480px }
+  .ft-link{ width:2px; height:30px; background:var(--gold); margin:0 auto }
+  .ft-branch{ max-width:480px; height:2px; background:var(--gold); margin:0 auto }
+  .ft-kids{ display:grid; gap:12px; max-width:600px; margin:14px auto 0 }
+  @media(min-width:620px){ .ft-kids{ grid-template-columns:1fr 1fr } }
+  .ft-kid{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 12px; text-align:center }
+  .ft-kid .ft-role{ display:block; font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin-bottom:6px }
+  .ft-kid .ft-name{ display:block; font-weight:700; color:var(--rose-deep); font-size:1rem; line-height:1.35 }
+  .ft-future{ border:1px dashed var(--gold); border-radius:var(--radius-md); padding:16px 12px; text-align:center; color:var(--ink-soft) }
+  .ft-future .ft-name{ display:block; font-weight:700; color:var(--gold); font-size:1rem; margin-bottom:4px }
+  .ft-future p{ margin:0; font-size:.92rem }
+  .ft-kids-title{ text-align:center; color:var(--rose-deep); margin:20px 0 0; font-size:1.05rem }
+
+  /* Kit de emergencia (dentro de «Cuando estés enojada») */
+  .emerg-kit{ margin-top:30px; border-top:1px solid var(--line); padding-top:26px }
+  .emerg-sealed{ position:relative; max-width:520px; margin:0 auto; background:var(--bg-soft); border:2px dashed var(--gold); border-radius:var(--radius-md); padding:28px 20px 24px; text-align:center }
+  .emerg-sticker{ display:inline-block; background:var(--gold); color:#3A2A10; font-weight:800; letter-spacing:.05em; text-transform:uppercase; font-size:.92rem; padding:10px 18px; border-radius:8px; transform:rotate(-2deg); box-shadow:0 3px 10px rgba(0,0,0,.18); margin-bottom:16px }
+  @media (prefers-color-scheme: dark){ .emerg-sticker{ color:#241A05 } }
+  html[data-theme="night"] .emerg-sticker{ color:#241A05 }
+  .emerg-sealed p{ color:var(--ink-soft); max-width:420px; margin:0 auto 18px }
+
   @media (prefers-reduced-motion: reduce){
     body::before, h1 .name, .hero-cta, .album-btn, .game-start-btn, #rainBtn,
     .games-section .game-card.active, .fx-spark, .fx-bit, .fx-celebrate{ animation:none !important }
@@ -1498,6 +1548,10 @@
       <button class="nav-item" type="button" data-open-game="screenAdvent"><span class="nav-icon" aria-hidden="true">❄</span>Navidad<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenDetallitos"><span class="nav-icon" aria-hidden="true">✦</span>Detallitos para ti<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenEnojada"><span class="nav-icon" aria-hidden="true">♡</span>Cuando estés enojada<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenHistoria"><span class="nav-icon" aria-hidden="true">❦</span>Nuestra historia<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenCartasFuturo"><span class="nav-icon" aria-hidden="true">✉</span>Cartas para el futuro<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenEnamora"><span class="nav-icon" aria-hidden="true">✿</span>Lo que me enamora de ti<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenArbolFamiliar"><span class="nav-icon" aria-hidden="true">❧</span>Nuestro árbol familiar eterno<span class="nav-here" aria-hidden="true">♥</span></button>
     </nav>
   </div>
 </div>
@@ -1973,6 +2027,30 @@
           <span class="game-menu-title">Cuando estés enojada</span>
           <span class="game-menu-desc">Un mensajito que te dejé guardado para esos días, mi amor: ábrelo cuando estés enojada conmigo.</span>
           <span class="game-menu-play">Leer ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenHistoria">
+          <span class="game-menu-icon" aria-hidden="true">❦</span>
+          <span class="game-menu-title">Nuestra historia</span>
+          <span class="game-menu-desc">La línea de tiempo de lo nuestro, mi vida: los momentos que nos trajeron hasta aquí, uno por uno.</span>
+          <span class="game-menu-play">Recordar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCartasFuturo">
+          <span class="game-menu-icon" aria-hidden="true">✉</span>
+          <span class="game-menu-title">Cartas para el futuro</span>
+          <span class="game-menu-desc">Tres cartitas selladas para abrir en nuestros aniversarios de casados: el primero, el quinto y el décimo.</span>
+          <span class="game-menu-play">Ver ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenEnamora">
+          <span class="game-menu-icon" aria-hidden="true">✿</span>
+          <span class="game-menu-title">Lo que me enamora de ti</span>
+          <span class="game-menu-desc">Una listita que se va revelando poco a poco, corazoncito a corazoncito, con todo lo que me enamora de ti.</span>
+          <span class="game-menu-play">Descubrir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenArbolFamiliar">
+          <span class="game-menu-icon" aria-hidden="true">❧</span>
+          <span class="game-menu-title">Nuestro árbol familiar eterno</span>
+          <span class="game-menu-desc">Nuestra familia eterna, mi amor: tú, yo, Nimrod y Liahona… y todos los nombres que Dios nos confíe.</span>
+          <span class="game-menu-play">Ver ♥</span>
         </button>
       </div>
     </div>
@@ -2842,14 +2920,14 @@
     <div class="game-card" id="screenCuento">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Nuestro cuento ❦</h3>
-      <p class="game-desc">Te escribí un cuentito, mi vida. No es la historia de nadie más: es la de dos personas que se buscaron sin saberlo, se encontraron, y pusieron a Dios en el centro de todo. Léelo despacito.</p>
+      <p class="game-desc">Te escribí un cuentito, mi vida, pero este no es un cuento cualquiera: es nuestra historia de verdad, contada como se merece. Léelo despacito.</p>
       <div class="story-card">
-        <p class="story-first">Había una vez, en un mundo muy grande y a veces muy ruidoso, dos personas que todavía no se conocían. Cada una vivía su vida, con sus días buenos y sus días difíciles, sin saber que en algún lugar había alguien orando por exactamente lo mismo que ellas pedían.</p>
-        <p>Porque los dos, cada uno por su lado, le pedían a Dios lo mismo: un amor de verdad. De esos que no se cansan, que perdonan rápido, que ríen mucho y que duran más que esta vida. Y Dios, que escucha hasta los susurros, fue acomodando los caminos sin que ellos se dieran cuenta.</p>
-        <p>Y un día de lo más común y corriente —sin trompetas ni fuegos artificiales— sus caminos se cruzaron. Ella sonrió. Él sintió que algo en su corazón decía bajito: «es ella». Y desde ese día nada volvió a ser igual… ni falta que hizo.</p>
-        <p>Lo suyo creció despacito y con cimientos firmes: pusieron a Dios en el centro de todo, oraron juntos, se sirvieron el uno al otro en lo pequeño y aprendieron que amarse también es pedirse perdón a tiempo y volver a elegirse cada mañana.</p>
-        <p>Cuando llegó el momento, se arrodillaron en un lugar santo y se prometieron algo más grande que el «para siempre» de los cuentos: se prometieron la eternidad. Con el anillo en la mano y el corazón en las manos de Dios, empezaron su «érase una vez» de esposos.</p>
-        <p>Ahora sueñan con un hogar lleno de risas, con una mesa donde siempre quepa uno más, con hijitos que aprendan a orar antes que a temer, y con envejecer juntitos contándose la misma historia una y otra vez.</p>
+        <p class="story-first">Había una vez un muchacho y una muchacha que se conocieron en un baile del FSY, en agosto de 2019. Él la invitó a bailar… huyendo de otro chico que lo perseguía, y ella, de broma, lo invitó a tocarle la pierna, y a él le dio más cringe que otra cosa. Se rieron, cada quien siguió su camino, y ninguno de los dos supo que ese día Dios había escrito la primera línea de su historia.</p>
+        <p>Pasaron dos años, hasta que una foto que subió la prima de ella los volvió a cruzar. Él pidió su número con permiso, ella dijo que sí, y entre mensajes, entrenamientos de básquetbol en Colinas de Plata y unos brownies de cumpleaños que sabían a gloria, los dos se fueron enamorando. Hasta se hicieron novios por mensaje, mientras él estaba lejos porque nacía su hermanito Ethan.</p>
+        <p>Pero todo cuento verdadero tiene su capítulo difícil: él se fue dos años a la misión, y estando lejos, ella decidió terminar. A él se le rompió el corazón, lloró y sufrió… pero en el fondo nunca dejó de amarla, y el Padre Celestial, que todo lo ve, tampoco dejó de acomodar los caminos.</p>
+        <p>Cuando él regresó, Dios los cruzó otra vez. Una tarde de junio de 2025, en el cine de Plaza Q, enfrente de las canchas donde entrenaban, él le pidió bajo la lluvia que fuera su novia. Ella dijo que sí, se besaron, y fueron a celebrar con sushi, su comida favorita. Fue la decisión más feliz de su vida… y de la de ella también.</p>
+        <p>Después trabajaron juntitos y con mucho esfuerzo para su boda: él en la Ciudad de México, vendiendo las gorditas de lechera que ella le daba; ella, vendiendo churros. Porque su amor no solo se decía: se demostraba, todos los días, en lo pequeño.</p>
+        <p>Y así llegó el 19 de diciembre de 2026, el día en que se tomaron de la mano y se prometieron algo más grande que el «para siempre» de los cuentos: se prometieron la eternidad, con Dios en el centro de todo. Después vendría su luna de miel, su primera Navidad como esposos y, un día, los hijitos que ya sueñan con recibir.</p>
         <p>Y colorín colorado… no, mi amor: este cuento no se ha acabado. Este cuento apenas empieza, y lo vamos a escribir tú y yo, página a página, en esta vida y por todas las que siguen. ♥</p>
       </div>
     </div>
@@ -2985,6 +3063,318 @@
         <div class="sorry-line"><span class="sorry-dot" aria-hidden="true">♥</span><p>Y ya, para terminar de convencerte… ¿me das un abrazo? De esos fuertes y calientitos que lo curan todo. Te amo, mi bb, hoy y siempre.</p></div>
       </div>
       <p class="sorry-sign">— Tu Hagot, que te ama hasta cuando la riega ♥</p>
+
+      <!-- Kit de emergencia: 30 ideas para reconciliarnos, una por día -->
+      <div class="emerg-kit">
+        <div class="emerg-sealed" id="emergSealed">
+          <span class="emerg-sticker">Romper o abrir en caso de emergencia</span>
+          <p>Adentro hay un kit de emergencia para nosotros dos, mi amor: 30 ideítas para reconciliarnos, una por día, para cuando las palabras no nos alcancen. Está selladito… rómpelo solo en caso de emergencia. ♥</p>
+          <button class="game-start-btn" id="emergBreakBtn" type="button">Romper el sello ♥</button>
+        </div>
+        <div id="emergOpen" hidden>
+          <h3 class="game-title" style="margin-top:4px">Kit de emergencia para reconciliarnos ♥</h3>
+          <p class="game-desc">Ya rompiste el sello, mi amor, así que vamos en serio: aquí van 30 ideítas, una por día, para volver a estar bien juntitos. No tienen que salir perfectas; tienen que salir de corazón, con Dios en el centro y sin soltarnos. Empiecen hoy con la primera.</p>
+          <div class="week-list">
+            <div class="week-day"><h4>Día 1 · Primero, respirar juntitos</h4><p>Antes de hablar de nada, siéntense tomados de la mano y respiren en silencio dos minutitos. Que el primer acuerdo sea este: estamos enojados, pero seguimos siendo un equipo.</p></div>
+            <div class="week-day"><h4>Día 2 · «Te amo» va primero</h4><p>Hoy, antes de explicar cualquier cosa, el otro escucha primero un «te amo». Todo lo demás se dice después, y más suavecito.</p></div>
+            <div class="week-day"><h4>Día 3 · Perdón sin «peros»</h4><p>Cada uno pide perdón por una cosa concreta, en voz alta, sin agregar ningún «pero es que tú…». Un perdón limpio, de corazón.</p></div>
+            <div class="week-day"><h4>Día 4 · Escuchar y repetir</h4><p>Uno habla hasta terminar, sin interrupciones. El otro repite con sus palabras lo que entendió, hasta que el primero diga: «sí, eso era».</p></div>
+            <div class="week-day"><h4>Día 5 · Orar antes de seguir</h4><p>Si la plática se calienta, se pausa y oran juntos primero. Pedirle a Dios palabras suaves es también una forma de cuidarse.</p></div>
+            <div class="week-day"><h4>Día 6 · El abrazo de 30 segundos</h4><p>Sin decir nada: un abrazo largo, de treinta segundos completos. A veces el cuerpo reconcilia lo que la boca todavía no puede.</p></div>
+            <div class="week-day"><h4>Día 7 · Mejor por escrito</h4><p>Lo que cueste decir, escríbanlo en un papel y léanlo con calma, sentados juntitos. En papel, las palabras no gritan.</p></div>
+            <div class="week-day"><h4>Día 8 · Algo calientito</h4><p>Uno le prepara al otro algo calientito de tomar y se sientan a tomarlo juntos, sin hablar del problema hasta terminar la taza.</p></div>
+            <div class="week-day"><h4>Día 9 · Un recuerdo bonito</h4><p>Cuéntense en voz alta un momento bonito que vivieron juntos, con detalles. Recordar por qué se eligieron baja cualquier enojo.</p></div>
+            <div class="week-day"><h4>Día 10 · Preguntar qué necesita</h4><p>Pregunta directa y hermosa: «¿qué necesitas de mí ahorita?». Y lo que el otro responda, se hace sin discutirlo.</p></div>
+            <div class="week-day"><h4>Día 11 · A caminar diez minutos</h4><p>Salgan a caminar juntitos diez minutos, de la mano si se puede. El enojo se cansa caminando; el amor, no.</p></div>
+            <div class="week-day"><h4>Día 12 · Pausa con hora de regreso</h4><p>Si hoy no se puede resolver, se deja el tema con una hora acordada para retomarlo tranquilos. Pausar no es huir: es cuidarse.</p></div>
+            <div class="week-day"><h4>Día 13 · Tres cosas bien hechas</h4><p>Aunque estén enojados, cada uno dice tres cosas que el otro sí hizo bien. El enojo no borra lo bueno, y hoy toca recordarlo.</p></div>
+            <div class="week-day"><h4>Día 14 · «Somos un equipo»</h4><p>Tómense de las manos y díganlo juntos, en voz alta: «somos un equipo, no rivales». Contra el problema, nunca el uno contra el otro.</p></div>
+            <div class="week-day"><h4>Día 15 · Un masajito de reconciliación</h4><p>Cinco minutos de masaje en los hombros o en los pies, en silencio y con calma, como solo se consiente a la persona amada. A veces las manos dicen el «lo siento» que la boca todavía no encuentra.</p></div>
+            <div class="week-day"><h4>Día 16 · Perdón también por el tono</h4><p>A veces el problema no fue lo que dijimos, sino cómo lo dijimos. Hoy se pide perdón también por el tono, por la cara y por el silencio frío.</p></div>
+            <div class="week-day"><h4>Día 17 · Nuestro baile en la cocina</h4><p>Pongan una canción lenta y báilenla abrazados en la sala o en la cocina, pegaditos, como en su primer baile de esposos. Que dure la canción entera, mejilla con mejilla, sin hablar del problema.</p></div>
+            <div class="week-day"><h4>Día 18 · Un minuto cada uno</h4><p>Mírense a los ojos y túrnense: un minuto para hablar cada uno, sin interrumpir, con un relojito si hace falta. Justo y suavecito.</p></div>
+            <div class="week-day"><h4>Día 19 · La meta es la paz</h4><p>Escriban juntos, en una frase, qué quieren lograr: no «ganar», sino estar en paz. Léanla cada vez que la plática se desvíe.</p></div>
+            <div class="week-day"><h4>Día 20 · Por qué nos elegimos</h4><p>Díganse en voz alta, uno por uno, por qué se eligieron. Escuchar eso en medio de un enojo es como agua fresca en el corazón.</p></div>
+            <div class="week-day"><h4>Día 21 · Una tarea en equipo</h4><p>Hagan juntos una tarea sencilla de la casa, en equipo y sin hablar del problema un rato. Trabajar juntitos también reconcilia.</p></div>
+            <div class="week-day"><h4>Día 22 · Acurrucarse un ratito</h4><p>En vez de seguir discutiendo, acuéstense abrazados unos minutos, en cucharita y en silencio, hasta que la respiración de los dos se calme juntita. Cerquita, bien cerquita, también se reconcilia.</p></div>
+            <div class="week-day"><h4>Día 23 · «Lo siento», y punto</h4><p>Practiquen el «lo siento» completo y cortito: sin justificarse después, sin explicar de más. A veces dos palabras alcanzan.</p></div>
+            <div class="week-day"><h4>Día 24 · Gracias por quedarte</h4><p>En medio del enojo, agradézcanse algo: «gracias por quedarte a hablarlo conmigo». La gratitud ablanda cualquier corazón.</p></div>
+            <div class="week-day"><h4>Día 25 · Un beso en la frente</h4><p>Antes de seguir hablando, un beso en la frente y un beso en las manos, suavecito. Hay besos que no apagan el enojo de golpe, pero dicen sin palabras: «aquí estoy, y no me voy».</p></div>
+            <div class="week-day"><h4>Día 26 · Una cartita de perdón</h4><p>Déjale al otro una cartita cortita junto a su almohada esta noche: qué lamentas, cuánto lo amas y qué quieres hacer mejor. Nada más.</p></div>
+            <div class="week-day"><h4>Día 27 · Orar el uno por el otro</h4><p>Aunque cueste, cada uno ora en voz alta por el otro: por su corazón, por su día, por su paz. Orar por alguien enoja mucho menos que pelear con él.</p></div>
+            <div class="week-day"><h4>Día 28 · Nuestro primer beso, otra vez</h4><p>Cuéntense cómo recuerda cada uno su primer beso, con todos los detalles que se les vengan al corazón… y ciérrenlo con uno nuevo, despacito y con ternura, como aquel.</p></div>
+            <div class="week-day"><h4>Día 29 · Una palabra clave</h4><p>Acuerden una palabra clave y bonita para pausar cualquier discusión cuando suba de tono. Cuando uno la diga, los dos respiran y bajan la voz.</p></div>
+            <div class="week-day"><h4>Día 30 · Nunca dormirse enojados</h4><p>El cierre del kit y la regla de oro de nuestro hogar: no dormirse enojados. Antes de dormir, un «te amo, estamos bien» y un abrazo, pase lo que pase.</p></div>
+          </div>
+          <p class="game-final" style="margin-top:22px; margin-bottom:0">Treinta días, mi amor, y una sola meta: volver siempre el uno al otro. Enojados a veces, sí… pero jamás lejos. Te amo. ♥</p>
+        </div>
+      </div>
+    </div>
+    <!-- Nuestra historia -->
+    <div class="game-card" id="screenHistoria">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestra historia ❦</h3>
+      <p class="game-desc">Esta es nuestra historia, mi vida, tal como pasó de verdad: desde un baile en el FSY de 2019 hasta el día de nuestra boda, y todo lo que soñamos después. Cada fecha es real y cada momento es nuestro. Léela despacito.</p>
+      <div class="tl">
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Agosto de 2019</span>
+          <h4>Nos conocemos en el FSY</h4>
+          <p>Fue en el FSY 2019, mi amor. En el baile te invité a bailar… y te voy a ser honesto: lo hice para escapar de un chico que me estaba persiguiendo. Después, en las actividades, tú me invitaste en broma a tocarte la pierna y a mí me dio más cringe que otra cosa. Así de chistoso empezó todo, sin que ninguno de los dos imaginara lo que venía.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Agosto de 2021</span>
+          <h4>Te reconozco en una foto</h4>
+          <p>Dos años después, tu prima subió una foto tuya y te reconocí. Le pedí que me pasara tu número; ella te preguntó primero, tú dijiste que sí, y empezamos a conocernos por mensajes. No sé cómo explicarlo, mi amor, pero desde ahí todo se sintió muy especial.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">2021</span>
+          <h4>Nuestra primera cita: Venom 2</h4>
+          <p>Fuimos al cine al estreno de Venom 2, pero tu papá estaba celoso y la cita fue medio incómoda. Aun así, yo ya sabía que quería seguir viéndote… y vaya que lo hice.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">2021</span>
+          <h4>Básquetbol en Colinas de Plata</h4>
+          <p>Te invité a entrenar básquetbol conmigo en las canchas de Colinas de Plata, atrás de Plaza Q, en Mineral de la Reforma, Hidalgo. Entre canasta y canasta convivimos muchísimo… y yo me fui enamorando sin darme cuenta.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">5 de octubre de 2021</span>
+          <h4>Los brownies de mi cumpleaños</h4>
+          <p>El día de mi cumpleaños me regalaste unos brownies que me encantaron. Mi mamá bromeaba contigo, preguntándote si querías andar conmigo… y yo por dentro pensaba que ojalá dijeras que sí.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">21 de octubre de 2021</span>
+          <h4>Brownies para mi mamá</h4>
+          <p>Ese día hicimos brownies juntos para el cumpleaños de mi mamá. Entre harina, chocolate y risas, yo ya sentía que lo nuestro era algo serio y bonito.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">23 de octubre – 10 de noviembre de 2021</span>
+          <h4>Novios por mensaje</h4>
+          <p>Viajé a la Ciudad de México porque nació mi hermano Ethan, y estando lejos, por mensajes, tú y yo nos hicimos novios. Ni la distancia pudo con lo que ya sentíamos.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Noviembre de 2021</span>
+          <h4>Empezamos a salir oficialmente</h4>
+          <p>Ya de vuelta en Pachuca, alrededor del 25 de noviembre, hablamos con tus papás y con mi mamá, y empezamos a salir oficialmente. Fui el más feliz del mundo. Duramos unos seis meses; después cortamos… y aun así estuvimos un tiempo como «amigos novios», porque ni lejos el uno del otro sabíamos estar.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">23 de octubre de 2022</span>
+          <h4>Me voy a la misión</h4>
+          <p>Me fui a servir a la Misión Ciudad de México Sur, lejos de mi amor. Y pasó algo curioso: entre más lejos estaba de ti, más me enamoraba de ti.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Agosto de 2023</span>
+          <h4>La despedida que más me dolió</h4>
+          <p>Estando en la misión, tú no sentiste lo mismo y decidiste terminar definitivamente. Me dijiste que, si yo quería, podíamos regresar después de la misión, primero como amigos y después como algo más… y yo no acepté. Me dolió mucho, me puse muy triste y sufrí. Pero ni ese dolor apagó lo que sentía por ti, y Dios lo sabía.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Febrero de 2025</span>
+          <h4>Regreso de la misión</h4>
+          <p>Volví a casa después de servir al Señor, con el corazón lleno de todo lo que aprendí… y con tu nombre todavía guardado en él.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">19 de junio de 2025</span>
+          <h4>Te pido que seas mi novia</h4>
+          <p>Habíamos empezado a salir unas dos semanas y media antes; un lunes acordamos retomar la relación, y fue la decisión más feliz de mi vida. El día que te pedí ser mi novia estábamos en el cine viendo Elio, en Plaza Q, enfrente de las canchas donde entrenábamos. Te lo pedí bajo la lluvia, dijiste que sí y nos besamos. Después fuimos a Plaza Universidad por sushi, tu comida favorita. El mejor día de mi vida, mi amor.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">7 de noviembre de 2025</span>
+          <h4>Nuestro compromiso</h4>
+          <p>Ese día nos comprometimos: lo que empezó con un baile en el FSY y sobrevivió a una misión, a la distancia y al tiempo, se volvió promesa de eternidad.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">3 de febrero de 2026</span>
+          <h4>Seis meses en la Ciudad de México</h4>
+          <p>Tuve que irme a vivir a la Ciudad de México por seis meses para juntar dinero para nuestra boda: trabajé en el CCM y también en el Templo de la Ciudad de México. Estaba lejos de mi amor, pero tú ibas a verme, y era genial verte los fines de semana. Me dabas gorditas de lechera y dulces para vender en el trabajo, y tú vendías churros. Los dos nos esforzamos muchísimo para salir adelante, juntitos aunque fuera a la distancia.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Agosto de 2026</span>
+          <h4>De regreso en Pachuca, juntitos</h4>
+          <p>Después de seis meses regresé a Pachuca. Viví como un mes con mi mamá y luego me mudé al lado de donde vives tú; desde que me mudé empecé a trabajar en Prendamex Autos, como el 19 o 20 de agosto. Por septiembre empezamos a vivir juntos, y me ha encantado: pasar tiempo contigo todos los días, tan cerquita ya de casarnos.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">15 de diciembre de 2026</span>
+          <h4>Tu cumpleaños</h4>
+          <p>El día en que celebramos tu vida, mi amor. Esta página entera es mi regalo para ti: está hecha con todo mi corazón para decirte lo agradecido que estoy con Dios por ti, hoy y siempre.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">19 de diciembre de 2026</span>
+          <h4>Nuestra boda</h4>
+          <p>El día en que nos convertimos en esposos y empieza nuestra eternidad: con Dios en el centro de todo, sellados el uno para el otro en esta vida y por todas las que siguen. El capítulo más hermoso… y apenas es el principio.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">20 al 23 de diciembre de 2026</span>
+          <h4>Nuestra luna de miel</h4>
+          <p>Recién casados, nos vamos de luna de miel los dos solitos, a celebrar que por fin somos esposos. Unos días para empezar nuestra eternidad como se debe: juntitos, sin prisa y muy enamorados.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Diciembre de 2026</span>
+          <h4>Nuestra primera Navidad como esposos</h4>
+          <p>De vuelta de la luna de miel, pasaremos nuestra primera Navidad ya como esposos: la primera de todas las Navidades que nos esperan, con Cristo en el centro de nuestro hogar.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Nuestro futuro</span>
+          <h4>Seremos papás</h4>
+          <p>Aproximadamente dos años después de casarnos, si el Señor así lo permite, nos convertiremos en papás. Ya sueño con ese día, mi amor: con nuestro Nimrod, con nuestra Liahona y con cada hijito que el Padre Celestial nos confíe.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true">♥</span>
+          <span class="tl-date">Un sueño por cumplir</span>
+          <h4>El Templo de Salt Lake City</h4>
+          <p>Tal vez el siguiente año viajemos al Templo de Salt Lake City, en Utah, Estados Unidos, para entrar a sus puertas abiertas. Un sueño más que quiero cumplir tomándote de la mano.</p>
+        </div>
+      </div>
+      <p class="game-final" style="margin-top:22px; margin-bottom:0">Te amo Naomi eres muy especial para mí. — Tu Hagot ♥</p>
+    </div>
+
+    <!-- Cartas para el futuro -->
+    <div class="game-card" id="screenCartasFuturo">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cartas para el futuro ✉</h3>
+      <p class="game-desc">Ya te escribí las tres cartas, mi amor, una para cada aniversario grande de nuestro matrimonio, con nuestra historia y nuestra fe en cada renglón. Están selladas con todo mi corazón y cada una se abre en su día exacto. Por ahora solo puedes ver cuánto falta… y soñar con lo que dirán.</p>
+
+      <div class="fut-letter">
+        <div class="anni-visual" aria-hidden="true">✉</div>
+        <h4>Carta para nuestro 1er aniversario</h4>
+        <p class="fut-when">Se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2027</strong>, cuando cumplamos nuestro primer año de casados. Esto es lo que falta:</p>
+        <div class="fut-locked" data-futlocked="0">
+          <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la carta del primer aniversario">
+            <div class="cd-unit"><span class="cd-num" data-fut="0-days">--</span><span class="cd-label">Días</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="0-hours">--</span><span class="cd-label">Horas</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="0-mins">--</span><span class="cd-label">Minutos</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="0-secs">--</span><span class="cd-label">Segundos</span></div>
+          </div>
+          <p class="fut-sealed-note">Sellada con un beso y con la promesa de nuestro primer año juntitos como esposos. ♥</p>
+        </div>
+        <div class="fut-openbox" data-futopen="0" hidden>
+          <div class="fut-letter-body">
+            <p>¡Feliz primer aniversario, mi esposa hermosa! Hoy cumplimos un año de casados, y te escribo esta carta desde antes de la boda, cuando todavía contaba los días para decirte «sí». Si estás leyendo esto, es porque ya vivimos nuestro primer año como esposos… y sé, porque te conozco y porque conozco lo que siento, que te amo más hoy que el día en que nos casamos.</p>
+            <p>Piensa en todo lo que ya vivimos solo para llegar aquí: un baile en el FSY de 2019 al que te invité huyendo de un chico que me perseguía, unos brownies que me enamoraron en mi cumpleaños, una misión, una despedida que me partió el corazón, y un regreso bajo la lluvia en Plaza Q donde me dijiste que sí otra vez. Y después, ya casados: nuestra luna de miel del 20 al 23 de diciembre, y nuestra primera Navidad como esposos. Cada diciembre me va a recordar que el mejor regalo de mi vida eres tú.</p>
+            <p>Gracias por este primer año: por las gorditas de lechera, por los churros, por visitarme en la Ciudad de México cuando trabajaba para nuestra boda, y por construir conmigo este hogar pasito a pasito. Todo ese esfuerzo valió la pena, mi amor, porque nos trajo hasta aquí.</p>
+            <p>Que nuestro segundo año nos encuentre igual: orando juntos, riendo juntos y con Cristo en el centro de nuestra casa. Y que sigamos soñando con el día, en unos añitos, en que seamos papás.</p>
+            <p class="fut-sign">Te amo hoy, mañana y por la eternidad. — Tu Hagot ♥</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fut-letter">
+        <div class="anni-visual" aria-hidden="true">✉</div>
+        <h4>Carta para nuestros 5 años</h4>
+        <p class="fut-when">Se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2031</strong>, cuando cumplamos cinco años de casados. Esto es lo que falta:</p>
+        <div class="fut-locked" data-futlocked="1">
+          <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la carta de los cinco años">
+            <div class="cd-unit"><span class="cd-num" data-fut="1-days">--</span><span class="cd-label">Días</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="1-hours">--</span><span class="cd-label">Horas</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="1-mins">--</span><span class="cd-label">Minutos</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="1-secs">--</span><span class="cd-label">Segundos</span></div>
+          </div>
+          <p class="fut-sealed-note">Cinco años de esposos nos esperan antes de abrirla… y sé que van a volar, porque a tu lado el tiempo bonito siempre vuela. ♥</p>
+        </div>
+        <div class="fut-openbox" data-futopen="1" hidden>
+          <div class="fut-letter-body">
+            <p>¡Cinco años de casados, mi amor! Cuando te escribí esta carta todavía no nos casábamos, y ya te imaginaba aquí, cinco años después, leyendo esto a mi lado. Si el Señor nos ha bendecido como soñábamos, por estas fechas ya somos papás, y nuestro hogar se llenó de risas chiquitas, de oraciones antes de dormir y de un amor que ya no es solo de dos.</p>
+            <p>¿Te acuerdas de cómo empezó todo? De entrenar básquetbol en las canchas de Colinas de Plata, de hacer brownies para mi mamá, de hacernos novios por mensaje mientras nacía mi hermano Ethan. ¿Y de lo que dolió la misión, cuando terminamos y pensé que te había perdido para siempre? Hoy, cinco años de esposos después, le agradezco a Dios por no haberme dejado rendirme: porque lo que Él juntó, ni la distancia ni el tiempo pudieron separarlo.</p>
+            <p>Gracias por ser mi compañera en todo: en el trabajo duro, en vender gorditas y churros para salir adelante, en servir en la Iglesia y en criar conmigo a nuestros hijos en el evangelio. Eres la respuesta a todas mis oraciones, Naomi, en 2026 lo eras y hoy lo sigues siendo, multiplicado.</p>
+            <p>Que los próximos cinco años nos hagan más pacientes, más tiernos y más unidos al Padre Celestial. Todavía nos falta cumplir sueños juntos —quizá ya fuimos al Templo de Salt Lake City, o quizá sigue en nuestra lista— pero el sueño más grande, el de nuestra familia eterna, ya lo estamos viviendo.</p>
+            <p class="fut-sign">Cinco años y contando, mi reina. Te amo más que ayer y menos que mañana. — Tu Hagot ♥</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fut-letter">
+        <div class="anni-visual" aria-hidden="true">✉</div>
+        <h4>Carta para nuestros 10 años</h4>
+        <p class="fut-when">Se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2036</strong>, cuando cumplamos diez años de casados. Esto es lo que falta:</p>
+        <div class="fut-locked" data-futlocked="2">
+          <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la carta de los diez años">
+            <div class="cd-unit"><span class="cd-num" data-fut="2-days">--</span><span class="cd-label">Días</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="2-hours">--</span><span class="cd-label">Horas</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="2-mins">--</span><span class="cd-label">Minutos</span></div>
+            <div class="cd-unit"><span class="cd-num" data-fut="2-secs">--</span><span class="cd-label">Segundos</span></div>
+          </div>
+          <p class="fut-sealed-note">Diez años, mi vida: una década entera de nosotros. Esta carta espera paciente, como esperé yo por ti. ♥</p>
+        </div>
+        <div class="fut-openbox" data-futopen="2" hidden>
+          <div class="fut-letter-body">
+            <p>¡Diez años de casados, mi vida! Una década entera de nosotros. Te escribo desde 2026, con el anillo todavía nuevo en mi mano y el corazón que no me cabe en el pecho, para decirte algo que el tiempo solo puede confirmar: elegirte fue, es y será la mejor decisión de mi vida.</p>
+            <p>Mira todo el camino que recorrimos para llegar aquí: nos conocimos en el FSY de 2019, nos reencontramos en 2021 por una foto que subió tu prima, nos separamos en la misión y creí que te perdía… y Dios, en Su tiempo perfecto, nos volvió a juntar un lunes de junio de 2025. Desde ese día no hemos dejado de construir: el compromiso, los seis meses que trabajé en la Ciudad de México vendiendo las gorditas que tú me dabas mientras tú vendías churros, la boda, la luna de miel y nuestra primera Navidad como esposos.</p>
+            <p>Diez años después, lo que más le agradezco al Padre Celestial es que nuestro matrimonio no se mide solo en años, sino en eternidad. Oramos juntos, servimos juntos, perdonamos rápido y reímos mucho: esa fue siempre nuestra receta, desde los brownies de 2021 hasta hoy.</p>
+            <p>Si nuestros hijos ya corretean por la casa, diles que su papá amó a su mamá desde antes de que existieran, y que la sigue amando igual que el primer día… bueno, no igual: mucho, muchísimo más. Y si la vida nos ha dado pruebas, gracias por enfrentarlas conmigo tomados de la mano y de la mano de Dios.</p>
+            <p class="fut-sign">Diez años, mi amor, y apenas es el principio de la eternidad. Te amo Naomi, eres muy especial para mí. — Tu Hagot ♥</p>
+          </div>
+        </div>
+      </div>
+      <p class="game-final" style="margin-bottom:0">Tres cartas, tres aniversarios, un solo amor que no se acaba: el nuestro, mi Naomi. ♥</p>
+    </div>
+
+    <!-- Lo que me enamora de ti -->
+    <div class="game-card" id="screenEnamora">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Lo que me enamora de ti ✿</h3>
+      <p class="game-desc">Esta listita está escrita con nuestra historia de verdad, mi amor: detrás de cada corazoncito hay algo que me enamora de ti —los brownies, el básquetbol, los churros, tus visitas—, y se va revelando poco a poco, uno por uno, como se fue revelando nuestro amor. Toca cada numerito y descúbrelos todos.</p>
+      <p class="reasons-count" id="enamoraCount" role="status"></p>
+      <div class="reasons-grid" id="enamoraGrid"></div>
+      <p class="game-final" id="enamoraFinal" style="margin-top:24px; margin-bottom:0" hidden>Ya descubriste los 24 corazoncitos, mi vida… y aun así me quedé corto: cada día contigo me enamora de algo nuevo. ♥</p>
+    </div>
+
+    <!-- Nuestro árbol familiar eterno -->
+    <div class="game-card" id="screenArbolFamiliar">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro árbol familiar eterno ❧</h3>
+      <p class="game-desc">Este es nuestro arbolito familiar, mi amor: la familia eterna que estamos formando con Dios en el centro. Aquí están nuestros nombres completos, los de nuestros hijos que ya viven en nuestros sueños, y espacio guardado para todos los que vendrán.</p>
+      <div class="ft-couple">
+        <div class="ft-card">
+          <span class="ft-role">El esposo</span>
+          <span class="ft-name">Hagot Coriantumr Viana Castro</span>
+        </div>
+        <span class="ft-heart" aria-hidden="true">♥</span>
+        <div class="ft-card">
+          <span class="ft-role">La esposa</span>
+          <span class="ft-name">Naomi Nazareth Carbajal Sánchez</span>
+        </div>
+      </div>
+      <p class="ft-sealed">Sellados el uno para el otro el <strong style="color:var(--rose-deep)">19 de diciembre de 2026</strong>, en esta vida y por toda la eternidad.</p>
+      <div class="ft-link" aria-hidden="true"></div>
+      <div class="ft-branch" aria-hidden="true"></div>
+      <h4 class="ft-kids-title">Nuestros hijos ♥</h4>
+      <div class="ft-kids">
+        <div class="ft-kid">
+          <span class="ft-role">Nuestro hijo</span>
+          <span class="ft-name">Nimrod Coriantumr Nabucodonosor Viana Carbajal</span>
+        </div>
+        <div class="ft-kid">
+          <span class="ft-role">Nuestra hija</span>
+          <span class="ft-name">Liahona Nazaret Viana Carbajal</span>
+        </div>
+        <div class="ft-future">
+          <span class="ft-name">Un nombre más…</span>
+          <p>Espacio guardado con amor para otro hijo o hija que Dios nos confíe.</p>
+        </div>
+        <div class="ft-future">
+          <span class="ft-name">Y otro más…</span>
+          <p>Porque en este arbolito siempre habrá lugar para los que vendrán.</p>
+        </div>
+      </div>
+      <p class="game-final" style="margin-top:24px; margin-bottom:0">Las familias pueden ser eternas, mi amor, y la nuestra ya empezó: tú, yo, y cada nombre que el cielo nos regale. ♥</p>
     </div>
   </section>
 
@@ -3346,7 +3736,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada'];
+  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenCartasFuturo', 'screenEnamora', 'screenArbolFamiliar'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -3367,6 +3757,8 @@
     screenGames: 'screenMenu', screenFaith: 'screenMenu', screenCapsule: 'screenMenu',
     screenAdvent: 'screenMenu', screenDetallitos: 'screenMenu',
     screenEnojada: 'screenMenu',
+    screenHistoria: 'screenMenu', screenCartasFuturo: 'screenMenu',
+    screenEnamora: 'screenMenu', screenArbolFamiliar: 'screenMenu',
     screenMenu: null
   };
   var currentScreen = null; // pantalla visible, o null = página principal
@@ -6250,7 +6642,9 @@
     screenConversemos: 'screenDetallitos', screenDiaPerfecto: 'screenDetallitos',
     screenRazones: 'screenDetallitos', screenAhorcado: 'screenDetallitos',
     screenAniversario: 'screenDetallitos', screenQueAmo: 'screenDetallitos',
-    screenEnojada: 'screenEnojada'
+    screenEnojada: 'screenEnojada', screenHistoria: 'screenHistoria',
+    screenCartasFuturo: 'screenCartasFuturo', screenEnamora: 'screenEnamora',
+    screenArbolFamiliar: 'screenArbolFamiliar'
   };
   function updateNavCurrent(){
     var active = document.querySelector('.game-card.active');
@@ -6671,6 +7065,119 @@
       if(letterCard.classList.contains('open')) burstOnEl(letterCard, 10);
     });
     letterObs.observe(letterCard, { attributes: true, attributeFilter: ['class'] });
+  }
+
+})();
+</script>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function futPad(n){ return (n < 10 ? '0' : '') + n; }
+
+  // ===== Kit de emergencia (dentro de «Cuando estés enojada»): romper el sello =====
+  var emergBreakBtn = document.getElementById('emergBreakBtn');
+  var emergSealed = document.getElementById('emergSealed');
+  var emergOpen = document.getElementById('emergOpen');
+  if(emergBreakBtn && emergSealed && emergOpen){
+    emergBreakBtn.addEventListener('click', function(){
+      emergSealed.hidden = true;
+      emergOpen.hidden = false;
+      emergOpen.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
+  // ===== Cartas para el futuro: cuentas regresivas en vivo (1, 5 y 10 años) =====
+  var FUT_TARGETS = [new Date(2027, 11, 19, 0, 0, 0), new Date(2031, 11, 19, 0, 0, 0), new Date(2036, 11, 19, 0, 0, 0)];
+  function tickFut(){
+    var anyLeft = false;
+    FUT_TARGETS.forEach(function(target, i){
+      var diff = target.getTime() - Date.now();
+      var locked = document.querySelector('[data-futlocked="' + i + '"]');
+      var open = document.querySelector('[data-futopen="' + i + '"]');
+      if(diff <= 0){
+        if(locked) locked.hidden = true;
+        if(open) open.hidden = false;
+        return;
+      }
+      anyLeft = true;
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor(diff % 86400000 / 3600000);
+      var m = Math.floor(diff % 3600000 / 60000);
+      var s = Math.floor(diff % 60000 / 1000);
+      var set = function(part, val){
+        var el = document.querySelector('[data-fut="' + i + '-' + part + '"]');
+        if(el) el.textContent = val;
+      };
+      set('days', d); set('hours', futPad(h)); set('mins', futPad(m)); set('secs', futPad(s));
+    });
+    return anyLeft;
+  }
+  if(document.querySelector('[data-futlocked]')){
+    if(tickFut()){
+      var futTimer = setInterval(function(){ if(!tickFut()) clearInterval(futTimer); }, 1000);
+    }
+  }
+
+  // ===== Lo que me enamora de ti: revelado poco a poco, todo sacado de nuestra historia =====
+  var ENAMORA_ITEMS = [
+    'Tu risa, mi amor: escucharla es mi sonido favorito del mundo, desde el FSY hasta hoy. ♥',
+    'Los brownies que me regalaste el 5 de octubre de 2021: con ese detallito me terminaste de enamorar. ♥',
+    'Que entrenábamos básquetbol juntos en Colinas de Plata: ni en la cancha me ganabas… bueno, a veces sí. ♥',
+    'Tu esfuerzo vendiendo churros para que saliéramos adelante: trabajadora como tú no hay dos. ♥',
+    'Que ibas a verme a la Ciudad de México cuando trabajaba allá: cada fin de semana contigo era mi premio. ♥',
+    'Las gorditas de lechera y los dulces que me dabas para vender en el trabajo: siempre pensando en los dos. ♥',
+    'Tu forma de querer: constante, paciente y sin rendirte con nosotros, ni en los momentos difíciles. ♥',
+    'Que me dijiste que sí bajo la lluvia, frente a las canchas de Plaza Q: ese sí me cambió la vida. ♥',
+    'Tu sonrisa, mi vida: es lo primero que busco al despertar y lo último que quiero ver al dormir. ♥',
+    'Tu fe: cómo amas al Padre Celestial y cómo quieres que Él sea el centro de nuestro hogar. ♥',
+    'Que Dios nos volvió a juntar y tú decidiste elegirme otra vez, en junio de 2025. La decisión más feliz de mi vida fue la nuestra. ♥',
+    'Lo especial que hiciste sentir todo desde que empezamos a conocernos por mensajes en 2021. ♥',
+    'Que hicimos brownies juntos para el cumpleaños de mi mamá: desde entonces supe que eras familia. ♥',
+    'Tu comida favorita es el sushi, pero tu corazón es todavía más rico que cualquier platillo. ♥',
+    'Tu valentía: cuando algo te importa de verdad, lo defiendes con todo tu corazón. ♥',
+    'Cómo me apoyaste cuando me fui a la misión, y cómo seguiste tu camino con la frente en alto. Te admiro. ♥',
+    'Tu ternura cuando estamos juntitos en casa: vivir contigo desde septiembre me ha encantado. ♥',
+    'Que eres mi mejor equipo: en el trabajo, en la Iglesia, en los sueños… en todo somos tú y yo. ♥',
+    'Tu manera de perdonar y de volver a empezar: así se construye una eternidad, mi amor. ♥',
+    'Que un día serás la mamá de nuestros hijos, y ya sé que serás la mejor del mundo. ♥',
+    'Tu voz cuando me dices que me amas: es mi frase favorita en cualquier idioma. ♥',
+    'Que contigo hasta una cita incómoda, con tu papá celoso en el estreno de Venom 2, se volvió un recuerdo que atesoro. ♥',
+    'Tu alegría de niña grande: contigo todo es más ligero, más bonito, más vida. ♥',
+    'Que eres tú, Naomi. Simplemente tú: la respuesta a mis oraciones y el amor de mi vida y de mi eternidad. ♥'
+  ];
+  var ENAMORA_TOTAL = 24;
+  var enamoraGrid = document.getElementById('enamoraGrid');
+  var enamoraCount = document.getElementById('enamoraCount');
+  var enamoraFinal = document.getElementById('enamoraFinal');
+  var enamoraSeen = 0;
+  function renderEnamoraCount(){
+    if(!enamoraCount) return;
+    enamoraCount.textContent = enamoraSeen === 0
+      ? 'Todavía no descubres ninguno… ¡toca el primero, mi amor!'
+      : 'Corazoncitos descubiertos: ' + enamoraSeen + ' de ' + ENAMORA_TOTAL + ' ♥';
+  }
+  if(enamoraGrid){
+    for(var ei = 0; ei < ENAMORA_TOTAL; ei++){
+      (function(idx){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'reason-item';
+        b.innerHTML = '<span class="reason-num" aria-hidden="true">' + (idx + 1) + '</span><span class="reason-hint">Toca para descubrir el corazoncito ' + (idx + 1) + ' ♥</span>';
+        b.setAttribute('aria-label', 'Descubrir el corazoncito número ' + (idx + 1));
+        b.addEventListener('click', function(){
+          if(b.classList.contains('open')) return;
+          b.classList.add('open');
+          var text = ENAMORA_ITEMS[idx % ENAMORA_ITEMS.length];
+          b.innerHTML = '<span class="reason-num" aria-hidden="true">♥</span><span class="reason-text">' + text + '</span>';
+          b.setAttribute('aria-label', 'Corazoncito ' + (idx + 1) + ': ' + text);
+          enamoraSeen++;
+          renderEnamoraCount();
+          if(enamoraSeen === ENAMORA_TOTAL && enamoraFinal) enamoraFinal.hidden = false;
+        });
+        enamoraGrid.appendChild(b);
+      })(ei);
+    }
+    renderEnamoraCount();
   }
 
 })();

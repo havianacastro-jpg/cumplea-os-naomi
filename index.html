@@ -785,7 +785,7 @@
   }
   .capsule-timer{ max-width:480px; margin:18px auto 0 }
   .capsule-letter{ text-align:left; margin-top:26px }
-  #capsuleLocked[hidden], #capsuleOpen[hidden], #capsuleLetter[hidden], #capsuleFuture[hidden], #capsuleKids[hidden], #capsuleLetterNimrod[hidden], #capsuleLetterLiahona[hidden]{ display:none }
+  #capsuleLocked[hidden], #capsuleOpen[hidden], #capsuleLetter[hidden], #capsuleFuture[hidden], #capsuleKids[hidden], #capsuleLetterNimrod[hidden], #capsuleLetterLiahona[hidden], #capsuleLetterNaomi[hidden]{ display:none }
   [data-futopen][hidden], [data-futlocked][hidden]{ display:none }
   .capsule-child-tag{ display:block; text-align:center; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.8rem; letter-spacing:.07em; text-transform:uppercase; color:var(--gold); margin:6px 0 10px }
   .capsule-child-name{ font-family:"Playfair Display",serif; font-size:1.35rem; line-height:1.3; text-align:center; color:var(--rose-deep); margin:0 0 16px }
@@ -2543,6 +2543,71 @@
               </div>
             </div>
           </div>
+          <p style="max-width:560px; margin:30px auto 0; color:var(--ink-soft)">Y hay dos cartas más en esta misma parte de la cápsula, mi amor, pero estas no son para los niños: son para ti, una para cuando nazca Nimrod y otra para cuando nazca Liahona. También van con candado, igualito que las de los niños, y cada una se abre con la foto de su bebé.</p>
+          <div class="capsule-sealed">
+            <span class="capsule-lock" aria-hidden="true" data-baby-lock="naomi">🔒</span>
+            <h5>Para Naomi, mi esposa, para cuando nazca Nimrod</h5>
+            <p>Esta carta está sellada con candado, mi amor. Es mi carta para ti para el día en que nazca nuestro Nimrod. Para abrirla hacen falta dos cosas: confirmar que ya son papás y la foto de ustedes con el bebé, ya sea la que papá ponga en la página o la que suban desde el teléfono aquí mismo; sin una de las dos, el candado no se abre.</p>
+            <div class="baby-ask">
+              <button class="baby-ask-btn" type="button" data-baby-ask-btn="naomi">¿Ya son papás?</button>
+              <div class="baby-confirm-box" data-baby-confirm="naomi" hidden>
+                <p>Antes de abrir el candado, confírmame esto, mi amor: ¿ya eres mamá? ¿Ya son papás de Nimrod?</p>
+                <p>Para abrir esta carta hacen falta <strong>las dos cosas</strong>: tu confirmación <strong>y</strong> la foto de ustedes con el bebé, ya sea la que papá ponga en la página o la que suban desde el teléfono aquí mismo. Sin la foto no se abre, aunque confirmes; y sin confirmar tampoco se abre, aunque la foto ya esté.</p>
+                <div class="baby-confirm-btns">
+                  <button class="baby-ask-btn" type="button" data-baby-yes="naomi">Sí, ya somos papás ♥</button>
+                  <button class="baby-ask-btn baby-no-btn" type="button" data-baby-no="naomi">Todavía no</button>
+                </div>
+              </div>
+              <p class="baby-wait-note" data-baby-wait="naomi" hidden>Está bien, mi amor, no hay prisa. Todo llega a su tiempo, cuando Dios quiera, y ese momento tan soñado va a llegar: lo esperamos juntitos, con paciencia, con fe y con mucho amor. Esta carta seguirá aquí sellada, guardadita, hasta que seamos papás y papá ponga aquí la foto con el bebé. Te amo. ♥</p>
+              <div class="baby-upload-box" data-baby-photo-wait="naomi" hidden>
+                <p class="baby-step-done">¡Sí! ¡Ya son papás, mi amor! ♥</p>
+                <p>¡No sabes la felicidad que me da leer esto! Después de tanto soñarlo y pedirlo en oración, nuestro Nimrod ya está aquí. Gracias, Padre Celestial, y gracias a ti, mi vida, por este regalo tan grande. ♥</p>
+                <p>Solo falta un pasito para abrir esta carta, mi amor: la foto de ustedes con el bebé. Y para que esta carta nunca se quede sin abrirse, tienen <strong>dos caminos</strong>, el que les quede más fácil:</p>
+                <p><strong>Opción A, la preferida:</strong> que papá ponga la foto en la página, como todas nuestras fotos, para que quede fija y la puedan ver en todos lados. Sigue estos pasos con calma:<br>1. Guarda la foto de ustedes con el bebé en formato <strong>JPG</strong>.<br>2. Ponle el nombre exacto <strong>bebe-nimrod.jpg</strong>.<br>3. Dile a papá que la suba al repo desde VS Code o desde la página de GitHub, a la carpeta <strong>imagenes/</strong>, para que quede guardada como <strong>imagenes/bebe-nimrod.jpg</strong>.<br>4. En cuanto la foto esté en el repo, este candado se abre solito, la foto se muestra aquí y podrás leer tu carta. ♥</p>
+                <p><strong>Opción B, el respaldo:</strong> si papá no puede subirla al repo, no se preocupen, mi amor: súbanla directo desde el teléfono, aquí mismo, con el botón de abajo. La foto se guarda en este teléfono, como los demás recuerdos de la página, y con eso el candado se abre en este dispositivo para que leas tu carta sin esperar. ♥</p>
+                <label class="baby-upload-label" for="babyFileNaomi">Subir la foto desde el teléfono ♥</label>
+                <input type="file" id="babyFileNaomi" data-baby-file="naomi" accept="image/*" hidden>
+                <p>Sea por un camino o por el otro, esta carta te estará esperando con todo mi amor. ♥</p>
+              </div>
+              <div data-baby-done="naomi" hidden>
+                <img class="baby-photo" data-baby-img="naomi" alt="Foto de Hagot y Naomi con su bebé" hidden>
+                <p class="baby-open-note">¡El candado se abrió, mi amor! ¡Ya somos papás! La foto de ustedes con su bebé ya está aquí, guardadita en tu carta. ♥</p>
+                <button class="baby-ask-btn" type="button" data-baby-read="naomi">Leer mi carta ♥</button>
+              </div>
+            </div>
+          </div>
+          <div class="capsule-sealed">
+            <span class="capsule-lock" aria-hidden="true" data-baby-lock="naomiLiahona">🔒</span>
+            <h5>Para Naomi, mi esposa, para cuando nazca Liahona</h5>
+            <p>Esta carta está sellada con candado, mi amor. Es mi carta para ti para el día en que nazca nuestra Liahona. Para abrirla hacen falta dos cosas: confirmar que ya son papás y la foto de ustedes con el bebé, ya sea la que papá ponga en la página o la que suban desde el teléfono aquí mismo; sin una de las dos, el candado no se abre.</p>
+            <div class="baby-ask">
+              <button class="baby-ask-btn" type="button" data-baby-ask-btn="naomiLiahona">¿Ya son papás?</button>
+              <div class="baby-confirm-box" data-baby-confirm="naomiLiahona" hidden>
+                <p>Antes de abrir el candado, confírmame esto, mi amor: ¿ya eres mamá? ¿Ya son papás de Liahona?</p>
+                <p>Para abrir esta carta hacen falta <strong>las dos cosas</strong>: tu confirmación <strong>y</strong> la foto de ustedes con el bebé, ya sea la que papá ponga en la página o la que suban desde el teléfono aquí mismo. Sin la foto no se abre, aunque confirmes; y sin confirmar tampoco se abre, aunque la foto ya esté.</p>
+                <div class="baby-confirm-btns">
+                  <button class="baby-ask-btn" type="button" data-baby-yes="naomiLiahona">Sí, ya somos papás ♥</button>
+                  <button class="baby-ask-btn baby-no-btn" type="button" data-baby-no="naomiLiahona">Todavía no</button>
+                </div>
+              </div>
+              <p class="baby-wait-note" data-baby-wait="naomiLiahona" hidden>Está bien, mi amor, no hay prisa. Todo llega a su tiempo, cuando Dios quiera, y ese momento tan soñado va a llegar: lo esperamos juntitos, con paciencia, con fe y con mucho amor. Esta carta seguirá aquí sellada, guardadita, hasta que seamos papás y papá ponga aquí la foto con el bebé. Te amo. ♥</p>
+              <div class="baby-upload-box" data-baby-photo-wait="naomiLiahona" hidden>
+                <p class="baby-step-done">¡Sí! ¡Ya son papás, mi amor! ♥</p>
+                <p>¡No sabes la felicidad que me da leer esto! Después de tanto soñarlo y pedirlo en oración, nuestra Liahona ya está aquí. Gracias, Padre Celestial, y gracias a ti, mi vida, por este regalo tan grande. ♥</p>
+                <p>Solo falta un pasito para abrir esta carta, mi amor: la foto de ustedes con el bebé. Y para que esta carta nunca se quede sin abrirse, tienen <strong>dos caminos</strong>, el que les quede más fácil:</p>
+                <p><strong>Opción A, la preferida:</strong> que papá ponga la foto en la página, como todas nuestras fotos, para que quede fija y la puedan ver en todos lados. Sigue estos pasos con calma:<br>1. Guarda la foto de ustedes con el bebé en formato <strong>JPG</strong>.<br>2. Ponle el nombre exacto <strong>bebe-liahona.jpg</strong>.<br>3. Dile a papá que la suba al repo desde VS Code o desde la página de GitHub, a la carpeta <strong>imagenes/</strong>, para que quede guardada como <strong>imagenes/bebe-liahona.jpg</strong>.<br>4. En cuanto la foto esté en el repo, este candado se abre solito, la foto se muestra aquí y podrás leer tu carta. ♥</p>
+                <p><strong>Opción B, el respaldo:</strong> si papá no puede subirla al repo, no se preocupen, mi amor: súbanla directo desde el teléfono, aquí mismo, con el botón de abajo. La foto se guarda en este teléfono, como los demás recuerdos de la página, y con eso el candado se abre en este dispositivo para que leas tu carta sin esperar. ♥</p>
+                <label class="baby-upload-label" for="babyFileNaomiLiahona">Subir la foto desde el teléfono ♥</label>
+                <input type="file" id="babyFileNaomiLiahona" data-baby-file="naomiLiahona" accept="image/*" hidden>
+                <p>Sea por un camino o por el otro, esta carta te estará esperando con todo mi amor. ♥</p>
+              </div>
+              <div data-baby-done="naomiLiahona" hidden>
+                <img class="baby-photo" data-baby-img="naomiLiahona" alt="Foto de Hagot y Naomi con su bebé" hidden>
+                <p class="baby-open-note">¡El candado se abrió, mi amor! ¡Ya somos papás! La foto de ustedes con su bebé ya está aquí, guardadita en tu carta. ♥</p>
+                <button class="baby-ask-btn" type="button" data-baby-read="naomiLiahona">Leer mi carta ♥</button>
+              </div>
+            </div>
+          </div>
         </div>
         <article class="letter capsule-letter" id="capsuleLetterNimrod" hidden>
           <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
@@ -2567,6 +2632,28 @@
           <p>Cuando leas esto, quiero que nunca dudes de algo: eres profundamente amada. Por tu mamá, la mujer más maravillosa que conozco, servicial, fuerte y llena de fe, que ya te ama con todo su corazón. Y por mí, tu papá, que desde antes de tenerte en brazos ya daría todo por ti. Vamos a equivocarnos a veces, como todos los papás, pero nunca te va a faltar amor, ni guía, ni un testimonio de Jesucristo en nuestro hogar. Y tendrás en tu hermano Nimrod a un compañero para crecer, reír y aprender juntos del Evangelio.</p>
           <p>Te esperamos, hija. Con los brazos abiertos, con el corazón listo y con toda la fe del mundo.</p>
           <p class="sign">Con todo mi amor, hoy y siempre,<br>Tu papá, Hagot<br><span style="font-size:1.05rem">Y tu mamá, Naomi, que ya te espera con todo su amor</span></p>
+        </article>
+        <article class="letter capsule-letter" id="capsuleLetterNaomi" hidden>
+          <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
+          <p class="capsule-child-name">Para Naomi, mi esposa, para cuando nazca Nimrod</p>
+          <img class="baby-photo" data-baby-img="naomi" alt="Foto de Hagot y Naomi con su bebé, la que papá puso en la página al abrir esta carta" hidden>
+          <p>Mi amor, mi esposa hermosa, mi reina: Si estás leyendo esta carta, es porque ya somos papás. Ya llegó ese día que soñábamos desde antes de casarnos, cuando hablábamos de nuestro Nimrod corriendo por la casa.</p>
+          <p>Gracias, mi amor. Gracias por tu paciencia, por tu fe, por haber traído a este mundo a nuestro Nimrod. Verte ser mamá es lo más bonito que me ha pasado en la vida, después de verte decir que sí frente a las canchas de Plaza Q, bajo la lluvia.</p>
+          <p>Quiero que sepas algo: eres la mejor mamá que nuestros hijos pudieron tener. Servicial, fuerte, llena de fe, como siempre has sido conmigo. Y yo te prometo que voy a estar a tu lado en todo: en las noches sin dormir, en las oraciones antes de dormir, en enseñarles del Padre Celestial y de Jesucristo, en criarlos en el evangelio, para que crezcan sabiendo que son parte de una familia eterna.</p>
+          <p>Nuestro hogar ya no es solo de dos: ahora somos una familia, y cada risa chiquita, cada pasito, cada oración, nos recuerda que Dios nos confió lo más sagrado que existe. Y yo le doy gracias todos los días por haberme dado a ti, y ahora, por habernos dado a ellos.</p>
+          <p>Te amo más que ayer, mi amor, y menos que mañana. Y te amo hoy, mañana y por la eternidad, como esposo, como compañero, y ahora, como el papá de tus hijos.</p>
+          <p class="sign">— Tu Hagot</p>
+        </article>
+        <article class="letter capsule-letter" id="capsuleLetterNaomiLiahona" hidden>
+          <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
+          <p class="capsule-child-name">Para Naomi, mi esposa, para cuando nazca Liahona</p>
+          <img class="baby-photo" data-baby-img="naomiLiahona" alt="Foto de Hagot y Naomi con su bebé, la que papá puso en la página al abrir esta carta" hidden>
+          <p>Mi reina, mi amor: Hoy el cielo nos regaló a nuestra Liahona, y no puedo dejar de pensar en lo que su nombre significa para nosotros. En el Libro de Mormón, la Liahona era esa brújula que el Señor le dio a la familia de Lehi, que solo funcionaba con fe y obediencia. Y míranos ahora: Dios nos confió a nuestra propia Liahona, una niña que llegó para guiarnos, para recordarnos todos los días hacia dónde caminar.</p>
+          <p>Naomi, verte con ella en brazos es ver la promesa cumplida. Te ves hermosa, cansada, fuerte y llena de amor, todo al mismo tiempo. Eres la mamá que yo siempre supe que serías: la que ora, la que canta, la que abraza, la que nunca se rinde.</p>
+          <p>Te prometo que voy a cuidarlas a las dos. Que en esta casa nunca va a faltar la oración, ni el perdón, ni la risa. Que le voy a enseñar a nuestra hija que tiene un Padre Celestial que la ama, un Salvador que dio todo por ella, y unos papás que la esperaron desde antes de casarse.</p>
+          <p>Gracias por hacerme papá de una niña, mi amor. Gracias por tu ejemplo, por tu ternura y por tu fe. Nuestra familia ya es eterna, y hoy se siente más grande y más hermosa que nunca.</p>
+          <p>Te amo, mi esposa, mi compañera, la mamá de nuestra Liahona. Hoy, mañana y por toda la eternidad.</p>
+          <p class="sign">— Tu Hagot</p>
         </article>
       </div>
     </div>
@@ -5026,13 +5113,15 @@
 
   // --- Cartas para Nimrod y Liahona: el candado se abre SOLO con los dos requisitos juntos: confirmar en la página que ya son papás Y la foto del bebé. La foto tiene doble opción para que la carta nunca se quede sin abrirse: Opción A (la preferida), la foto ya está en la página porque papá la puso en el repo como todas las demás fotos (imagenes/bebe-nimrod.jpg e imagenes/bebe-liahona.jpg), así queda fija para todos los dispositivos; Opción B (respaldo), si la foto no está en el repo, la suben directo desde el teléfono en la misma página y se guarda en ese dispositivo como los demás recuerdos de la página, y con eso se abre la carta ahí. Sin foto por ningún lado no se abre aunque confirmen; sin confirmar no se abre aunque la foto ya esté. ---
   var BABY_PHOTO_SRC = { nimrod: 'imagenes/bebe-nimrod.jpg', liahona: 'imagenes/bebe-liahona.jpg' };
-  var BABY_CONFIRM_KEYS = { nimrod: 'confirm-papas-nimrod-naomi', liahona: 'confirm-papas-liahona-naomi' };
-  var BABY_LOCAL_KEYS = { nimrod: 'foto-bebe-nimrod-naomi', liahona: 'foto-bebe-liahona-naomi' };
-  var BABY_LETTERS = { nimrod: document.getElementById('capsuleLetterNimrod'), liahona: document.getElementById('capsuleLetterLiahona') };
-  var babyState = { nimrod: { confirmed: false, photo: false, localPhoto: null }, liahona: { confirmed: false, photo: false, localPhoto: null } };
+  // Las DOS cartas de Naomi (una para cuando nazca Nimrod y otra, completamente distinta, para cuando nazca Liahona) usan el MISMO candado que las de los niños, pero cada una se abre SOLO con su propio bebé: la de Nimrod con la confirmación y la foto imagenes/bebe-nimrod.jpg (o la subida desde el teléfono para Nimrod, guardada en su propia llave local), y la de Liahona con la confirmación y la foto imagenes/bebe-liahona.jpg (o la subida desde el teléfono para Liahona, en su propia llave local).
+  var BABY_PHOTO_SRCS = { nimrod: ['imagenes/bebe-nimrod.jpg'], liahona: ['imagenes/bebe-liahona.jpg'], naomi: ['imagenes/bebe-nimrod.jpg'], naomiLiahona: ['imagenes/bebe-liahona.jpg'] };
+  var BABY_CONFIRM_KEYS = { nimrod: 'confirm-papas-nimrod-naomi', liahona: 'confirm-papas-liahona-naomi', naomi: 'confirm-papas-carta-naomi', naomiLiahona: 'confirm-papas-carta-naomi-liahona' };
+  var BABY_LOCAL_KEYS = { nimrod: 'foto-bebe-nimrod-naomi', liahona: 'foto-bebe-liahona-naomi', naomi: 'foto-bebe-carta-naomi', naomiLiahona: 'foto-bebe-carta-naomi-liahona' };
+  var BABY_LETTERS = { nimrod: document.getElementById('capsuleLetterNimrod'), liahona: document.getElementById('capsuleLetterLiahona'), naomi: document.getElementById('capsuleLetterNaomi'), naomiLiahona: document.getElementById('capsuleLetterNaomiLiahona') };
+  var babyState = { nimrod: { confirmed: false, photo: false, localPhoto: null, photoSrc: null }, liahona: { confirmed: false, photo: false, localPhoto: null, photoSrc: null }, naomi: { confirmed: false, photo: false, localPhoto: null, photoSrc: null }, naomiLiahona: { confirmed: false, photo: false, localPhoto: null, photoSrc: null } };
   function setBabyPhoto(kid){
     var st = babyState[kid];
-    var src = st.photo ? BABY_PHOTO_SRC[kid] : st.localPhoto;
+    var src = st.photo ? (st.photoSrc || BABY_PHOTO_SRC[kid]) : st.localPhoto;
     if(!src) return;
     var imgs = document.querySelectorAll('[data-baby-img="' + kid + '"]');
     for(var i = 0; i < imgs.length; i++){ imgs[i].src = src; imgs[i].hidden = false; }
@@ -5077,19 +5166,22 @@
     // Si la foto ya está en la página pero falta la confirmación, la foto NO se muestra y la carta sigue sellada: primero hay que confirmar.
   }
   function checkBabyPhoto(kid){
-    // La foto solo cuenta si el archivo ya está en la página (en el repo); si todavía no existe, el candado sigue cerrado.
-    var probe = new Image();
-    probe.onload = function(){
-      babyState[kid].photo = true;
-      if(!tryUnlockBaby(kid, false)) renderBabyLocked(kid);
-    };
-    probe.onerror = function(){
-      babyState[kid].photo = false;
-      renderBabyLocked(kid);
-    };
-    probe.src = BABY_PHOTO_SRC[kid];
+    // La foto solo cuenta si el archivo ya está en la página (en el repo); si todavía no existe, el candado sigue cerrado. Cada carta usa su propia foto: las de los niños la suya, la carta de Naomi para Nimrod la de Nimrod y la carta de Naomi para Liahona la de Liahona.
+    var srcs = BABY_PHOTO_SRCS[kid] || [BABY_PHOTO_SRC[kid]];
+    srcs.forEach(function(src){
+      var probe = new Image();
+      probe.onload = function(){
+        babyState[kid].photo = true;
+        babyState[kid].photoSrc = src;
+        if(!tryUnlockBaby(kid, false)) renderBabyLocked(kid);
+      };
+      probe.onerror = function(){
+        if(!babyState[kid].photo) renderBabyLocked(kid);
+      };
+      probe.src = src;
+    });
   }
-  ['nimrod', 'liahona'].forEach(function(kid){
+  ['nimrod', 'liahona', 'naomi', 'naomiLiahona'].forEach(function(kid){
     var st = babyState[kid];
     try{ st.confirmed = window.localStorage.getItem(BABY_CONFIRM_KEYS[kid]) === 'si'; }catch(e){}
     try{ st.localPhoto = window.localStorage.getItem(BABY_LOCAL_KEYS[kid]) || null; }catch(e){}

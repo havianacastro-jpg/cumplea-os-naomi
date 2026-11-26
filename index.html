@@ -564,6 +564,14 @@
   .quiz-opt.is-correct{ background:var(--gold-soft); border-color:var(--gold); opacity:1 }
   .quiz-opt.is-wrong{ background:var(--rose-pale); border-color:var(--rose); opacity:1 }
   .quiz-feedback{ min-height:1.6em; margin:14px 0 4px; font-weight:700; color:var(--rose-deep) }
+  .conoces-input{
+    width:100%; padding:14px 16px; margin-top:14px;
+    border:1.5px solid var(--line); border-radius:14px;
+    background:var(--bg-soft); color:var(--ink);
+    font-family:"Quicksand",sans-serif; font-weight:600; font-size:1rem;
+  }
+  .conoces-input:focus{ outline:3px solid var(--gold); outline-offset:2px; border-color:var(--gold) }
+  .conoces-open-btn-wrap{ margin-top:12px; text-align:left }
   .game-next-btn{
     margin-top:10px; background:var(--rose-deep); color:#fff; border:none; border-radius:999px;
     padding:13px 28px; font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; cursor:pointer; min-height:48px;
@@ -1552,6 +1560,7 @@
       <button class="nav-item" type="button" data-open-game="screenCartasFuturo"><span class="nav-icon" aria-hidden="true">✉</span>Cartas para el futuro<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenEnamora"><span class="nav-icon" aria-hidden="true">✿</span>Lo que me enamora de ti<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenArbolFamiliar"><span class="nav-icon" aria-hidden="true">❧</span>Nuestro árbol familiar eterno<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenConoces"><span class="nav-icon" aria-hidden="true">?</span>¿Cuánto me conoces?<span class="nav-here" aria-hidden="true">♥</span></button>
     </nav>
   </div>
 </div>
@@ -2052,6 +2061,12 @@
           <span class="game-menu-desc">Nuestra familia eterna, mi amor: tú, yo, Nimrod y Liahona… y todos los nombres que Dios nos confíe.</span>
           <span class="game-menu-play">Ver ♥</span>
         </button>
+        <button class="game-menu-card" type="button" data-open-game="screenConoces">
+          <span class="game-menu-icon" aria-hidden="true">?</span>
+          <span class="game-menu-title">¿Cuánto me conoces?</span>
+          <span class="game-menu-desc">Un jueguito de preguntitas sobre mí, mi amor: mis gustos, mis sueños y lo que más amo de ti. A ver cuántas aciertas.</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
       </div>
     </div>
 
@@ -2155,6 +2170,36 @@
       <div id="quizEnd" hidden>
         <p class="game-final" id="quizFinalMsg"></p>
         <button class="game-start-btn" id="quizRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+    </div>
+
+    <!-- ¿Cuánto me conoces? -->
+    <div class="game-card" id="screenConoces">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">¿Cuánto me conoces?</h3>
+      <p class="game-desc">Ahora te toca adivinar sobre mí, mi amor: once preguntitas de mis gustos, mis sueños y lo que siento por ti. Al final te digo tu puntaje… y algo bonito. ♥</p>
+      <div id="conocesStartWrap">
+        <button class="game-start-btn" id="conocesStartBtn" type="button">♥ ¡Empezar!</button>
+      </div>
+      <div id="conocesBody" hidden>
+        <div class="quiz-meta">
+          <span id="conocesProgress">Pregunta 1 de 11</span>
+          <span>Aciertos: <strong id="conocesScore">0</strong></span>
+        </div>
+        <p class="quiz-q" id="conocesQuestion"></p>
+        <div class="quiz-options" id="conocesOptions"></div>
+        <div id="conocesOpenWrap" hidden>
+          <input class="conoces-input" id="conocesInput" type="text" placeholder="Escribe la que tú creas, mi amor…" autocomplete="off" aria-label="Tu respuesta">
+          <div class="conoces-open-btn-wrap">
+            <button class="game-next-btn" id="conocesOpenBtn" type="button">Responder ♥</button>
+          </div>
+        </div>
+        <p class="quiz-feedback" id="conocesFeedback" role="status"></p>
+        <button class="game-next-btn" id="conocesNextBtn" type="button" hidden>Siguiente pregunta ♥</button>
+      </div>
+      <div id="conocesEnd" hidden>
+        <p class="game-final" id="conocesFinalMsg"></p>
+        <button class="game-start-btn" id="conocesRestartBtn" type="button">Jugar otra vez ♥</button>
       </div>
     </div>
 
@@ -3736,7 +3781,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenCartasFuturo', 'screenEnamora', 'screenArbolFamiliar'];
+  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenCartasFuturo', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -3759,6 +3804,7 @@
     screenEnojada: 'screenMenu',
     screenHistoria: 'screenMenu', screenCartasFuturo: 'screenMenu',
     screenEnamora: 'screenMenu', screenArbolFamiliar: 'screenMenu',
+    screenConoces: 'screenMenu',
     screenMenu: null
   };
   var currentScreen = null; // pantalla visible, o null = página principal
@@ -4112,6 +4158,158 @@
   if(quizNextBtn) quizNextBtn.addEventListener('click', function(){
     quizState.idx++;
     if(quizState.idx >= QUIZ.length) endQuiz(); else renderQuizQuestion();
+  });
+
+  // --- ¿Cuánto me conoces? (preguntas sobre Hagot) ---
+  var CONOCES = [
+    { q: '¿Cuál es mi comida favorita?',
+      opts: ['Los tacos', 'El sushi', 'La pizza'], answers: [0] },
+    { q: '¿Cuál es mi color favorito?',
+      opts: ['El azul rey', 'El negro azulado', 'El verde botella'], answers: [1] },
+    { q: '¿Qué me gusta hacer en mi tiempo libre?',
+      opts: ['Jugar videojuegos hasta la madrugada',
+             'Tocar la guitarra, cantar, ver una película contigo y pasar el rato contigo',
+             'Dormir todo el día y no ver a nadie'], answers: [1] },
+    { q: '¿Cuál es mi película favorita?', open: true },
+    { q: '¿Y mi serie favorita? (el anime también cuenta)',
+      opts: ['Naruto', 'One Piece', 'Dragon Ball'], answers: [2] },
+    { q: '¿A qué hora me levanto entre semana?',
+      opts: ['A las 5:00 en punto, como soldado',
+             'Entre las 6:00 y las 6:30… a veces más temprano, a veces más tarde',
+             'Como a las 9:00, con toda la calma'], answers: [1] },
+    { q: '¿Cuál es nuestra canción favorita?',
+      opts: ['“Can’t Help Falling in Love”, de Elvis Presley',
+             '“Vamos bien”, de Majo y Dan',
+             '“Perfect”, de Ed Sheeran'], answers: [0, 1],
+      okMsg: '¡Correcto, mi amor! Y ojo: valían las dos, porque las dos representan muchísimo de nosotros como pareja. ♥',
+      noMsg: 'Casi, mi vida… valían las dos nuestras: “Can’t Help Falling in Love”, de Elvis Presley, o “Vamos bien”, de Majo y Dan, porque representan muchísimo de nosotros como pareja. ♥' },
+    { q: '¿Qué es lo que más me gusta de ti?',
+      opts: ['Tu sonrisa y tu forma de bailar',
+             'Físicamente, tu trasero… y sentimentalmente, lo servicial que eres y cómo me tratas: eso me enamora',
+             'Tus ojos y tu sentido del humor'], answers: [1] },
+    { q: '¿Cuál es mi sueño más grande?',
+      opts: ['Ser famoso y salir en la televisión',
+             'Viajar solo por todo el mundo',
+             'Tener una buena cantidad de dinero para disfrutar todo el tiempo con mi familia, sin tener que trabajar, y una casa como me gusta, tipo pueblito'], answers: [2] },
+    { q: '¿Cuál es mi postre favorito?',
+      opts: ['El pastel de chocolate', 'Cualquier cosa que me hagas tú', 'El flan napolitano'], answers: [1] },
+    { q: '¿Qué fue lo primero que te gustó de mí?',
+      opts: ['Mi estatura y que estaba guapo', 'Mi carro y mi reloj', 'Mi forma de contar chistes'], answers: [0] }
+  ];
+  var conocesStartWrap = document.getElementById('conocesStartWrap');
+  var conocesBody = document.getElementById('conocesBody');
+  var conocesEnd = document.getElementById('conocesEnd');
+  var conocesProgress = document.getElementById('conocesProgress');
+  var conocesScoreEl = document.getElementById('conocesScore');
+  var conocesQuestion = document.getElementById('conocesQuestion');
+  var conocesOptions = document.getElementById('conocesOptions');
+  var conocesOpenWrap = document.getElementById('conocesOpenWrap');
+  var conocesInput = document.getElementById('conocesInput');
+  var conocesOpenBtn = document.getElementById('conocesOpenBtn');
+  var conocesFeedback = document.getElementById('conocesFeedback');
+  var conocesNextBtn = document.getElementById('conocesNextBtn');
+  var conocesFinalMsg = document.getElementById('conocesFinalMsg');
+  var conocesState = { idx: 0, score: 0, locked: false };
+  function renderConocesQuestion(){
+    var item = CONOCES[conocesState.idx];
+    conocesState.locked = false;
+    if(conocesProgress) conocesProgress.textContent = 'Pregunta ' + (conocesState.idx + 1) + ' de ' + CONOCES.length;
+    if(conocesScoreEl) conocesScoreEl.textContent = conocesState.score;
+    if(conocesQuestion) conocesQuestion.textContent = item.q;
+    if(conocesFeedback) conocesFeedback.textContent = '';
+    if(conocesNextBtn) conocesNextBtn.hidden = true;
+    if(conocesOptions) conocesOptions.innerHTML = '';
+    if(conocesOpenWrap) conocesOpenWrap.hidden = !item.open;
+    if(item.open){
+      if(conocesInput){ conocesInput.value = ''; conocesInput.disabled = false; }
+      if(conocesOpenBtn) conocesOpenBtn.disabled = false;
+    } else if(conocesOptions){
+      item.opts.forEach(function(opt, i){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'quiz-opt';
+        b.textContent = opt;
+        b.addEventListener('click', function(){ answerConoces(i, b); });
+        conocesOptions.appendChild(b);
+      });
+    }
+  }
+  function finishConocesAnswer(){
+    if(conocesScoreEl) conocesScoreEl.textContent = conocesState.score;
+    if(conocesNextBtn){
+      conocesNextBtn.textContent = conocesState.idx === CONOCES.length - 1 ? 'Ver mi resultado ♥' : 'Siguiente pregunta ♥';
+      conocesNextBtn.hidden = false;
+    }
+  }
+  function answerConoces(i, btn){
+    if(conocesState.locked) return;
+    conocesState.locked = true;
+    var item = CONOCES[conocesState.idx];
+    var isRight = item.answers.indexOf(i) !== -1;
+    var buttons = conocesOptions ? conocesOptions.querySelectorAll('.quiz-opt') : [];
+    Array.prototype.forEach.call(buttons, function(b, j){
+      b.disabled = true;
+      if(item.answers.indexOf(j) !== -1) b.classList.add('is-correct');
+    });
+    if(isRight){
+      conocesState.score++;
+      if(conocesFeedback) conocesFeedback.textContent = item.okMsg || '¡Correcto, mi amor! ♥';
+    } else {
+      btn.classList.add('is-wrong');
+      if(conocesFeedback){
+        if(item.noMsg) conocesFeedback.textContent = item.noMsg;
+        else {
+          var right = item.answers.map(function(a){ return item.opts[a]; }).join(' …o también: ');
+          conocesFeedback.textContent = 'Casi, mi vida… la respuesta era: ' + right;
+        }
+      }
+    }
+    finishConocesAnswer();
+  }
+  function answerConocesOpen(){
+    if(conocesState.locked) return;
+    var val = conocesInput ? conocesInput.value.trim() : '';
+    if(!val){
+      if(conocesFeedback) conocesFeedback.textContent = 'Escribe algo, mi amor… lo que tú creas. Esta vale con lo que sea. ♥';
+      if(conocesInput) conocesInput.focus();
+      return;
+    }
+    conocesState.locked = true;
+    conocesState.score++;
+    if(conocesInput) conocesInput.disabled = true;
+    if(conocesOpenBtn) conocesOpenBtn.disabled = true;
+    if(conocesFeedback) conocesFeedback.textContent = '¡Palomita para ti, mi amor! ✓ La verdad es que no tengo una película favorita clara, así que cualquier respuesta que escribas vale. Y si hablamos de serie, esa sí la tengo clarísima: Dragon Ball. ♥';
+    finishConocesAnswer();
+  }
+  function startConoces(){
+    conocesState = { idx: 0, score: 0, locked: false };
+    if(conocesStartWrap) conocesStartWrap.hidden = true;
+    if(conocesEnd) conocesEnd.hidden = true;
+    if(conocesBody) conocesBody.hidden = false;
+    renderConocesQuestion();
+  }
+  function endConoces(){
+    if(conocesBody) conocesBody.hidden = true;
+    if(conocesEnd) conocesEnd.hidden = false;
+    var s = conocesState.score, total = CONOCES.length, msg;
+    if(s === total) msg = '¡Perfecto, mi amor! Acertaste las ' + total + ' de ' + total + ': me conoces mejor que nadie en este mundo… y cómo no, si eres la dueña de mi corazón. Te amo con todo lo que soy. ♥';
+    else if(s >= 9) msg = '¡Casi perfecto, mi amor! Acertaste ' + s + ' de ' + total + '. Me conoces de memoria, mi vida: mis tacos, mi Dragon Ball, mis sueños… y lo más importante, sabes cuánto te amo. ♥';
+    else if(s >= 6) msg = '¡Muy bien, mi amor! Acertaste ' + s + ' de ' + total + '. Ya me conoces muchísimo… y lo que falte lo vas a ir descubriendo cerquita de mí, día a día, toda la vida. ♥';
+    else if(s >= 3) msg = 'Acertaste ' + s + ' de ' + total + ', mi vida. No pasa nada: conocerme bien bien es tarea de toda una vida… y esa vida la quiero pasar contigo, enseñándote cada rincón de mi corazón. ♥';
+    else msg = 'Acertaste ' + s + ' de ' + total + ', mi amor… pero ¿sabes qué? Lo único que de verdad tienes que saber de mí es esto: te amo, te elijo y te voy a amar todos los días de mi vida. Lo demás lo aprendemos juntos. ♥';
+    if(conocesFinalMsg) conocesFinalMsg.textContent = msg;
+  }
+  var conocesStartBtn = document.getElementById('conocesStartBtn');
+  var conocesRestartBtn = document.getElementById('conocesRestartBtn');
+  if(conocesStartBtn) conocesStartBtn.addEventListener('click', startConoces);
+  if(conocesRestartBtn) conocesRestartBtn.addEventListener('click', startConoces);
+  if(conocesOpenBtn) conocesOpenBtn.addEventListener('click', answerConocesOpen);
+  if(conocesInput) conocesInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); answerConocesOpen(); }
+  });
+  if(conocesNextBtn) conocesNextBtn.addEventListener('click', function(){
+    conocesState.idx++;
+    if(conocesState.idx >= CONOCES.length) endConoces(); else renderConocesQuestion();
   });
 
   // --- Memorama ---
@@ -6644,7 +6842,8 @@
     screenAniversario: 'screenDetallitos', screenQueAmo: 'screenDetallitos',
     screenEnojada: 'screenEnojada', screenHistoria: 'screenHistoria',
     screenCartasFuturo: 'screenCartasFuturo', screenEnamora: 'screenEnamora',
-    screenArbolFamiliar: 'screenArbolFamiliar'
+    screenArbolFamiliar: 'screenArbolFamiliar',
+    screenConoces: 'screenConoces'
   };
   function updateNavCurrent(){
     var active = document.querySelector('.game-card.active');

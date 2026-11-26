@@ -707,7 +707,7 @@
   .menu-grid .game-menu-title{ font-size:1.02rem }
   .menu-grid .game-menu-desc{ font-size:.8rem; line-height:1.4 }
   .menu-grid .game-menu-play{ font-size:.82rem; padding:7px 16px; margin-top:4px }
-  #screenMenu .game-menu-card.nav-current{ border-color:var(--rose-deep); background:var(--rose-pale) }
+  #screenMenu .game-menu-card.nav-current, .submenu-screen .game-menu-card.nav-current{ border-color:var(--rose-deep); background:var(--rose-pale) }
 
   /* Rueda de sorpresas */
   .wheel-wrap{ position:relative; max-width:340px; margin:0 auto 20px }
@@ -851,10 +851,30 @@
 
   /* Cuando estés enojada */
   .sorry-heart{
-    width:96px; height:96px; margin:6px auto 16px; border-radius:50%;
+    position:relative; width:min(210px,62vw); height:min(210px,62vw); margin:6px auto 16px; border-radius:50%;
     background:var(--rose-pale); border:2px dashed var(--gold); color:var(--rose-deep);
-    display:grid; place-items:center; font-size:2.3rem;
+    display:grid; place-items:center; font-size:2.3rem; overflow:hidden; cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
   }
+  .sorry-heart:focus-visible{ outline:3px solid var(--gold); outline-offset:4px }
+  .sorry-heart-video{
+    position:absolute; inset:0; display:block; width:100%; height:100%;
+    object-fit:cover; border-radius:50%; background:#000;
+  }
+  .sorry-heart-video[hidden]{ display:none }
+  .sorry-heart-veil{
+    position:absolute; inset:0; border-radius:50%; display:none;
+    background:rgba(24,10,16,.38); pointer-events:none;
+  }
+  .sorry-heart.has-video .sorry-heart-veil{ display:block }
+  .sorry-heart.is-playing .sorry-heart-veil{ display:none }
+  .sorry-heart-icon{ position:relative; z-index:2; pointer-events:none; line-height:1 }
+  .sorry-heart.has-video .sorry-heart-icon{
+    width:64px; height:64px; border-radius:50%; display:grid; place-items:center;
+    background:rgba(255,246,240,.92); color:var(--rose-deep); font-size:1.8rem;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+  }
+  .sorry-heart.is-playing .sorry-heart-icon{ display:none }
   .sorry-main{
     background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
     padding:26px 24px; max-width:600px; margin:0 auto 8px;
@@ -874,9 +894,6 @@
   .sorry-photo[hidden]{ display:none }
   .sorry-photo img{ display:block; width:100%; border-radius:var(--radius-md); border:3px solid var(--gold) }
   .sorry-photo figcaption{ font-family:"Cormorant Garamond",serif; font-size:1.25rem; line-height:1.5; margin-top:12px }
-  .sorry-video{ max-width:520px; margin:28px auto 0 }
-  .sorry-video[hidden]{ display:none }
-  .sorry-video video{ display:block; width:100%; border-radius:var(--radius-md); border:3px solid var(--gold); background:#000 }
 
   /* Calendario de Adviento — pantalla de Navidad */
   .advent-card{
@@ -2085,7 +2102,44 @@
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Menú ♥</h3>
       <p class="game-desc">Aquí están todos tus apartados, mi vida. Toca el que quieras abrir.</p>
-      <h4 class="menu-group-title">Juegos</h4>
+      <div class="game-menu">
+        <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuJuegos">
+          <span class="game-menu-icon" aria-hidden="true">♥</span>
+          <span class="game-menu-title">Juegos</span>
+          <span class="game-menu-desc">Todos tus jueguitos juntos, mi amor: corazones, preguntas, memorama, sorpresas y un mapa del tesoro.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuHistoria">
+          <span class="game-menu-icon" aria-hidden="true">❦</span>
+          <span class="game-menu-title">Nuestra historia y familia</span>
+          <span class="game-menu-desc">Lo nuestro juntito en un solo lugar, mi vida: nuestra historia, lo que me enamora de ti, nuestro árbol familiar eterno, la cápsula del tiempo y nuestra fe.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuDetallitos">
+          <span class="game-menu-icon" aria-hidden="true">✦</span>
+          <span class="game-menu-title">Detallitos para ti</span>
+          <span class="game-menu-desc">Un rinconcito que te preparé con mucho amor, mi vida: cositas bonitas para descubrir y un pensamiento nuevo cada día.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuNavidad">
+          <span class="game-menu-icon" aria-hidden="true">❄</span>
+          <span class="game-menu-title">Navidad</span>
+          <span class="game-menu-desc">Tu calendario de Adviento, mi amor: 24 puertecitas de diciembre con una sorpresa cada día, música navideña y dos rompecabezas nuestros.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuSueltos">
+          <span class="game-menu-icon" aria-hidden="true">♡</span>
+          <span class="game-menu-title">Apartados sueltos</span>
+          <span class="game-menu-desc">Dos apartados muy especiales, mi amor: el mensajito para cuando estés enojada conmigo y mi lista de canciones para ti.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Submenú: Juegos -->
+    <div class="game-card hub-card submenu-screen" id="screenMenuJuegos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Juegos</h3>
       <div class="game-menu menu-grid">
         <button class="game-menu-card" type="button" data-open-game="screenGames">
           <span class="game-menu-icon" aria-hidden="true">♥</span>
@@ -2100,7 +2154,12 @@
           <span class="game-menu-play">Jugar ♥</span>
         </button>
       </div>
-      <h4 class="menu-group-title">Nuestra historia y familia</h4>
+    </div>
+
+    <!-- Submenú: Nuestra historia y familia -->
+    <div class="game-card hub-card submenu-screen" id="screenMenuHistoria">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestra historia y familia</h3>
       <div class="game-menu menu-grid">
         <button class="game-menu-card" type="button" data-open-game="screenHistoria">
           <span class="game-menu-icon" aria-hidden="true">❦</span>
@@ -2133,7 +2192,12 @@
           <span class="game-menu-play">Leer ♥</span>
         </button>
       </div>
-      <h4 class="menu-group-title">Detallitos para ti</h4>
+    </div>
+
+    <!-- Submenú: Detallitos para ti -->
+    <div class="game-card hub-card submenu-screen" id="screenMenuDetallitos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Detallitos para ti</h3>
       <div class="game-menu menu-grid">
         <button class="game-menu-card" type="button" data-open-game="screenDetallitos">
           <span class="game-menu-icon" aria-hidden="true">✦</span>
@@ -2142,7 +2206,12 @@
           <span class="game-menu-play">Entrar ♥</span>
         </button>
       </div>
-      <h4 class="menu-group-title">Navidad</h4>
+    </div>
+
+    <!-- Submenú: Navidad -->
+    <div class="game-card hub-card submenu-screen" id="screenMenuNavidad">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Navidad</h3>
       <div class="game-menu menu-grid">
         <button class="game-menu-card" type="button" data-open-game="screenAdvent">
           <span class="game-menu-icon" aria-hidden="true">❄</span>
@@ -2151,7 +2220,12 @@
           <span class="game-menu-play">Entrar ♥</span>
         </button>
       </div>
-      <h4 class="menu-group-title">Apartados sueltos</h4>
+    </div>
+
+    <!-- Submenú: Apartados sueltos -->
+    <div class="game-card hub-card submenu-screen" id="screenMenuSueltos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Apartados sueltos</h3>
       <div class="game-menu menu-grid">
         <button class="game-menu-card" type="button" data-open-game="screenEnojada">
           <span class="game-menu-icon" aria-hidden="true">♡</span>
@@ -3443,7 +3517,11 @@
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Cuando estés enojada</h3>
       <p class="game-desc">Mi amor, si llegaste hasta aquí es porque estás enojada conmigo… y antes de cualquier otra cosa, quiero que leas esto despacito, con calma. Es un mensajito que te dejé guardado justo para un día así. ♥</p>
-      <div class="sorry-heart" aria-hidden="true">♥</div>
+      <div class="sorry-heart" id="sorryHeart" role="button" tabindex="0" aria-label="Video de perdón: toca para reproducirlo">
+        <video class="sorry-heart-video" id="sorryHeartVideo" playsinline preload="metadata" hidden></video>
+        <span class="sorry-heart-veil" aria-hidden="true"></span>
+        <span class="sorry-heart-icon" aria-hidden="true">♥</span>
+      </div>
       <div class="sorry-main">
         <p>“Cuando estés enojada y yo sea todo un tonto que no sepa decir las cosas o reconciliarme, recuerda que te amo y que lo siento mucho.”</p>
       </div>
@@ -3460,10 +3538,6 @@
         <img data-sorry-img alt="Hagot y Naomi en una lancha en el lago, los dos sonriendo, con Naomi mostrando su anillo de compromiso">
         <figcaption>ya ves como si nos vemos muy bonitos, los dos juntitos no me dejes y perdóname por lo que hago</figcaption>
       </figure>
-      <div class="sorry-video" data-sorry-video hidden>
-        <video data-sorry-video-el controls playsinline preload="metadata"></video>
-      </div>
-
       <!-- Kit de emergencia: 30 ideas para reconciliarnos, una por día -->
       <div class="emerg-kit">
         <div class="emerg-sealed" id="emergSealed">
@@ -4152,7 +4226,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
+  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -4170,13 +4244,17 @@
     screenDiaPerfecto: 'screenDetallitos', screenRazones: 'screenDetallitos',
     screenAhorcado: 'screenDetallitos', screenAniversario: 'screenDetallitos',
     screenQueAmo: 'screenDetallitos',
-    screenGames: 'screenMenu', screenFaith: 'screenMenu', screenCapsule: 'screenMenu',
-    screenAdvent: 'screenMenu', screenDetallitos: 'screenMenu',
-    screenEnojada: 'screenMenu',
-    screenHistoria: 'screenMenu',
-    screenEnamora: 'screenMenu', screenArbolFamiliar: 'screenMenu',
-    screenConoces: 'screenMenu',
-    screenPlaylist: 'screenMenu',
+    screenGames: 'screenMenuJuegos', screenConoces: 'screenMenuJuegos',
+    screenFaith: 'screenMenuHistoria', screenCapsule: 'screenMenuHistoria',
+    screenHistoria: 'screenMenuHistoria',
+    screenEnamora: 'screenMenuHistoria', screenArbolFamiliar: 'screenMenuHistoria',
+    screenDetallitos: 'screenMenuDetallitos',
+    screenAdvent: 'screenMenuNavidad',
+    screenEnojada: 'screenMenuSueltos',
+    screenPlaylist: 'screenMenuSueltos',
+    screenMenuJuegos: 'screenMenu', screenMenuHistoria: 'screenMenu',
+    screenMenuDetallitos: 'screenMenu', screenMenuNavidad: 'screenMenu',
+    screenMenuSueltos: 'screenMenu',
     screenMenu: null
   };
   var currentScreen = null; // pantalla visible, o null = página principal
@@ -7298,6 +7376,9 @@
 
   // ===== Menú hamburguesa: corazoncito en la sección actual =====
   var NAV_MAP = {
+    screenMenuJuegos: 'screenMenuJuegos', screenMenuHistoria: 'screenMenuHistoria',
+    screenMenuDetallitos: 'screenMenuDetallitos', screenMenuNavidad: 'screenMenuNavidad',
+    screenMenuSueltos: 'screenMenuSueltos',
     screenGames: 'screenGames', screenCatch: 'screenGames', screenQuiz: 'screenGames',
     screenMemo: 'screenGames', screenWheel: 'screenGames', screenChest: 'screenGames',
     screenPuzzle: 'screenGames', screenWords: 'screenGames', screenTreasure: 'screenGames',
@@ -7322,7 +7403,7 @@
   function updateNavCurrent(){
     var active = document.querySelector('.game-card.active');
     var target = active ? (NAV_MAP[active.id] || null) : null;
-    Array.prototype.forEach.call(document.querySelectorAll('#screenMenu .game-menu-card'), function(item){
+    Array.prototype.forEach.call(document.querySelectorAll('#screenMenu .game-menu-card, .submenu-screen .game-menu-card'), function(item){
       item.classList.toggle('nav-current', !!target && item.getAttribute('data-open-game') === target);
     });
   }
@@ -7848,10 +7929,13 @@
     };
     sorryPhotoTry(0);
   }
-  var sorryVideoBox = document.querySelector('[data-sorry-video]');
-  var sorryVideoEl = document.querySelector('[data-sorry-video-el]');
-  if(sorryVideoBox && sorryVideoEl){
+  // El video de perdón va dentro del círculo punteado con el corazón: nunca se reproduce solo;
+  // al tocar el círculo se reproduce o se pausa, y en pausa el corazoncito queda encima como botón.
+  var sorryHeart = document.getElementById('sorryHeart');
+  var sorryHeartVideo = document.getElementById('sorryHeartVideo');
+  if(sorryHeart && sorryHeartVideo){
     var sorryVideoCandidates = ['imagenes/Perd%C3%B3n.mp4.MP4', 'imagenes/perdon.mp4'];
+    var sorryVideoReady = false;
     var sorryVideoTry = function(i){
       if(i >= sorryVideoCandidates.length) return;
       var sorryVideoProbe = document.createElement('video');
@@ -7860,8 +7944,10 @@
       sorryVideoProbe.addEventListener('loadedmetadata', function(){
         if(sorryVideoOk) return;
         sorryVideoOk = true;
-        sorryVideoEl.src = sorryVideoCandidates[i];
-        sorryVideoBox.hidden = false;
+        sorryHeartVideo.src = sorryVideoCandidates[i];
+        sorryHeartVideo.hidden = false;
+        sorryHeart.classList.add('has-video');
+        sorryVideoReady = true;
       });
       sorryVideoProbe.addEventListener('error', function(){
         if(sorryVideoOk) return;
@@ -7871,6 +7957,32 @@
       sorryVideoProbe.src = sorryVideoCandidates[i];
     };
     sorryVideoTry(0);
+    var sorryToggleVideo = function(){
+      if(!sorryVideoReady) return;
+      if(sorryHeartVideo.paused || sorryHeartVideo.ended){
+        var sorryPlayPromise = sorryHeartVideo.play();
+        if(sorryPlayPromise && sorryPlayPromise.catch) sorryPlayPromise.catch(function(){});
+      } else {
+        sorryHeartVideo.pause();
+      }
+    };
+    sorryHeart.addEventListener('click', sorryToggleVideo);
+    sorryHeart.addEventListener('keydown', function(ev){
+      if(ev.key === 'Enter' || ev.key === ' '){
+        ev.preventDefault();
+        sorryToggleVideo();
+      }
+    });
+    sorryHeartVideo.addEventListener('play', function(){
+      sorryHeart.classList.add('is-playing');
+      sorryHeart.setAttribute('aria-label', 'Video de perdón: toca para pausarlo');
+    });
+    var sorryVideoStopped = function(){
+      sorryHeart.classList.remove('is-playing');
+      sorryHeart.setAttribute('aria-label', 'Video de perdón: toca para reproducirlo');
+    };
+    sorryHeartVideo.addEventListener('pause', sorryVideoStopped);
+    sorryHeartVideo.addEventListener('ended', sorryVideoStopped);
   }
 
   // ===== Para el futuro (dentro de la cápsula): candados de las cartas de 1 y 5 años =====

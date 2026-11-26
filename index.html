@@ -769,7 +769,17 @@
   }
   .capsule-timer{ max-width:480px; margin:18px auto 0 }
   .capsule-letter{ text-align:left; margin-top:26px }
-  #capsuleLocked[hidden], #capsuleOpen[hidden], #capsuleLetter[hidden]{ display:none }
+  #capsuleLocked[hidden], #capsuleOpen[hidden], #capsuleLetter[hidden], #capsuleFuture[hidden], #capsuleKids[hidden], #capsuleLetterNimrod[hidden], #capsuleLetterLiahona[hidden]{ display:none }
+  [data-futopen][hidden], [data-futlocked][hidden]{ display:none }
+  .capsule-child-tag{ display:block; text-align:center; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.8rem; letter-spacing:.07em; text-transform:uppercase; color:var(--gold); margin:6px 0 10px }
+  .capsule-child-name{ font-family:"Playfair Display",serif; font-size:1.35rem; line-height:1.3; text-align:center; color:var(--rose-deep); margin:0 0 16px }
+  .capsule-future-head{ margin:38px auto 4px; max-width:560px }
+  .capsule-future-head h4{ font-family:"Playfair Display",serif; font-size:1.6rem; line-height:1.25; color:var(--rose-deep); margin:0 0 8px }
+  .capsule-future-head p{ color:var(--ink-soft); margin:0 auto }
+  .capsule-sealed{ max-width:560px; margin:26px auto 0; background:var(--bg-soft); border:2px dashed var(--gold); border-radius:var(--radius-md); padding:28px 22px 24px; text-align:center }
+  .capsule-sealed .capsule-lock{ font-size:2rem; line-height:1; display:block; margin-bottom:10px }
+  .capsule-sealed h5{ font-family:"Playfair Display",serif; font-size:1.25rem; line-height:1.3; color:var(--rose-deep); margin:0 0 8px }
+  .capsule-sealed p{ color:var(--ink-soft); margin:0 auto; max-width:440px }
 
   /* Mapa del tesoro */
   .treasure-progress{ display:flex; gap:8px; justify-content:center; margin-bottom:18px; color:var(--rose-light); font-size:1.15rem }
@@ -1596,7 +1606,6 @@
       <button class="nav-item" type="button" data-open-game="screenDetallitos"><span class="nav-icon" aria-hidden="true">✦</span>Detallitos para ti<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenEnojada"><span class="nav-icon" aria-hidden="true">♡</span>Cuando estés enojada<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenHistoria"><span class="nav-icon" aria-hidden="true">❦</span>Nuestra historia<span class="nav-here" aria-hidden="true">♥</span></button>
-      <button class="nav-item" type="button" data-open-game="screenCartasFuturo"><span class="nav-icon" aria-hidden="true">✉</span>Cartas para el futuro<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenEnamora"><span class="nav-icon" aria-hidden="true">✿</span>Lo que me enamora de ti<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenArbolFamiliar"><span class="nav-icon" aria-hidden="true">❧</span>Nuestro árbol familiar eterno<span class="nav-here" aria-hidden="true">♥</span></button>
       <button class="nav-item" type="button" data-open-game="screenConoces"><span class="nav-icon" aria-hidden="true">?</span>¿Cuánto me conoces?<span class="nav-here" aria-hidden="true">♥</span></button>
@@ -2083,12 +2092,6 @@
           <span class="game-menu-desc">La línea de tiempo de lo nuestro, mi vida: los momentos que nos trajeron hasta aquí, uno por uno.</span>
           <span class="game-menu-play">Recordar ♥</span>
         </button>
-        <button class="game-menu-card" type="button" data-open-game="screenCartasFuturo">
-          <span class="game-menu-icon" aria-hidden="true">✉</span>
-          <span class="game-menu-title">Cartas para el futuro</span>
-          <span class="game-menu-desc">Tres cartitas selladas para abrir en nuestros aniversarios de casados: el primero, el quinto y el décimo.</span>
-          <span class="game-menu-play">Ver ♥</span>
-        </button>
         <button class="game-menu-card" type="button" data-open-game="screenEnamora">
           <span class="game-menu-icon" aria-hidden="true">✿</span>
           <span class="game-menu-title">Lo que me enamora de ti</span>
@@ -2353,6 +2356,105 @@
           <p>El 19 de diciembre te tomo de la mano para siempre. Hasta ese día y después de ese día, en esta vida y en la que sigue: te amo, te elijo y te vuelvo a elegir, siempre.</p>
           <p>¡Feliz cumpleaños, mi futura esposa!</p>
           <p class="sign">Con todo mi amor, por tiempo y por toda la eternidad,<br>Hagot</p>
+        </article>
+        <div id="capsuleFuture" hidden>
+          <div class="capsule-future-head">
+            <h4>Para el futuro ✉</h4>
+            <p>Ya te escribí las tres cartas, mi amor, una para cada aniversario grande de nuestro matrimonio, con nuestra historia y nuestra fe en cada renglón. La de nuestro primer aniversario y la de los cinco años van con candado, selladas hasta que llegue su día; la de los diez años quedó sin candado, así que esa sí la puedes leer hoy mismo, al abrir esta cápsula.</p>
+          </div>
+          <article class="letter capsule-letter">
+            <span class="capsule-child-tag">🔒 Para el futuro · Carta para nuestro 1er aniversario · Con candado</span>
+            <div data-futlocked="0">
+              <p>Esta carta va con candado, mi amor: está sellada hasta nuestro primer aniversario, el <strong style="color:var(--rose-deep)">19 de diciembre de 2027</strong>. Esto es lo que falta para abrirla:</p>
+              <div class="cd-timer" style="max-width:440px; margin:0 auto" role="timer" aria-label="Cuenta regresiva para la carta del primer aniversario">
+                <div class="cd-unit"><span class="cd-num" data-fut="0-days">--</span><span class="cd-label">Días</span></div>
+                <div class="cd-unit"><span class="cd-num" data-fut="0-hours">--</span><span class="cd-label">Horas</span></div>
+                <div class="cd-unit"><span class="cd-num" data-fut="0-mins">--</span><span class="cd-label">Minutos</span></div>
+                <div class="cd-unit"><span class="cd-num" data-fut="0-secs">--</span><span class="cd-label">Segundos</span></div>
+              </div>
+              <p class="fut-sealed-note">Sellada con un beso y con la promesa de nuestro primer año juntitos como esposos. ♥</p>
+            </div>
+            <div data-futopen="0" hidden>
+            <div class="fut-letter-body">
+              <p>¡Feliz primer aniversario, mi esposa hermosa! Hoy cumplimos un año de casados, y te escribo esta carta desde antes de la boda, cuando todavía contaba los días para decirte «sí». Si estás leyendo esto, es porque ya vivimos nuestro primer año como esposos… y sé, porque te conozco y porque conozco lo que siento, que te amo más hoy que el día en que nos casamos.</p>
+              <p>Piensa en todo lo que ya vivimos solo para llegar aquí: un baile en el FSY de 2019 al que te invité huyendo de un chico que me perseguía, unos brownies que me enamoraron en mi cumpleaños, una misión, una despedida que me partió el corazón, y un regreso bajo la lluvia en Plaza Q donde me dijiste que sí otra vez. Y después, ya casados: nuestra luna de miel del 20 al 23 de diciembre, y nuestra primera Navidad como esposos. Cada diciembre me va a recordar que el mejor regalo de mi vida eres tú.</p>
+              <p>Gracias por este primer año: por las gorditas de lechera, por los churros, por visitarme en la Ciudad de México cuando trabajaba para nuestra boda, y por construir conmigo este hogar pasito a pasito. Todo ese esfuerzo valió la pena, mi amor, porque nos trajo hasta aquí.</p>
+              <p>Que nuestro segundo año nos encuentre igual: orando juntos, riendo juntos y con Cristo en el centro de nuestra casa. Y que sigamos soñando con el día, en unos añitos, en que seamos papás.</p>
+              <p class="fut-sign">Te amo hoy, mañana y por la eternidad. — Tu Hagot ♥</p>
+            </div>
+            </div>
+          </article>
+          <article class="letter capsule-letter">
+            <span class="capsule-child-tag">🔒 Para el futuro · Carta para nuestros 5 años · Con candado</span>
+            <div data-futlocked="1">
+              <p>Esta carta va con candado, mi amor: está sellada hasta que cumplamos cinco años de casados, el <strong style="color:var(--rose-deep)">19 de diciembre de 2031</strong>. Esto es lo que falta para abrirla:</p>
+              <div class="cd-timer" style="max-width:440px; margin:0 auto" role="timer" aria-label="Cuenta regresiva para la carta de los cinco años">
+                <div class="cd-unit"><span class="cd-num" data-fut="1-days">--</span><span class="cd-label">Días</span></div>
+                <div class="cd-unit"><span class="cd-num" data-fut="1-hours">--</span><span class="cd-label">Horas</span></div>
+                <div class="cd-unit"><span class="cd-num" data-fut="1-mins">--</span><span class="cd-label">Minutos</span></div>
+                <div class="cd-unit"><span class="cd-num" data-fut="1-secs">--</span><span class="cd-label">Segundos</span></div>
+              </div>
+              <p class="fut-sealed-note">Cinco años de esposos nos esperan antes de abrirla… y sé que van a volar, porque a tu lado el tiempo bonito siempre vuela. ♥</p>
+            </div>
+            <div data-futopen="1" hidden>
+            <div class="fut-letter-body">
+              <p>¡Cinco años de casados, mi amor! Cuando te escribí esta carta todavía no nos casábamos, y ya te imaginaba aquí, cinco años después, leyendo esto a mi lado. Si el Señor nos ha bendecido como soñábamos, por estas fechas ya somos papás, y nuestro hogar se llenó de risas chiquitas, de oraciones antes de dormir y de un amor que ya no es solo de dos.</p>
+              <p>¿Te acuerdas de cómo empezó todo? De entrenar básquetbol en las canchas de Colinas de Plata, de hacer brownies para mi mamá, de hacernos novios por mensaje mientras nacía mi hermano Ethan. ¿Y de lo que dolió la misión, cuando terminamos y pensé que te había perdido para siempre? Hoy, cinco años de esposos después, le agradezco a Dios por no haberme dejado rendirme: porque lo que Él juntó, ni la distancia ni el tiempo pudieron separarlo.</p>
+              <p>Gracias por ser mi compañera en todo: en el trabajo duro, en vender gorditas y churros para salir adelante, en servir en la Iglesia y en criar conmigo a nuestros hijos en el evangelio. Eres la respuesta a todas mis oraciones, Naomi, en 2026 lo eras y hoy lo sigues siendo, multiplicado.</p>
+              <p>Que los próximos cinco años nos hagan más pacientes, más tiernos y más unidos al Padre Celestial. Todavía nos falta cumplir sueños juntos —quizá ya fuimos al Templo de Salt Lake City, o quizá sigue en nuestra lista— pero el sueño más grande, el de nuestra familia eterna, ya lo estamos viviendo.</p>
+              <p class="fut-sign">Cinco años y contando, mi reina. Te amo más que ayer y menos que mañana. — Tu Hagot ♥</p>
+            </div>
+            </div>
+          </article>
+          <article class="letter capsule-letter">
+            <span class="capsule-child-tag">♥ Para el futuro · Carta para nuestros 10 años · 19 de diciembre de 2036 · Sin candado</span>
+            <div class="fut-letter-body">
+              <p>¡Diez años de casados, mi vida! Una década entera de nosotros. Te escribo desde 2026, con el anillo todavía nuevo en mi mano y el corazón que no me cabe en el pecho, para decirte algo que el tiempo solo puede confirmar: elegirte fue, es y será la mejor decisión de mi vida.</p>
+              <p>Mira todo el camino que recorrimos para llegar aquí: nos conocimos en el FSY de 2019, nos reencontramos en 2021 por una foto que subió tu prima, nos separamos en la misión y creí que te perdía… y Dios, en Su tiempo perfecto, nos volvió a juntar un lunes de junio de 2025. Desde ese día no hemos dejado de construir: el compromiso, los seis meses que trabajé en la Ciudad de México vendiendo las gorditas que tú me dabas mientras tú vendías churros, la boda, la luna de miel y nuestra primera Navidad como esposos.</p>
+              <p>Diez años después, lo que más le agradezco al Padre Celestial es que nuestro matrimonio no se mide solo en años, sino en eternidad. Oramos juntos, servimos juntos, perdonamos rápido y reímos mucho: esa fue siempre nuestra receta, desde los brownies de 2021 hasta hoy.</p>
+              <p>Si nuestros hijos ya corretean por la casa, diles que su papá amó a su mamá desde antes de que existieran, y que la sigue amando igual que el primer día… bueno, no igual: mucho, muchísimo más. Y si la vida nos ha dado pruebas, gracias por enfrentarlas conmigo tomados de la mano y de la mano de Dios.</p>
+              <p class="fut-sign">Diez años, mi amor, y apenas es el principio de la eternidad. Te amo Naomi, eres muy especial para mí. — Tu Hagot ♥</p>
+            </div>
+          </article>
+          <p class="game-final" style="margin:26px auto 0">Tres cartas, tres aniversarios, un solo amor que no se acaba: el nuestro, mi Naomi. ♥</p>
+        </div>
+        <div id="capsuleKids" hidden>
+          <div class="capsule-future-head">
+            <h4>Para nuestros hijos 🔒</h4>
+            <p>Y guardé dos cartas más, mi amor, pero estas sí van con candado: una para Nimrod y una para Liahona. Están selladas y no se abren hoy; se abrirán hasta que tú y yo seamos papás y ellos puedan leer cuánto los esperábamos desde antes de casarnos.</p>
+          </div>
+          <div class="capsule-sealed">
+            <span class="capsule-lock" aria-hidden="true">🔒</span>
+            <h5>Para Nimrod Coriantumr Nabucodonosor Viana Carbajal</h5>
+            <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestro hijo pueda leer, con sus propios ojitos, todo el amor con el que ya lo esperamos.</p>
+          </div>
+          <div class="capsule-sealed">
+            <span class="capsule-lock" aria-hidden="true">🔒</span>
+            <h5>Para Liahona Nazaret Viana Carbajal</h5>
+            <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestra hija pueda leer, con sus propios ojitos, todo el amor con el que ya la esperamos.</p>
+          </div>
+        </div>
+        <article class="letter capsule-letter" id="capsuleLetterNimrod" hidden>
+          <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
+          <p class="capsule-child-name">Para Nimrod Coriantumr Nabucodonosor Viana Carbajal</p>
+          <p>Mi querido Nimrod:</p>
+          <p>Te escribo esta carta mucho antes de conocerte, cuando todavía eres un sueño que tu mamá y yo guardamos en el corazón. La dejé dentro de esta cápsula del tiempo, que sellamos en diciembre de 2026, unos días antes de casarnos, porque ya desde entonces te amábamos y ya te estábamos esperando.</p>
+          <p>Tu nombre completo es Nimrod Coriantumr Nabucodonosor Viana Carbajal, y cada parte de él la elegimos con amor y con intención. Queremos que crezcas sabiendo que no llegas a este mundo por casualidad: eres parte del plan de nuestro Padre Celestial, y eres parte de nuestra familia eterna. Tu mamá Naomi y yo soñamos con sellarnos en el templo para ser esposos por tiempo y por toda la eternidad, y oramos para que tú crezcas bajo ese mismo convenio, en un hogar donde Dios siempre esté en el centro, donde se ore, se perdone y se crea en Jesucristo todos los días.</p>
+          <p>Todavía no sabemos cómo será tu carita, ni tu risa, ni tu voz, pero ya te imaginamos corriendo por la casa, haciendo mil preguntas, aprendiendo a orar, a cantar, a ser valiente y bondadoso. Ya le pedimos a Dios por ti en nuestras oraciones, hijo. Ya te amamos sin haberte visto, y te vamos a esperar con paciencia, preparando nuestro corazón y nuestro hogar para cuando Él decida que es tu momento de llegar. Si Dios así lo permite, serás de lo más bonito que nos pase unos años después de casarnos, cuando tu mamá y yo nos convirtamos en papás.</p>
+          <p>Cuando leas esto, quiero que nunca dudes de algo: eres profundamente amado. Por tu mamá, la mujer más maravillosa que conozco, servicial, fuerte y llena de fe, que ya te ama con todo su corazón. Y por mí, tu papá, que desde antes de tenerte en brazos ya daría todo por ti. Vamos a equivocarnos a veces, como todos los papás, pero nunca te va a faltar amor, ni guía, ni un testimonio de Jesucristo en nuestro hogar.</p>
+          <p>Te esperamos, hijo. Con los brazos abiertos, con el corazón listo y con toda la fe del mundo.</p>
+          <p class="sign">Con todo mi amor, hoy y siempre,<br>Tu papá, Hagot<br><span style="font-size:1.05rem">Y tu mamá, Naomi, que ya te espera con todo su amor</span></p>
+        </article>
+        <article class="letter capsule-letter" id="capsuleLetterLiahona" hidden>
+          <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
+          <p class="capsule-child-name">Para Liahona Nazaret Viana Carbajal</p>
+          <p>Mi querida Liahona:</p>
+          <p>Te escribo esta carta mucho antes de conocerte, cuando todavía eres un sueño que tu mamá y yo guardamos en el corazón. La dejé dentro de esta cápsula del tiempo, que sellamos en diciembre de 2026, unos días antes de casarnos, porque ya desde entonces te amábamos y ya te estábamos esperando.</p>
+          <p>Tu nombre completo es Liahona Nazaret Viana Carbajal, y es un nombre muy especial para nosotros. En el Libro de Mormón, la Liahona fue la guía que el Señor dio a la familia de Lehi para dirigirlos en su camino cuando obedecían y tenían fe. Oramos para que tú siempre permitas que Dios guíe tu vida, mi amor, y para que recuerdes que en nuestro hogar siempre vas a encontrar dirección, luz y amor. Eres parte del plan de nuestro Padre Celestial y parte de nuestra familia eterna: tu mamá Naomi y yo soñamos con un hogar sellado en el templo, por tiempo y por toda la eternidad, donde Jesucristo sea el centro de todo.</p>
+          <p>Todavía no sabemos cómo será tu carita, ni tu sonrisa, ni tu voz, pero ya te imaginamos llenando la casa de alegría, aprendiendo a orar, a cantar, a ser dulce, valiente y llena de fe, como tu mamá. Ya le pedimos a Dios por ti en nuestras oraciones, hija. Ya te amamos sin haberte visto, y te vamos a esperar con paciencia, preparando nuestro corazón y nuestro hogar para cuando Él decida que es tu momento de llegar, cuando tu mamá y yo nos convirtamos en papás y nuestra familia empiece a crecer.</p>
+          <p>Cuando leas esto, quiero que nunca dudes de algo: eres profundamente amada. Por tu mamá, la mujer más maravillosa que conozco, servicial, fuerte y llena de fe, que ya te ama con todo su corazón. Y por mí, tu papá, que desde antes de tenerte en brazos ya daría todo por ti. Vamos a equivocarnos a veces, como todos los papás, pero nunca te va a faltar amor, ni guía, ni un testimonio de Jesucristo en nuestro hogar. Y tendrás en tu hermano Nimrod a un compañero para crecer, reír y aprender juntos del Evangelio.</p>
+          <p>Te esperamos, hija. Con los brazos abiertos, con el corazón listo y con toda la fe del mundo.</p>
+          <p class="sign">Con todo mi amor, hoy y siempre,<br>Tu papá, Hagot<br><span style="font-size:1.05rem">Y tu mamá, Naomi, que ya te espera con todo su amor</span></p>
         </article>
       </div>
     </div>
@@ -3337,86 +3439,6 @@
       <p class="game-final" style="margin-top:22px; margin-bottom:0">Te amo Naomi eres muy especial para mí. — Tu Hagot ♥</p>
     </div>
 
-    <!-- Cartas para el futuro -->
-    <div class="game-card" id="screenCartasFuturo">
-      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
-      <h3 class="game-title">Cartas para el futuro ✉</h3>
-      <p class="game-desc">Ya te escribí las tres cartas, mi amor, una para cada aniversario grande de nuestro matrimonio, con nuestra historia y nuestra fe en cada renglón. Están selladas con todo mi corazón y cada una se abre en su día exacto. Por ahora solo puedes ver cuánto falta… y soñar con lo que dirán.</p>
-
-      <div class="fut-letter">
-        <div class="anni-visual" aria-hidden="true">✉</div>
-        <h4>Carta para nuestro 1er aniversario</h4>
-        <p class="fut-when">Se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2027</strong>, cuando cumplamos nuestro primer año de casados. Esto es lo que falta:</p>
-        <div class="fut-locked" data-futlocked="0">
-          <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la carta del primer aniversario">
-            <div class="cd-unit"><span class="cd-num" data-fut="0-days">--</span><span class="cd-label">Días</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="0-hours">--</span><span class="cd-label">Horas</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="0-mins">--</span><span class="cd-label">Minutos</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="0-secs">--</span><span class="cd-label">Segundos</span></div>
-          </div>
-          <p class="fut-sealed-note">Sellada con un beso y con la promesa de nuestro primer año juntitos como esposos. ♥</p>
-        </div>
-        <div class="fut-openbox" data-futopen="0" hidden>
-          <div class="fut-letter-body">
-            <p>¡Feliz primer aniversario, mi esposa hermosa! Hoy cumplimos un año de casados, y te escribo esta carta desde antes de la boda, cuando todavía contaba los días para decirte «sí». Si estás leyendo esto, es porque ya vivimos nuestro primer año como esposos… y sé, porque te conozco y porque conozco lo que siento, que te amo más hoy que el día en que nos casamos.</p>
-            <p>Piensa en todo lo que ya vivimos solo para llegar aquí: un baile en el FSY de 2019 al que te invité huyendo de un chico que me perseguía, unos brownies que me enamoraron en mi cumpleaños, una misión, una despedida que me partió el corazón, y un regreso bajo la lluvia en Plaza Q donde me dijiste que sí otra vez. Y después, ya casados: nuestra luna de miel del 20 al 23 de diciembre, y nuestra primera Navidad como esposos. Cada diciembre me va a recordar que el mejor regalo de mi vida eres tú.</p>
-            <p>Gracias por este primer año: por las gorditas de lechera, por los churros, por visitarme en la Ciudad de México cuando trabajaba para nuestra boda, y por construir conmigo este hogar pasito a pasito. Todo ese esfuerzo valió la pena, mi amor, porque nos trajo hasta aquí.</p>
-            <p>Que nuestro segundo año nos encuentre igual: orando juntos, riendo juntos y con Cristo en el centro de nuestra casa. Y que sigamos soñando con el día, en unos añitos, en que seamos papás.</p>
-            <p class="fut-sign">Te amo hoy, mañana y por la eternidad. — Tu Hagot ♥</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="fut-letter">
-        <div class="anni-visual" aria-hidden="true">✉</div>
-        <h4>Carta para nuestros 5 años</h4>
-        <p class="fut-when">Se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2031</strong>, cuando cumplamos cinco años de casados. Esto es lo que falta:</p>
-        <div class="fut-locked" data-futlocked="1">
-          <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la carta de los cinco años">
-            <div class="cd-unit"><span class="cd-num" data-fut="1-days">--</span><span class="cd-label">Días</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="1-hours">--</span><span class="cd-label">Horas</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="1-mins">--</span><span class="cd-label">Minutos</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="1-secs">--</span><span class="cd-label">Segundos</span></div>
-          </div>
-          <p class="fut-sealed-note">Cinco años de esposos nos esperan antes de abrirla… y sé que van a volar, porque a tu lado el tiempo bonito siempre vuela. ♥</p>
-        </div>
-        <div class="fut-openbox" data-futopen="1" hidden>
-          <div class="fut-letter-body">
-            <p>¡Cinco años de casados, mi amor! Cuando te escribí esta carta todavía no nos casábamos, y ya te imaginaba aquí, cinco años después, leyendo esto a mi lado. Si el Señor nos ha bendecido como soñábamos, por estas fechas ya somos papás, y nuestro hogar se llenó de risas chiquitas, de oraciones antes de dormir y de un amor que ya no es solo de dos.</p>
-            <p>¿Te acuerdas de cómo empezó todo? De entrenar básquetbol en las canchas de Colinas de Plata, de hacer brownies para mi mamá, de hacernos novios por mensaje mientras nacía mi hermano Ethan. ¿Y de lo que dolió la misión, cuando terminamos y pensé que te había perdido para siempre? Hoy, cinco años de esposos después, le agradezco a Dios por no haberme dejado rendirme: porque lo que Él juntó, ni la distancia ni el tiempo pudieron separarlo.</p>
-            <p>Gracias por ser mi compañera en todo: en el trabajo duro, en vender gorditas y churros para salir adelante, en servir en la Iglesia y en criar conmigo a nuestros hijos en el evangelio. Eres la respuesta a todas mis oraciones, Naomi, en 2026 lo eras y hoy lo sigues siendo, multiplicado.</p>
-            <p>Que los próximos cinco años nos hagan más pacientes, más tiernos y más unidos al Padre Celestial. Todavía nos falta cumplir sueños juntos —quizá ya fuimos al Templo de Salt Lake City, o quizá sigue en nuestra lista— pero el sueño más grande, el de nuestra familia eterna, ya lo estamos viviendo.</p>
-            <p class="fut-sign">Cinco años y contando, mi reina. Te amo más que ayer y menos que mañana. — Tu Hagot ♥</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="fut-letter">
-        <div class="anni-visual" aria-hidden="true">✉</div>
-        <h4>Carta para nuestros 10 años</h4>
-        <p class="fut-when">Se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2036</strong>, cuando cumplamos diez años de casados. Esto es lo que falta:</p>
-        <div class="fut-locked" data-futlocked="2">
-          <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la carta de los diez años">
-            <div class="cd-unit"><span class="cd-num" data-fut="2-days">--</span><span class="cd-label">Días</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="2-hours">--</span><span class="cd-label">Horas</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="2-mins">--</span><span class="cd-label">Minutos</span></div>
-            <div class="cd-unit"><span class="cd-num" data-fut="2-secs">--</span><span class="cd-label">Segundos</span></div>
-          </div>
-          <p class="fut-sealed-note">Diez años, mi vida: una década entera de nosotros. Esta carta espera paciente, como esperé yo por ti. ♥</p>
-        </div>
-        <div class="fut-openbox" data-futopen="2" hidden>
-          <div class="fut-letter-body">
-            <p>¡Diez años de casados, mi vida! Una década entera de nosotros. Te escribo desde 2026, con el anillo todavía nuevo en mi mano y el corazón que no me cabe en el pecho, para decirte algo que el tiempo solo puede confirmar: elegirte fue, es y será la mejor decisión de mi vida.</p>
-            <p>Mira todo el camino que recorrimos para llegar aquí: nos conocimos en el FSY de 2019, nos reencontramos en 2021 por una foto que subió tu prima, nos separamos en la misión y creí que te perdía… y Dios, en Su tiempo perfecto, nos volvió a juntar un lunes de junio de 2025. Desde ese día no hemos dejado de construir: el compromiso, los seis meses que trabajé en la Ciudad de México vendiendo las gorditas que tú me dabas mientras tú vendías churros, la boda, la luna de miel y nuestra primera Navidad como esposos.</p>
-            <p>Diez años después, lo que más le agradezco al Padre Celestial es que nuestro matrimonio no se mide solo en años, sino en eternidad. Oramos juntos, servimos juntos, perdonamos rápido y reímos mucho: esa fue siempre nuestra receta, desde los brownies de 2021 hasta hoy.</p>
-            <p>Si nuestros hijos ya corretean por la casa, diles que su papá amó a su mamá desde antes de que existieran, y que la sigue amando igual que el primer día… bueno, no igual: mucho, muchísimo más. Y si la vida nos ha dado pruebas, gracias por enfrentarlas conmigo tomados de la mano y de la mano de Dios.</p>
-            <p class="fut-sign">Diez años, mi amor, y apenas es el principio de la eternidad. Te amo Naomi, eres muy especial para mí. — Tu Hagot ♥</p>
-          </div>
-        </div>
-      </div>
-      <p class="game-final" style="margin-bottom:0">Tres cartas, tres aniversarios, un solo amor que no se acaba: el nuestro, mi Naomi. ♥</p>
-    </div>
-
     <!-- Lo que me enamora de ti -->
     <div class="game-card" id="screenEnamora">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
@@ -3846,7 +3868,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenCartasFuturo', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
+  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -3867,7 +3889,7 @@
     screenGames: 'screenMenu', screenFaith: 'screenMenu', screenCapsule: 'screenMenu',
     screenAdvent: 'screenMenu', screenDetallitos: 'screenMenu',
     screenEnojada: 'screenMenu',
-    screenHistoria: 'screenMenu', screenCartasFuturo: 'screenMenu',
+    screenHistoria: 'screenMenu',
     screenEnamora: 'screenMenu', screenArbolFamiliar: 'screenMenu',
     screenConoces: 'screenMenu',
     screenPlaylist: 'screenMenu',
@@ -4788,6 +4810,8 @@
   var capsuleOpen = document.getElementById('capsuleOpen');
   var capsuleOpenBtn = document.getElementById('capsuleOpenBtn');
   var capsuleLetter = document.getElementById('capsuleLetter');
+  var capsuleFuture = document.getElementById('capsuleFuture');
+  var capsuleKids = document.getElementById('capsuleKids');
   var capTarget = new Date('2026-12-15T00:00:00-06:00').getTime();
   var capNums = {
     days: document.querySelector('[data-cap="days"]'),
@@ -4816,6 +4840,8 @@
   }
   if(capsuleOpenBtn) capsuleOpenBtn.addEventListener('click', function(){
     if(capsuleLetter) capsuleLetter.hidden = false;
+    if(capsuleFuture) capsuleFuture.hidden = false;
+    if(capsuleKids) capsuleKids.hidden = false;
     capsuleOpenBtn.hidden = true;
     if(capsuleLetter) capsuleLetter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   });
@@ -6907,7 +6933,7 @@
     screenRazones: 'screenDetallitos', screenAhorcado: 'screenDetallitos',
     screenAniversario: 'screenDetallitos', screenQueAmo: 'screenDetallitos',
     screenEnojada: 'screenEnojada', screenHistoria: 'screenHistoria',
-    screenCartasFuturo: 'screenCartasFuturo', screenEnamora: 'screenEnamora',
+    screenEnamora: 'screenEnamora',
     screenArbolFamiliar: 'screenArbolFamiliar',
     screenConoces: 'screenConoces',
     screenPlaylist: 'screenPlaylist'
@@ -7352,7 +7378,8 @@
     });
   }
 
-  // ===== Cartas para el futuro: cuentas regresivas en vivo (1, 5 y 10 años) =====
+  // ===== Para el futuro (dentro de la cápsula): candados de las cartas de 1 y 5 años =====
+  // La carta de 10 años va sin candado (índice 2, sin elementos de candado) y las de los hijos quedan selladas hasta que sean papás.
   var FUT_TARGETS = [new Date(2027, 11, 19, 0, 0, 0), new Date(2031, 11, 19, 0, 0, 0), new Date(2036, 11, 19, 0, 0, 0)];
   function tickFut(){
     var anyLeft = false;

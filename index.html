@@ -749,6 +749,139 @@
   .faith-quote cite{ display:block; margin-top:12px; font-style:normal; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.92rem; color:var(--rose-deep) }
   .faith-quote .faith-source{ display:block; margin-top:2px; font-size:.82rem; color:var(--ink-soft); font-weight:600 }
 
+  /* Calendario de Adviento — pantalla de Navidad */
+  .advent-card{
+    max-width:820px; overflow:hidden;
+    background:linear-gradient(180deg, #123524 0%, #1C5138 58%, #143D29 100%);
+    border-color:#0C2A1B; color:#FFF6E8;
+  }
+  .advent-card .game-title{ color:#FFE9B8 }
+  .advent-card .game-desc{ color:#F3E3CF }
+  .advent-card .game-back{ color:#FFE9B8; border-color:var(--gold) }
+  .advent-card .game-back:focus-visible{ outline-color:#FFE9B8 }
+  .adv-content{ position:relative; z-index:2 }
+  .adv-snow{ position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:1 }
+  .adv-snow span{
+    position:absolute; top:-26px; color:#FFFFFF; line-height:1; user-select:none;
+    animation-name:advSnowFall; animation-timing-function:linear; animation-iteration-count:infinite;
+  }
+  @keyframes advSnowFall{ to{ transform:translateY(3600px) rotate(300deg) } }
+  .adv-lights{ display:flex; justify-content:space-between; align-items:flex-start; padding:0 4px; margin:0 0 4px }
+  .adv-lights span{
+    width:11px; height:11px; border-radius:50%; flex:0 0 auto;
+    animation:advTwinkle 1.5s ease-in-out infinite alternate;
+  }
+  .adv-lights span:nth-child(4n+1){ background:#FFD166; box-shadow:0 0 10px 3px rgba(255,209,102,.75) }
+  .adv-lights span:nth-child(4n+2){ background:#FF7A9C; box-shadow:0 0 10px 3px rgba(255,122,156,.7); margin-top:8px }
+  .adv-lights span:nth-child(4n+3){ background:#8FE3A8; box-shadow:0 0 10px 3px rgba(143,227,168,.7) }
+  .adv-lights span:nth-child(4n){ background:#F6B0C2; box-shadow:0 0 10px 3px rgba(246,176,194,.7); margin-top:8px }
+  .adv-lights span:nth-child(odd){ animation-delay:.7s }
+  @keyframes advTwinkle{ from{ opacity:.45 } to{ opacity:1 } }
+  .adv-year{
+    display:inline-block; margin:2px auto 0; background:rgba(255,233,184,.14); border:1px solid var(--gold);
+    color:#FFE9B8; border-radius:999px; padding:5px 16px; font-weight:700; font-size:.88rem; letter-spacing:.03em;
+  }
+  .adv-music-grid{ display:grid; gap:12px; margin-top:20px; text-align:left }
+  @media(min-width:700px){ .adv-music-grid{grid-template-columns:1fr 1fr} }
+  .adv-music-btn{ padding:20px 20px 16px }
+  .adv-music-btn .music-play-icon{ width:46px; height:46px; font-size:1.05rem; margin-bottom:2px }
+  .adv-music-btn .music-btn-title{ font-size:1.2rem }
+  .adv-music-btn .music-btn-song{ font-size:1rem }
+  .adv-music-player{ background:var(--surface) }
+  .adv-doors{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:24px }
+  @media(min-width:700px){ .adv-doors{grid-template-columns:repeat(6,1fr); gap:12px} }
+  .adv-door{
+    position:relative; aspect-ratio:3/3.4; border-radius:14px; padding:10px 4px 8px;
+    border:2px solid rgba(255,233,184,.55); cursor:pointer; color:#FFF6E8;
+    font-family:"Quicksand",sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+    box-shadow:0 8px 18px rgba(0,0,0,.28); -webkit-tap-highlight-color:transparent;
+    transition:transform .15s ease, filter .2s ease;
+  }
+  .adv-door::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:17%;
+    background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0));
+    border-radius:12px 12px 50% 50%;
+  }
+  .adv-door:nth-child(3n+1){ background:linear-gradient(180deg, #2E7D4F, #1F5C3A) }
+  .adv-door:nth-child(3n+2){ background:linear-gradient(180deg, #B03A5B, #8E2743) }
+  .adv-door:nth-child(3n){ background:linear-gradient(180deg, #A87C22, #7D5A14) }
+  .adv-door:hover{ transform:translateY(-2px) }
+  .adv-door:focus-visible{ outline:3px solid #FFE9B8; outline-offset:2px }
+  .adv-door .adv-num{ font-family:"Playfair Display",serif; font-weight:800; font-size:clamp(1.5rem,6vw,2rem); line-height:1 }
+  .adv-door .adv-ico{ font-size:1rem; line-height:1.2 }
+  .adv-door .adv-state{ font-size:.62rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; opacity:.92; text-align:center; line-height:1.3 }
+  .adv-door.is-locked{ filter:saturate(.35) brightness(.72); cursor:not-allowed }
+  .adv-door.is-today{ border-color:#FFE9B8; animation:advTodayPulse 1.8s ease-in-out infinite }
+  @keyframes advTodayPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(255,233,184,.55), 0 8px 18px rgba(0,0,0,.28) } 50%{ box-shadow:0 0 0 7px rgba(255,233,184,0), 0 8px 18px rgba(0,0,0,.28) } }
+  .adv-door.is-open{ background:linear-gradient(180deg, #FFF9EE, #FBEED3); color:var(--ink); border-color:var(--gold) }
+  .adv-door.is-open .adv-num{ color:var(--rose-deep) }
+  .adv-door.just-opened{ animation:advGlow 1.25s ease-out }
+  @keyframes advGlow{
+    0%{ box-shadow:0 0 0 0 rgba(255,209,102,.95), 0 0 38px 12px rgba(255,183,77,.9) }
+    100%{ box-shadow:0 0 0 22px rgba(255,209,102,0), 0 0 0 0 rgba(255,183,77,0) }
+  }
+  .adv-door.shake{ animation:advShake .4s ease }
+  @keyframes advShake{ 0%,100%{ transform:translateX(0) } 25%{ transform:translateX(-5px) } 75%{ transform:translateX(5px) } }
+  .adv-spark{ position:absolute; left:50%; top:45%; z-index:4; pointer-events:none; font-size:15px; line-height:1; color:#FFD166; animation:advSpark .85s ease-out forwards }
+  @keyframes advSpark{ 0%{ transform:translate(-50%,-50%) scale(.4); opacity:1 } 100%{ transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.2); opacity:0 } }
+  .adv-reveal{
+    margin-top:24px; background:var(--surface); color:var(--ink); border:1px solid var(--gold-soft);
+    border-radius:var(--radius-md); box-shadow:var(--shadow); padding:26px 24px; text-align:center;
+  }
+  .adv-reveal-tag{ font-size:.75rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold) }
+  .adv-reveal h4{ font-family:"Playfair Display",serif; font-size:1.45rem; margin:8px 0 10px; line-height:1.25; color:var(--rose-deep) }
+  .adv-reveal p{ margin:0 auto 10px; max-width:560px; color:var(--ink) }
+  .adv-reveal .adv-verse{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.35rem; line-height:1.6 }
+  .adv-reveal .adv-ref{ font-family:"Playfair Display",serif; font-weight:700; color:var(--rose-deep) }
+  .adv-reveal .adv-note{ color:var(--ink-soft); font-size:.95rem }
+  .adv-reveal img{ width:100%; max-width:440px; margin:6px auto 14px; border-radius:14px; box-shadow:var(--shadow) }
+  .adv-vale{
+    border:2px dashed var(--gold); background:var(--surface-warm); border-radius:14px;
+    padding:18px 18px 10px; max-width:520px; margin:4px auto 6px;
+  }
+  .adv-piece-note{ margin-top:14px; font-weight:700; color:var(--gold); font-size:.95rem }
+  .adv-answer-btn{
+    margin-top:6px; background:var(--rose-deep); color:#fff; border:none; border-radius:999px;
+    padding:11px 24px; font-family:"Quicksand",sans-serif; font-weight:700; cursor:pointer; min-height:44px;
+  }
+  @media (prefers-color-scheme: dark){ .adv-answer-btn{color:#241419} }
+  .adv-letter{ text-align:left; max-width:600px; margin:0 auto }
+  .adv-letter p{ font-family:"Cormorant Garamond",serif; font-size:1.25rem; line-height:1.7; margin:0 0 12px; max-width:none }
+  .adv-letter .sign{ font-family:"Playfair Display",serif; font-style:italic; text-align:right; color:var(--rose-deep); font-size:1.15rem }
+  .adv-puzzles{ margin-top:30px }
+  .adv-puzzles > h4{ font-family:"Playfair Display",serif; font-size:1.35rem; color:#FFE9B8; margin:0 0 6px }
+  .adv-puzzles > p{ color:#F3E3CF; margin:0 auto 18px; max-width:560px }
+  .adv-puzzle{ margin:0 auto 26px; max-width:560px }
+  .adv-puzzle h5{ font-family:"Playfair Display",serif; font-size:1.12rem; color:#FFF6E8; margin:0 0 4px }
+  .adv-puzzle .adv-puzzle-count{ color:#F3E3CF; font-size:.9rem; margin:0 0 10px }
+  .adv-puzzle-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:4px; border-radius:14px; overflow:hidden;
+    border:2px solid rgba(255,233,184,.5); background:#0C2A1B; aspect-ratio:4/3;
+  }
+  .adv-puzzle-grid.done{ border-color:var(--gold); box-shadow:0 0 24px rgba(255,209,102,.45) }
+  .adv-piece{ background-repeat:no-repeat; background-color:#2E7D4F; position:relative }
+  .adv-piece.just-placed{ animation:advPieceGlow 1.3s ease-out }
+  @keyframes advPieceGlow{
+    0%{ filter:brightness(2.2); box-shadow:inset 0 0 0 3px #FFD166, inset 0 0 28px rgba(255,209,102,.95) }
+    100%{ filter:brightness(1); box-shadow:inset 0 0 0 0 rgba(255,209,102,0), inset 0 0 0 rgba(255,209,102,0) }
+  }
+  .adv-piece.hidden-piece{ background:#173F2C; display:grid; place-items:center; color:rgba(255,246,232,.75) }
+  .adv-piece.hidden-piece span{ font-size:.68rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; padding:2px }
+  .adv-full{ margin-top:14px }
+  .adv-full img{ width:100%; border-radius:14px; box-shadow:var(--shadow); border:2px solid var(--gold) }
+  .adv-full figcaption{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:#FFE9B8; margin-top:10px; text-align:center }
+  .adv-naomi{ max-width:430px; margin:34px auto 6px; background:var(--surface); padding:12px 12px 16px; border-radius:12px; box-shadow:var(--shadow); transform:rotate(-1.6deg) }
+  .adv-naomi img{ width:100%; border-radius:8px }
+  .adv-naomi figcaption{
+    text-align:center; font-family:"Cormorant Garamond",serif; font-style:italic;
+    font-size:1.3rem; color:var(--rose-deep); padding-top:12px; line-height:1.35;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .adv-lights span, .adv-door.is-today, .adv-piece.just-placed{ animation:none }
+    .adv-snow{ display:none }
+    .adv-spark{ display:none }
+  }
+
   footer{ text-align:center; padding:44px 20px 54px; color:var(--ink-soft); position:relative; z-index:2}
   footer .foot-hearts{ color:var(--rose); letter-spacing:.5em; font-size:1rem; margin-bottom:10px}
   footer p{margin:4px 0; font-size:.95rem}
@@ -789,6 +922,7 @@
       <button class="nav-item" type="button" data-open-game="screenGames"><span class="nav-icon" aria-hidden="true">♥</span>Juegos</button>
       <button class="nav-item" type="button" data-open-game="screenFaith"><span class="nav-icon" aria-hidden="true">☀</span>Nuestra fe y nuestro matrimonio eterno</button>
       <button class="nav-item" type="button" data-open-game="screenCapsule"><span class="nav-icon" aria-hidden="true">◷</span>Cápsula del tiempo</button>
+      <button class="nav-item" type="button" data-open-game="screenAdvent"><span class="nav-icon" aria-hidden="true">❄</span>Navidad</button>
     </nav>
   </div>
 </div>
@@ -1208,6 +1342,12 @@
         <span class="game-menu-desc">Un mensaje guardado para ti, que se abre el día de tu cumpleaños.</span>
         <span class="game-menu-play">Ver ♥</span>
       </button>
+      <button class="game-menu-card cat-card" type="button" data-open-game="screenAdvent">
+        <span class="game-menu-icon" aria-hidden="true">❄</span>
+        <span class="game-menu-title">Navidad</span>
+        <span class="game-menu-desc">Tu calendario de Adviento, mi amor: 24 puertecitas de diciembre con una sorpresa cada día, música navideña y dos rompecabezas nuestros.</span>
+        <span class="game-menu-play">Entrar ♥</span>
+      </button>
     </div>
 
     <!-- Apartado: Juegos -->
@@ -1483,6 +1623,95 @@
           <cite>Presidente David O. McKay</cite>
           <span class="faith-source">Conferencia General, abril de 1964</span>
         </div>
+      </div>
+    </div>
+
+    <!-- Navidad: Calendario de Adviento -->
+    <div class="game-card advent-card" id="screenAdvent">
+      <div class="adv-snow" id="advSnow" aria-hidden="true"></div>
+      <div class="adv-content">
+        <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+        <div class="adv-lights" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <h3 class="game-title">Calendario de Adviento 🎄</h3>
+        <p class="game-desc">¡Llegó la Navidad, mi amor! Te hice este calendario con 24 puertecitas, una para cada día del 1 al 24 de diciembre. Cada una se abre cuando llega su día y guarda una sorpresita distinta, creada solo para este calendario. Y cada puertecita que abras revela además una pieza de nuestros dos rompecabezas navideños. ❄</p>
+        <span class="adv-year" id="advYear"></span>
+
+        <div class="adv-music-grid">
+          <button class="music-btn adv-music-btn" type="button" data-adv-song="0" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">La Tamalada</span>
+            <span class="music-btn-song">Las Ardillitas de Lalo Guerrero</span>
+            <span class="music-btn-state">Toca para escuchar ♪</span>
+          </button>
+          <button class="music-btn adv-music-btn" type="button" data-adv-song="1" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">Feliz Navidad</span>
+            <span class="music-btn-song">José Feliciano</span>
+            <span class="music-btn-state">Toca para escuchar ♪</span>
+          </button>
+          <button class="music-btn adv-music-btn" type="button" data-adv-song="2" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">Mi Burrito Sabanero</span>
+            <span class="music-btn-song">Villancico tradicional</span>
+            <span class="music-btn-state">Toca para escuchar ♪</span>
+          </button>
+          <button class="music-btn adv-music-btn" type="button" data-adv-song="3" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">Los Peces en el Río</span>
+            <span class="music-btn-song">Villancico tradicional</span>
+            <span class="music-btn-state">Toca para escuchar ♪</span>
+          </button>
+          <button class="music-btn adv-music-btn" type="button" data-adv-song="4" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">Noche de Paz</span>
+            <span class="music-btn-song">Villancico tradicional</span>
+            <span class="music-btn-state">Toca para escuchar ♪</span>
+          </button>
+        </div>
+
+        <div class="music-player-wrap adv-music-player" id="adventPlayerWrap" hidden>
+          <p class="music-now" id="adventNow" role="status">Música navideña para ti, mi amor…</p>
+          <div class="music-frame"><div id="adventYtPlayer"></div></div>
+          <button class="music-stop" id="adventMusicStop" type="button">Detener la música</button>
+        </div>
+
+        <div class="adv-doors" id="advDoors" role="group" aria-label="Puertecitas del calendario de Adviento, del 1 al 24 de diciembre"></div>
+
+        <div class="adv-reveal" id="advReveal" role="status">
+          <span class="adv-reveal-tag">Tu sorpresa de hoy ♥</span>
+          <h4>Una puertecita a la vez, mi amor</h4>
+          <p>Toca una puertecita abierta para descubrir la sorpresa que guarda. Las que tienen candadito se abren cuando llegue su día de diciembre… ¡ten paciencia, que cada una vale la espera! 🎄</p>
+        </div>
+
+        <div class="adv-puzzles">
+          <h4>Nuestros rompecabezas de Navidad 🧩</h4>
+          <p>Cada día, al abrir tu puertecita, se revela una pieza: los días nones arman el primer rompecabezas y los días pares el segundo. El 24 de diciembre los dos quedan completos, mi amor.</p>
+
+          <div class="adv-puzzle">
+            <h5>Rompecabezas 1 · Bajo las luces de Navidad</h5>
+            <p class="adv-puzzle-count" id="advCount1">0 de 12 piezas</p>
+            <div class="adv-puzzle-grid" id="advPuzzle1" role="img" aria-label="Rompecabezas de una foto de Hagot y Naomi bajo las luces de Navidad, que se revela pieza por pieza"></div>
+            <figure class="adv-full" id="advFull1" hidden>
+              <img src="imagenes/adviento.jpg" alt="Hagot y Naomi sonriendo en una selfie bajo un techo de luces de Navidad" />
+              <figcaption>¡Completo! Tú y yo, bajo un cielo de lucecitas ♥</figcaption>
+            </figure>
+          </div>
+
+          <div class="adv-puzzle">
+            <h5>Rompecabezas 2 · Frente al árbol grande</h5>
+            <p class="adv-puzzle-count" id="advCount2">0 de 12 piezas</p>
+            <div class="adv-puzzle-grid" id="advPuzzle2" role="img" aria-label="Rompecabezas de una foto de Hagot y Naomi frente a un árbol de Navidad grande e iluminado, que se revela pieza por pieza"></div>
+            <figure class="adv-full" id="advFull2" hidden>
+              <img src="imagenes/adviento-2.jpg" alt="Hagot y Naomi sonriendo en una selfie frente a un árbol de Navidad enorme lleno de luces" />
+              <figcaption>¡Completo! Frente al árbol más grande, la pareja más feliz ♥</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <figure class="adv-naomi">
+          <img src="imagenes/navidad-naomi.jpg" alt="Naomi sonriendo frente a los árboles de Navidad iluminados de la plaza" />
+          <figcaption>La más hermosa y única señora Claus de mi corazón</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -1792,9 +2021,10 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith'];
+  var gameCardIds = ['screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent'];
   var navReturn = null; // pantalla a la que regresa «Volver» (la lista de Juegos), o null = página principal
   function openGame(id, fromId){
+    if(id !== 'screenAdvent' && typeof stopAdventMusic === 'function') stopAdventMusic();
     gameCardIds.forEach(function(cid){
       var c = document.getElementById(cid);
       if(c) c.classList.toggle('active', cid === id);
@@ -1805,6 +2035,7 @@
   }
   function closeGame(){
     stopCatchGame();
+    if(typeof stopAdventMusic === 'function') stopAdventMusic();
     if(navReturn){
       var backTo = navReturn;
       navReturn = null;
@@ -2606,6 +2837,436 @@
     if(dailyRef) dailyRef.textContent = SCRIPTURES[idx].ref;
   }
   renderFaith();
+
+  // --- Calendario de Adviento (pantalla de Navidad) ---
+  // Las sorpresas rotan cada año: hay tres juegos completos de contenido y se
+  // elige según el año de la temporada de diciembre que se esté viendo.
+  var ADV_SETS = [
+    {
+      sign: "Con todo mi amor, hoy y por toda la eternidad, siempre tuyo, Hagot ♥",
+      frags: [
+        "Mi amor: diciembre llegó con luces, con frío rico y con la cuenta regresiva más bonita de mi vida: los días que faltan para llamarte mi esposa.",
+        "Quiero que sepas que cada día de este calendario lo pensé para ti: cada notita y cada sorpresa es una forma chiquita de decirte lo inmenso que es lo que siento por ti.",
+        "Gracias por tu fe, por tu sonrisa y por caminar conmigo hacia el Padre Celestial. Contigo, hasta lo ordinario se vuelve milagro.",
+        "Este mes celebramos tu cumpleaños y nuestra boda, pero yo te celebro a ti todos los días: eres la respuesta a muchas de mis oraciones.",
+        "Y cuando este calendario se acabe, no se acaba lo nuestro: apenas empieza. Te elijo hoy, el 19 de diciembre, y en cada diciembre que venga, por tiempo y por toda la eternidad."
+      ],
+      days: [
+        { k: "nota", t: "¡Empezó diciembre, mi amor!", b: "Hoy se abre la primera puertecita de este calendario que hice solo para ti. Cada día de diciembre te espera una sorpresita nueva, pensada con todo mi amor. Y agárrate, porque este mes celebramos tu cumpleaños… ¡y nuestra boda!" },
+        { k: "escritura", t: "La mejor noticia del mundo", b: "que os ha nacido hoy, en la ciudad de David, un Salvador, que es Cristo el Señor.", ref: "Lucas 2:11", note: "Así empezó la Navidad: con el nacimiento de nuestro Salvador. Y así quiero que empiece nuestro diciembre, mi amor: con Él en el centro de todo." },
+        { k: "carta", f: 0 },
+        { k: "vale", t: "Vale por un chocolate caliente juntitos", b: "Canjeable cualquier noche de diciembre: chocolate caliente, pan dulce y una plática larga, larga, de esas que no queremos que se acaben nunca." },
+        { k: "adivinanza", b: "Vuelo sin alas, lloro sin ojos, y cuando llego a tu corazón, me quedo para siempre. ¿Qué soy?", a: "¡El amor! (Y también yo, mi vida: llegué a tu corazón para quedarme para siempre.)" },
+        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "Esa sonrisa que ilumina diciembre", b: "Mira esta foto, mi amor: tú con tu ramo de rosas y esa sonrisa que me derrite. Si diciembre tiene luces por todos lados, es porque tu sonrisa las inspiró." },
+        { k: "razon", t: "Razón para amarte: tu fe", b: "Porque tu fe me inspira: verte confiar en el Padre Celestial me hace querer ser mejor hombre, mejor esposo y mejor persona, cada día de mi vida." },
+        { k: "carta", f: 1 },
+        { k: "cancion", t: "“Can’t Help Falling in Love” · Elvis Presley", b: "La canción de «Cómo inició nuestra historia». Ponla bajito, cierra los ojos e imagínanos bailando en nuestra boda… ya casi, mi amor, ya casi." },
+        { k: "vale", t: "Vale por una noche de películas", b: "Tú eliges la película (aunque sea la misma de siempre), yo pongo las palomitas y el abrazo permanente durante toda la función." },
+        { k: "escritura", t: "El Príncipe de Paz", b: "Porque un niño nos es nacido, hijo nos es dado, y el principado sobre su hombro; y se llamará su nombre Admirable, Consejero, Dios fuerte, Padre eterno, Príncipe de paz.", ref: "Isaías 9:6", note: "Él es el Príncipe de Paz… y la paz que siento cuando estoy contigo, mi amor, viene de Él." },
+        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Tú y yo, siempre", b: "Nuestra foto en el puente es de mis favoritas del mundo: abrazados, riendo, sin prisa. Así quiero todos nuestros diciembres: cerquita, riendo y sin soltarnos jamás." },
+        { k: "carta", f: 2 },
+        { k: "adivinanza", b: "Tengo un solo latido pero sueno en dos pechos; no soy doctor y curo cualquier tristeza. ¿Qué soy?", a: "¡Nuestro amor! Dos pechos, un mismo corazón." },
+        { k: "cumple", t: "¡Feliz cumpleaños, mi Naomi! 🎂", b: "¡Hoy cumples años, mi vida! Hoy celebro que llegaste a este mundo y que el Padre Celestial te puso en mi camino. Que este nuevo año te traiga todo lo bonito que mereces… y que me dejes acompañarte en cada paso. ¡Te amo, cumpleañera hermosa!" },
+        { k: "nota", t: "Ya eres mi casi-esposa", b: "Faltan tres días para la boda, mi amor, y yo ya practico decir «mi esposa» frente al espejo. Suena perfecto. Suenas perfecta. El 19 de diciembre te tomo de la mano para siempre." },
+        { k: "vale", t: "Vale por tu desayuno favorito en la cama", b: "El día que tú digas: te despierto con tu desayuno favorito, un beso de buenos días y cero prisas. Porque la futura señora de esta casa se merece todo." },
+        { k: "carta", f: 3 },
+        { k: "boda", t: "¡Hoy nos casamos! 💍", b: "¡Llegó el gran día, mi amor! Hoy te tomo de la mano y empezamos nuestro para siempre, con Dios como testigo y en el centro de lo nuestro. Gracias por decirme que sí. Hoy, mañana y por toda la eternidad: te elijo a ti, Naomi. ¡Feliz boda, mi esposa!" },
+        { k: "escritura", t: "Nuestro fundamento", b: "Y se llamará Jesucristo, el Hijo de Dios, el Padre del cielo y de la tierra, el Creador de todas las cosas desde el principio; y su madre se llamará María.", ref: "Mosíah 3:8", note: "Ya somos esposos, mi amor, y nuestro hogar lo edificamos sobre Él: Jesucristo, nuestro Salvador." },
+        { k: "cancion", t: "“All of Me” · John Legend", b: "«Porque todo de mí ama todo de ti»: así, completito, sin dejar fuera ni un pedacito, te amo yo a ti, mi esposa hermosa." },
+        { k: "carta", f: 4 },
+        { k: "adivinanza", b: "Me encuentras el 15 y el 19 de diciembre, y también todos los días del año: soy la razón de esta página. ¿Quién soy?", a: "¡Tú, mi Naomi! La razón de esta página y de todas mis sonrisas." },
+        { k: "final", t: "Tu carta completa, mi amor" }
+      ]
+    },
+    {
+      sign: "Feliz Navidad, mi esposa hermosa. Tuyo por siempre, Hagot ♥",
+      frags: [
+        "Mi amor: otro diciembre nos encontró, y esta vez te escribo ya como tu esposo, con un año entero de «para siempre» recorrido tomados de la mano.",
+        "Este calendario volvió a cambiar, como cambian los años, pero hay algo que no cambia ni cambiará jamás: lo que siento por ti crece con cada temporada.",
+        "Gracias por nuestro hogar, por las oraciones juntos, por las risas en la cocina y por hacer de cada día común un día especial.",
+        "Este mes celebramos tu cumpleaños y nuestro primer aniversario: doce meses de elegirnos, y te volvería a elegir en cada uno de ellos, sin dudarlo ni un segundo.",
+        "Que vengan muchos diciembres más, mi Naomi: con luces, con tamales, con nuestra familia creciendo en fe. Yo estaré en todos, justo a tu lado."
+      ],
+      days: [
+        { k: "nota", t: "¡Otro diciembre juntitos!", b: "Volvió nuestro calendario, mi amor, y volvió renovado: sorpresas nuevas para un diciembre nuevo. Esta vez te lo entrega tu esposo, con un año de matrimonio en el corazón y el mismo brillo en los ojos del primer día." },
+        { k: "escritura", t: "Paz en la tierra", b: "¡Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres!", ref: "Lucas 2:14", note: "Paz en la tierra… y paz en nuestro hogar, mi amor, que es mi pedacito de tierra favorito en todo el mundo." },
+        { k: "carta", f: 0 },
+        { k: "vale", t: "Vale por un paseo para ver las luces", b: "Una tarde-noche de diciembre, tomados de la mano, caminando sin rumbo entre las luces de Navidad, con parada obligada para un chocolate calientito." },
+        { k: "adivinanza", b: "Cuanto más pasa el tiempo, más valgo; no me compras con dinero y me guardas en el corazón. ¿Qué soy?", a: "¡Nuestros recuerdos juntos! Y este diciembre, mi amor, vamos a fabricar muchos más." },
+        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Un año después, la misma sonrisa", b: "Nuestra foto en el puente cumple otro diciembre con nosotros. Míranos: así de felices éramos… y así de felices somos, mi amor, porque lo nuestro crece y crece." },
+        { k: "razon", t: "Razón para amarte: nuestro hogar", b: "Porque haces que nuestro hogar se sienta como el cielo en la tierra: tu manera de amar, de orar y de reír convierte cualquier casa en nuestro lugar favorito del mundo." },
+        { k: "carta", f: 1 },
+        { k: "cancion", t: "“Vamos bien” · Majo y Dan", b: "La canción de «Cómo empezará nuestra eternidad». Un año después te lo confirmo con todo mi corazón, mi amor: vamos bien, vamos muy bien." },
+        { k: "vale", t: "Vale por cocinarte tu comida favorita", b: "Yo cocino, con todo mi amor y mi mejor esfuerzo; tú solo llega, siéntate hermosa y deja que te consienta. Postre incluido, por supuesto." },
+        { k: "escritura", t: "El amor más grande", b: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", ref: "Juan 3:16", note: "El amor más grande de todos es el de nuestro Padre Celestial. De ese amor aprendemos a amarnos tú y yo, mi vida." },
+        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "La dueña de mi corazón", b: "Tu foto con el ramo sigue siendo mi favorita: esa sonrisa tuya es mi paisaje preferido, en diciembre y en cualquier mes del año." },
+        { k: "carta", f: 2 },
+        { k: "adivinanza", b: "No soy estrella, pero guío; no soy mapa, pero llevo a casa. En Belén brilló una igual que yo. ¿Qué soy?", a: "La luz de Cristo… y la fe que guía nuestro matrimonio, mi amor." },
+        { k: "cumple", t: "¡Feliz cumpleaños, mi esposa! 🎂", b: "¡Hoy cumples años, mi Naomi! Otro cumpleaños tuyo a mi lado, y pienso celebrarte así toda la vida: con gratitud a Dios por ti y con el corazón de fiesta. ¡Feliz cumpleaños, mi amor!" },
+        { k: "nota", t: "Cuenta regresiva al aniversario", b: "En tres días cumplimos un año de casados, mi vida. Un año enterito… y ya sé que ni la eternidad me va a alcanzar para amarte como mereces." },
+        { k: "vale", t: "Vale por una tarde de fotos juntos", b: "Salimos con nuestras mejores sonrisas a tomarnos fotos por los lugares bonitos de la ciudad, para seguir llenando nuestro álbum de momentitos." },
+        { k: "carta", f: 3 },
+        { k: "boda", t: "¡Un año de casados! 💍", b: "Hoy hace un año te tomé de la mano para siempre, mi amor, y ha sido el año más bonito de mi vida. Gracias por cada día, por cada risa y por cada oración juntos. ¡Feliz primer aniversario, mi esposa! Y los que faltan… todos, juntitos." },
+        { k: "escritura", t: "Siempre hay lugar para Él", b: "Y dio a luz a su hijo primogénito, y lo envolvió en pañales, y lo acostó en un pesebre, porque no había lugar para ellos en el mesón.", ref: "Lucas 2:7", note: "No hubo lugar en el mesón para el Salvador… pero en nuestro hogar y en nuestro corazón, mi amor, Él siempre tiene el primer lugar." },
+        { k: "cancion", t: "“Thinking Out Loud” · Ed Sheeran", b: "«Te seguiré amando hasta que tengamos setenta años», dice la canción… y yo te corrijo, mi amor: yo te amaré por toda la eternidad." },
+        { k: "carta", f: 4 },
+        { k: "adivinanza", b: "Tengo 24 puertecitas y un solo tesoro al final. ¿Qué soy?", a: "¡Este calendario de Adviento! Y sí, mi vida: el tesoro siempre fuiste tú." },
+        { k: "final", t: "Tu carta completa, mi amor" }
+      ]
+    },
+    {
+      sign: "Por tiempo y por toda la eternidad, tu Hagot ♥",
+      frags: [
+        "Mi amor: tercer diciembre de este calendario, y mi corazón sigue haciendo lo mismo que el primer día: latir más fuerte cuando pienso en ti.",
+        "Las sorpresas cambian cada año, porque quiero que siempre descubras algo nuevo de mi amor; lo que nunca cambia es la razón de todo esto: tú.",
+        "Gracias por estos años de matrimonio, por tu paciencia, por tu fe y por tu manera de convertir nuestra casa en un pedacito de cielo.",
+        "Celebramos tu cumpleaños y dos años de esposos, y sigo sin creer mi suerte: el Padre Celestial me confió a la mujer más maravillosa del mundo.",
+        "Sigamos armando nuestra eternidad pieza por pieza, diciembre a diciembre, hasta que el tiempo ya no importe. Te amo hoy y siempre."
+      ],
+      days: [
+        { k: "nota", t: "¡Tercer diciembre, mismo amor!", b: "Nuestro calendario vuelve con sorpresas nuevas, mi vida, porque mi amor por ti siempre encuentra formas nuevas de decirse. Bienvenida a tu diciembre, mi Naomi hermosa." },
+        { k: "escritura", t: "Dios cumple Sus promesas", b: "Pero tú, Belén Efrata, pequeña para estar entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad.", ref: "Miqueas 5:2", note: "Siglos antes ya se sabía dónde nacería el Salvador: Dios cumple Sus promesas, mi amor… y yo quiero cumplirte todas las mías." },
+        { k: "carta", f: 0 },
+        { k: "vale", t: "Vale por una carta escrita a mano", b: "De puño y letra, en papel de verdad, para que la guardes entre tus tesoros y la releas cada vez que quieras sentirme cerquita de ti." },
+        { k: "adivinanza", b: "Empiezo con una mirada, sigo con una sonrisa y termino en una eternidad. ¿Qué soy?", a: "¡Nuestra historia de amor! Empezó con una mirada… y no va a terminar nunca." },
+        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "Diciembre te queda hermoso", b: "Entre rosas y luces, la más hermosa siempre eres tú. Esta foto me recuerda por qué diciembre es mi mes favorito: porque en diciembre llegaste tú." },
+        { k: "razon", t: "Otra razón, de las infinitas", b: "Porque después de estos años sigues siendo mi persona favorita para todo: para reír, para orar, para soñar y hasta para no hacer nada, juntitos los dos." },
+        { k: "carta", f: 1 },
+        { k: "cancion", t: "“Can’t Help Falling in Love” · Elvis Presley", b: "La de nuestra historia, la de siempre. Los años pasan y las versiones cambian, mi amor, pero esta canción siempre me va a sonar a ti." },
+        { k: "vale", t: "Vale por una noche de estrellas", b: "Cobija, chocolate caliente y el cielo de diciembre: salimos a mirar las estrellas tomados de la mano y a darle gracias a Dios por nosotros." },
+        { k: "escritura", t: "Un día para gozarse", b: "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él.", ref: "Salmos 118:24", note: "Cada día contigo es un día para gozarse, mi amor. Pero los de diciembre… los de diciembre brillan más." },
+        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Nuestro puente a la eternidad", b: "En ese puente nos abrazamos sin saber todo lo que venía. Hoy ya lo sé: venía una vida entera contigo. Y volvería a cruzar ese puente mil veces, siempre hacia ti." },
+        { k: "carta", f: 2 },
+        { k: "adivinanza", b: "Soy chiquito en diciembre y enorme en tu corazón; nací en un pesebre y te amo desde antes de que nacieras. ¿Quién soy?", a: "¡Jesús, nuestro Salvador! El centro de la Navidad y el centro de nuestro hogar." },
+        { k: "cumple", t: "¡Feliz cumpleaños, mi reina! 🎂", b: "Hoy celebro tu vida, mi Naomi: tu corazón enorme, tu fe firme y esa luz que llevas a donde quiera que vas. Que este año te abrace tan bonito como tú abrazas a todos. ¡Feliz cumpleaños, mi amor eterno!" },
+        { k: "nota", t: "Ya casi, aniversario", b: "En tres días cumplimos dos años de casados, mi vida, y sigo contando los días para celebrarte como si fuera la primera vez. Porque contigo, todo se siente nuevo." },
+        { k: "vale", t: "Vale por un masaje de hombros", b: "Después de un día largo, tú te sientas, cierras los ojos y dejas que estas manos que te aman te quiten el cansancio. Incluye beso en la frente al final." },
+        { k: "carta", f: 3 },
+        { k: "boda", t: "¡Dos años de eternidad! 💍", b: "Dos años tomados de la mano, mi amor, y cada día confirmo que decirte «sí» fue la mejor decisión de mi vida. Gracias por construir conmigo este para siempre. ¡Feliz segundo aniversario, mi esposa!" },
+        { k: "escritura", t: "Él habita con nosotros", b: "Y aquel Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.", ref: "Juan 1:14", note: "Él habitó entre nosotros… y habita en nuestro hogar, mi amor, cada vez que lo invitamos con nuestras oraciones." },
+        { k: "cancion", t: "“Marry You” · Bruno Mars", b: "Una canción alegre que dice que casarse es lo más bonito que se puede hacer. Yo ya lo hice contigo, mi amor… y lo volvería a hacer en cada vida." },
+        { k: "carta", f: 4 },
+        { k: "adivinanza", b: "Dos letras me bastan para decirlo todo: soy la palabra que se dice el 19 de diciembre y se repite cada día después. ¿Qué palabra soy?", a: "La palabra es «sí»: la del 19 de diciembre… y la que te repito todos los días, mi amor." },
+        { k: "final", t: "Tu carta completa, mi amor" }
+      ]
+    }
+  ];
+  var ADV_KIND_LABEL = { nota: "Notita de amor", razon: "Una razón para amarte", foto: "Un recuerdo nuestro", vale: "Vale navideño", escritura: "Escritura para ti", cancion: "Cancioncita para ti", adivinanza: "Adivinanza de amor", carta: "Pedacito de tu carta", cumple: "¡Día especial!", boda: "¡Día especial!", final: "Tu carta completa" };
+  var ADV_KIND_ICON = { nota: "♥", razon: "★", foto: "✿", vale: "✉", escritura: "☀", cancion: "♪", adivinanza: "?", carta: "✎", cumple: "🎂", boda: "💍", final: "✉" };
+  var ADV_SONGS = [
+    { video: "YJoXVyHLauU", start: 3185, label: "“La Tamalada” · Las Ardillitas de Lalo Guerrero" },
+    { video: "N8NcQzMQN_U", start: 0, label: "“Feliz Navidad” · José Feliciano" },
+    { video: "cyTW4fdTq6g", start: 0, label: "“Mi Burrito Sabanero” · Villancico tradicional" },
+    { video: "yfpBMrJZt1Q", start: 0, label: "“Los Peces en el Río” · Villancico tradicional" },
+    { video: "uMVFoqngpnY", start: 0, label: "“Noche de Paz” · Villancico tradicional" }
+  ];
+  var advNow = new Date();
+  var advSeasonYear = advNow.getMonth() === 0 ? advNow.getFullYear() - 1 : advNow.getFullYear();
+  var advSet = ADV_SETS[(((advSeasonYear - 2026) % ADV_SETS.length) + ADV_SETS.length) % ADV_SETS.length];
+  var advOpened = {};
+  var advDoorsEl = document.getElementById('advDoors');
+  var advReveal = document.getElementById('advReveal');
+  var advYearEl = document.getElementById('advYear');
+  function advIsUnlocked(day){
+    return Date.now() >= new Date(advSeasonYear, 11, day).getTime();
+  }
+  function advTodayDay(){
+    var n = new Date();
+    if(n.getFullYear() === advSeasonYear && n.getMonth() === 11 && n.getDate() >= 1 && n.getDate() <= 24) return n.getDate();
+    return 0;
+  }
+  if(advYearEl){
+    advYearEl.textContent = Date.now() < new Date(advSeasonYear, 11, 1).getTime()
+      ? "🎄 Diciembre de " + advSeasonYear + " · El calendario empieza el 1 de diciembre"
+      : "🎄 Diciembre de " + advSeasonYear;
+  }
+  // Nieve dentro de la pantalla de Navidad
+  var advSnow = document.getElementById('advSnow');
+  if(advSnow && !reduceMotion){
+    for(var sn = 0; sn < 26; sn++){
+      var flake = document.createElement('span');
+      flake.textContent = sn % 3 === 0 ? '❄' : '•';
+      flake.style.left = (Math.random() * 98) + '%';
+      flake.style.fontSize = (9 + Math.random() * 11) + 'px';
+      flake.style.opacity = (0.45 + Math.random() * 0.5).toFixed(2);
+      flake.style.animationDuration = (9 + Math.random() * 9) + 's';
+      flake.style.animationDelay = (-Math.random() * 18) + 's';
+      advSnow.appendChild(flake);
+    }
+  }
+  // Rompecabezas: orden en que se van revelando las piezas (posición en la cuadrícula 4×3)
+  var ADV_PIECE_ORDER = [4, 0, 8, 2, 10, 5, 1, 11, 6, 3, 9, 7];
+  function advDayForPiece(puzzleIdx, pos){
+    var k = ADV_PIECE_ORDER.indexOf(pos);
+    return puzzleIdx === 0 ? (2 * k + 1) : (2 * k + 2);
+  }
+  function advPiecePos(pos){
+    var col = pos % 4, row = Math.floor(pos / 4);
+    return (col * (100 / 3)) + '% ' + (row * 50) + '%';
+  }
+  var advPuzzles = [
+    { grid: document.getElementById('advPuzzle1'), count: document.getElementById('advCount1'), full: document.getElementById('advFull1'), img: 'imagenes/adviento.jpg' },
+    { grid: document.getElementById('advPuzzle2'), count: document.getElementById('advCount2'), full: document.getElementById('advFull2'), img: 'imagenes/adviento-2.jpg' }
+  ];
+  advPuzzles.forEach(function(pz){
+    if(!pz.grid) return;
+    for(var p = 0; p < 12; p++){
+      var cell = document.createElement('div');
+      cell.className = 'adv-piece hidden-piece';
+      var lab = document.createElement('span');
+      lab.textContent = 'Día ' + advDayForPiece(advPuzzles.indexOf(pz), p);
+      cell.appendChild(lab);
+      pz.grid.appendChild(cell);
+    }
+  });
+  function advUpdatePuzzles(justDay){
+    advPuzzles.forEach(function(pz, pi){
+      if(!pz.grid) return;
+      var revealed = 0;
+      Array.prototype.forEach.call(pz.grid.children, function(cell, pos){
+        var day = advDayForPiece(pi, pos);
+        if(advOpened[day]){
+          revealed++;
+          var wasHidden = cell.classList.contains('hidden-piece');
+          cell.classList.remove('hidden-piece');
+          cell.innerHTML = '';
+          cell.style.backgroundImage = 'url(' + pz.img + ')';
+          cell.style.backgroundSize = '400% 300%';
+          cell.style.backgroundPosition = advPiecePos(pos);
+          if(wasHidden && day === justDay){
+            cell.classList.remove('just-placed');
+            void cell.offsetWidth;
+            cell.classList.add('just-placed');
+            setTimeout(function(){ cell.classList.remove('just-placed'); }, 1400);
+          }
+        }
+      });
+      if(pz.count) pz.count.textContent = revealed + ' de 12 piezas reveladas';
+      var done = revealed === 12;
+      pz.grid.classList.toggle('done', done);
+      if(pz.full) pz.full.hidden = !done;
+    });
+  }
+  function advPieceNote(day){
+    var pzIdx = day % 2 === 1 ? 0 : 1;
+    var num = pzIdx === 0 ? (day + 1) / 2 : day / 2;
+    var name = pzIdx === 0 ? 'rompecabezas 1 (Bajo las luces de Navidad)' : 'rompecabezas 2 (Frente al árbol grande)';
+    var complete = true;
+    for(var d = pzIdx === 0 ? 1 : 2; d <= 24; d += 2){ if(!advOpened[d]){ complete = false; break; } }
+    var txt = 'Y hoy también se reveló la pieza ' + num + ' de 12 del ' + name + '. 🧩';
+    if(complete) txt += ' ¡Y con esta pieza el rompecabezas quedó completo! Míralo aquí abajito. 🎉';
+    return txt;
+  }
+  function advRenderReveal(day){
+    if(!advReveal) return;
+    var item = advSet.days[day - 1];
+    var html = '<span class="adv-reveal-tag">Día ' + day + ' de diciembre · ' + ADV_KIND_LABEL[item.k] + '</span>';
+    if(item.k === 'carta'){
+      html += '<h4>Pedacito ' + (item.f + 1) + ' de 5 de tu carta secreta</h4>';
+      html += '<div class="adv-letter"><p>“' + advSet.frags[item.f] + '”</p></div>';
+      html += '<p class="adv-note">Guarda este pedacito en tu corazón, mi amor: el 24 de diciembre, en la última puertecita, podrás leer tu carta completita. ♥</p>';
+    } else if(item.k === 'final'){
+      html += '<h4>' + item.t + '</h4><div class="adv-letter"><p>Mi Naomi hermosa:</p>';
+      advSet.frags.forEach(function(fr){ html += '<p>' + fr + '</p>'; });
+      html += '<p class="sign">' + advSet.sign + '</p></div>';
+      html += '<p class="adv-note">Feliz Navidad, mi amor. Gracias por abrir conmigo cada puertecita de este diciembre inolvidable. 🎄♥</p>';
+    } else if(item.k === 'escritura'){
+      html += '<h4>' + item.t + '</h4>';
+      html += '<p class="adv-verse">“' + item.b + '”</p>';
+      html += '<p class="adv-ref">' + item.ref + '</p>';
+      if(item.note) html += '<p class="adv-note">' + item.note + '</p>';
+    } else if(item.k === 'foto'){
+      html += '<h4>' + item.t + '</h4>';
+      html += '<img src="' + item.img + '" alt="' + item.alt + '" />';
+      html += '<p>' + item.b + '</p>';
+    } else if(item.k === 'vale'){
+      html += '<h4>' + item.t + '</h4>';
+      html += '<div class="adv-vale"><p>' + item.b + '</p><p class="adv-note">Válido hoy, mañana y siempre · Se canjea conmigo, en persona, con un beso de por medio ♥</p></div>';
+    } else if(item.k === 'adivinanza'){
+      html += '<h4>¿Qué soy, mi amor?</h4>';
+      html += '<p>' + item.b + '</p>';
+      html += '<button class="adv-answer-btn" id="advAnswerBtn" type="button">Ver la respuesta ♥</button>';
+      html += '<p class="adv-verse" id="advAnswer" hidden style="margin-top:14px">' + item.a + '</p>';
+    } else {
+      html += '<h4>' + item.t + '</h4><p>' + item.b + '</p>';
+    }
+    html += '<p class="adv-piece-note">' + advPieceNote(day) + '</p>';
+    advReveal.innerHTML = html;
+    var ansBtn = document.getElementById('advAnswerBtn');
+    if(ansBtn) ansBtn.addEventListener('click', function(){
+      var ans = document.getElementById('advAnswer');
+      if(ans) ans.hidden = false;
+      ansBtn.hidden = true;
+    });
+  }
+  function advSparkle(door){
+    if(reduceMotion || !door) return;
+    var chars = ['✦', '❄', '★', '♥'];
+    for(var i = 0; i < 9; i++){
+      var s = document.createElement('span');
+      s.className = 'adv-spark';
+      s.textContent = chars[i % chars.length];
+      s.style.setProperty('--tx', (Math.random() * 110 - 55) + 'px');
+      s.style.setProperty('--ty', (Math.random() * 110 - 60) + 'px');
+      s.style.color = i % 3 === 0 ? '#8FE3A8' : (i % 3 === 1 ? '#FFD166' : '#FF9FB6');
+      door.appendChild(s);
+      (function(el){ setTimeout(function(){ el.remove(); }, 900); })(s);
+    }
+  }
+  function advRefreshDoor(btn){
+    var day = parseInt(btn.getAttribute('data-day'), 10);
+    var item = advSet.days[day - 1];
+    var unlocked = advIsUnlocked(day);
+    var opened = !!advOpened[day];
+    btn.classList.toggle('is-locked', !unlocked);
+    btn.classList.toggle('is-open', opened);
+    btn.classList.toggle('is-today', unlocked && !opened && advTodayDay() === day);
+    btn.querySelector('.adv-ico').textContent = unlocked ? ADV_KIND_ICON[item.k] : '🎁';
+    btn.querySelector('.adv-state').textContent = !unlocked ? '🔒 ' + day + ' dic' : (opened ? 'Abierta ♥' : 'Tócame ♥');
+    btn.setAttribute('aria-label', !unlocked
+      ? 'Día ' + day + ' de diciembre: esta puertecita se abre el ' + day + ' de diciembre'
+      : (opened ? 'Día ' + day + ' de diciembre: sorpresa abierta, toca para verla otra vez' : 'Día ' + day + ' de diciembre: toca para abrir tu sorpresa'));
+  }
+  function advDoorTap(btn){
+    var day = parseInt(btn.getAttribute('data-day'), 10);
+    if(!advIsUnlocked(day)){
+      btn.classList.remove('shake');
+      void btn.offsetWidth;
+      btn.classList.add('shake');
+      if(advReveal){
+        advReveal.innerHTML = '<span class="adv-reveal-tag">Día ' + day + ' de diciembre</span><h4>Todavía no, mi amor 🔒</h4><p>No seas tramposa, mi bb, es uno por día, mi amor. Cada día tiene su sorpresa, espérame tantito. Te amo.</p>';
+        advReveal.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+      }
+      return;
+    }
+    var firstOpen = !advOpened[day];
+    advOpened[day] = true;
+    advRefreshDoor(btn);
+    if(firstOpen){
+      btn.classList.remove('just-opened');
+      void btn.offsetWidth;
+      btn.classList.add('just-opened');
+      advSparkle(btn);
+      advUpdatePuzzles(day);
+      if(!advMusicTouched) advPlaySong(0);
+    }
+    advRenderReveal(day);
+    if(advReveal) advReveal.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+  }
+  if(advDoorsEl){
+    for(var advD = 1; advD <= 24; advD++){
+      var doorBtn = document.createElement('button');
+      doorBtn.type = 'button';
+      doorBtn.className = 'adv-door';
+      doorBtn.setAttribute('data-day', String(advD));
+      doorBtn.innerHTML = '<span class="adv-num">' + advD + '</span><span class="adv-ico" aria-hidden="true">🎁</span><span class="adv-state"></span>';
+      (function(b){ b.addEventListener('click', function(){ advDoorTap(b); }); })(doorBtn);
+      advDoorsEl.appendChild(doorBtn);
+      advRefreshDoor(doorBtn);
+    }
+  }
+  advUpdatePuzzles();
+
+  // --- Música navideña del calendario (suena al abrir una puertecita o al tocar una canción) ---
+  var advPlayerWrap = document.getElementById('adventPlayerWrap');
+  var advNowEl = document.getElementById('adventNow');
+  var advStopBtn = document.getElementById('adventMusicStop');
+  var advSongBtns = Array.prototype.slice.call(document.querySelectorAll('[data-adv-song]'));
+  var advPlayer = null;
+  var advPlaying = false;
+  var advCurrent = -1;
+  var advMusicTouched = false;
+  var advApiRequested = false;
+  function refreshAdvMusicUI(){
+    advSongBtns.forEach(function(btn, i){
+      var isCurrent = advCurrent === i;
+      var playing = isCurrent && advPlaying;
+      btn.classList.toggle('is-playing', playing);
+      btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      var icon = btn.querySelector('.music-play-icon');
+      var state = btn.querySelector('.music-btn-state');
+      if(icon) icon.textContent = playing ? '❚❚' : '▶';
+      if(state) state.textContent = playing ? 'Sonando ahora… toca para pausar ♪' : (isCurrent && advPlayer ? 'En pausa · toca para seguir escuchando' : 'Toca para escuchar ♪');
+    });
+    if(advNowEl && advCurrent >= 0){
+      advNowEl.textContent = (advPlaying ? 'Sonando para ti, mi amor: ' : 'En pausa: ') + ADV_SONGS[advCurrent].label;
+    }
+  }
+  function advEnsureApi(cb){
+    if(window.YT && window.YT.Player){ cb(); return; }
+    var prevReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if(typeof prevReady === 'function'){ try{ prevReady(); }catch(e){} }
+      cb();
+    };
+    if(!advApiRequested){
+      advApiRequested = true;
+      if(!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')){
+        var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+      }
+    }
+  }
+  function advCreatePlayer(song){
+    advPlayer = new window.YT.Player('adventYtPlayer', {
+      videoId: song.video,
+      playerVars: { autoplay: 1, playsinline: 1, rel: 0, start: song.start || 0 },
+      events: {
+        onReady: function(e){ try{ e.target.playVideo(); }catch(err){} },
+        onStateChange: function(e){
+          if(!window.YT) return;
+          if(e.data === window.YT.PlayerState.PLAYING){ advPlaying = true; }
+          if(e.data === window.YT.PlayerState.PAUSED || e.data === window.YT.PlayerState.ENDED){ advPlaying = false; }
+          refreshAdvMusicUI();
+        }
+      }
+    });
+  }
+  function advPlaySong(i){
+    var song = ADV_SONGS[i];
+    advCurrent = i;
+    advMusicTouched = true;
+    if(ytPlayer && musicPlaying){ try{ ytPlayer.pauseVideo(); }catch(e){} musicPlaying = false; refreshMusicUI(); }
+    if(advPlayerWrap) advPlayerWrap.hidden = false;
+    advPlaying = true;
+    refreshAdvMusicUI();
+    if(advPlayer && typeof advPlayer.loadVideoById === 'function'){
+      advPlayer.loadVideoById({ videoId: song.video, startSeconds: song.start || 0 });
+      return;
+    }
+    advEnsureApi(function(){
+      if(advPlayer && typeof advPlayer.loadVideoById === 'function'){
+        advPlayer.loadVideoById({ videoId: ADV_SONGS[advCurrent].video, startSeconds: ADV_SONGS[advCurrent].start || 0 });
+        return;
+      }
+      advCreatePlayer(ADV_SONGS[advCurrent]);
+    });
+  }
+  function stopAdventMusic(){
+    if(advPlayer){ try{ advPlayer.stopVideo(); }catch(e){} }
+    advPlaying = false;
+    advCurrent = -1;
+    if(advPlayerWrap) advPlayerWrap.hidden = true;
+    refreshAdvMusicUI();
+  }
+  advSongBtns.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      if(advCurrent === i && advPlayer){
+        if(advPlaying){ try{ advPlayer.pauseVideo(); }catch(e){} advPlaying = false; }
+        else { try{ advPlayer.playVideo(); }catch(e){} advPlaying = true; }
+        refreshAdvMusicUI();
+        return;
+      }
+      advPlaySong(i);
+      if(advPlayerWrap){
+        setTimeout(function(){
+          advPlayerWrap.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+        }, 350);
+      }
+    });
+  });
+  if(advStopBtn) advStopBtn.addEventListener('click', stopAdventMusic);
 
   // Nuestros lugares — mapa interactivo con un corazoncito en cada lugar
   var placesMapEl = document.getElementById('placesMap');

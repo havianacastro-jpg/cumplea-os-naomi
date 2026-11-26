@@ -949,6 +949,35 @@
   body.game-open .to-top{ display:none }
   @media (prefers-reduced-motion: reduce){ .to-top{ transition:none } }
 
+  /* Botones «Volver arriba» al final de cada pantalla y de cada sección */
+  .to-top-end-wrap{ text-align:center; margin-top:28px; position:relative; z-index:2 }
+  .to-top-end{
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    background:var(--rose-pale); color:var(--rose-deep);
+    border:1.5px solid var(--gold); border-radius:999px;
+    padding:12px 26px; min-height:48px; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.98rem;
+    box-shadow:var(--shadow);
+    transition:background .18s ease, transform .18s ease;
+  }
+  .to-top-end:hover{ background:var(--gold-soft); transform:translateY(-2px) }
+  .to-top-end:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .to-top-end .to-top-arrow{ font-size:1.05rem; line-height:1 }
+  .advent-card .to-top-end{ background:rgba(255,233,184,.14); color:#FFE9B8; border-color:var(--gold) }
+  .advent-card .to-top-end:hover{ background:rgba(255,233,184,.28) }
+  @media (prefers-reduced-motion: reduce){ .to-top-end{ transition:none } }
+
+  /* Contador de visitas en la página principal */
+  .visit-counter{
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+    max-width:640px; margin:26px auto 0; text-align:center;
+    background:var(--surface); border:1.5px solid var(--gold-soft); border-radius:999px;
+    box-shadow:var(--shadow); padding:12px 24px;
+    font-family:"Cormorant Garamond",serif; font-size:1.22rem; line-height:1.4; color:var(--ink);
+  }
+  .visit-counter .vc-heart{ color:var(--rose); font-size:1rem }
+  .visit-counter strong{ font-family:"Playfair Display",serif; color:var(--rose-deep) }
+
   /* Te amo en muchos idiomas */
   .lang-grid{ display:grid; gap:12px; max-width:560px; margin:0 auto; text-align:left }
   @media(min-width:620px){ .lang-grid{ grid-template-columns:1fr 1fr } }
@@ -1056,15 +1085,21 @@
   .dream-item.done{ background:var(--gold-soft); border-color:var(--gold) }
   .dream-item.done span::after{ content:" ♥"; color:var(--rose-deep); font-weight:700 }
 
-  /* Oración de la noche */
+  /* Oremos juntos en la noche — guía para orar de corazón */
   .prayer-card{
     background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
     padding:30px 26px; max-width:560px; margin:0 auto; text-align:left;
   }
   .prayer-card p{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.7; margin:0 0 14px }
   .prayer-card p:last-child{ margin-bottom:0 }
-  .prayer-open{ font-family:"Playfair Display",serif; font-weight:700; color:var(--rose-deep) }
-  .prayer-amen{ text-align:right; font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep) }
+  .prayer-card .prayer-lead{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.12rem; line-height:1.4; color:var(--rose-deep); margin:20px 0 10px }
+  .prayer-card .prayer-lead:first-child{ margin-top:0 }
+  .prayer-ideas{ list-style:none; margin:0 0 16px; padding:0; display:grid; gap:10px }
+  .prayer-ideas li{ background:var(--bg-soft); border:1px solid var(--line); border-radius:14px; padding:12px 14px 12px 44px; position:relative; font-size:1rem; line-height:1.55 }
+  .prayer-ideas li::before{ content:"♥"; position:absolute; left:15px; top:11px; color:var(--rose); font-size:1rem }
+  .prayer-ideas strong{ color:var(--rose-deep) }
+  .prayer-note{ border:2px dashed var(--gold); border-radius:14px; padding:16px 18px; background:var(--surface) }
+  .prayer-note strong{ color:var(--rose-deep) }
 
   /* Árbol de gratitud */
   .gtree{ position:relative; width:min(330px, 88vw); height:400px; margin:4px auto 0 }
@@ -1147,11 +1182,12 @@
 
   /* ===== Cuarta tanda de Detallitos: bingo, conversemos, día perfecto, medidor, flor e índice ===== */
   /* Bingo de amor */
-  .bingo-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; max-width:520px; margin:0 auto }
+  .bingo-grid{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px; max-width:520px; width:100%; margin:0 auto }
   .bingo-cell{
     border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
-    border-radius:14px; padding:12px 6px; min-height:86px; cursor:pointer;
+    border-radius:14px; padding:12px 6px; min-height:86px; min-width:0; cursor:pointer;
     font-family:"Quicksand",sans-serif; font-weight:700; font-size:.82rem; line-height:1.35;
+    overflow-wrap:break-word; hyphens:auto;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center;
   }
   .bingo-cell .bingo-heart{ font-size:1.05rem; color:var(--rose-pale); line-height:1 }
@@ -1161,6 +1197,11 @@
   .bingo-msg{ max-width:520px; margin:18px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.55; color:var(--rose-deep); min-height:1.6em }
   .bingo-reset{ margin-top:14px; background:none; border:0; cursor:pointer; color:var(--ink-soft); font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; text-decoration:underline; text-underline-offset:3px }
   .bingo-reset:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  @media (max-width:480px){
+    .bingo-grid{ gap:6px }
+    .bingo-cell{ padding:9px 3px; min-height:78px; font-size:.68rem; line-height:1.3; border-radius:11px; gap:3px }
+    .bingo-cell .bingo-heart{ font-size:.9rem }
+  }
 
   /* Conversemos, mi amor */
   .talk-stage{ max-width:560px; margin:0 auto }
@@ -1206,16 +1247,6 @@
   .flor-svg{ display:block; margin:0 auto; max-width:230px; width:100%; height:auto }
   .flor-msg{ max-width:480px; margin:10px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.6; color:var(--ink) }
   .flor-count{ color:var(--rose-deep); font-weight:700; margin-top:8px }
-
-  /* Índice rápido al final de la página principal */
-  .index-list{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:640px; margin:0 auto }
-  .index-link{
-    border:1.5px solid var(--rose-light); background:var(--surface); color:var(--rose-deep);
-    border-radius:999px; padding:11px 20px; cursor:pointer;
-    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem;
-  }
-  .index-link:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
-  html[data-theme="night"] .index-link{ color:var(--rose-deep) }
 
   /* ===== Quinta tanda de Detallitos: 50 razones, ahorcado, carta de aniversario, qué amo más, beso y menú actual ===== */
   /* Menú hamburguesa: corazoncito en la sección actual */
@@ -1356,6 +1387,13 @@
 </header>
 
 <main class="wrap">
+
+  <!-- CONTADOR DE VISITAS -->
+  <div class="visit-counter" role="status">
+    <span class="vc-heart" aria-hidden="true">♥</span>
+    <span>Naomi ha entrado a esta página <strong id="visitCountNum">…</strong> <span id="visitCountWord">veces</span></span>
+    <span class="vc-heart" aria-hidden="true">♥</span>
+  </div>
 
   <!-- MÚSICA -->
   <section aria-labelledby="musica-title" style="padding-top:36px">
@@ -2204,8 +2242,8 @@
         </button>
         <button class="game-menu-card" type="button" data-open-game="screenOracion">
           <span class="game-menu-icon" aria-hidden="true">☾</span>
-          <span class="game-menu-title">Oración de la noche</span>
-          <span class="game-menu-desc">Una oracioncita cortita y nuestra, para leerla juntitos cada noche antes de dormir, tomados de la mano.</span>
+          <span class="game-menu-title">Oremos juntos en la noche</span>
+          <span class="game-menu-desc">Una guía para arrodillarnos juntitos cada noche y orar de corazón, con nuestras propias palabras, antes de dormir.</span>
           <span class="game-menu-play">Orar juntitos ♥</span>
         </button>
         <button class="game-menu-card" type="button" data-open-game="screenArbol">
@@ -2296,7 +2334,7 @@
     <div class="game-card" id="screenPensamiento">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Un pensamiento para ti hoy ♥</h3>
-      <p class="game-desc">Cada día del mes te espera un pensamiento distinto, mi amor. Este es el que te toca hoy:</p>
+      <p class="game-desc">Cada día del año te espera un pensamiento distinto, mi amor: hay uno para cada uno de los 365 días, sin que se repita ninguno. Este es el que te toca hoy:</p>
       <div class="thought-card">
         <p class="thought-date" id="thoughtDate"></p>
         <p class="thought-text" id="thoughtText"></p>
@@ -2506,18 +2544,28 @@
       <p class="game-final" id="dreamsFinal" hidden style="margin-top:24px; margin-bottom:0">¡Los doce sueños cumplidos, mi amor! Lo que un día fue una lista hoy es nuestra historia. Y que conste: ya estoy soñando los siguientes doce… contigo, siempre contigo. ♥</p>
     </div>
 
-    <!-- Oración de la noche -->
+    <!-- Oremos juntos en la noche -->
     <div class="game-card" id="screenOracion">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
-      <h3 class="game-title">Oración de la noche ☾</h3>
-      <p class="game-desc">Una oracioncita cortita y muy nuestra, mi amor, para leerla juntitos cada noche antes de dormir, tomados de la mano. Guárdala en tu corazón:</p>
+      <h3 class="game-title">Oremos juntos en la noche ☾</h3>
+      <p class="game-desc">Esto no es una oración para leer, mi amor: en nuestra iglesia las oraciones no se leen, se dicen de corazón, con nuestras propias palabras. Esto es solo una guía para nuestro momentito de cada noche:</p>
       <div class="prayer-card">
-        <p class="prayer-open">Padre Celestial:</p>
-        <p>Antes de dormir, venimos a darte las gracias por este día y por tenernos el uno al otro. Gracias por tu amor que nunca nos suelta, por cuidarnos en el camino y por guiar nuestros pasos hasta este momento tan bonito de nuestras vidas.</p>
-        <p>Te pedimos que bendigas nuestro hogar: el que ya tenemos y el que estamos por construir como esposos. Llénalo de tu paz, de tu Espíritu y de mucha fe, para que en esta casa siempre se te busque a Ti primero.</p>
-        <p>Bendice también a nuestras familias y a cada persona que amamos. Perdona las faltas que hoy cometimos y ayúdanos a despertar mañana siendo un poquito más pacientes, más humildes y más parecidos a tu Hijo.</p>
-        <p>Cuida nuestro descanso esta noche, Padre, y que al abrir los ojos recordemos siempre que lo nuestro es un regalo tuyo.</p>
-        <p class="prayer-amen">Te lo pedimos con todo nuestro corazón, en el nombre de Jesucristo. Amén.</p>
+        <p class="prayer-lead">Arrodillémonos juntitos, tomados de la mano ♥</p>
+        <p>Cada noche, antes de dormir, nos arrodillamos juntitos, nos tomamos de la mano y hablamos con nuestro Padre Celestial como lo que es: una conversación de corazón a corazón. Y nos turnamos: una noche ofrece la oración en voz alta uno, y a la siguiente el otro; quien escucha la sigue en silencio, la hace suya en su corazón y al final decimos «amén» juntitos.</p>
+        <p class="prayer-lead">Ideas para incluir en nuestra oración de la noche:</p>
+        <ul class="prayer-ideas">
+          <li><strong>Empezar con reverencia:</strong> dirigirnos a nuestro Padre Celestial y abrirle el corazón.</li>
+          <li><strong>Dar gracias por el día:</strong> por lo bonito que pasó hoy, por lo que aprendimos y por cada bendición, grande o chiquita.</li>
+          <li><strong>Dar gracias el uno por el otro:</strong> por tenernos, por amarnos y por caminar juntos esta vida.</li>
+          <li><strong>Pedir por nuestro matrimonio y nuestra familia eterna:</strong> que nuestro amor crezca, que nos mantengamos firmes en nuestros convenios y que nuestro hogar sea un pedacito de cielo.</li>
+          <li><strong>Pedir por nuestros planes:</strong> por la boda, por nuestro hogar, por el trabajo y por cada sueño que estamos construyendo.</li>
+          <li><strong>Pedir por las personas que amamos:</strong> por nuestras familias, por quien esté pasando un momento difícil y por quien necesite consuelo.</li>
+          <li><strong>Pedir perdón y guía:</strong> reconocer en qué fallamos hoy y pedir la ayuda del Espíritu Santo para ser mejores mañana.</li>
+          <li><strong>Cerrar en el nombre de Jesucristo,</strong> con fe, y decir «amén» juntitos.</li>
+        </ul>
+        <div class="prayer-note">
+          <p><strong>Recordatorio de nuestro corazón:</strong> en La Iglesia de Jesucristo de los Santos de los Últimos Días no leemos oraciones ya escritas; oramos con nuestras propias palabras, sinceras y sencillas. No tiene que ser larga ni perfecta: tiene que salir del corazón.</p>
+        </div>
       </div>
       <p class="game-desc" style="margin-top:18px; margin-bottom:0">Que duermas cerquita de Dios y de mi corazón, mi vida. ♥</p>
     </div>
@@ -2809,21 +2857,6 @@
         Gracias por existir, por tanto amor, por ser tú. Gracias a Dios por ti, hoy y todos los días.
         El 19 de diciembre empieza nuestro para siempre, y yo te prometo amarte y cuidarte en esta vida y por toda la eternidad.
         <span class="from">¡Feliz cumpleaños, mi futura esposa! Con todo, todo mi amor — Hagot ♥</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ÍNDICE RÁPIDO -->
-  <section class="surprise" aria-labelledby="indice-title" style="padding-top:8px">
-    <div class="surprise-box">
-      <h2 id="indice-title">Índice rápido, mi amor</h2>
-      <p>Para que saltes directo a tu rinconcito favorito, sin buscar: toca uno y vas derechito.</p>
-      <div class="index-list">
-        <button class="index-link" type="button" data-open-game="screenGames">♥ Juegos</button>
-        <button class="index-link" type="button" data-open-game="screenFaith">☀ Nuestra fe</button>
-        <button class="index-link" type="button" data-open-game="screenCapsule">◷ Cápsula del tiempo</button>
-        <button class="index-link" type="button" data-open-game="screenAdvent">❄ Navidad</button>
-        <button class="index-link" type="button" data-open-game="screenDetallitos">✦ Detallitos para ti</button>
       </div>
     </div>
   </section>
@@ -4612,6 +4645,35 @@
       });
     }
 
+    // --- Botones «Volver arriba» al final de cada pantalla y de cada sección ---
+    function addEndTopButton(container){
+      if(!container) return;
+      var wrapEnd = document.createElement('div');
+      wrapEnd.className = 'to-top-end-wrap';
+      var endBtn = document.createElement('button');
+      endBtn.type = 'button';
+      endBtn.className = 'to-top-end';
+      var arrowSpan = document.createElement('span');
+      arrowSpan.className = 'to-top-arrow';
+      arrowSpan.setAttribute('aria-hidden', 'true');
+      arrowSpan.textContent = '↑';
+      endBtn.appendChild(arrowSpan);
+      endBtn.appendChild(document.createTextNode(' Volver arriba '));
+      var heartSpan = document.createElement('span');
+      heartSpan.setAttribute('aria-hidden', 'true');
+      heartSpan.textContent = '♥';
+      endBtn.appendChild(heartSpan);
+      endBtn.addEventListener('click', function(){
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+      wrapEnd.appendChild(endBtn);
+      container.appendChild(wrapEnd);
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.game-card'), addEndTopButton);
+    Array.prototype.forEach.call(document.querySelectorAll('main > section'), function(sec){
+      if(!sec.classList.contains('games-section')) addEndTopButton(sec);
+    });
+
     // --- Te amo en muchos idiomas ---
     var LANGS = [
       { lang: 'Español', phrase: 'Te amo', sound: 'Así, como te lo digo todos los días ♥' },
@@ -4688,7 +4750,341 @@
       'Hoy celebro que existes, que me elegiste y que caminamos juntos de la mano.',
       'Que tu día tenga tanto color como el que tú le das a mi vida.',
       'Prometo buscarte una sonrisa nueva cada día, aunque sea con un chiste malo.',
-      'Cierra los ojos un segundo e imagina mi abrazo: así de cerquita te llevo siempre.'
+      'Cierra los ojos un segundo e imagina mi abrazo: así de cerquita te llevo siempre.',
+      'Despertar y saber que existes hace que cualquier lunes se sienta como viernes.',
+      'Hoy desayuna rico, mi amor, y piensa que cada bocado te lo mando con un beso.',
+      'Si el café te sabe mejor hoy, es porque te lo endulcé pensando en ti.',
+      'Que el espejo de esta mañana te devuelva la sonrisa que yo veo en ti todos los días.',
+      'Hoy camina con la frente en alto: eres la mujer más amada de este planeta, y lo digo yo.',
+      'A veces me descubro sonriendo solo, en medio de la nada, porque me acordé de ti.',
+      'Eres la notificación favorita de mi corazón: llegas y todo se ilumina.',
+      'Hoy, si algo sale mal, respira: en la noche me lo cuentas y lo resolvemos juntos, como equipo.',
+      'Tu cabello, tu mirada, tu forma de caminar… todo en ti me parece una obra de arte.',
+      'Me encanta cómo se te iluminan los ojos cuando hablas de algo que te apasiona.',
+      'Hoy quiero que el mundo te trate con la misma dulzura con la que tú lo tratas a él.',
+      'Eres la razón por la que las canciones de amor por fin me hacen sentido.',
+      'Si hoy te sientes cansada, apóyate en mí: para eso estoy, para cargarte el corazón cuando pese.',
+      'Tu nombre es mi palabra favorita en todos los idiomas.',
+      'Cada vez que dices mi nombre, suena a hogar.',
+      'Hoy ponte esa blusa que te encanta: te ves hermosa y lo sabes.',
+      'Me gusta cómo arrugas la nariz cuando te ríes de verdad; es mi vista favorita.',
+      'Que hoy encuentres motivos para reírte hasta que te duela la panza, como cuando estamos juntos.',
+      'Eres mi domingo en la mañana: paz, calma y ganas de quedarme contigo todo el día.',
+      'Si el día amanece nublado, no importa: tú eres mi sol de bolsillo.',
+      'Hoy te mando un abrazo de esos que no se ven pero se sienten hasta los huesos.',
+      'Pensar en ti es mi deporte favorito: lo practico a todas horas y nunca me canso.',
+      'Eres la calma que llega después de un día largo: solo verte y ya descansé.',
+      'Hoy brilla sin pedir permiso, mi amor: para eso naciste.',
+      'Tu voz es el sonido que quiero escuchar al llegar a casa, hoy y siempre.',
+      'Me fascina tu manera de encontrar lo bonito en las cosas más sencillas.',
+      'Hoy, cada vez que mires el reloj, imagina que te estoy mandando un beso a esa hora exacta.',
+      'Eres mi pausa favorita en medio del ruido del mundo.',
+      'Si pudiera embotellar tu risa, la guardaría para los días grises… aunque contigo casi no hay.',
+      'Hoy mereces flores, chocolate y que te digan lo increíble que eres. Empiezo yo: eres increíble.',
+      'Tu ternura desarma cualquier enojo: contigo es imposible durar molesto más de un minuto.',
+      'Eres la prueba viviente de que Dios escucha las oraciones con lujo de detalle.',
+      'Hoy date el gusto de descansar sin culpa: también mereces que te cuiden a ti.',
+      'Me encanta cómo cantas bajito cuando crees que nadie te escucha. Yo siempre te escucho.',
+      'Eres mi persona favorita para contarle todo, hasta lo más tonto del día.',
+      'Hoy el mundo tiene suerte: va a verte sonreír.',
+      'Tu abrazo tiene la medida exacta de mi paz.',
+      'Si me dieran a elegir otra vez, en cualquier vida, te elegiría a ti sin pensarlo.',
+      'Eres la historia que quiero contar cuando seamos viejitos: la de cómo te amé toda la vida.',
+      'Hoy, cuando el sol te dé en la cara, piensa que es Dios recordándote lo mucho que te ama… y yo también.',
+      'Tu forma de bailar en la cocina merece escenario y aplausos; yo seré tu público fiel.',
+      'Me gusta que contigo el silencio también se siente bonito.',
+      'Hoy eres la protagonista: que nadie te robe ni una escena.',
+      'Eres mi pensamiento feliz cuando el día se pone difícil.',
+      'Si el amor se midiera en sonrisas, las tuyas ya me hicieron millonario.',
+      'Hoy quiero que te consientas como yo te consentiría si estuviera ahí contigo.',
+      'Tu mirada tiene ese no sé qué que me deja sin palabras y con el corazón acelerado.',
+      'Eres el mejor plan, la mejor compañía y la mejor noticia de todos mis días.',
+      'Hoy, si te sale una cancioncita en la cabeza, cántala: seguro es porque estás contenta, y eso me encanta.',
+      'Me derrite cuando te ríes de mis chistes malos solo para no dejarme solo en el intento.',
+      'Eres mi lugar seguro: contigo no tengo que fingir nada.',
+      'Hoy lleva tu sonrisa puesta como tu mejor accesorio; combina con todo.',
+      'Que hoy te sorprendan bonito, como tú me sorprendes a mí cada día.',
+      'Tu corazón generoso es la parte de ti que más admiro… y eso que admiro todo de ti.',
+      'Eres la melodía que mi corazón tararea sin darse cuenta.',
+      'Hoy te pienso, te quiero y te celebro, como ayer, como mañana, como siempre.',
+      'Eres más valiente de lo que crees: yo he visto tu fuerza y me deja sin aliento.',
+      'Hoy recuerda que no tienes que poder con todo sola: me tienes a mí, siempre.',
+      'Tu inteligencia me enamora tanto como tu sonrisa, y eso es decir muchísimo.',
+      'Eres capaz de lograr lo que te propongas; yo seré tu porrista número uno en cada meta.',
+      'Hoy, si alguien no ve tu valor, el problema es su vista, no tu brillo.',
+      'Me encanta tu determinación: cuando quieres algo, vas por ello con todo el corazón.',
+      'Eres dulce sin dejar de ser fuerte: esa mezcla tuya es mi favorita.',
+      'Hoy perdónate cualquier error chiquito: para mí sigues siendo perfecta en lo que importa.',
+      'Tu sensibilidad no es debilidad, mi amor: es tu superpoder más hermoso.',
+      'Eres una mujer de fe, y eso te hace brillar de una manera que no se puede fingir.',
+      'Hoy camina segura: cada paso tuyo lo acompaña mi amor, aunque no me veas.',
+      'Me gusta cómo defiendes lo que amas: con ese corazón, nuestra familia está en las mejores manos.',
+      'Eres la definición de belleza que no necesita espejo: la que se le nota en el alma.',
+      'Hoy mereces que te escuchen con atención, como yo te escucho: como si cada palabra tuya importara, porque importa.',
+      'Tu paciencia conmigo dice mucho de tu grandeza; gracias por no rendirte con este terco que te ama.',
+      'Eres organizada, creativa y de buen corazón: el paquete completo, y es mío.',
+      'Hoy, si el cansancio te gana un ratito, descansa en mi hombro imaginario: aquí cabe tu mundo entero.',
+      'Me enamora tu risa, pero también tu seriedad cuando algo te importa de verdad.',
+      'Eres la mujer que quiero que nuestras hijas admiren y la que quiero que nuestros hijos respeten como ejemplo.',
+      'Hoy mírate al espejo y di: soy amada, soy capaz, soy Naomi. Y sonríe, porque es verdad.',
+      'Tu bondad deja huella en cada persona que te conoce; yo soy el más afortunado de todos.',
+      'Eres luz en los días de otros, aunque a veces no te des cuenta. En los míos, ni se diga.',
+      'Hoy te toca recibir un poquito de todo el amor que siempre andas repartiendo.',
+      'Me gusta tu forma de soñar en grande sin dejar de disfrutar lo pequeño.',
+      'Eres mi ejemplo de constancia: verte luchar por lo tuyo me inspira a ser mejor.',
+      'Hoy, si el mundo se pone ruidoso, escucha mi voz en tu memoria: te amo, estoy contigo, tú puedes.',
+      'Tu corazón perdona, tu mente aprende y tu alma agradece: por eso eres tan especial.',
+      'Eres la pieza que le faltaba a mi vida para que todo tuviera sentido.',
+      'Hoy brilla en lo tuyo, mi amor: yo aplaudo desde la primera fila.',
+      'Me encanta cómo te emocionas con las cosas bonitas de la vida; tu alegría es contagiosa.',
+      'Eres mi persona favorita para celebrar triunfos y para llorar derrotas: para todo, tú.',
+      'Hoy recuerda: no eres «casi» nada; eres completamente maravillosa.',
+      'Tu fe en Dios y en nosotros me sostiene más de lo que imaginas.',
+      'Eres la calma de mi casa antes de que la casa exista: ya eres hogar, mi amor.',
+      'Hoy sonríe también por mí, que desde donde estoy te estoy sonriendo de vuelta.',
+      'Me gusta que seas exactamente tú: sin copias, sin moldes, sin pedir disculpas por brillar.',
+      'Eres la mujer de mis sueños, pero despierta eres todavía mejor.',
+      'Hoy date crédito: has llegado lejos y lo has hecho con un corazón hermoso.',
+      'Tu manera de amar a tu familia me enseñó cómo quiero amar a la nuestra.',
+      'Eres mi orgullo: presumirte es de mis actividades favoritas.',
+      'Hoy, si dudas de tu belleza, recuerda que me tienes rendido desde el primer día.',
+      'Me fascina tu voz cuando lees en voz alta: todo suena más bonito dicho por ti.',
+      'Eres fuerte como raíz y dulce como flor: por eso nuestro amor va a crecer tan bonito.',
+      'Hoy elige creer en ti, como yo creo en ti todos los días sin dudar ni un segundo.',
+      'Tu alegría es mi clima favorito: contigo siempre es primavera en mi corazón.',
+      'Eres la mejor decisión que he tomado y la mejor bendición que he recibido.',
+      'Hoy, si el día se pone cuesta arriba, agárrate de mi mano: subimos juntos.',
+      'Me encanta verte concentrada en lo tuyo: se te nota la pasión y me enamoras más.',
+      'Eres mi poema favorito, y ni siquiera tuve que escribirte: Dios ya te había escrito perfecta.',
+      'Hoy recibe este pensamiento como un beso en la frente: de esos que dicen «estoy aquí».',
+      'Tu amor me ha hecho mejor hombre, y te lo voy a agradecer toda la vida.',
+      'Eres la dueña de mis «buenos días» y de mis «buenas noches», hoy y siempre.',
+      'Hoy, hagas lo que hagas, hazlo sabiendo que alguien te ama más allá de las palabras.',
+      'Me gusta cómo se te arruga la frente cuando piensas: hasta pensando te ves hermosa.',
+      'Eres mi tesoro mejor guardado y, a la vez, el que más presumo.',
+      'Hoy quiero que te sientas tan querida como lo que eres: el centro de mi mundo.',
+      'Agradezco a Dios por ti en mis oraciones, y luego le agradezco otra vez, por si no quedó claro.',
+      'Nuestro amor tiene dirección eterna: no termina en esta vida, apenas empieza.',
+      'Hoy Dios te mira con amor, mi vida, y yo tengo la bendición de mirarte igual.',
+      'Cuando pienso en la eternidad, lo primero que veo es tu mano en la mía, para siempre.',
+      'Eres una bendición con nombre y apellido, enviada derechito del cielo a mi vida.',
+      'Hoy, en tu oración, dile a Dios que te amo; aunque Él ya lo sabe mejor que nadie.',
+      'El Señor cruzó nuestros caminos con un propósito hermoso, y cada día lo descubro más.',
+      'Contigo aprendí que el amor verdadero también se arrodilla a orar.',
+      'Hoy deja tus preocupaciones en manos de Dios y tu corazón en las mías: ambos están bien cuidados.',
+      'Nuestra historia la está escribiendo Dios, y es mi historia favorita de todas.',
+      'Eres mi compañera de convenios: lo nuestro no es solo amor, es promesa sagrada.',
+      'Hoy brilla con esa luz que viene de tu fe: se te nota, y es hermosa.',
+      'El templo nos espera, mi amor, y con él una eternidad enterita para amarnos.',
+      'Gracias a Dios por tu vida, por tu salud y por ese corazón que me entregó para cuidar.',
+      'Hoy, si algo te preocupa, oremos juntos en la noche: dos corazones, una misma oración.',
+      'Eres la prueba de que los milagros también llegan caminando y sonriendo.',
+      'Nuestro amor, con Dios en el centro, no conoce imposibles.',
+      'Hoy camina en fe, mi amor: lo mejor de nuestra historia apenas viene.',
+      'Me encanta imaginar la eternidad contigo: suena larga, pero a tu lado se me hará cortita.',
+      'Eres mi bendición de todos los días, no solo de los domingos.',
+      'Hoy el cielo sonríe porque tú sonríes; así de amada eres allá arriba y aquí abajo.',
+      'Dios no se equivoca: te hizo a ti, me hizo a mí, y nos juntó a propósito.',
+      'Contigo quiero construir una familia centrada en Cristo, con risas en la mesa y amor en cada rincón.',
+      'Hoy agradece conmigo: por tu vida, por la mía y por este amor que nos fue confiado.',
+      'Eres mi respuesta favorita cuando me preguntan si Dios contesta oraciones.',
+      'El amor que nos une viene de lo alto, y por eso nadie ni nada lo podrá romper.',
+      'Hoy, si el día se siente incierto, recuerda que nuestro futuro está en las mejores manos: las de Dios.',
+      'Me gusta pensar que en el cielo ya se sabía que tú y yo terminaríamos juntos.',
+      'Eres mi compañera para esta vida y para la que sigue: no te me escapas ni en la eternidad.',
+      'Hoy sirve con ese corazón tuyo y deja que Dios multiplique tu dulzura.',
+      'Nuestra boda será en la casa del Señor, y nuestro amor será para siempre: ¿qué más puedo pedir?',
+      'Eres un regalo que no merezco pero que cuidaré como el tesoro que es.',
+      'Hoy, cuando veas el atardecer, piensa en esto: el mismo Dios que pinta el cielo, te pintó a ti para mí.',
+      'Contigo, hasta el estudio de las escrituras se siente como una cita con el amor de mi vida.',
+      'Eres mi bendición contada y recontada: cada día encuentro un motivo nuevo para agradecer por ti.',
+      'Hoy camina con Dios y conmigo: entre los dos te llevamos bien agarrada.',
+      'El amor eterno no es un cuento, mi amor: es el plan que estamos viviendo tú y yo.',
+      'Me emociona pensar en todas las noches de hogar que nos esperan, llenas de fe y de risas.',
+      'Eres la hija de Dios más hermosa que conozco, y tengo el honor de ser tu futuro esposo.',
+      'Hoy pide en oración lo que necesites; yo pediré que nunca te falte nada, empezando por mi amor.',
+      'Nuestro amor florece porque tiene raíces en lo eterno.',
+      'Gracias, Padre Celestial, por Naomi: hoy lo digo en voz alta, aunque sea en tu pensamiento del día.',
+      'Hoy, si te sientes pequeña ante un reto grande, recuerda el tamaño de tu Dios y el de mi amor por ti.',
+      'Eres mi certeza en un mundo de dudas: Dios te puso en mi vida y punto.',
+      'Contigo quiero envejecer y, después de envejecer, seguir amándote en la eternidad.',
+      'Hoy tu luz alumbra mi camino, como la de una estrella que Dios colgó solo para mí.',
+      'El amor que siento por ti crece como crece la fe: poquito a poco, hasta llenarlo todo.',
+      'Eres mi milagro cotidiano: no necesito ver el mar abrirse, me basta con verte a ti.',
+      'Hoy demos gracias juntos, aunque sea en silencio: por nosotros, por lo que viene, por todo.',
+      'Nuestra historia tendrá tropiezos, pero con Dios de la mano, cada tropiezo será un testimonio.',
+      'Eres mi oración contestada y mi promesa por cumplir: todo en una sola persona.',
+      'Hoy, cuando cierres los ojos para orar, imagina mi mano sobre la tuya: estoy contigo.',
+      'El cielo me queda claro contigo: si la eternidad es a tu lado, es todo lo que quiero.',
+      'Eres la flor más bonita del jardín de Dios, y me eligió a mí para cuidarte.',
+      'Hoy recuerda que eres hija de un Rey: trátala como reina, mundo, que yo ya lo hago.',
+      'Nuestro amor tiene sello eterno: ni el tiempo ni la distancia ni nada podrá borrarlo.',
+      'Ya imagino nuestra casita: tú cantando en la cocina y yo fingiendo que sé cocinar para ayudarte.',
+      'Hoy sueño despierto con nuestras mañanas de casados: café, risas y tu cabello despeinado que amo.',
+      'Nuestra casa será pequeña o grande, no importa: con tu amor dentro, será un palacio.',
+      'Ya quiero esas tardes de película abrazados, peleando por la cobija y compartiendo las palomitas.',
+      'Hoy pienso en nuestro primer árbol de Navidad de casados y se me llena el corazón.',
+      'Contigo, hasta ir al mercado será una aventura: tú con la lista y yo empujando el carrito feliz.',
+      'Ya imagino tu risa rebotando en las paredes de nuestro hogar: ese será mi sonido favorito.',
+      'Hoy sueño con despertar a tu lado todos los días de mi vida. Falta poquito, mi amor.',
+      'Nuestra mesa será testigo de mil cenas, mil historias y mil veces de decir «te amo» entre bocados.',
+      'Ya quiero colgar nuestra primera foto de casados en la sala, para presumirla con cada visita.',
+      'Hoy pienso en lo bonito que será orar juntos cada noche antes de dormir, en nuestra propia casa.',
+      'Contigo quiero construir tradiciones: desayunos de domingo, cartas escondidas y abrazos sin motivo.',
+      'Ya imagino nuestras plantas en la ventana y tu cuidado en cada rincón de la casa.',
+      'Hoy se me antoja nuestro futuro: sencillo, lleno de amor y con olor a comida rica.',
+      'Nuestra casa tendrá una regla de oro: nunca dormir enojados y siempre decir «te amo» antes de cerrar los ojos.',
+      'Ya quiero aprender tus recetas y que me corrijas la sazón con un beso.',
+      'Hoy pienso en las visitas de nuestros abuelitos y en cómo nuestra casa olerá a familia y a amor.',
+      'Contigo, la rutina será mi parte favorita de la vida.',
+      'Ya imagino nuestro sillón favorito, el de los abrazos largos y las pláticas hasta tarde.',
+      'Hoy sueño con bailar contigo en la cocina, sin música, solo con la melodía de tu risa.',
+      'Nuestra casa será refugio: de puertas abiertas para quien amamos y de corazón abierto entre nosotros.',
+      'Ya quiero verte elegir las cortinas y discutir por colores como si fuera asunto de Estado.',
+      'Hoy pienso en nuestro primer aniversario y en todos los que vendrán: cada uno te amaré más.',
+      'Contigo, hasta doblar ropa será bonito si lo hacemos platicando.',
+      'Ya imagino tu cepillo junto al mío en el baño: esos detallitos me harán sonreír cada mañana.',
+      'Hoy sueño con nuestras noches de juegos de mesa, donde siempre te dejo ganar… o casi siempre.',
+      'Nuestra vida de casados será mi aventura favorita, y empieza el 19 de diciembre.',
+      'Ya quiero preparar tu desayuno en la cama en tu primer cumpleaños de casada.',
+      'Hoy pienso en los domingos en la capilla, sentados juntitos, agradeciendo por habernos encontrado.',
+      'Contigo quiero llenar un álbum entero de fotos: cada página, un capítulo de nuestra felicidad.',
+      'Ya imagino nuestro jardín, aunque sea de macetas: todo lo que tocas florece, mi amor.',
+      'Hoy se me llena el pecho pensando en la familia que vamos a formar: será lo más bonito que haré en mi vida.',
+      'Nuestra casa tendrá risas en la cocina, música en la sala y amor en cada cuarto.',
+      'Ya quiero esas pláticas en la cama antes de dormir, contándonos el día con los pies entrelazados.',
+      'Hoy pienso en tu lado de la cama: el mío será siempre el que esté pegadito a ti.',
+      'Contigo, hasta un día de lluvia en casa será plan perfecto: cobija, chocolate y tú.',
+      'Ya imagino nuestras cartas de amor escondidas por la casa, para encontrarnos sonrisas cualquier día.',
+      'Hoy sueño con celebrar contigo cada logro, por chiquito que sea, como si fuera el más grande.',
+      'Nuestra historia de casados la escribiremos con paciencia, con perdón y con muchísimo amor.',
+      'Ya quiero verte dormida a mi lado y pensar: «lo logramos, es mi esposa».',
+      'Hoy pienso en nuestro primer viaje de casados y en todos los caminos que recorreremos agarrados de la mano.',
+      'Contigo, la palabra «hogar» dejó de ser un lugar y se convirtió en tu abrazo.',
+      'Ya imagino a nuestros hijos correteando y a ti mirándolos con esos ojos llenos de amor.',
+      'Hoy sueño con ser el esposo que mereces: presente, tierno, trabajador y locamente enamorado.',
+      'Nuestra casa olerá a pan recién hecho y sonará a tu risa: así lo decreto desde hoy.',
+      'Ya quiero nuestro primer desayuno de Año Nuevo como esposos, brindando con jugo por todo lo que viene.',
+      'Hoy pienso en lo rápido que pasará el tiempo a tu lado, porque la felicidad vuela.',
+      'Contigo quiero coleccionar atardeceres desde nuestro propio balcón, aunque sea chiquito.',
+      'Ya imagino tu mano buscando la mía en la noche, medio dormida: ese será mi momento favorito del día.',
+      'Hoy se me antoja construir contigo una vida que, al mirarla atrás, nos haga decir: «valió cada segundo».',
+      'Nuestra vida juntos será sencilla y extraordinaria a la vez, como tú.',
+      'Ya quiero nuestro primer domingo de ayuno y testimonio como familia: tú, yo y un corazón agradecido.',
+      'Hoy pienso en las llaves de nuestra casa y en la suerte de abrir esa puerta contigo cada día.',
+      'Contigo, hasta pagar cuentas será llevadero, porque lo haremos como equipo, riéndonos de la vida adulta.',
+      'Ya imagino nuestro tendedero con ropita de los dos y, un día, ropita chiquita también.',
+      'Hoy declaro que nuestro hogar será conocido por una cosa: por cuánto nos amamos.',
+      'Si fueras una estación, serías primavera: todo florece cuando llegas tú.',
+      'Hoy el viento trae tu nombre, o quizá es mi corazón que no deja de repetirlo.',
+      'Eres como el primer rayo de sol después de la lluvia: llegas y todo huele a nuevo.',
+      'Hoy conté las estrellas que alcanzo a ver y me faltaron para contar las razones de mi amor por ti.',
+      'Tu amor es mi clima perfecto: ni frío ni calor, solo esa tibieza de estar en casa.',
+      'Eres la luna de mis noches: sin ti, todo sería más oscuro.',
+      'Hoy, si llueve, piensa que hasta el cielo está feliz y lo demuestra regando flores para ti.',
+      'Tu sonrisa compite con el amanecer, y te juro que a veces le gana.',
+      'Eres mi estación favorita del año: la que dura para siempre y se llama «contigo».',
+      'Hoy el mar de Veracruz tiene celos: tus ojos brillan más que sus olas al sol.',
+      'Como la marea, mi amor por ti siempre vuelve a ti, una y otra vez.',
+      'Eres el arcoíris de mis días: apareces después de cualquier tormenta y pintas todo de colores.',
+      'Hoy las flores de los jardines se inclinaron un poquito: pasó la más bonita de todas, tú.',
+      'Tu risa suena mejor que el canto de los pájaros en la mañana, y eso que ellos ensayan diario.',
+      'Eres mi brisa en día caluroso: llegas y todo se siente mejor.',
+      'Hoy el cielo amaneció despejado, como mi mente cuando pienso en ti: sin una sola nube.',
+      'Como el río que siempre llega al mar, todo en mí siempre llega a ti.',
+      'Eres la semilla de todas mis alegrías: donde estás tú, florece mi vida.',
+      'Hoy te comparo con el atardecer y me quedo corto: tú eres más bonita y duras para siempre.',
+      'Tu amor me calienta más que el chocolate en diciembre y me alegra más que las luces del árbol.',
+      'Eres mi nieve en Navidad y mi sol en verano: lo mejor de cada temporada.',
+      'Hoy los árboles susurran tu nombre… bueno, quizá soy yo, pero suena igual de bonito.',
+      'Como la tierra necesita la lluvia, así necesito yo tus abrazos: seguido y con ganas.',
+      'Eres el faro que me guía cuando me siento perdido: tu luz siempre me trae de vuelta.',
+      'Hoy pienso en la arena y el mar: millones de granitos, millones de olas, y ni así sumo lo que te amo.',
+      'Tu corazón es un jardín donde siempre quiero quedarme a vivir.',
+      'Eres mi estrella fugaz que se quedó: pedí un deseo y te convertiste en mi realidad.',
+      'Hoy el amanecer se tardó un poquito: estaba esperando a que tú despertaras para brillar completo.',
+      'Como las olas escriben en la arena, tu amor escribe en mi corazón todos los días.',
+      'Eres la flor que no se marchita en mi vida: cada día te veo más hermosa.',
+      'Hoy, si ves una mariposa, piensa que va contando por ahí lo bonita que es nuestra historia.',
+      'Tu amor es mi estación de tren favorita: siempre quiero llegar a ti.',
+      'Eres mi luna llena: completa, luminosa y dueña de todas mis noches.',
+      'Hoy el viento despeinó los árboles; tú me despeinas el corazón con solo sonreír.',
+      'Como el sol no se cansa de salir, yo no me canso de amarte: es mi naturaleza.',
+      'Eres el rocío de mis mañanas: frescura pura para empezar el día.',
+      'Hoy las nubes tienen formas de corazón, o será que ya todo me recuerda a ti.',
+      'Tu abrazo es mi refugio de invierno y mi sombra de verano: sirve para todo el año.',
+      'Eres mi norte, mi sur y todos mis puntos cardinales: todo camino mío lleva tu nombre.',
+      'Hoy conté pétalos de una flor diciendo «me ama» en cada uno: salieron todos que sí.',
+      'Como la primavera no pide permiso para florecer, tu alegría tampoco: llega y llena todo.',
+      'Eres la melodía de la lluvia cuando cae suave: tranquila, bonita y necesaria.',
+      'Hoy el sol salió más temprano nomás para verte un ratito más.',
+      'Tu amor es mi gravedad: sin él, andaría flotando sin rumbo.',
+      'Eres mi playa favorita: paz, belleza y ganas de quedarme para siempre.',
+      'Hoy las estrellas parpadean de envidia: ninguna brilla como tú cuando sonríes.',
+      'Como el farol alumbra la calle, tu amor alumbra mis decisiones: contigo todo se ve claro.',
+      'Eres el perfume de mi vida: no se ve, pero se siente en todo lo que hago.',
+      'Hoy, si el día se pone frío, acuérdate de mi abrazo: es cobija talla única, hecha a tu medida.',
+      'Tu voz es mi canción de cuna y mi himno de batalla: me calma y me anima a la vez.',
+      'Eres mi eclipse favorito: cuando apareces, todo lo demás deja de importar.',
+      'Hoy el jardín de mi corazón amaneció florecido: es que soñé contigo.',
+      'Como el río busca el mar, mi corazón te busca a ti en cada cosa que hace.',
+      'Eres mi cometa: llegaste del cielo, traes cola de colores y me elevas el corazón.',
+      'Hoy la luna está celosa de tu luz; dile que no se preocupe, que tú iluminas solo mi mundo.',
+      'Tu amor es mi estación permanente: en mi corazón siempre es temporada de Naomi.',
+      'Hoy quiero ser el motivo de una de tus sonrisas; con eso, mi día ya valió la pena.',
+      'Eres la dueña de mis planes, de mis sueños y de mi corazón completo.',
+      'Hoy te elijo otra vez, como te elijo todos los días desde que te conocí.',
+      'Si el amor fuera un examen, contigo sacaría diez… porque estudiarte es mi materia favorita.',
+      'Eres mi «érase una vez» y también mi «vivieron felices para siempre».',
+      'Hoy pienso en tu nombre y se me acomoda el corazón: Naomi, mi paz.',
+      'Eres la carta que nunca me canso de leer: cada día descubro algo nuevo en ti.',
+      'Hoy, si pudiera teletransportarme, aparecería justo a tu lado con un abrazo listo.',
+      'Eres mi lugar de vacaciones permanente: contigo descanso el alma.',
+      'Hoy celebro tu existencia con la misma emoción de un niño en su cumpleaños: con todo el corazón.',
+      'Eres la mejor parte de mis días, incluso de los días malos.',
+      'Hoy te mando este pensamiento envuelto en papel de beso: ábrelo con una sonrisa.',
+      'Eres mi contraseña favorita: con tu nombre se abre todo lo bueno de mi vida.',
+      'Hoy quiero que sepas que presumirte no es presumir: es contar la verdad.',
+      'Eres el «sí» más bonito que he dicho, y el 19 de diciembre lo diré frente a todos.',
+      'Hoy mi corazón hizo una lista de agradecimientos y tu nombre ocupó todas las líneas.',
+      'Eres mi brújula, mi mapa y mi destino: todo en ti apunta a felicidad.',
+      'Hoy, si el mundo te pide prisa, tú ve a tu paso: yo camino contigo, sin apurarte nunca.',
+      'Eres la respuesta a mi «¿qué más puedo pedir?»: nada, ya te tengo a ti.',
+      'Hoy te quiero con la misma fuerza de ayer, pero un poquito más, porque así crece esto cada día.',
+      'Eres mi canción en repetición: la escucho mil veces y cada vez me gusta más.',
+      'Hoy piensa en algo bonito que quieras hacer y dime: lo ponemos primero en nuestra lista de casados.',
+      'Eres mi persona favorita en todos los universos posibles; en este tengo la suerte de casarme contigo.',
+      'Hoy mi amor por ti no cabe en un pensamiento, pero aquí va el intento: te amo infinito.',
+      'Eres la dueña de mis «algún día»: algún día en nuestra casa, algún día con nuestros hijos, algún día viejitos.',
+      'Hoy quiero que te rías de algo tonto, y si no encuentras de qué, acuérdate de mis chistes malos.',
+      'Eres mi tesoro sin mapa: te encontré sin buscar tesoros y resultaste el más valioso.',
+      'Hoy te pienso en presente y en futuro: mi amor de hoy, mi esposa de siempre.',
+      'Eres la página que marco en mi libro favorito: la que releo cuando necesito sonreír.',
+      'Hoy, si pudiera darte el cielo, te lo daría envuelto; mientras tanto, te doy mi corazón, que es más mío para dar.',
+      'Eres mi «todo va a estar bien» dicho en persona.',
+      'Hoy celebro que tu corazón me eligió entre todo el mundo: qué suerte la mía.',
+      'Eres la melodía que quiero de fondo en la película de mi vida.',
+      'Hoy te abrazo en pensamiento, te beso en deseo y te amo en serio, como todos los días.',
+      'Eres mi motivo para madrugar contento y para soñar bonito en la noche.',
+      'Hoy quiero que el día te regale algo chiquito y bonito, como tú me regalas tu amor a diario.',
+      'Eres la luz de mi casa, aunque la casa todavía sea un sueño: ya alumbras desde ahora.',
+      'Hoy mi corazón late en clave: Na-o-mi, Na-o-mi… es su ritmo favorito.',
+      'Eres mi mejor amiga, mi novia, mi futura esposa y mi amor eterno: todo en una, qué bendición.',
+      'Hoy, si te sientes lejos de mí, toca tu corazón: ahí vivo yo, cerquita de ti.',
+      'Eres la promesa que sí se cumple: la de un amor que crece y no se acaba.',
+      'Hoy pienso en todo lo que hemos vivido y sonrío: y lo mejor todavía no llega.',
+      'Eres mi día festivo personal: contigo cualquier fecha es celebración.',
+      'Hoy quiero ser tu refugio como tú eres el mío: turnémonos para cuidarnos toda la vida.',
+      'Eres la firma al final de todas mis cartas: con amor, para siempre, tuyo.',
+      'Hoy te amo en voz alta, en silencio, en pensamiento y en oración: en todos los formatos.',
+      'Eres mi lugar en el mundo, mi gente favorita y mi hogar con patas: donde estés tú, ahí quiero estar.',
+      'Hoy, si el día trae prisa, regálate un minuto para respirar y acordarte de cuánto te amo.',
+      'Eres la dueña de mi corazón desde antes de saber que era tuyo.',
+      'Hoy mi pensamiento es cortito pero infinito: gracias por ser tú, mi amor.',
+      'Eres mi sueño cumplido y mi sueño por cumplir: cumplido al tenerte, por cumplir al casarme contigo.',
+      'Hoy te quiero más que ayer, y eso que ayer pensé que ya no se podía más.',
+      'Eres mi para siempre favorito: de todos los «para siempre» que existen, el nuestro es el más bonito.',
+      'Hoy, mañana y cada día del año: eres y serás el amor de mi vida, Naomi. Este pensamiento es el último de la lista, pero mi amor por ti no tiene último día.'
     ];
     var thoughtDate = document.getElementById('thoughtDate');
     var thoughtText = document.getElementById('thoughtText');
@@ -4698,7 +5094,8 @@
         var fecha = now.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
         thoughtDate.textContent = 'Hoy es ' + fecha;
       }
-      thoughtText.textContent = THOUGHTS[(now.getDate() - 1) % THOUGHTS.length];
+      var dayOfYear = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(now.getFullYear(), 0, 0)) / 86400000);
+      thoughtText.textContent = THOUGHTS[(dayOfYear - 1) % THOUGHTS.length];
     }
 
     // --- Adivina el lugar ---
@@ -5481,6 +5878,28 @@
     if(florCount){
       florCount.textContent = 'Visitas tuyas a esta página: ' + florVisits + (florVisits === 1 ? ' ♥' : ' ♥');
     }
+
+    // --- Contador de visitas (página principal): cuenta cada entrada y se guarda en el dispositivo ---
+    var VISIT_KEY = 'visitas-de-naomi';
+    var visitCount = 0;
+    var visitLoaded = false;
+    try{
+      var savedVisits = window.localStorage.getItem(VISIT_KEY);
+      if(savedVisits === null){
+        visitCount = parseInt(window.localStorage.getItem(FLOR_KEY), 10) || 0;
+      } else {
+        visitCount = parseInt(savedVisits, 10) || 0;
+      }
+      visitLoaded = true;
+    }catch(e){ visitCount = florVisits; }
+    if(visitLoaded){
+      visitCount++;
+      try{ window.localStorage.setItem(VISIT_KEY, String(visitCount)); }catch(e){}
+    }
+    var visitCountNum = document.getElementById('visitCountNum');
+    var visitCountWord = document.getElementById('visitCountWord');
+    if(visitCountNum) visitCountNum.textContent = visitCount;
+    if(visitCountWord) visitCountWord.textContent = visitCount === 1 ? 'vez' : 'veces';
   })();
 </script>
 <script>

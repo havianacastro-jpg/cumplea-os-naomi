@@ -785,12 +785,18 @@
   .baby-ask-btn:hover{ opacity:.88 }
   [data-baby-ask-btn][hidden]{ display:none }
   .baby-upload-box{ margin-top:14px }
-  [data-baby-upload][hidden], [data-baby-done][hidden]{ display:none }
+  [data-baby-photo-wait][hidden], [data-baby-done][hidden]{ display:none }
   .baby-upload-label{ display:inline-block; margin-top:12px; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; color:var(--rose-deep); background:var(--rose-pale); border:2px dashed var(--gold); border-radius:999px; padding:11px 22px; cursor:pointer }
   .baby-photo{ display:block; width:100%; max-width:340px; margin:4px auto 14px; border-radius:var(--radius-md); border:3px solid var(--gold) }
   .baby-photo[hidden]{ display:none }
   .capsule-letter .baby-photo{ max-width:420px; margin:6px auto 18px }
   .baby-open-note{ font-weight:600; color:var(--rose-deep) !important; margin-bottom:14px !important }
+  .baby-confirm-box{ margin-top:14px }
+  [data-baby-confirm][hidden], [data-baby-wait][hidden]{ display:none }
+  .baby-confirm-btns{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px }
+  .baby-no-btn{ background:transparent; color:var(--rose-deep); border:2px solid var(--rose-deep) }
+  .baby-wait-note{ margin-top:14px; font-weight:600; color:var(--ink-soft) }
+  .baby-step-done{ font-weight:700; color:var(--rose-deep) }
 
   /* Mapa del tesoro */
   .treasure-progress{ display:flex; gap:8px; justify-content:center; margin-bottom:18px; color:var(--rose-light); font-size:1.15rem }
@@ -2444,17 +2450,28 @@
           <div class="capsule-sealed">
             <span class="capsule-lock" aria-hidden="true" data-baby-lock="nimrod">🔒</span>
             <h5>Para Nimrod Coriantumr Nabucodonosor Viana Carbajal</h5>
-            <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestro hijo pueda leer, con sus propios ojitos, todo el amor con el que ya lo esperamos.</p>
+            <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestro hijo pueda leer, con sus propios ojitos, todo el amor con el que ya lo esperamos. Para abrirla hacen falta dos cosas: confirmar que ya son papás y que papá ya haya puesto la foto de ustedes con el bebé en la página; sin una de las dos, el candado no se abre.</p>
             <div class="baby-ask">
               <button class="baby-ask-btn" type="button" data-baby-ask-btn="nimrod">¿Ya son papás?</button>
-              <div class="baby-upload-box" data-baby-upload="nimrod" hidden>
-                <p>¡Qué alegría, mi amor! Si ya son papás, suban una foto de ustedes con su bebé y el candado de esta carta se abrirá para que puedan leerla juntitos.</p>
-                <label class="baby-upload-label" for="babyPhotoNimrod">Subir la foto con el bebé ♥</label>
-                <input type="file" id="babyPhotoNimrod" accept="image/*" data-baby-file="nimrod" hidden>
+              <div class="baby-confirm-box" data-baby-confirm="nimrod" hidden>
+                <p>Antes de abrir el candado, confírmame esto, mi amor: ¿ya eres mamá? ¿Ya son papás de Nimrod?</p>
+                <p>Para abrir esta carta hacen falta <strong>las dos cosas</strong>: tu confirmación <strong>y</strong> que la foto de ustedes con el bebé ya esté en la página. Sin la foto no se abre, aunque confirmes; y sin confirmar tampoco se abre, aunque la foto ya esté.</p>
+                <div class="baby-confirm-btns">
+                  <button class="baby-ask-btn" type="button" data-baby-yes="nimrod">Sí, ya somos papás ♥</button>
+                  <button class="baby-ask-btn baby-no-btn" type="button" data-baby-no="nimrod">Todavía no</button>
+                </div>
+              </div>
+              <p class="baby-wait-note" data-baby-wait="nimrod" hidden>Está bien, mi amor, no hay prisa. Todo llega a su tiempo, cuando Dios quiera, y ese momento tan soñado va a llegar: lo esperamos juntitos, con paciencia, con fe y con mucho amor. Esta carta seguirá aquí sellada, guardadita, hasta que seamos papás y papá ponga aquí la foto con el bebé. Te amo. ♥</p>
+              <div class="baby-upload-box" data-baby-photo-wait="nimrod" hidden>
+                <p class="baby-step-done">¡Sí! ¡Ya son papás, mi amor! ♥</p>
+                <p>¡No sabes la felicidad que me da leer esto! Después de tanto soñarlo y pedirlo en oración, nuestro Nimrod ya está aquí. Gracias, Padre Celestial, y gracias a ti, mi vida, por este regalo tan grande. ♥</p>
+                <p>Solo falta un pasito para abrir esta carta, mi amor: la foto. No se sube desde aquí; la pone papá en la página, como todas nuestras fotos, para que quede fija y la puedan ver en todos lados. Sigue estos pasos con calma:</p>
+                <p>1. Guarda la foto de ustedes con el bebé en formato <strong>JPG</strong>.<br>2. Ponle el nombre exacto <strong>bebe-nimrod.jpg</strong>.<br>3. Dile a papá que la suba al repo desde VS Code, a la carpeta <strong>imagenes/</strong>, para que quede guardada como <strong>imagenes/bebe-nimrod.jpg</strong>.<br>4. En cuanto la foto esté en el repo, este candado se abre solito, la foto se muestra aquí y podrás leer la carta. ♥</p>
+                <p>Ten paciencia, mi amor: papá subirá la foto pronto, y esta carta los estará esperando. ♥</p>
               </div>
               <div data-baby-done="nimrod" hidden>
                 <img class="baby-photo" data-baby-img="nimrod" alt="Foto de Hagot y Naomi con su bebé" hidden>
-                <p class="baby-open-note">¡El candado se abrió, mi amor! Su foto quedó guardada aquí, en la carta de Nimrod. ♥</p>
+                <p class="baby-open-note">¡El candado se abrió, mi amor! ¡Ya somos papás! La foto de ustedes con su bebé ya está aquí, en la carta de Nimrod, fija en la página para verla en todos lados. ♥</p>
                 <button class="baby-ask-btn" type="button" data-baby-read="nimrod">Leer la carta de Nimrod ♥</button>
               </div>
             </div>
@@ -2462,17 +2479,28 @@
           <div class="capsule-sealed">
             <span class="capsule-lock" aria-hidden="true" data-baby-lock="liahona">🔒</span>
             <h5>Para Liahona Nazaret Viana Carbajal</h5>
-            <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestra hija pueda leer, con sus propios ojitos, todo el amor con el que ya la esperamos.</p>
+            <p>Esta carta está sellada con candado, mi amor. Se abrirá cuando seamos papás y nuestra hija pueda leer, con sus propios ojitos, todo el amor con el que ya la esperamos. Para abrirla hacen falta dos cosas: confirmar que ya son papás y que papá ya haya puesto la foto de ustedes con el bebé en la página; sin una de las dos, el candado no se abre.</p>
             <div class="baby-ask">
               <button class="baby-ask-btn" type="button" data-baby-ask-btn="liahona">¿Ya son papás?</button>
-              <div class="baby-upload-box" data-baby-upload="liahona" hidden>
-                <p>¡Qué alegría, mi amor! Si ya son papás, suban una foto de ustedes con su bebé y el candado de esta carta se abrirá para que puedan leerla juntitos.</p>
-                <label class="baby-upload-label" for="babyPhotoLiahona">Subir la foto con el bebé ♥</label>
-                <input type="file" id="babyPhotoLiahona" accept="image/*" data-baby-file="liahona" hidden>
+              <div class="baby-confirm-box" data-baby-confirm="liahona" hidden>
+                <p>Antes de abrir el candado, confírmame esto, mi amor: ¿ya eres mamá? ¿Ya son papás de Liahona?</p>
+                <p>Para abrir esta carta hacen falta <strong>las dos cosas</strong>: tu confirmación <strong>y</strong> que la foto de ustedes con el bebé ya esté en la página. Sin la foto no se abre, aunque confirmes; y sin confirmar tampoco se abre, aunque la foto ya esté.</p>
+                <div class="baby-confirm-btns">
+                  <button class="baby-ask-btn" type="button" data-baby-yes="liahona">Sí, ya somos papás ♥</button>
+                  <button class="baby-ask-btn baby-no-btn" type="button" data-baby-no="liahona">Todavía no</button>
+                </div>
+              </div>
+              <p class="baby-wait-note" data-baby-wait="liahona" hidden>Está bien, mi amor, no hay prisa. Todo llega a su tiempo, cuando Dios quiera, y ese momento tan soñado va a llegar: lo esperamos juntitos, con paciencia, con fe y con mucho amor. Esta carta seguirá aquí sellada, guardadita, hasta que seamos papás y papá ponga aquí la foto con el bebé. Te amo. ♥</p>
+              <div class="baby-upload-box" data-baby-photo-wait="liahona" hidden>
+                <p class="baby-step-done">¡Sí! ¡Ya son papás, mi amor! ♥</p>
+                <p>¡No sabes la felicidad que me da leer esto! Después de tanto soñarlo y pedirlo en oración, nuestra Liahona ya está aquí. Gracias, Padre Celestial, y gracias a ti, mi vida, por este regalo tan grande. ♥</p>
+                <p>Solo falta un pasito para abrir esta carta, mi amor: la foto. No se sube desde aquí; la pone papá en la página, como todas nuestras fotos, para que quede fija y la puedan ver en todos lados. Sigue estos pasos con calma:</p>
+                <p>1. Guarda la foto de ustedes con el bebé en formato <strong>JPG</strong>.<br>2. Ponle el nombre exacto <strong>bebe-liahona.jpg</strong>.<br>3. Dile a papá que la suba al repo desde VS Code, a la carpeta <strong>imagenes/</strong>, para que quede guardada como <strong>imagenes/bebe-liahona.jpg</strong>.<br>4. En cuanto la foto esté en el repo, este candado se abre solito, la foto se muestra aquí y podrás leer la carta. ♥</p>
+                <p>Ten paciencia, mi amor: papá subirá la foto pronto, y esta carta los estará esperando. ♥</p>
               </div>
               <div data-baby-done="liahona" hidden>
                 <img class="baby-photo" data-baby-img="liahona" alt="Foto de Hagot y Naomi con su bebé" hidden>
-                <p class="baby-open-note">¡El candado se abrió, mi amor! Su foto quedó guardada aquí, en la carta de Liahona. ♥</p>
+                <p class="baby-open-note">¡El candado se abrió, mi amor! ¡Ya somos papás! La foto de ustedes con su bebé ya está aquí, en la carta de Liahona, fija en la página para verla en todos lados. ♥</p>
                 <button class="baby-ask-btn" type="button" data-baby-read="liahona">Leer la carta de Liahona ♥</button>
               </div>
             </div>
@@ -2481,7 +2509,7 @@
         <article class="letter capsule-letter" id="capsuleLetterNimrod" hidden>
           <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
           <p class="capsule-child-name">Para Nimrod Coriantumr Nabucodonosor Viana Carbajal</p>
-          <img class="baby-photo" data-baby-img="nimrod" alt="Foto de Hagot y Naomi con su bebé, la que subieron al abrir esta carta" hidden>
+          <img class="baby-photo" data-baby-img="nimrod" alt="Foto de Hagot y Naomi con su bebé, la que papá puso en la página al abrir esta carta" hidden>
           <p>Mi querido Nimrod:</p>
           <p>Te escribo esta carta mucho antes de conocerte, cuando todavía eres un sueño que tu mamá y yo guardamos en el corazón. La dejé dentro de esta cápsula del tiempo, que sellamos en diciembre de 2026, unos días antes de casarnos, porque ya desde entonces te amábamos y ya te estábamos esperando.</p>
           <p>Tu nombre completo es Nimrod Coriantumr Nabucodonosor Viana Carbajal, y cada parte de él la elegimos con amor y con intención. Queremos que crezcas sabiendo que no llegas a este mundo por casualidad: eres parte del plan de nuestro Padre Celestial, y eres parte de nuestra familia eterna. Tu mamá Naomi y yo soñamos con sellarnos en el templo para ser esposos por tiempo y por toda la eternidad, y oramos para que tú crezcas bajo ese mismo convenio, en un hogar donde Dios siempre esté en el centro, donde se ore, se perdone y se crea en Jesucristo todos los días.</p>
@@ -2493,7 +2521,7 @@
         <article class="letter capsule-letter" id="capsuleLetterLiahona" hidden>
           <span class="capsule-child-tag">♥ Dentro de esta misma cápsula · Para cuando seamos papás</span>
           <p class="capsule-child-name">Para Liahona Nazaret Viana Carbajal</p>
-          <img class="baby-photo" data-baby-img="liahona" alt="Foto de Hagot y Naomi con su bebé, la que subieron al abrir esta carta" hidden>
+          <img class="baby-photo" data-baby-img="liahona" alt="Foto de Hagot y Naomi con su bebé, la que papá puso en la página al abrir esta carta" hidden>
           <p>Mi querida Liahona:</p>
           <p>Te escribo esta carta mucho antes de conocerte, cuando todavía eres un sueño que tu mamá y yo guardamos en el corazón. La dejé dentro de esta cápsula del tiempo, que sellamos en diciembre de 2026, unos días antes de casarnos, porque ya desde entonces te amábamos y ya te estábamos esperando.</p>
           <p>Tu nombre completo es Liahona Nazaret Viana Carbajal, y es un nombre muy especial para nosotros. En el Libro de Mormón, la Liahona fue la guía que el Señor dio a la familia de Lehi para dirigirlos en su camino cuando obedecían y tenían fe. Oramos para que tú siempre permitas que Dios guíe tu vida, mi amor, y para que recuerdes que en nuestro hogar siempre vas a encontrar dirección, luz y amor. Eres parte del plan de nuestro Padre Celestial y parte de nuestra familia eterna: tu mamá Naomi y yo soñamos con un hogar sellado en el templo, por tiempo y por toda la eternidad, donde Jesucristo sea el centro de todo.</p>
@@ -3633,12 +3661,12 @@
 
   <div class="foot-panel">
     <div class="foot-grid">
-      <div class="foot-block" aria-label="Clima en Pachuca, Hidalgo">
-        <span class="foot-label">♥ Nuestro rinconcito · Pachuca, Hidalgo</span>
-        <h3>El clima donde vivimos</h3>
-        <p style="margin:8px 0 4px"><span class="foot-weather-temp">11°C</span><span class="foot-weather-cond">Nublado</span></p>
-        <p>Humedad 88% · Viento del noreste a 8 km/h · Presión 1023 hPa · Salida del sol 6:49 a.m. · Puesta del sol 5:53 p.m.</p>
-        <p>Clima consultado el martes 24 de noviembre de 2026 a las 10:31 p.m. (hora de México). Fuente: <a href="https://weather.com/mx/hidalgo/city/pachuca/today" target="_blank" rel="noopener noreferrer">The Weather Channel</a></p>
+      <div class="foot-block" id="footWeatherBlock" aria-label="Clima en Pachuca, Hidalgo">
+        <span class="foot-label" id="footWeatherLabel">♥ Nuestro rinconcito · Pachuca, Hidalgo</span>
+        <h3 id="footWeatherTitle">El clima donde vivimos</h3>
+        <p style="margin:8px 0 4px"><span class="foot-weather-temp" id="footWeatherTemp">11°C</span><span class="foot-weather-cond" id="footWeatherCond">Nublado</span></p>
+        <p id="footWeatherDetail">Humedad 88% · Viento del noreste a 8 km/h · Presión 1023 hPa · Salida del sol 6:49 a.m. · Puesta del sol 5:53 p.m.</p>
+        <p id="footWeatherSource">Clima consultado el martes 24 de noviembre de 2026 a las 10:31 p.m. (hora de México). Fuente: <a href="https://weather.com/mx/hidalgo/city/pachuca/today" target="_blank" rel="noopener noreferrer">The Weather Channel</a></p>
       </div>
       <div class="foot-block" aria-label="Fecha y hora actuales">
         <span class="foot-label">♥ Aquí y ahora</span>
@@ -3792,6 +3820,68 @@
   }
   updateClock();
   setInterval(updateClock, 1000);
+
+  // Clima en vivo según la ubicación de quien ve la página: se pide permiso de geolocalización y, si se concede, se muestra el clima actual de ese lugar (Open-Meteo, servicio gratuito sin clave). Si no se concede el permiso o algo falla, se queda el clima fijo de Pachuca que ya trae el pie de página.
+  (function(){
+    var tempEl = document.getElementById('footWeatherTemp');
+    if(!tempEl || !navigator.geolocation || !window.fetch) return;
+    var condEl = document.getElementById('footWeatherCond');
+    var detailEl = document.getElementById('footWeatherDetail');
+    var labelEl = document.getElementById('footWeatherLabel');
+    var titleEl = document.getElementById('footWeatherTitle');
+    var sourceEl = document.getElementById('footWeatherSource');
+    var blockEl = document.getElementById('footWeatherBlock');
+    var WMO = { 0:'Despejado', 1:'Casi despejado', 2:'Parcialmente nublado', 3:'Nublado', 45:'Niebla', 48:'Niebla', 51:'Llovizna ligera', 53:'Llovizna', 55:'Llovizna fuerte', 56:'Llovizna helada', 57:'Llovizna helada', 61:'Lluvia ligera', 63:'Lluvia', 65:'Lluvia fuerte', 66:'Lluvia helada', 67:'Lluvia helada', 71:'Nieve ligera', 73:'Nieve', 75:'Nieve fuerte', 77:'Granizo de nieve', 80:'Chubascos ligeros', 81:'Chubascos', 82:'Chubascos fuertes', 85:'Chubascos de nieve', 86:'Chubascos de nieve', 95:'Tormenta', 96:'Tormenta con granizo', 99:'Tormenta con granizo' };
+    var DIRS = ['norte','noreste','este','sureste','sur','suroeste','oeste','noroeste'];
+    function fmtHora(iso){
+      if(!iso) return '';
+      var m = /T(\d{2}):(\d{2})/.exec(iso);
+      if(!m) return '';
+      var h = parseInt(m[1], 10);
+      var suf = h >= 12 ? 'p.m.' : 'a.m.';
+      var h12 = h % 12; if(h12 === 0) h12 = 12;
+      return h12 + ':' + m[2] + ' ' + suf;
+    }
+    function showLive(place, data){
+      try{
+        var cur = data.current || {};
+        var daily = data.daily || {};
+        if(typeof cur.temperature_2m !== 'number') return;
+        tempEl.textContent = Math.round(cur.temperature_2m) + '°C';
+        if(condEl) condEl.textContent = WMO[cur.weather_code] || '—';
+        var parts = [];
+        if(typeof cur.relative_humidity_2m === 'number') parts.push('Humedad ' + Math.round(cur.relative_humidity_2m) + '%');
+        if(typeof cur.wind_speed_10m === 'number'){
+          var dir = (typeof cur.wind_direction_10m === 'number') ? DIRS[Math.round(cur.wind_direction_10m / 45) % 8] : '';
+          parts.push('Viento' + (dir ? ' del ' + dir : '') + ' a ' + Math.round(cur.wind_speed_10m) + ' km/h');
+        }
+        if(typeof cur.surface_pressure === 'number') parts.push('Presión ' + Math.round(cur.surface_pressure) + ' hPa');
+        if(daily.sunrise && daily.sunrise[0]) parts.push('Salida del sol ' + fmtHora(daily.sunrise[0]));
+        if(daily.sunset && daily.sunset[0]) parts.push('Puesta del sol ' + fmtHora(daily.sunset[0]));
+        if(detailEl && parts.length) detailEl.textContent = parts.join(' · ');
+        if(labelEl) labelEl.textContent = '♥ Donde estás ahora · ' + place;
+        if(titleEl) titleEl.textContent = 'El clima donde estás';
+        if(blockEl) blockEl.setAttribute('aria-label', 'Clima en ' + place);
+        if(sourceEl) sourceEl.innerHTML = 'Clima en vivo de donde estás, consultado al abrir la página. Fuente: <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer">Open-Meteo</a>';
+      }catch(e){}
+    }
+    navigator.geolocation.getCurrentPosition(function(pos){
+      var lat = pos.coords.latitude, lon = pos.coords.longitude;
+      var place = 'tu ubicación';
+      var weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure&daily=sunrise,sunset&timezone=auto&forecast_days=1';
+      var placeUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + lon + '&localityLanguage=es';
+      var weatherData = null;
+      var wDone = false, pDone = false;
+      function maybeShow(){ if(wDone && pDone && weatherData) showLive(place, weatherData); }
+      fetch(weatherUrl).then(function(r){ return r.json(); }).then(function(d){ weatherData = d; wDone = true; maybeShow(); }).catch(function(){});
+      fetch(placeUrl).then(function(r){ return r.json(); }).then(function(d){
+        var p = (d && (d.city || d.locality)) || '';
+        var st = (d && d.principalSubdivision) || '';
+        if(p) place = st && st !== p ? p + ', ' + st : p;
+        pDone = true; maybeShow();
+      }).catch(function(){ pDone = true; maybeShow(); });
+    }, function(){ /* Sin permiso de ubicación: se queda el clima fijo de Pachuca. */ }, { timeout: 8000, maximumAge: 600000 });
+  })();
 
   // Música — suena solo cuando Naomi toca un botón (sin autoplay al entrar)
   var musicBtns = [
@@ -4892,74 +4982,100 @@
     if(capsuleLetter) capsuleLetter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   });
 
-  // --- Cartas para Nimrod y Liahona: el candado se abre cuando ya son papás, subiendo una foto con el bebé ---
-  var BABY_PHOTO_KEYS = { nimrod: 'foto-bebe-nimrod-naomi', liahona: 'foto-bebe-liahona-naomi' };
+  // --- Cartas para Nimrod y Liahona: el candado se abre SOLO con los dos requisitos juntos: confirmar en la página que ya son papás Y que la foto del bebé ya esté en la página. La foto NO se sube desde el celular: la pone papá en la página como todas las demás fotos (imagenes/bebe-nimrod.jpg e imagenes/bebe-liahona.jpg), así queda fija para todos los dispositivos. Sin la foto en la página no se abre aunque confirmen; sin confirmar no se abre aunque la foto ya esté. ---
+  var BABY_PHOTO_SRC = { nimrod: 'imagenes/bebe-nimrod.jpg', liahona: 'imagenes/bebe-liahona.jpg' };
+  var BABY_CONFIRM_KEYS = { nimrod: 'confirm-papas-nimrod-naomi', liahona: 'confirm-papas-liahona-naomi' };
   var BABY_LETTERS = { nimrod: document.getElementById('capsuleLetterNimrod'), liahona: document.getElementById('capsuleLetterLiahona') };
-  function setBabyPhoto(kid, src){
+  var babyState = { nimrod: { confirmed: false, photo: false }, liahona: { confirmed: false, photo: false } };
+  function setBabyPhoto(kid){
     var imgs = document.querySelectorAll('[data-baby-img="' + kid + '"]');
-    for(var i = 0; i < imgs.length; i++){ imgs[i].src = src; imgs[i].hidden = false; }
+    for(var i = 0; i < imgs.length; i++){ imgs[i].src = BABY_PHOTO_SRC[kid]; imgs[i].hidden = false; }
   }
-  function unlockBaby(kid, src, showLetter){
+  function unlockBaby(kid, showLetter){
     var askBtn = document.querySelector('[data-baby-ask-btn="' + kid + '"]');
     if(askBtn) askBtn.hidden = true;
-    var box = document.querySelector('[data-baby-upload="' + kid + '"]');
-    if(box) box.hidden = true;
+    var confirmBox = document.querySelector('[data-baby-confirm="' + kid + '"]');
+    if(confirmBox) confirmBox.hidden = true;
+    var waitNote = document.querySelector('[data-baby-wait="' + kid + '"]');
+    if(waitNote) waitNote.hidden = true;
+    var photoWait = document.querySelector('[data-baby-photo-wait="' + kid + '"]');
+    if(photoWait) photoWait.hidden = true;
     var done = document.querySelector('[data-baby-done="' + kid + '"]');
     if(done) done.hidden = false;
     var lock = document.querySelector('[data-baby-lock="' + kid + '"]');
     if(lock) lock.textContent = '♥';
-    if(src) setBabyPhoto(kid, src);
+    if(babyState[kid].photo) setBabyPhoto(kid);
     var letter = BABY_LETTERS[kid];
     if(showLetter && letter){
       letter.hidden = false;
       letter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     }
   }
-  function handleBabyPhoto(kid, file){
-    if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(){
-      var raw = String(reader.result);
-      var img = new Image();
-      img.onload = function(){
-        var maxSide = 1000;
-        var scale = Math.min(1, maxSide / Math.max(img.width, img.height));
-        var canvas = document.createElement('canvas');
-        canvas.width = Math.max(1, Math.round(img.width * scale));
-        canvas.height = Math.max(1, Math.round(img.height * scale));
-        var ctx = canvas.getContext('2d');
-        var dataUrl = raw;
-        if(ctx){
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          try{ dataUrl = canvas.toDataURL('image/jpeg', 0.85); }catch(e){}
-        }
-        try{ window.localStorage.setItem(BABY_PHOTO_KEYS[kid], dataUrl); }catch(e){}
-        unlockBaby(kid, dataUrl, true);
-      };
-      img.onerror = function(){
-        try{ window.localStorage.setItem(BABY_PHOTO_KEYS[kid], raw); }catch(e){}
-        unlockBaby(kid, raw, true);
-      };
-      img.src = raw;
+  function tryUnlockBaby(kid, showLetter){
+    var st = babyState[kid];
+    if(st.confirmed && st.photo){
+      unlockBaby(kid, showLetter);
+      return true;
+    }
+    return false;
+  }
+  function renderBabyLocked(kid){
+    var st = babyState[kid];
+    if(st.confirmed && !st.photo){
+      // Ya confirmaron que son papás, pero la foto todavía no está en la página: se muestra el mensaje de celebración con los pasos para la foto y el candado sigue cerrado.
+      var askBtn = document.querySelector('[data-baby-ask-btn="' + kid + '"]');
+      if(askBtn) askBtn.hidden = true;
+      var photoWait = document.querySelector('[data-baby-photo-wait="' + kid + '"]');
+      if(photoWait) photoWait.hidden = false;
+    }
+    // Si la foto ya está en la página pero falta la confirmación, la foto NO se muestra y la carta sigue sellada: primero hay que confirmar.
+  }
+  function checkBabyPhoto(kid){
+    // La foto solo cuenta si el archivo ya está en la página (en el repo); si todavía no existe, el candado sigue cerrado.
+    var probe = new Image();
+    probe.onload = function(){
+      babyState[kid].photo = true;
+      if(!tryUnlockBaby(kid, false)) renderBabyLocked(kid);
     };
-    reader.readAsDataURL(file);
+    probe.onerror = function(){
+      babyState[kid].photo = false;
+      renderBabyLocked(kid);
+    };
+    probe.src = BABY_PHOTO_SRC[kid];
   }
   ['nimrod', 'liahona'].forEach(function(kid){
-    var savedPhoto = null;
-    try{ savedPhoto = window.localStorage.getItem(BABY_PHOTO_KEYS[kid]); }catch(e){}
-    if(savedPhoto) unlockBaby(kid, savedPhoto, false);
+    var st = babyState[kid];
+    try{ st.confirmed = window.localStorage.getItem(BABY_CONFIRM_KEYS[kid]) === 'si'; }catch(e){}
+    checkBabyPhoto(kid);
     var askBtn = document.querySelector('[data-baby-ask-btn="' + kid + '"]');
+    var confirmBox = document.querySelector('[data-baby-confirm="' + kid + '"]');
+    var waitNote = document.querySelector('[data-baby-wait="' + kid + '"]');
+    var photoWait = document.querySelector('[data-baby-photo-wait="' + kid + '"]');
     if(askBtn) askBtn.addEventListener('click', function(){
-      var box = document.querySelector('[data-baby-upload="' + kid + '"]');
-      if(box) box.hidden = false;
+      // Paso 1: primero se pide la confirmación; la foto todavía no entra en juego.
       askBtn.hidden = true;
+      if(waitNote) waitNote.hidden = true;
+      if(confirmBox) confirmBox.hidden = false;
     });
-    var fileInput = document.querySelector('[data-baby-file="' + kid + '"]');
-    if(fileInput) fileInput.addEventListener('change', function(){
-      if(fileInput.files && fileInput.files[0]) handleBabyPhoto(kid, fileInput.files[0]);
+    var yesBtn = document.querySelector('[data-baby-yes="' + kid + '"]');
+    if(yesBtn) yesBtn.addEventListener('click', function(){
+      st.confirmed = true;
+      try{ window.localStorage.setItem(BABY_CONFIRM_KEYS[kid], 'si'); }catch(e){}
+      if(confirmBox) confirmBox.hidden = true;
+      // Confirmar solo NO basta: si la foto todavía no está en la página, el candado sigue cerrado y se muestra el mensaje con los pasos para la foto.
+      if(!tryUnlockBaby(kid, true)){
+        if(photoWait) photoWait.hidden = false;
+      }
+    });
+    var noBtn = document.querySelector('[data-baby-no="' + kid + '"]');
+    if(noBtn) noBtn.addEventListener('click', function(){
+      if(confirmBox) confirmBox.hidden = true;
+      if(askBtn) askBtn.hidden = false;
+      if(waitNote) waitNote.hidden = false;
     });
     var readBtn = document.querySelector('[data-baby-read="' + kid + '"]');
     if(readBtn) readBtn.addEventListener('click', function(){
+      if(!(st.confirmed && st.photo)) return;
       var letter = BABY_LETTERS[kid];
       if(letter){
         letter.hidden = false;

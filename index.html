@@ -849,6 +849,13 @@
   .faith-quote cite{ display:block; margin-top:12px; font-style:normal; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.92rem; color:var(--rose-deep) }
   .faith-quote .faith-source{ display:block; margin-top:2px; font-size:.82rem; color:var(--ink-soft); font-weight:600 }
 
+  /* ===== Cupones de amor ===== */
+  .coupon-list{ display:grid; gap:12px; max-width:640px; margin:0 auto; text-align:left }
+  .coupon{ background:var(--bg-soft); border:2px dashed var(--gold); border-radius:var(--radius-md); padding:18px 20px }
+  .coupon h4{ font-family:"Playfair Display",serif; color:var(--rose-deep); margin:0 0 6px; font-size:1.15rem; line-height:1.3 }
+  .coupon p{ margin:0; line-height:1.6 }
+  .coupon .coupon-foot{ display:block; margin-top:10px; font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft) }
+
   /* Cuando estés enojada */
   .sorry-heart{
     position:relative; width:min(210px,62vw); height:min(210px,62vw); margin:6px auto 16px; border-radius:50%;
@@ -2372,6 +2379,24 @@
           <span class="game-menu-desc">Un mensajito que te dejé guardado para esos días, mi amor: ábrelo cuando estés enojada conmigo.</span>
           <span class="game-menu-play">Leer ♥</span>
         </button>
+        <button class="game-menu-card" type="button" data-open-game="screenTriste">
+          <span class="game-menu-icon" aria-hidden="true">🌦</span>
+          <span class="game-menu-title">Cuando estés triste</span>
+          <span class="game-menu-desc">Una cartita de consuelo para los días grises, mi amor: léela despacito y siéntete acompañada, sin prisa por sentirte mejor.</span>
+          <span class="game-menu-play">Leer ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenExtranes">
+          <span class="game-menu-icon" aria-hidden="true">💌</span>
+          <span class="game-menu-title">Cuando me extrañes</span>
+          <span class="game-menu-desc">Un mensaje para cuando no esté cerquita de ti, mi cielo: para sacarlo y leerlo cada vez que el corazón me extrañe.</span>
+          <span class="game-menu-play">Leer ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenDormir">
+          <span class="game-menu-icon" aria-hidden="true">😴</span>
+          <span class="game-menu-title">Cuando no puedas dormir</span>
+          <span class="game-menu-desc">Una oración que digo por ti y una cancioncita bajita para arrullarte, mi amor, para que el descanso te encuentre tranquila.</span>
+          <span class="game-menu-play">Escuchar ♥</span>
+        </button>
       </div>
     </div>
 
@@ -3316,6 +3341,24 @@
           <span class="game-menu-desc">Elige una cosita de ti y te digo con un mensajito por qué hoy, justo hoy, es lo que más amo de ti.</span>
           <span class="game-menu-play">Elegir ♥</span>
         </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCupones">
+          <span class="game-menu-icon" aria-hidden="true">🎟</span>
+          <span class="game-menu-title">Cupones de amor</span>
+          <span class="game-menu-desc">Cupones que ya son tuyos, mi amor, para canjearlos conmigo cuando quieras: un masaje, la ropa lavada, el quehacer hecho y otros gustitos fuera de lo común.</span>
+          <span class="game-menu-play">Ver mis cupones ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenBuenasNoches">
+          <span class="game-menu-icon" aria-hidden="true">🌙</span>
+          <span class="game-menu-title">Cartitas de buenas noches</span>
+          <span class="game-menu-desc">Una notita tierna para cada noche de la semana, para leerla ya acostadita, con la luz bajita, antes de cerrar los ojitos.</span>
+          <span class="game-menu-play">Leer la de hoy ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenPoema">
+          <span class="game-menu-icon" aria-hidden="true">🪶</span>
+          <span class="game-menu-title">Un poema para ti</span>
+          <span class="game-menu-desc">Poemas cortitos que te escribí en verso, sin ser poeta de libros: cada uno guarda un pedacito distinto de lo que siento por ti.</span>
+          <span class="game-menu-play">Leer los poemas ♥</span>
+        </button>
       </div>
     </div>
 
@@ -3792,6 +3835,143 @@
       <div class="queamo-msg" id="queAmoMsg" role="status" hidden></div>
     </div>
 
+    <!-- Cupones de amor -->
+    <div class="game-card" id="screenCupones">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cupones de amor 🎟</h3>
+      <p class="game-desc">Estos cupones no se compran ni se ganan, mi amor: ya son tuyos desde ahorita. Guárdalos y canjéalos conmigo cuando quieras; cada uno vale por un gustito de esos que no se venden en ningún lado, de los que solo se me ocurren a mí para consentirte.</p>
+      <div class="coupon-list">
+        <div class="coupon">
+          <h4>🎟 Válido por un masaje completo</h4>
+          <p>De pies a cabeza, con calma y sin mirar el reloj: tú solo acuéstate, cierra los ojitos y déjame consentirte hasta que se te olvide el cansancio del día.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por lavar y doblar toda la ropa</h4>
+          <p>Un día entero de lavandería por mi cuenta: lavo, tiendo, doblo y guardo todo en su lugar. Tú no tocas ni un solo calcetín.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por el quehacer de toda la casa</h4>
+          <p>Barrer, trapear, sacudir y dejar cada rincón oliendo rico, de principio a fin y sin que muevas un dedo. La casa queda como nueva y tú, descansando.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por cocinar lo que se te antoje</h4>
+          <p>Tú pides el menú y yo me meto a la cocina: cocino con cariño, sirvo bonito y hasta lavo los trastes al final. Tu único trabajo es decir «mmm, qué rico».</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por una tarde de mandados</h4>
+          <p>Todas las vueltas y compras del día corren por mi cuenta: tú te quedas en casita descansando y yo regreso con todo resuelto y la lista tachada.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por tu ropa planchada de la semana</h4>
+          <p>Plancho y dejo colgadita y lista tu ropa de toda la semana, para que tus mañanas empiecen ligeras, sin andar buscando qué ponerte.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por una noche sin celular</h4>
+          <p>Apago el teléfono y el mundo se queda afuera de la puerta: mi atención entera es tuya, para escucharte todo lo que quieras contarme, sin interrupciones.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+        <div class="coupon">
+          <h4>🎟 Válido por una siesta bien cuidada</h4>
+          <p>Yo vigilo tu descanso como un guardián: silencio en la casa, tu cobija calientita, la luz bajita y nadie, nadie, te despierta hasta que abras los ojitos solita.</p>
+          <span class="coupon-foot">Sin fecha de vencimiento · Canjeable solo con Hagot</span>
+        </div>
+      </div>
+
+      <h4 class="faith-h">Servir también es una forma de querer</h4>
+      <div class="faith-list">
+        <div class="faith-item">
+          <h5>Mosíah 2:17</h5>
+          <p>«Y he aquí, os digo estas cosas para que aprendáis sabiduría; para que sepáis que cuando os halláis al servicio de vuestros semejantes, solo estáis al servicio de vuestro Dios».</p>
+        </div>
+        <div class="faith-item">
+          <h5>Gálatas 5:13</h5>
+          <p>«Porque vosotros, hermanos, a libertad fuisteis llamados; solamente que no uséis la libertad como ocasión para la carne, sino servíos por amor los unos a los otros».</p>
+        </div>
+      </div>
+      <div class="faith-quotes" style="margin-top:12px">
+        <div class="faith-quote">
+          <blockquote>«Nunca permitamos que un problema por resolver sea más importante que una persona a la que amar».</blockquote>
+          <cite>Presidente Thomas S. Monson</cite>
+          <span class="faith-source">«Encontrar gozo en el trayecto», Conferencia General, octubre de 2008</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartitas de buenas noches -->
+    <div class="game-card" id="screenBuenasNoches">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cartitas de buenas noches 🌙</h3>
+      <p class="game-desc">Para que ningún día termine sin que leas algo mío, te dejé una notita para cada noche de la semana. Léela ya acostadita, con la luz bajita, y duerme sabiendo que alguien piensa en ti incluso cuando sueña.</p>
+      <div class="week-list">
+        <div class="week-day"><h4>Lunes 🌙</h4><p>Hoy empezó la semana y quizá trajo sus prisas. Suéltalas aquí, en tu almohada: mañana será otro día, y en ese día también estaré yo, cerquita de ti.</p></div>
+        <div class="week-day"><h4>Martes 🌙</h4><p>Cierra los ojitos y respira despacio. Todo lo que hoy quedó pendiente puede esperar hasta mañana; lo único urgente esta noche es tu descanso.</p></div>
+        <div class="week-day"><h4>Miércoles 🌙</h4><p>Si el día pesó, déjalo al pie de la cama, como quien se quita los zapatos al llegar. Aquí adentro, bajo las cobijas, todo es suavecito y seguro.</p></div>
+        <div class="week-day"><h4>Jueves 🌙</h4><p>Que la luna te haga compañía por la ventana mientras yo te cuido en pensamiento. Duerme sin prisa, que la noche es larga y es toda tuya.</p></div>
+        <div class="week-day"><h4>Viernes 🌙</h4><p>Terminó la semana, mi cielo. Lo hiciste muy bien, incluso en eso que nadie vio. Ahora descansa: te lo ganaste todito.</p></div>
+        <div class="week-day"><h4>Sábado 🌙</h4><p>Esta noche no manda ningún despertador. Duerme hasta que tu cuerpo solito decida despertar, que yo velo tu sueño desde aquí.</p></div>
+        <div class="week-day"><h4>Domingo 🌙</h4><p>Antes de dormir, quédate con lo bueno de hoy: una risa, una comida rica, un ratito de paz. Mañana juntaremos más momentos así, uno por uno.</p></div>
+      </div>
+
+      <h4 class="faith-h">Para dormir en paz</h4>
+      <div class="faith-list">
+        <div class="faith-item">
+          <h5>Salmos 4:8</h5>
+          <p>«En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado».</p>
+        </div>
+        <div class="faith-item">
+          <h5>Proverbios 3:24</h5>
+          <p>«Cuando te acuestes, no tendrás temor, sino que te acostarás, y tu sueño será grato».</p>
+        </div>
+      </div>
+      <div class="faith-quotes" style="margin-top:12px">
+        <div class="faith-quote">
+          <blockquote>«Sigan amando. Sigan tratando. Sigan confiando. Sigan creyendo. Sigan creciendo. El cielo los está alentando hoy, mañana y para siempre».</blockquote>
+          <cite>Élder Jeffrey R. Holland</cite>
+          <span class="faith-source">«Mañana el Señor hará maravillas entre vosotros», Conferencia General, abril de 2016</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Un poema para ti -->
+    <div class="game-card" id="screenPoema">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Un poema para ti 🪶</h3>
+      <p class="game-desc">No soy poeta de libros, mi amor, pero contigo las palabras me salen en verso sin pedir permiso. Te escribí estos poemas cortitos; léelos despacio, que cada uno guarda un pedacito distinto de lo que siento.</p>
+      <div class="prayer-card">
+        <p class="prayer-lead">Tu nombre en mi boca</p>
+        <p>Dicen que hay palabras que pesan<br>y palabras que vuelan;<br>tu nombre, en mi boca, hace las dos cosas:<br>pesa como promesa que no pienso soltar<br>y vuela como pájaro cada vez que te llamo.</p>
+        <p class="prayer-lead">Lo que cabe en tus manos</p>
+        <p>En tus manos cabe mi calma,<br>cabe mi risa de los días buenos<br>y también mi cansancio de los días largos:<br>todo lo mío, sin forzarlo,<br>encuentra su sitio en ti.</p>
+        <p class="prayer-lead">Si me piden un deseo</p>
+        <p>Si un día me piden un deseo,<br>no pediré oro ni cielos nuevos:<br>pediré tus mañanas junto a las mías,<br>una mesa sencilla<br>y tu voz llamándome a comer.</p>
+      </div>
+
+      <h4 class="faith-h">Hasta Dios canta de amor</h4>
+      <div class="faith-list">
+        <div class="faith-item">
+          <h5>Sofonías 3:17</h5>
+          <p>«Jehová tu Dios está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría, callará de amor, se regocijará sobre ti con cánticos».</p>
+        </div>
+        <div class="faith-item">
+          <h5>Isaías 43:4</h5>
+          <p>«Porque a mis ojos fuiste de gran estima, fuiste honorable, y yo te amé; daré, pues, hombres por ti, y naciones por tu vida».</p>
+        </div>
+      </div>
+      <div class="faith-quotes" style="margin-top:12px">
+        <div class="faith-quote">
+          <blockquote>«La primera gran verdad de toda la eternidad es que Dios nos ama con todo Su corazón, alma, mente y fuerza».</blockquote>
+          <cite>Élder Jeffrey R. Holland</cite>
+          <span class="faith-source">«El primer gran mandamiento», Conferencia General, octubre de 2012</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Cuando estés enojada -->
     <div class="game-card" id="screenEnojada">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
@@ -3876,6 +4056,105 @@
             <p class="game-desc">Cada vez que rompemos el sello, primero escribimos por qué estamos enojados. Aquí quedan guardadas esas respuestas en este dispositivo, con su fecha y quién las escribió, para volver a leerlas cuando queramos.</p>
             <div class="diary-list" id="emergHistoryList" style="margin-top:0"></div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cuando estés triste -->
+    <div class="game-card" id="screenTriste">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cuando estés triste</h3>
+      <p class="game-desc">Si hoy el corazón te pesa y las lágrimas llegaron sin pedir permiso, esta cartita es para ti. Léela despacito, mi amor: estoy aquí, en estas palabras, sentadito junto a ti. ♥</p>
+      <div class="prayer-card">
+        <p>Primero lo primero: está bien estar triste. No tienes que fingir una sonrisa para mí ni para nadie. Los días grises también son parte de ti, y yo no te quiero solo en los días de sol.</p>
+        <p>Llora si necesitas llorar, sin pena y sin explicarme nada. Yo me quedo a tu lado, en silencio si hace falta, sosteniéndote la mano hasta que la nube pase de largo.</p>
+        <p>Y si hoy no encuentras fuerzas, toma prestadas las mías: te las doy todas, sin medida. Apóyate en mí, que para eso estoy: para los días bonitos y para estos también.</p>
+        <p>Esto que sientes va a pasar, mi cielo, aunque ahorita no lo parezca. Hasta la noche más larga termina amaneciendo, y cuando amanezca, aquí voy a estar yo.</p>
+        <p class="prayer-lead">— Tu Hagot, que también se sienta contigo en los días grises ♥</p>
+      </div>
+
+      <h4 class="faith-h">Consuelo que viene de arriba</h4>
+      <div class="faith-list">
+        <div class="faith-item">
+          <h5>Salmos 34:18</h5>
+          <p>«Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu».</p>
+        </div>
+        <div class="faith-item">
+          <h5>2 Corintios 1:3–4</h5>
+          <p>«Bendito sea el Dios y Padre de nuestro Señor Jesucristo, Padre de misericordias y Dios de toda consolación, el cual nos consuela en todas nuestras tribulaciones, para que podamos también nosotros consolar a los que están en cualquier tribulación, por medio de la consolación con que nosotros somos consolados por Dios».</p>
+        </div>
+      </div>
+      <div class="faith-quotes" style="margin-top:12px">
+        <div class="faith-quote">
+          <blockquote>«El gozo que sentimos tiene poco que ver con las circunstancias de nuestra vida, y tiene todo que ver con el enfoque de nuestra vida».</blockquote>
+          <cite>Presidente Russell M. Nelson</cite>
+          <span class="faith-source">«El gozo y la supervivencia espiritual», Conferencia General, octubre de 2016</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cuando me extrañes -->
+    <div class="game-card" id="screenExtranes">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cuando me extrañes</h3>
+      <p class="game-desc">Si un día la distancia se mete entre nosotros —un viaje, el trabajo, lo que sea— y me extrañas, abre esto, mi cielo. Es mi manera de quedarme contigo aunque no esté cerquita. ♥</p>
+      <div class="prayer-card">
+        <p>Cierra los ojos un momento e imagina mi voz diciéndote bajito: ya falta menos. Cada día que pasa sin vernos es un día menos para volver a estar frente a frente.</p>
+        <p>Guarda este mensajito como se guarda una foto en la cartera: para sacarlo cuando el corazón lo pida. Léelo las veces que necesites; estas palabras no se gastan ni se borran.</p>
+        <p>Mientras volvemos a estar juntitos, cuídate por mí: come bien, duerme temprano y ríete de algo cada día. Yo haré lo mismo por ti, esté donde esté.</p>
+        <p>La distancia se mide en kilómetros, pero lo nuestro no se mide con nada. Estaré lejos con los pies, mi cielo, pero de cerquita, muy cerquita, con todo lo demás.</p>
+        <p class="prayer-lead">— Tu Hagot, que cuenta los días para volver a ti ♥</p>
+      </div>
+
+      <h4 class="faith-h">Nunca estamos solos</h4>
+      <div class="faith-list">
+        <div class="faith-item">
+          <h5>Deuteronomio 31:8</h5>
+          <p>«Y Jehová va delante de ti; él estará contigo, no te dejará, ni te desamparará; no temas ni te intimides».</p>
+        </div>
+        <div class="faith-item">
+          <h5>Doctrina y Convenios 24:8</h5>
+          <p>«Sé paciente en las aflicciones, porque tendrás muchas; pero sopórtalas, pues he aquí, yo estoy contigo hasta el fin de tus días».</p>
+        </div>
+      </div>
+      <div class="faith-quotes" style="margin-top:12px">
+        <div class="faith-quote">
+          <blockquote>«El futuro es tan brillante como su fe».</blockquote>
+          <cite>Presidente Thomas S. Monson</cite>
+          <span class="faith-source">«Tengan valor», Conferencia General, abril de 2009</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cuando no puedas dormir -->
+    <div class="game-card" id="screenDormir">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cuando no puedas dormir</h3>
+      <p class="game-desc">Si la noche se te hace larga y el sueño no llega, no pelees con la almohada, mi amor. Aquí te dejé la oración que digo por ti cada noche y una cancioncita bajita, para que el descanso te encuentre tranquila. ☾</p>
+      <div class="prayer-card">
+        <p class="prayer-lead">Mi oración por ti esta noche</p>
+        <p>Padre Celestial, esta noche te pido por ella: aquieta sus pensamientos, uno por uno, como quien apaga las luces de la casa antes de descansar. Quítale de encima el peso del día, cúbrela con Tu paz y deja que duerma profundo, sin sobresaltos, hasta que la mañana la despierte renovada. Gracias por su vida, por su corazón bueno y por permitirme cuidarla también con mis oraciones. En el nombre de Jesucristo. Amén.</p>
+        <p class="prayer-lead">Cancioncita para dormir 🎵</p>
+        <p>Duérmete, mi cielo, duérmete ya,<br>que la luna en la ventana te viene a cuidar.<br>Cierra los ojitos, suelta el pensar,<br>que mañana el solcito nos vuelve a juntar.</p>
+        <p>Duérmete, mi vida, sin miedo a soñar,<br>que en todos tus sueños te voy a esperar.<br>Y si el sueño tarda, vuelve a cantar:<br>esta cancioncita te va a arrullar.</p>
+      </div>
+
+      <h4 class="faith-h">Descanso prometido</h4>
+      <div class="faith-list">
+        <div class="faith-item">
+          <h5>Mateo 11:28</h5>
+          <p>«Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar».</p>
+        </div>
+        <div class="faith-item">
+          <h5>Salmos 127:2</h5>
+          <p>«Por demás es que os levantéis de madrugada, y vayáis tarde a reposar, y que comáis pan de dolores; pues que a su amado dará Dios el sueño».</p>
+        </div>
+      </div>
+      <div class="faith-quotes" style="margin-top:12px">
+        <div class="faith-quote">
+          <blockquote>«La fe en Jesucristo es el mayor poder al que podemos acceder en esta vida».</blockquote>
+          <cite>Presidente Russell M. Nelson</cite>
+          <span class="faith-source">«Cristo ha resucitado; la fe en Él moverá montañas», Conferencia General, abril de 2021</span>
         </div>
       </div>
     </div>
@@ -4506,7 +4785,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
+  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -4524,6 +4803,8 @@
     screenDiaPerfecto: 'screenDetallitos', screenRazones: 'screenDetallitos',
     screenAhorcado: 'screenDetallitos', screenAniversario: 'screenDetallitos',
     screenQueAmo: 'screenDetallitos',
+    screenCupones: 'screenDetallitos', screenBuenasNoches: 'screenDetallitos',
+    screenPoema: 'screenDetallitos',
     screenGames: 'screenMenuJuegos', screenConoces: 'screenGames',
     screenFaith: 'screenMenuHistoria', screenCapsule: 'screenMenuHistoria',
     screenHistoria: 'screenMenuHistoria',
@@ -4534,6 +4815,8 @@
     screenTriviaNavidad: 'screenMenuNavidad', screenDeseosAnio: 'screenMenuNavidad',
     screenNacimiento: 'screenMenuNavidad', screenEscriturasNavidad: 'screenMenuNavidad',
     screenEnojada: 'screenMenuSueltos',
+    screenTriste: 'screenMenuSueltos', screenExtranes: 'screenMenuSueltos',
+    screenDormir: 'screenMenuSueltos',
     screenPlaylist: 'screenMenuJuegos',
     screenMenuJuegos: 'screenMenu', screenMenuHistoria: 'screenMenu',
     screenMenuDetallitos: 'screenMenu', screenMenuNavidad: 'screenMenu',
@@ -8168,7 +8451,11 @@
     screenConversemos: 'screenDetallitos', screenDiaPerfecto: 'screenDetallitos',
     screenRazones: 'screenDetallitos', screenAhorcado: 'screenDetallitos',
     screenAniversario: 'screenDetallitos', screenQueAmo: 'screenDetallitos',
-    screenEnojada: 'screenEnojada', screenHistoria: 'screenHistoria',
+    screenCupones: 'screenDetallitos', screenBuenasNoches: 'screenDetallitos',
+    screenPoema: 'screenDetallitos',
+    screenEnojada: 'screenEnojada', screenTriste: 'screenTriste',
+    screenExtranes: 'screenExtranes', screenDormir: 'screenDormir',
+    screenHistoria: 'screenHistoria',
     screenEnamora: 'screenEnamora',
     screenArbolFamiliar: 'screenArbolFamiliar',
     screenConoces: 'screenGames',

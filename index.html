@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --bg:#FFF7F3;
@@ -84,6 +85,53 @@
   }
 
   .wrap{max-width:980px; margin:0 auto; padding:0 20px; position:relative; z-index:2}
+
+  /* Encabezado fijo con menú */
+  body{ padding-top:60px }
+  section{ scroll-margin-top:72px }
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:80;
+    background:var(--surface); border-bottom:1px solid var(--line);
+    box-shadow:0 8px 24px rgba(158,47,78,.12);
+  }
+  .topbar-inner{
+    max-width:980px; margin:0 auto; height:60px; padding:0 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    position:relative;
+  }
+  .topbar-title{
+    font-family:"Playfair Display",serif; font-weight:700; font-size:1.3rem;
+    color:var(--rose-deep); margin:0; line-height:1.1; white-space:nowrap;
+  }
+  .topbar-title .tb-heart{ color:var(--gold); font-size:1.05rem; margin-right:8px }
+  .menu-btn{
+    flex:0 0 auto; width:48px; height:48px; border-radius:50%;
+    background:var(--rose-pale); border:1.5px solid var(--rose-light);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    cursor:pointer; padding:0;
+  }
+  .menu-btn span{ display:block; width:20px; height:2.5px; border-radius:2px; background:var(--rose-deep) }
+  .menu-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .nav-menu{
+    position:absolute; top:calc(100% + 10px); right:8px; width:min(320px, calc(100vw - 32px));
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    box-shadow:var(--shadow); padding:10px; display:grid; gap:6px; z-index:81;
+  }
+  .nav-menu[hidden]{ display:none }
+  .nav-item{
+    display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+    background:transparent; border:none; border-radius:12px; padding:13px 14px;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; color:var(--ink);
+    cursor:pointer; min-height:52px;
+  }
+  .nav-item:hover{ background:var(--rose-pale) }
+  .nav-item:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .nav-item .nav-icon{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:var(--rose-pale); color:var(--rose-deep);
+    display:grid; place-items:center; font-size:1.05rem;
+  }
+  .nav-item:hover .nav-icon{ background:var(--surface) }
 
   /* HERO */
   .hero{ text-align:center; padding:18px 0 10px; position:relative}
@@ -182,6 +230,28 @@
   .photo-slot span{font-size:.82rem; font-weight:600; color:var(--ink-soft); line-height:1.4}
   .gallery-note{ text-align:center; color:var(--ink-soft); font-size:.95rem; max-width:520px; margin:22px auto 0}
 
+  /* Álbum de Google Photos */
+  .album-card{
+    max-width:720px; margin:0 auto 30px; text-align:center;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow); padding:34px 28px 30px; position:relative; overflow:hidden;
+  }
+  .album-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .album-card .album-heart{ font-size:2.2rem; color:var(--rose); line-height:1; margin-bottom:10px}
+  .album-card h3{ font-family:"Playfair Display",serif; font-size:1.6rem; margin:0 0 8px; line-height:1.25}
+  .album-card p{ color:var(--ink-soft); margin:0 auto 22px; max-width:480px}
+  .album-btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--rose-deep); color:#fff; text-decoration:none;
+    font-weight:700; font-size:1.15rem; padding:17px 38px; border-radius:999px;
+    box-shadow:var(--shadow); min-height:56px;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .album-btn:hover{transform:translateY(-2px)}
+  .album-btn:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+  @media (prefers-color-scheme: dark){ .album-btn{color:#241419} }
+  .album-card .album-hint{ display:block; margin-top:14px; font-size:.88rem; color:var(--ink-soft)}
+
   /* Gratitude list */
   .thanks-list{ max-width:720px; margin:0 auto; display:grid; gap:14px}
   .thanks-item{
@@ -257,6 +327,28 @@
   .date-card .month{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.35rem; color:var(--gold); margin:2px 0 10px}
   .date-card h3{ margin:0 0 6px; font-family:"Playfair Display",serif; font-size:1.25rem}
   .date-card p{ margin:0; color:var(--ink-soft); font-size:.98rem}
+  /* Countdown */
+  .countdowns{ display:grid; gap:18px; max-width:820px; margin:0 auto}
+  @media(min-width:700px){ .countdowns{grid-template-columns:1fr 1fr} }
+  .cd-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow); padding:28px 22px 24px; text-align:center; position:relative; overflow:hidden;
+  }
+  .cd-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .cd-card .cd-tag{ font-size:.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:6px}
+  .cd-card h3{ margin:0 0 2px; font-family:"Playfair Display",serif; font-size:1.45rem; line-height:1.2}
+  .cd-card .cd-date{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.15rem; color:var(--rose); margin:0 0 18px}
+  .cd-timer{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+  .cd-unit{ background:var(--bg-soft); border:1px solid var(--line); border-radius:14px; padding:12px 4px 10px}
+  .cd-unit .cd-num{ display:block; font-family:"Playfair Display",serif; font-weight:800; font-size:clamp(1.55rem,6vw,2.1rem); line-height:1; color:var(--rose-deep); font-variant-numeric:tabular-nums}
+  .cd-unit .cd-label{ display:block; margin-top:6px; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft)}
+  .cd-note{ margin:16px 0 0; color:var(--ink-soft); font-size:.92rem}
+  .cd-arrived{ display:none; background:var(--rose-pale); border:1px dashed var(--rose); border-radius:14px; padding:18px 14px}
+  .cd-arrived .big{ display:block; font-family:"Playfair Display",serif; font-size:1.45rem; color:var(--rose-deep); line-height:1.25; margin-bottom:4px}
+  .cd-arrived p{ margin:0; color:var(--ink-soft); font-size:.95rem}
+  .cd-card.is-today .cd-timer, .cd-card.is-today .cd-note{ display:none}
+  .cd-card.is-today .cd-arrived{ display:block}
+
   .eternity-text{ max-width:720px; margin:30px auto 0}
   .eternity-text p{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.75; margin:0 0 16px}
   .love-quote{
@@ -293,15 +385,413 @@
   }
   @media (prefers-color-scheme: dark){ .video-link.alt{color:var(--rose-deep)} }
 
+  /* Música */
+  .music-grid{ display:grid; gap:18px; max-width:820px; margin:0 auto}
+  @media(min-width:700px){ .music-grid{grid-template-columns:1fr 1fr} }
+  .music-btn{
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
+    width:100%; background:var(--surface); border:1.5px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow); padding:32px 26px 28px; cursor:pointer; color:var(--ink);
+    font-family:"Quicksand",sans-serif; position:relative; overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease, background .18s ease;
+  }
+  .music-btn::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .music-btn:hover{ transform:translateY(-3px); border-color:var(--rose-light)}
+  .music-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px}
+  .music-btn .music-play-icon{
+    width:60px; height:60px; border-radius:50%; background:var(--rose-deep); color:#fff;
+    display:grid; place-items:center; font-size:1.35rem; line-height:1; padding-left:3px;
+    box-shadow:var(--shadow); margin-bottom:8px; flex:0 0 auto;
+  }
+  @media (prefers-color-scheme: dark){ .music-btn .music-play-icon{color:#241419} }
+  .music-btn.is-playing{ background:var(--rose-pale); border-color:var(--rose)}
+  .music-btn.is-playing .music-play-icon{ background:var(--gold); padding-left:0}
+  .music-btn-title{
+    font-family:"Playfair Display",serif; font-weight:700; font-size:1.55rem; line-height:1.25; color:var(--ink);
+  }
+  .music-btn-song{
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.12rem; line-height:1.35; color:var(--rose-deep);
+  }
+  .music-btn-state{ font-size:.85rem; font-weight:700; letter-spacing:.04em; color:var(--ink-soft); margin-top:8px}
+  .music-btn.is-playing .music-btn-state{ color:var(--rose-deep)}
+  .music-player-wrap{
+    max-width:720px; margin:22px auto 0; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:22px 22px 20px; text-align:center;
+  }
+  .music-player-wrap[hidden]{ display:none}
+  .music-now{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:var(--rose-deep); margin:0 0 14px; line-height:1.4}
+  .music-frame{ position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden; background:#000}
+  .music-frame iframe, .music-frame > div{ position:absolute; inset:0; width:100%; height:100%; border:0}
+  .music-stop{
+    margin-top:16px; background:transparent; color:var(--rose-deep); border:1.5px solid var(--rose-deep);
+    border-radius:999px; padding:10px 24px; font-family:"Quicksand",sans-serif; font-weight:700;
+    cursor:pointer; font-size:.95rem; min-height:44px;
+  }
+  .music-stop:focus-visible{ outline:3px solid var(--gold); outline-offset:3px}
+
+  /* Nuestros lugares — mapa */
+  .places-map-card{
+    max-width:820px; margin:0 auto; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:14px; position:relative; overflow:hidden;
+  }
+  .places-map-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)); z-index:5 }
+  .places-map{ width:100%; height:340px; border-radius:16px; overflow:hidden; background:var(--bg-soft) }
+  @media(min-width:700px){ .places-map{height:460px} }
+  .map-fallback img{ width:100%; height:auto; border-radius:16px }
+  .map-notices{ display:inline-block; margin-top:10px; font-size:.8rem; color:var(--ink-soft) }
+  .pin{
+    width:40px; height:40px; display:flex; align-items:flex-start; justify-content:center;
+    padding-top:8px; background:var(--rose-deep); color:#fff;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; line-height:1;
+    clip-path:path("M20 37C9 27.5 3 20.8 3 13.6 3 8 6.9 4 11.6 4 15.2 4 18.3 5.9 20 9 21.7 5.9 24.8 4 28.4 4 33.1 4 37 8 37 13.6 37 20.8 31 27.5 20 37Z");
+    filter:drop-shadow(0 3px 5px rgba(74,35,48,.35)); cursor:pointer;
+  }
+  .pin--on{ background:var(--gold); color:#4A2330 }
+  @media (prefers-color-scheme: dark){ .pin{color:#241419} }
+  .places-list{ list-style:none; margin:26px auto 0; padding:0; max-width:720px; display:grid; gap:12px }
+  @media(min-width:700px){ .places-list{grid-template-columns:1fr 1fr} }
+  .place-row{
+    display:flex; gap:14px; align-items:center;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:14px 18px; cursor:pointer; text-decoration:none; color:inherit;
+    transition:border-color .18s ease, background .18s ease;
+  }
+  .place-open{
+    margin-left:auto; flex:0 0 auto; color:var(--rose); font-weight:700; font-size:1.05rem; line-height:1;
+  }
+  .place-row:hover .place-open{ color:var(--rose-deep) }
+  .place-row:hover{ border-color:var(--rose-light) }
+  .place-row:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .place-row.map-selected{ background:var(--rose-pale); border-color:var(--rose) }
+  .place-num{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:var(--rose-pale); color:var(--rose-deep);
+    display:grid; place-items:center; font-weight:700; font-size:.95rem;
+  }
+  .place-row.map-selected .place-num{ background:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .place-row.map-selected .place-num{color:#241419} }
+  .place-row h3{ margin:0; font-family:"Playfair Display",serif; font-size:1.08rem; line-height:1.25 }
+  .place-row p{ margin:2px 0 0; color:var(--ink-soft); font-size:.9rem }
+  .places-more{
+    text-align:center; margin:28px auto 0; font-family:"Cormorant Garamond",serif; font-style:italic;
+    font-size:1.5rem; color:var(--rose-deep);
+  }
+
+  /* Juegos */
+  .game-card{
+    max-width:720px; margin:0 auto 26px; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:30px 24px 28px;
+    position:relative; overflow:hidden; text-align:center;
+  }
+  .game-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .game-title{ font-family:"Playfair Display",serif; font-size:1.55rem; margin:0 0 6px; line-height:1.2}
+  .game-desc{ color:var(--ink-soft); margin:0 auto 20px; max-width:520px}
+  .game-start-btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--rose-deep); color:#fff; border:none; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1.12rem;
+    padding:16px 34px; border-radius:999px; box-shadow:var(--shadow); min-height:56px;
+    transition:transform .18s ease;
+  }
+  .game-start-btn:hover{ transform:translateY(-2px) }
+  .game-start-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  @media (prefers-color-scheme: dark){ .game-start-btn{color:#241419} }
+  .game-final{
+    font-family:"Cormorant Garamond",serif; font-size:1.35rem; line-height:1.55; margin:0 auto 20px; max-width:520px;
+  }
+  .game-hud{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:16px }
+  .hud-item{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:999px;
+    padding:8px 18px; font-size:.92rem; font-weight:600; color:var(--ink-soft);
+  }
+  .hud-item strong{ font-family:"Playfair Display",serif; font-size:1.15rem; color:var(--rose-deep); margin-left:5px; font-variant-numeric:tabular-nums }
+
+  /* Atrapa corazones */
+  .catch-area{
+    position:relative; height:380px; border-radius:var(--radius-md); overflow:hidden;
+    background:linear-gradient(180deg, var(--bg-soft), var(--rose-pale));
+    border:1px solid var(--line);
+  }
+  @media(max-width:560px){ .catch-area{height:330px} }
+  .catch-area.is-playing{ touch-action:none }
+  .catch-heart{
+    position:absolute; top:0; left:0; background:none; border:none; padding:10px; margin:-10px;
+    cursor:pointer; line-height:1; user-select:none; -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent; touch-action:manipulation; z-index:2;
+    text-shadow:0 2px 8px rgba(158,47,78,.25);
+  }
+  .catch-heart.is-golden{ text-shadow:0 2px 12px rgba(185,138,47,.55) }
+  .catch-pop{
+    position:absolute; z-index:3; pointer-events:none; transform:translate(-50%,-50%);
+    font-family:"Playfair Display",serif; font-weight:800; font-size:1.25rem; color:var(--gold);
+    animation:catchPop .75s ease-out forwards;
+  }
+  @keyframes catchPop{ 0%{opacity:0; margin-top:0} 20%{opacity:1} 100%{opacity:0; margin-top:-44px} }
+  .catch-overlay{
+    position:absolute; inset:0; z-index:5; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:14px; padding:24px; text-align:center;
+    background:var(--surface); background:color-mix(in srgb, var(--surface) 88%, transparent);
+  }
+  .catch-overlay[hidden]{ display:none }
+  .catch-overlay p{ margin:0; color:var(--ink-soft); max-width:420px }
+  .catch-final{ font-family:"Playfair Display",serif; font-size:1.5rem; line-height:1.3; color:var(--rose-deep); margin:0 }
+  .catch-final-sub{ display:block; margin-top:10px; font-family:"Cormorant Garamond",serif; font-size:1.2rem; color:var(--ink); line-height:1.5 }
+
+  /* Quiz */
+  .quiz-meta{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:.92rem; font-weight:600; color:var(--ink-soft); margin-bottom:6px }
+  .quiz-meta strong{ color:var(--rose-deep) }
+  .quiz-q{ font-family:"Playfair Display",serif; font-size:1.3rem; line-height:1.35; margin:8px 0 4px; text-align:left }
+  .quiz-options{ display:grid; gap:10px; margin-top:14px; text-align:left }
+  .quiz-opt{
+    background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px;
+    padding:14px 16px; font-family:"Quicksand",sans-serif; font-weight:600; font-size:1rem;
+    color:var(--ink); cursor:pointer; text-align:left; width:100%;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .quiz-opt:hover:not(:disabled){ border-color:var(--rose-light) }
+  .quiz-opt:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .quiz-opt:disabled{ cursor:default; opacity:.7 }
+  .quiz-opt.is-correct{ background:var(--gold-soft); border-color:var(--gold); opacity:1 }
+  .quiz-opt.is-wrong{ background:var(--rose-pale); border-color:var(--rose); opacity:1 }
+  .quiz-feedback{ min-height:1.6em; margin:14px 0 4px; font-weight:700; color:var(--rose-deep) }
+  .game-next-btn{
+    margin-top:10px; background:var(--rose-deep); color:#fff; border:none; border-radius:999px;
+    padding:13px 28px; font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; cursor:pointer; min-height:48px;
+  }
+  @media (prefers-color-scheme: dark){ .game-next-btn{color:#241419} }
+  .game-next-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  .game-next-btn[hidden]{ display:none }
+
+  /* Memorama */
+  .memo-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; max-width:600px; margin:0 auto }
+  @media(max-width:560px){ .memo-grid{gap:7px} }
+  .memo-card{
+    position:relative; aspect-ratio:1/1; width:100%; padding:0; border:none; background:none;
+    cursor:pointer; perspective:600px; -webkit-tap-highlight-color:transparent; border-radius:12px;
+  }
+  .memo-card:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .memo-inner{
+    display:block; position:absolute; inset:0; transform-style:preserve-3d;
+    transition:transform .45s ease;
+  }
+  .memo-card.flipped .memo-inner{ transform:rotateY(180deg) }
+  .memo-face{
+    position:absolute; inset:0; display:grid; place-items:center; border-radius:12px;
+    backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden;
+  }
+  .memo-front{ background:var(--rose-pale); border:1.5px solid var(--rose-light); color:var(--rose); font-size:clamp(1.2rem,5vw,1.7rem) }
+  .memo-back{ transform:rotateY(180deg); background:var(--surface); border:1.5px solid var(--line) }
+  .memo-back img{ width:100%; height:100%; object-fit:cover }
+  .memo-card.matched{ cursor:default }
+  .memo-card.matched .memo-back{ border-color:var(--gold); box-shadow:0 0 0 2px var(--gold) }
+  .memo-actions{ margin-top:20px }
+  @media (prefers-reduced-motion: reduce){ .memo-inner{transition:none} .catch-pop{animation-duration:.01s} }
+
+  /* Menú de juegos y pantallas individuales */
+  .games-section .game-card{ display:none }
+  .games-section .game-card.active{ display:block }
+  body.game-open .hero,
+  body.game-open footer,
+  body.game-open main.wrap > section:not(.games-section){ display:none }
+  body.game-open .games-section .section-head,
+  body.game-open .games-section > .game-menu{ display:none }
+  .game-menu{ display:grid; gap:16px; max-width:820px; margin:0 auto }
+  @media(min-width:700px){ .game-menu{grid-template-columns:repeat(3,1fr)} }
+  .game-menu-card{
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;
+    width:100%; background:var(--surface); border:1.5px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow); padding:30px 22px 26px; cursor:pointer; color:var(--ink);
+    font-family:"Quicksand",sans-serif; position:relative; overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .game-menu-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .game-menu-card:hover{ transform:translateY(-3px); border-color:var(--rose-light) }
+  .game-menu-card:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  .game-menu-icon{
+    width:58px; height:58px; border-radius:50%; background:var(--rose-pale); color:var(--rose-deep);
+    display:grid; place-items:center; font-size:1.45rem; font-family:"Playfair Display",serif; font-weight:800; margin-bottom:4px; line-height:1;
+  }
+  .game-menu-title{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.3rem; line-height:1.25 }
+  .game-menu-desc{ color:var(--ink-soft); font-size:.95rem; line-height:1.5; flex:1 }
+  .game-menu-play{
+    margin-top:8px; background:var(--rose-deep); color:#fff; font-weight:700; font-size:.95rem;
+    padding:10px 24px; border-radius:999px;
+  }
+  @media (prefers-color-scheme: dark){ .game-menu-play{color:#241419} }
+  .game-topbar{ text-align:left; margin-bottom:6px }
+  .game-back{
+    display:inline-flex; align-items:center; gap:8px;
+    background:transparent; color:var(--rose-deep); border:1.5px solid var(--rose-deep);
+    border-radius:999px; padding:10px 22px; font-family:"Quicksand",sans-serif; font-weight:700;
+    cursor:pointer; font-size:.95rem; min-height:44px;
+  }
+  .game-back:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+
+  /* Apartados grandes del menú principal */
+  .cat-card{ padding:40px 24px 34px; gap:10px }
+  .cat-card .game-menu-icon{ width:72px; height:72px; font-size:1.85rem }
+  .cat-card .game-menu-title{ font-size:1.5rem }
+  .cat-card .game-menu-play{ font-size:1rem; padding:12px 28px }
+  /* Pantalla del apartado «Juegos» */
+  .hub-card{ max-width:820px }
+  .hub-card .game-menu{ margin-top:6px }
+
+  /* Rueda de sorpresas */
+  .wheel-wrap{ position:relative; max-width:340px; margin:0 auto 20px }
+  .wheel-svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 10px 22px rgba(158,47,78,.18)) }
+  #wheelGroup{ transform-box:fill-box; transform-origin:center }
+  .wheel-pointer{
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%); z-index:3;
+    color:var(--gold); font-size:1.7rem; line-height:1; text-shadow:0 2px 4px rgba(74,35,48,.3);
+  }
+  .wheel-result{ min-height:1.6em; margin:18px auto 0; max-width:480px; font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.5; color:var(--ink) }
+  .wheel-result strong{ font-family:"Playfair Display",serif; color:var(--rose-deep) }
+
+  /* Cofre de promesas */
+  .chest-grid{ display:grid; gap:14px; max-width:560px; margin:0 auto }
+  @media(min-width:620px){ .chest-grid{grid-template-columns:1fr 1fr} }
+  .chest{ text-align:center }
+  .chest-box{
+    width:100%; border:none; cursor:pointer; border-radius:16px; padding:20px 16px 16px;
+    background:linear-gradient(180deg, var(--rose) 0%, var(--rose-deep) 100%); color:#fff;
+    font-family:"Quicksand",sans-serif; position:relative; overflow:hidden; box-shadow:var(--shadow);
+    transition:transform .18s ease, background .25s ease;
+  }
+  .chest-box::before{ content:""; position:absolute; top:0; left:0; right:0; height:8px; background:var(--gold) }
+  @media (prefers-color-scheme: dark){ .chest-box{color:#241419} }
+  .chest-box:hover{ transform:translateY(-2px) }
+  .chest-box:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  .chest.open .chest-box{ background:var(--gold-soft); color:var(--ink) }
+  .chest-heart{ display:block; font-size:1.9rem; line-height:1; transition:transform .3s ease }
+  .chest.open .chest-heart{ transform:scale(1.3) }
+  .chest-num{ display:block; margin-top:8px; font-weight:700; font-size:.95rem; letter-spacing:.03em }
+  .chest-state{ display:block; font-size:.8rem; opacity:.85; margin-top:2px }
+  .chest-promise{
+    margin:12px 4px 0; font-family:"Cormorant Garamond",serif; font-size:1.22rem; line-height:1.55; color:var(--ink);
+    background:var(--surface-warm); border:1px dashed var(--gold); border-radius:14px; padding:16px 18px;
+  }
+  .chest-promise[hidden]{ display:none }
+
+  /* Rompecabezas */
+  .puzzle-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; max-width:440px; margin:0 auto }
+  .puzzle-tile{
+    aspect-ratio:4/3; width:100%; border:2px solid var(--line); border-radius:10px; padding:0; cursor:pointer;
+    background-repeat:no-repeat; background-color:var(--bg-soft); min-height:0;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .puzzle-tile.selected{ border-color:var(--gold); box-shadow:0 0 0 3px var(--gold-soft) }
+  .puzzle-tile:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .puzzle-grid.done .puzzle-tile{ border-color:var(--gold); cursor:default }
+  .puzzle-help{ display:flex; align-items:center; gap:12px; justify-content:center; margin-top:16px; color:var(--ink-soft); font-size:.9rem }
+  .puzzle-help img{ width:64px; height:48px; object-fit:cover; border-radius:10px; border:1px solid var(--line) }
+
+  /* Sopa de letras */
+  .ws-words{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:16px }
+  .ws-word{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:999px; padding:6px 14px;
+    font-weight:700; font-size:.85rem; letter-spacing:.04em; color:var(--ink-soft);
+  }
+  .ws-word.found{ background:var(--gold-soft); border-color:var(--gold); color:var(--ink); text-decoration:line-through }
+  .ws-grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:3px; max-width:480px; margin:0 auto }
+  .ws-cell{
+    aspect-ratio:1/1; width:100%; border:1px solid var(--line); border-radius:6px; padding:0; min-height:0;
+    background:var(--surface); color:var(--ink); font-family:"Quicksand",sans-serif; font-weight:700;
+    font-size:clamp(.62rem, 2.6vw, .95rem); cursor:pointer; display:grid; place-items:center;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .ws-cell.start{ background:var(--rose); color:#fff; border-color:var(--rose-deep) }
+  @media (prefers-color-scheme: dark){ .ws-cell.start{color:#241419} }
+  .ws-cell.found{ background:var(--gold-soft); border-color:var(--gold) }
+  .ws-cell:focus-visible{ outline:2px solid var(--gold); outline-offset:1px }
+
+  /* Cápsula del tiempo */
+  .capsule-visual{
+    width:110px; height:110px; margin:6px auto 16px; border-radius:50%;
+    background:var(--rose-pale); border:2px dashed var(--gold); color:var(--rose-deep);
+    display:grid; place-items:center; font-size:2.6rem;
+  }
+  .capsule-timer{ max-width:480px; margin:18px auto 0 }
+  .capsule-letter{ text-align:left; margin-top:26px }
+  #capsuleLocked[hidden], #capsuleOpen[hidden], #capsuleLetter[hidden]{ display:none }
+
+  /* Mapa del tesoro */
+  .treasure-progress{ display:flex; gap:8px; justify-content:center; margin-bottom:18px; color:var(--rose-light); font-size:1.15rem }
+  .treasure-progress .on{ color:var(--gold) }
+  .treasure-clue{ background:var(--surface-warm); border:1px solid var(--line); border-radius:var(--radius-md); padding:24px 22px; max-width:560px; margin:0 auto }
+  .treasure-step{ font-size:.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold) }
+  .treasure-text{ font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.6; margin:10px 0 0 }
+  .treasure-answer{ font-family:"Playfair Display",serif; font-size:1.35rem; color:var(--rose-deep); margin:16px 0 0; line-height:1.3 }
+  .treasure-answer .treasure-detail{ display:block; margin-top:6px; font-family:"Cormorant Garamond",serif; font-size:1.15rem; color:var(--ink-soft) }
+  .treasure-answer[hidden]{ display:none }
+  #treasureBtn{ margin-top:20px }
+  .treasure-final .treasure-heart{ font-size:3rem; color:var(--rose-deep); line-height:1; margin-bottom:8px }
+  .treasure-final[hidden]{ display:none }
+
+  /* Nuestra fe y nuestro matrimonio eterno */
+  .faith-daily{
+    background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
+    padding:24px 22px; max-width:600px; margin:0 auto 8px;
+  }
+  .faith-daily-tag{ font-size:.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold) }
+  .faith-verse{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.35rem; line-height:1.6; margin:10px 0 8px }
+  .faith-ref{ font-family:"Playfair Display",serif; font-weight:700; color:var(--rose-deep); margin:0 }
+  .faith-h{ font-family:"Playfair Display",serif; font-size:1.3rem; margin:32px 0 14px; line-height:1.25 }
+  .faith-list{ display:grid; gap:12px; max-width:640px; margin:0 auto; text-align:left }
+  .faith-item{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:18px 20px }
+  .faith-item h5{ margin:0 0 6px; font-family:"Playfair Display",serif; font-size:1.08rem; color:var(--rose-deep) }
+  .faith-item p{ margin:0; font-family:"Cormorant Garamond",serif; font-size:1.18rem; line-height:1.6 }
+  .faith-proclaim{ max-width:640px; margin:0 auto; text-align:left; background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px 22px }
+  .faith-proclaim p{ margin:0 0 10px; font-family:"Cormorant Garamond",serif; font-size:1.2rem; line-height:1.65 }
+  .faith-proclaim p:last-child{ margin-bottom:0 }
+  .faith-quotes{ display:grid; gap:12px; max-width:640px; margin:0 auto; text-align:left }
+  .faith-quote{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px 22px }
+  .faith-quote blockquote{ margin:0; font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.25rem; line-height:1.55 }
+  .faith-quote cite{ display:block; margin-top:12px; font-style:normal; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.92rem; color:var(--rose-deep) }
+  .faith-quote .faith-source{ display:block; margin-top:2px; font-size:.82rem; color:var(--ink-soft); font-weight:600 }
+
   footer{ text-align:center; padding:44px 20px 54px; color:var(--ink-soft); position:relative; z-index:2}
   footer .foot-hearts{ color:var(--rose); letter-spacing:.5em; font-size:1rem; margin-bottom:10px}
   footer p{margin:4px 0; font-size:.95rem}
   footer .foot-name{font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:var(--ink)}
+  .foot-panel{
+    max-width:820px; margin:30px auto 0; text-align:left;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow); padding:26px 24px 22px; position:relative; overflow:hidden;
+  }
+  .foot-panel::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep), var(--gold-soft)) }
+  .foot-grid{ display:grid; gap:20px}
+  @media(min-width:700px){ .foot-grid{grid-template-columns:1.15fr 1fr} }
+  .foot-block h3{ margin:0 0 6px; font-family:"Playfair Display",serif; font-size:1.15rem; color:var(--ink); line-height:1.25}
+  .foot-block .foot-label{ display:block; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold); margin-bottom:5px}
+  .foot-weather-temp{ font-family:"Playfair Display",serif; font-weight:800; font-size:2.2rem; line-height:1; color:var(--rose-deep)}
+  .foot-weather-cond{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; color:var(--ink); margin-left:6px}
+  .foot-block p{ font-size:.92rem; line-height:1.55}
+  .foot-block a{ color:var(--rose-deep); font-weight:700}
+  .foot-clock{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.55rem; line-height:1.15; color:var(--rose-deep); font-variant-numeric:tabular-nums}
+  .foot-date{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.12rem; color:var(--ink); text-transform:capitalize}
+  .foot-meta{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); display:grid; gap:6px; text-align:center}
+  .foot-meta p{ font-size:.9rem}
+  .foot-copy{ font-size:.92rem; color:var(--ink)}
+  .foot-copy strong{ color:var(--rose-deep)}
 </style>
 </head>
 <body>
 
 <div id="heartsLayer" aria-hidden="true"></div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <p class="topbar-title"><span class="tb-heart" aria-hidden="true">♥</span>Feliz cumpleaños</p>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="navMenu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <nav class="nav-menu" id="navMenu" aria-label="Menú de secciones" hidden>
+      <button class="nav-item" type="button" data-open-game="screenGames"><span class="nav-icon" aria-hidden="true">♥</span>Juegos</button>
+      <button class="nav-item" type="button" data-open-game="screenFaith"><span class="nav-icon" aria-hidden="true">☀</span>Nuestra fe y nuestro matrimonio eterno</button>
+      <button class="nav-item" type="button" data-open-game="screenCapsule"><span class="nav-icon" aria-hidden="true">◷</span>Cápsula del tiempo</button>
+    </nav>
+  </div>
+</div>
 
 <header class="hero">
   <img class="garland" src="images/foto-1.jpg" alt="Guirnalda de corazones rosas y rojos con rosas y estrellas doradas" />
@@ -317,6 +807,37 @@
 </header>
 
 <main class="wrap">
+
+  <!-- MÚSICA -->
+  <section aria-labelledby="musica-title" style="padding-top:36px">
+    <div class="section-head">
+      <h2 id="musica-title">Nuestra música, mi amor</h2>
+      <p>Dos canciones que cuentan lo nuestro: cómo empezó todo… y cómo va a empezar nuestro para siempre. Toca un botón y escúchalas conmigo.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="music-grid">
+      <button class="music-btn" id="musicBtn1" type="button" data-video="vGJTaP6anOU" aria-pressed="false">
+        <span class="music-play-icon" aria-hidden="true">▶</span>
+        <span class="music-btn-title">Cómo inició nuestra historia</span>
+        <span class="music-btn-song">“Can’t Help Falling in Love” · Elvis Presley</span>
+        <span class="music-btn-state">Toca para escuchar ♥</span>
+      </button>
+
+      <button class="music-btn" id="musicBtn2" type="button" data-video="H_BoCkFuaF0" aria-pressed="false">
+        <span class="music-play-icon" aria-hidden="true">▶</span>
+        <span class="music-btn-title">Cómo empezará nuestra eternidad</span>
+        <span class="music-btn-song">“Vamos bien” · Majo y Dan</span>
+        <span class="music-btn-state">Toca para escuchar ♥</span>
+      </button>
+    </div>
+
+    <div class="music-player-wrap" id="musicPlayerWrap" hidden>
+      <p class="music-now" id="musicNow" role="status">Sonando para ti, mi amor…</p>
+      <div class="music-frame"><div id="ytPlayer"></div></div>
+      <button class="music-stop" id="musicStop" type="button">Detener la música</button>
+    </div>
+  </section>
 
   <!-- CARTA -->
   <section id="carta" aria-labelledby="carta-title">
@@ -352,6 +873,14 @@
       <div class="divider" aria-hidden="true">♥</div>
     </div>
 
+    <div class="album-card">
+      <div class="album-heart" aria-hidden="true">♥</div>
+      <h3>Nuestro álbum completo</h3>
+      <p>Son muchísimas fotos, mi amor, así que mejor las junté todas en nuestro álbum de Google Photos: ahí están todos nuestros recuerdos juntos, para que los veas con calma, uno por uno, y revivas cada momento conmigo.</p>
+      <a class="album-btn" href="https://photos.app.goo.gl/6bk8YymEgtXRixWx9" target="_blank" rel="noopener noreferrer">♥ &nbsp;Ver nuestro álbum</a>
+      <span class="album-hint">Se abre en Google Photos ♥</span>
+    </div>
+
     <div class="gallery">
       <figure class="polaroid">
         <img src="images/foto-3.jpg" alt="Ilustración en acuarela de un ramo de rosas y peonías rosas con un moño" />
@@ -359,18 +888,12 @@
       </figure>
 
       <figure class="polaroid">
-        <div class="photo-slot" role="img" aria-label="Espacio reservado para una foto de Naomi">
-          <div class="big-heart" aria-hidden="true">♥</div>
-          <span>Aquí va tu foto favorita, mi amor</span>
-        </div>
+        <img src="images/foto-naomi-ramo.jpg" alt="Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo" style="object-position:center 28%" />
         <figcaption>Esa sonrisa que amo</figcaption>
       </figure>
 
       <figure class="polaroid">
-        <div class="photo-slot" role="img" aria-label="Espacio reservado para una foto juntos">
-          <div class="big-heart" aria-hidden="true">♥</div>
-          <span>Aquí va una fotito de los dos</span>
-        </div>
+        <img src="images/foto-juntos-puente.jpg" alt="Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles" style="object-position:center 30%" />
         <figcaption>Tú y yo, siempre</figcaption>
       </figure>
 
@@ -380,7 +903,114 @@
       </figure>
     </div>
 
-    <p class="gallery-note">Aquí quiero poner tus fotos favoritas y una nuestra, de esas que más amo. En cuanto las tengamos, este rinconcito va a ser todavía más nuestro.</p>
+    <p class="gallery-note">Y aquí, en este rinconcito, están dos fotos muy especiales: tu foto favorita, con tu ramo de rosas, y una de los dos en el puente, de esas que más amo. Todas las demás viven en nuestro álbum, juntitas.</p>
+  </section>
+
+  <!-- NUESTROS LUGARES -->
+  <section aria-labelledby="lugares-title">
+    <div class="section-head">
+      <h2 id="lugares-title">Nuestros lugares</h2>
+      <p>Algunos de los lugares donde dejamos huella de nuestro amor ♥ Toca un corazoncito en el mapa para verlo aquí, o toca un lugar de la lista para abrirlo en Google Maps y llegar hasta ahí conmigo.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="places-map-card">
+      <div class="places-map" id="placesMap" role="application" aria-label="Mapa interactivo con los lugares de nuestras fotos"></div>
+      <div class="map-fallback" id="placesFallback" hidden>
+        <img src="images/mapa-lugares.png" width="800" height="500" alt="Mapa con corazoncitos marcando nuestros lugares: Pachuca, la Ciudad de México y Veracruz" />
+        <a class="map-notices" href="https://www.facebook.com/maps/attribution_terms" target="_blank" rel="noopener">© OpenStreetMap contributors, Map Data Legal Notices</a>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:24px">
+      <a class="album-btn" href="https://photos.app.goo.gl/6bk8YymEgtXRixWx9" target="_blank" rel="noopener noreferrer">♥ &nbsp;Ver nuestro álbum</a>
+      <span class="album-hint" style="display:block; margin-top:10px; font-size:.88rem; color:var(--ink-soft)">Todas las fotos de estos lugares están en nuestro álbum de Google Photos ♥</span>
+    </div>
+
+    <ul class="places-list">
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=20.06608,-98.72996" target="_blank" rel="noopener noreferrer" aria-label="Abrir Calle Pandora, El Saucillo en Google Maps">
+          <span class="place-num" aria-hidden="true">1</span>
+          <div>
+            <h3>Calle Pandora, El Saucillo</h3>
+            <p>Pachuca, Hidalgo</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.35803,-99.14221" target="_blank" rel="noopener noreferrer" aria-label="Abrir Casa de los abuelitos de Naomi, en Ermita, en Google Maps">
+          <span class="place-num" aria-hidden="true">2</span>
+          <div>
+            <h3>Casa de los abuelitos de Naomi</h3>
+            <p>Ermita, Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.34684,-99.16034" target="_blank" rel="noopener noreferrer" aria-label="Abrir Coyoacán en Google Maps">
+          <span class="place-num" aria-hidden="true">3</span>
+          <div>
+            <h3>Coyoacán</h3>
+            <p>Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.46529,-99.08661" target="_blank" rel="noopener noreferrer" aria-label="Abrir Templo de Aragón en Google Maps">
+          <span class="place-num" aria-hidden="true">4</span>
+          <div>
+            <h3>Templo de Aragón</h3>
+            <p>Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.5570043,-99.1335651" target="_blank" rel="noopener noreferrer" aria-label="Abrir Casa de los abuelitos de Hagot, en Cuautepec, en Google Maps">
+          <span class="place-num" aria-hidden="true">5</span>
+          <div>
+            <h3>Casa de los abuelitos de Hagot</h3>
+            <p>Cuautepec, Ciudad de México</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.20821,-96.14598" target="_blank" rel="noopener noreferrer" aria-label="Abrir Puerto de Veracruz en Google Maps">
+          <span class="place-num" aria-hidden="true">6</span>
+          <div>
+            <h3>Puerto de Veracruz</h3>
+            <p>Veracruz, Veracruz</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.2210379,-96.1686536" target="_blank" rel="noopener noreferrer" aria-label="Abrir Playa Norte en Google Maps">
+          <span class="place-num" aria-hidden="true">7</span>
+          <div>
+            <h3>Playa Norte</h3>
+            <p>Veracruz, Veracruz</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li>
+        <a class="place-row" href="https://www.google.com/maps/search/?api=1&query=19.1959744,-96.1730906" target="_blank" rel="noopener noreferrer" aria-label="Abrir Reserva Uno, Veracruz, en Google Maps">
+          <span class="place-num" aria-hidden="true">8</span>
+          <div>
+            <h3>Reserva Uno</h3>
+            <p>Veracruz, Veracruz</p>
+          </div>
+          <span class="place-open" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="places-more">…y muchos otros lugares más ♥</p>
   </section>
 
   <!-- GRACIAS -->
@@ -419,6 +1049,51 @@
           <h3>Gracias por ser tú</h3>
           <p>Por ser exactamente así, tan tú. No cambiaría nada de ti. Mi vida es muchísimo más bonita desde que estás en ella.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUENTA REGRESIVA -->
+  <section aria-labelledby="cuenta-title">
+    <div class="section-head">
+      <h2 id="cuenta-title">Falta poquito, mi amor…</h2>
+      <p>Cada segundo que pasa nos acerca más a celebrarte y a empezar nuestro para siempre. Mira cuánto falta:</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="countdowns">
+      <div class="cd-card" id="cdBirthday">
+        <span class="cd-tag">♥ 15 de diciembre de 2026</span>
+        <h3>Tu cumpleaños, Naomi</h3>
+        <p class="cd-date">Para celebrarte como te mereces</p>
+        <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para el cumpleaños de Naomi">
+          <div class="cd-unit"><span class="cd-num" data-cd="days">--</span><span class="cd-label">Días</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="hours">--</span><span class="cd-label">Horas</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="mins">--</span><span class="cd-label">Minutos</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="secs">--</span><span class="cd-label">Segundos</span></div>
+        </div>
+        <div class="cd-arrived" role="status">
+          <span class="big">🎂 ¡Ya llegó tu día, mi amor!</span>
+          <p>¡Feliz cumpleaños, Naomi! Hoy te celebramos con todo el corazón. ♥</p>
+        </div>
+        <p class="cd-note">Contando los días para verte sonreír en tu día ✨</p>
+      </div>
+
+      <div class="cd-card" id="cdWedding">
+        <span class="cd-tag">♥ 19 de diciembre de 2026</span>
+        <h3>¡Nuestra boda!</h3>
+        <p class="cd-date">Para decirnos “sí” para siempre</p>
+        <div class="cd-timer" role="timer" aria-label="Cuenta regresiva para la boda">
+          <div class="cd-unit"><span class="cd-num" data-cd="days">--</span><span class="cd-label">Días</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="hours">--</span><span class="cd-label">Horas</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="mins">--</span><span class="cd-label">Minutos</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="secs">--</span><span class="cd-label">Segundos</span></div>
+        </div>
+        <div class="cd-arrived" role="status">
+          <span class="big">💍 ¡Ya llegó el gran día!</span>
+          <p>¡Hoy nos casamos, mi amor! Hoy empieza nuestra eternidad juntos. ♥</p>
+        </div>
+        <p class="cd-note">Contando los segundos para tomarte de la mano para siempre ✨</p>
       </div>
     </div>
   </section>
@@ -506,6 +1181,312 @@
     </div>
   </section>
 
+  <!-- JUEGOS -->
+  <section class="games-section" id="juegos" aria-labelledby="juegos-title">
+    <div class="section-head">
+      <h2 id="juegos-title">Tres rinconcitos para ti</h2>
+      <p>Te preparé tres apartados con mucho amor, mi vida: uno con todos tus jueguitos y sorpresas, uno muy especial de nuestra fe, y tu cápsula del tiempo. Toca el que quieras abrir.</p>
+      <div class="divider" aria-hidden="true">♥</div>
+    </div>
+
+    <div class="game-menu" id="gameMenu">
+      <button class="game-menu-card cat-card" type="button" data-open-game="screenGames">
+        <span class="game-menu-icon" aria-hidden="true">♥</span>
+        <span class="game-menu-title">Juegos</span>
+        <span class="game-menu-desc">Todos tus jueguitos juntos, mi amor: corazones, preguntas, memorama, sorpresas y un mapa del tesoro.</span>
+        <span class="game-menu-play">Entrar ♥</span>
+      </button>
+      <button class="game-menu-card cat-card" type="button" data-open-game="screenFaith">
+        <span class="game-menu-icon" aria-hidden="true">☀</span>
+        <span class="game-menu-title">Nuestra fe y nuestro matrimonio eterno</span>
+        <span class="game-menu-desc">Escrituras y palabras de profetas y apóstoles sobre nuestro amor eterno.</span>
+        <span class="game-menu-play">Leer ♥</span>
+      </button>
+      <button class="game-menu-card cat-card" type="button" data-open-game="screenCapsule">
+        <span class="game-menu-icon" aria-hidden="true">◷</span>
+        <span class="game-menu-title">Cápsula del tiempo</span>
+        <span class="game-menu-desc">Un mensaje guardado para ti, que se abre el día de tu cumpleaños.</span>
+        <span class="game-menu-play">Ver ♥</span>
+      </button>
+    </div>
+
+    <!-- Apartado: Juegos -->
+    <div class="game-card hub-card" id="screenGames">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Juegos para Naomi ♥</h3>
+      <p class="game-desc">Aquí están todos tus jueguitos, mi vida. Toca el que quieras jugar.</p>
+      <div class="game-menu">
+        <button class="game-menu-card" type="button" data-open-game="screenCatch">
+          <span class="game-menu-icon" aria-hidden="true">♥</span>
+          <span class="game-menu-title">Atrapa corazones</span>
+          <span class="game-menu-desc">Corazones que caen por 30 segundos. ¡Atrapa todos los que puedas, mi amor!</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenQuiz">
+          <span class="game-menu-icon" aria-hidden="true">¿?</span>
+          <span class="game-menu-title">Preguntas sobre nosotros</span>
+          <span class="game-menu-desc">Cinco preguntitas de nuestra historia. ¿Cuánto la conoces, mi vida?</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenMemo">
+          <span class="game-menu-icon" aria-hidden="true">♥♥</span>
+          <span class="game-menu-title">Memorama</span>
+          <span class="game-menu-desc">Encuentra las parejitas de nuestras fotos y dibujitos, una por una.</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenWheel">
+          <span class="game-menu-icon" aria-hidden="true">☼</span>
+          <span class="game-menu-title">Rueda de sorpresas</span>
+          <span class="game-menu-desc">Gira la rueda y gana un premio romántico para reclamar conmigo.</span>
+          <span class="game-menu-play">Girar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenChest">
+          <span class="game-menu-icon" aria-hidden="true">✦</span>
+          <span class="game-menu-title">Cofre de promesas</span>
+          <span class="game-menu-desc">Cofrecitos cerrados con promesas mías para ti. Ábrelos todos, mi amor.</span>
+          <span class="game-menu-play">Abrir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenPuzzle">
+          <span class="game-menu-icon" aria-hidden="true">▦</span>
+          <span class="game-menu-title">Rompecabezas de nuestra foto</span>
+          <span class="game-menu-desc">Nuestra foto en el puente, partida en piezas. Ármala conmigo, mi vida.</span>
+          <span class="game-menu-play">Armar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenWords">
+          <span class="game-menu-icon" aria-hidden="true">A</span>
+          <span class="game-menu-title">Sopa de letras de amor</span>
+          <span class="game-menu-desc">Las palabras de nuestra historia escondidas entre letras. ¡Encuéntralas!</span>
+          <span class="game-menu-play">Buscar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenTreasure">
+          <span class="game-menu-icon" aria-hidden="true">⚑</span>
+          <span class="game-menu-title">Nuestro mapa del tesoro</span>
+          <span class="game-menu-desc">Pistas por nuestros lugares que te llevan, paso a paso, a un tesoro.</span>
+          <span class="game-menu-play">Seguir el mapa ♥</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Atrapa corazones -->
+    <div class="game-card" id="screenCatch">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Atrapa corazones ♥</h3>
+      <p class="game-desc">Van a llover corazones por 30 segundos, mi vida. Tócalos (o hazles clic) antes de que caigan: los grandes valen 1 punto, los medianos 2, los chiquitos y rápidos 3… y si ves uno dorado, ¡ese vale 5!</p>
+      <div class="game-hud" aria-label="Marcador de Atrapa corazones">
+        <span class="hud-item">Puntos<strong id="catchScore">0</strong></span>
+        <span class="hud-item">Corazones<strong id="catchCount">0</strong></span>
+        <span class="hud-item">Tiempo<strong id="catchTime">30</strong></span>
+      </div>
+      <div class="catch-area" id="catchArea">
+        <div class="catch-overlay" id="catchStartOverlay">
+          <button class="game-start-btn" id="catchStartBtn" type="button">♥ ¡A jugar, mi amor!</button>
+          <p>Tienes 30 segundos. ¡Atrapa todos los corazones que puedas!</p>
+        </div>
+        <div class="catch-overlay" id="catchEndOverlay" hidden>
+          <p class="catch-final" id="catchFinalMsg"></p>
+          <button class="game-start-btn" id="catchAgainBtn" type="button">Jugar otra vez ♥</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz: Preguntas sobre nosotros -->
+    <div class="game-card" id="screenQuiz">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Preguntas sobre nosotros</h3>
+      <p class="game-desc">Cinco preguntitas de nuestra historia, mi amor. A ver qué tan bien la conoces… yo sé que perfecta. ♥</p>
+      <div id="quizStartWrap">
+        <button class="game-start-btn" id="quizStartBtn" type="button">♥ ¡Empezar!</button>
+      </div>
+      <div id="quizBody" hidden>
+        <div class="quiz-meta">
+          <span id="quizProgress">Pregunta 1 de 5</span>
+          <span>Aciertos: <strong id="quizScore">0</strong></span>
+        </div>
+        <p class="quiz-q" id="quizQuestion"></p>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p class="quiz-feedback" id="quizFeedback" role="status"></p>
+        <button class="game-next-btn" id="quizNextBtn" type="button" hidden>Siguiente pregunta ♥</button>
+      </div>
+      <div id="quizEnd" hidden>
+        <p class="game-final" id="quizFinalMsg"></p>
+        <button class="game-start-btn" id="quizRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+    </div>
+
+    <!-- Memorama -->
+    <div class="game-card" id="screenMemo">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Memorama de nosotros</h3>
+      <p class="game-desc">Nuestras fotos y dibujitos están escondidos en parejitas. Toca las tarjetas para voltearlas y encuentra los 5 pares, mi amor.</p>
+      <div class="game-hud" aria-label="Marcador del memorama">
+        <span class="hud-item">Intentos<strong id="memoAttempts">0</strong></span>
+        <span class="hud-item">Pares<strong id="memoPairs">0 de 5</strong></span>
+      </div>
+      <div class="memo-grid" id="memoGrid"></div>
+      <div id="memoFinal" hidden style="margin-top:22px">
+        <p class="game-final" id="memoFinalMsg" style="margin-bottom:0"></p>
+      </div>
+      <div class="memo-actions">
+        <button class="game-next-btn" id="memoRestartBtn" type="button">Barajar y empezar de nuevo ♥</button>
+      </div>
+    </div>
+
+    <!-- Rueda de sorpresas -->
+    <div class="game-card" id="screenWheel">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Rueda de sorpresas</h3>
+      <p class="game-desc">Gira la rueda, mi amor, y descubre qué sorpresita te toca hoy. Todos los premios se reclaman conmigo, en persona. ♥</p>
+      <div class="wheel-wrap">
+        <div class="wheel-pointer" aria-hidden="true">▼</div>
+        <svg class="wheel-svg" id="wheelSvg" viewBox="0 0 320 320" role="img" aria-label="Rueda de sorpresas con premios románticos: un beso, un abrazo, un baile, una cita, una serenata y un día juntos">
+          <g id="wheelGroup"></g>
+          <circle cx="160" cy="160" r="36" style="fill:var(--surface)" stroke="var(--gold)" stroke-width="3"/>
+          <text x="160" y="168" text-anchor="middle" font-size="27" style="fill:var(--rose-deep)">♥</text>
+        </svg>
+      </div>
+      <button class="game-start-btn" id="wheelSpinBtn" type="button">♥ ¡Girar la rueda!</button>
+      <p class="wheel-result" id="wheelResult" role="status"></p>
+    </div>
+
+    <!-- Cofre de promesas -->
+    <div class="game-card" id="screenChest">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cofre de promesas</h3>
+      <p class="game-desc">Seis cofrecitos cerrados, mi amor, y adentro de cada uno hay una promesa mía para ti. Tócalos para abrirlos todos. ♥</p>
+      <div class="chest-grid" id="chestGrid"></div>
+      <p class="game-final" id="chestFinal" hidden style="margin-top:24px">Y la promesa que las guarda a todas, mi Naomi: amarte y elegirte cada día, en esta vida y por toda la eternidad. ♥</p>
+    </div>
+
+    <!-- Rompecabezas de nuestra foto -->
+    <div class="game-card" id="screenPuzzle">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Rompecabezas de nuestra foto</h3>
+      <p class="game-desc">Nuestra foto en el puente se desarmó en 9 piezas, mi vida. Toca una pieza y luego otra para intercambiarlas, hasta armarla completa.</p>
+      <div class="game-hud" aria-label="Marcador del rompecabezas">
+        <span class="hud-item">Movimientos<strong id="puzzleMoves">0</strong></span>
+      </div>
+      <div class="puzzle-grid" id="puzzleGrid"></div>
+      <div class="puzzle-help">
+        <img src="images/foto-juntos-puente.jpg" alt="Foto completa de Hagot y Naomi abrazados en el puente" />
+        <span>Así debe quedar, mi amor ♥</span>
+      </div>
+      <p class="game-final" id="puzzleFinal" hidden style="margin-top:20px"></p>
+      <div class="memo-actions">
+        <button class="game-next-btn" id="puzzleRestartBtn" type="button">Mezclar de nuevo ♥</button>
+      </div>
+    </div>
+
+    <!-- Sopa de letras de amor -->
+    <div class="game-card" id="screenWords">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Sopa de letras de amor</h3>
+      <p class="game-desc">Ocho palabras de nuestra historia están escondidas entre las letras: pueden ir en horizontal, vertical o diagonal. Toca la primera letra de una palabra y luego su última letra para marcarla, mi amor.</p>
+      <div class="ws-words" id="wsWords"></div>
+      <div class="ws-grid" id="wsGrid"></div>
+      <p class="quiz-feedback" id="wsFeedback" role="status"></p>
+      <p class="game-final" id="wsFinal" hidden></p>
+      <div class="memo-actions">
+        <button class="game-next-btn" id="wsRestartBtn" type="button">Nueva sopa ♥</button>
+      </div>
+    </div>
+
+    <!-- Cápsula del tiempo -->
+    <div class="game-card" id="screenCapsule">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cápsula del tiempo</h3>
+      <p class="game-desc">Guardé un mensaje para ti dentro de esta cápsula, mi amor. Está sellada con todo mi cariño y solo se abre cuando llegue el gran día.</p>
+      <div id="capsuleLocked">
+        <div class="capsule-visual" aria-hidden="true">♥</div>
+        <p style="color:var(--ink-soft); max-width:480px; margin:0 auto">La cápsula se abre el <strong style="color:var(--rose-deep)">15 de diciembre de 2026</strong>, el día de tu cumpleaños… y también estará abierta para nuestra boda, el <strong style="color:var(--rose-deep)">19 de diciembre</strong>. Esto es lo que falta:</p>
+        <div class="cd-timer capsule-timer" role="timer" aria-label="Cuenta regresiva para abrir la cápsula del tiempo">
+          <div class="cd-unit"><span class="cd-num" data-cap="days">--</span><span class="cd-label">Días</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cap="hours">--</span><span class="cd-label">Horas</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cap="mins">--</span><span class="cd-label">Minutos</span></div>
+          <div class="cd-unit"><span class="cd-num" data-cap="secs">--</span><span class="cd-label">Segundos</span></div>
+        </div>
+        <p class="cd-note">Ten paciencia, mi vida… lo que guarda vale toda la espera. ♥</p>
+      </div>
+      <div id="capsuleOpen" hidden>
+        <div class="capsule-visual" aria-hidden="true">♥</div>
+        <p style="color:var(--ink-soft); max-width:480px; margin:0 auto 20px">¡Llegó el día, mi amor! La cápsula está abierta y el mensaje es todo tuyo:</p>
+        <button class="game-start-btn" id="capsuleOpenBtn" type="button">♥ Abrir la cápsula</button>
+        <article class="letter capsule-letter" id="capsuleLetter" hidden>
+          <p>Mi Naomi hermosa:</p>
+          <p>Si estás leyendo esto, es porque por fin llegó el día que contamos juntos, segundo a segundo: tu cumpleaños… y en unos días, nuestra boda. Guardé este mensaje en esta cápsula porque quería que lo abrieras justo hoy, con el corazón llenito de todo lo que hemos vivido.</p>
+          <p>Quiero que sepas que le doy gracias a Dios por ti todos los días. Gracias por tu amor, por tu fe, por tu sonrisa y por elegir caminar conmigo. Lo que viene —nuestro hogar, nuestra familia, nuestro Nimrod y nuestra Liahona, y una eternidad entera tomados de la mano— es el sueño más bonito que tengo, y es contigo.</p>
+          <p>El 19 de diciembre te tomo de la mano para siempre. Hasta ese día y después de ese día, en esta vida y en la que sigue: te amo, te elijo y te vuelvo a elegir, siempre.</p>
+          <p>¡Feliz cumpleaños, mi futura esposa!</p>
+          <p class="sign">Con todo mi amor, por tiempo y por toda la eternidad,<br>Hagot</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Nuestro mapa del tesoro -->
+    <div class="game-card" id="screenTreasure">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro mapa del tesoro</h3>
+      <p class="game-desc">Hay un tesoro escondido al final de nuestro mapa, mi amor. Sigue las pistas por nuestros lugares y descúbrelo conmigo. ♥</p>
+      <div class="treasure-progress" id="treasureProgress" aria-hidden="true"></div>
+      <div class="treasure-clue" id="treasureClue">
+        <span class="treasure-step" id="treasureStep">Pista 1 de 4</span>
+        <p class="treasure-text" id="treasureText"></p>
+        <p class="treasure-answer" id="treasureAnswer" hidden></p>
+        <button class="game-start-btn" id="treasureBtn" type="button">Revelar el lugar ♥</button>
+      </div>
+      <div class="treasure-final" id="treasureFinal" hidden>
+        <div class="treasure-heart" aria-hidden="true">♥</div>
+        <p class="game-final">¡Encontraste el tesoro, mi amor! Pero entre tú y yo: el tesoro nunca estuvo escondido en el mapa. El tesoro eres tú. Cada lugar de este mapa vale oro porque tú estuviste ahí conmigo, y cada día a tu lado es una joya más. Gracias por caminar conmigo, pista a pista y lugar a lugar… y gracias por caminar conmigo para siempre. Te amo hoy, el 15, el 19 y por toda la eternidad. ♥</p>
+        <button class="game-next-btn" id="treasureRestartBtn" type="button">Recorrer el mapa de nuevo ♥</button>
+      </div>
+    </div>
+
+    <!-- Nuestra fe y nuestro matrimonio eterno -->
+    <div class="game-card" id="screenFaith">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestra fe y nuestro matrimonio eterno</h3>
+      <p class="game-desc">Lo nuestro tiene un fundamento eterno, mi amor: Dios en el centro de todo. Aquí guardé escrituras y palabras de profetas y apóstoles para leerlas juntitos y recordar por qué lo nuestro es para siempre.</p>
+
+      <div class="faith-daily">
+        <span class="faith-daily-tag">♥ Escritura del día</span>
+        <p class="faith-verse" id="dailyVerse"></p>
+        <p class="faith-ref" id="dailyRef"></p>
+      </div>
+
+      <h4 class="faith-h">Escrituras para nuestro matrimonio</h4>
+      <div class="faith-list" id="faithList"></div>
+
+      <h4 class="faith-h">La Familia: Una Proclamación para el Mundo</h4>
+      <div class="faith-proclaim">
+        <p>«Nosotros, la Primera Presidencia y el Consejo de los Doce Apóstoles de La Iglesia de Jesucristo de los Santos de los Últimos Días, solemnemente proclamamos que el matrimonio entre el hombre y la mujer es ordenado por Dios y que la familia es fundamental en el plan del Creador para el destino eterno de Sus hijos».</p>
+        <p>«La familia está ordenada por Dios. El matrimonio entre el hombre y la mujer es esencial para Su plan eterno».</p>
+      </div>
+
+      <h4 class="faith-h">Palabras de profetas y apóstoles</h4>
+      <div class="faith-quotes">
+        <div class="faith-quote">
+          <blockquote>«La salvación es un asunto individual, pero la exaltación es un asunto familiar».</blockquote>
+          <cite>Presidente Russell M. Nelson</cite>
+          <span class="faith-source">«Salvación y exaltación», Conferencia General, abril de 2008</span>
+        </div>
+        <div class="faith-quote">
+          <blockquote>«En las relaciones familiares, el amor se deletrea t-i-e-m-p-o: tiempo».</blockquote>
+          <cite>Presidente Dieter F. Uchtdorf</cite>
+          <span class="faith-source">«De las cosas que más importan», Conferencia General, octubre de 2010</span>
+        </div>
+        <div class="faith-quote">
+          <blockquote>«El matrimonio es un don de Dios para nosotros; la calidad de nuestro matrimonio es nuestro don para Él».</blockquote>
+          <cite>Élder L. Whitney Clayton</cite>
+          <span class="faith-source">«El matrimonio: Observar y aprender», Conferencia General, abril de 2013</span>
+        </div>
+        <div class="faith-quote">
+          <blockquote>«Ningún otro éxito puede compensar el fracaso en el hogar».</blockquote>
+          <cite>Presidente David O. McKay</cite>
+          <span class="faith-source">Conferencia General, abril de 1964</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SORPRESA -->
   <section class="surprise" aria-labelledby="sorpresa-title">
     <div class="surprise-box">
@@ -527,7 +1508,32 @@
   <div class="foot-hearts" aria-hidden="true">♥ ♥ ♥</div>
   <p class="foot-name">Hecha con muchísimo amor, solo para ti, Naomi</p>
   <p>Te amo. Feliz cumpleaños, mi vida… y nos vemos el 19 de diciembre, para empezar nuestra eternidad.</p>
+
+  <div class="foot-panel">
+    <div class="foot-grid">
+      <div class="foot-block" aria-label="Clima en Pachuca, Hidalgo">
+        <span class="foot-label">♥ Nuestro rinconcito · Pachuca, Hidalgo</span>
+        <h3>El clima donde vivimos</h3>
+        <p style="margin:8px 0 4px"><span class="foot-weather-temp">11°C</span><span class="foot-weather-cond">Nublado</span></p>
+        <p>Humedad 88% · Viento del noreste a 8 km/h · Presión 1023 hPa · Salida del sol 6:49 a.m. · Puesta del sol 5:53 p.m.</p>
+        <p>Clima consultado el martes 24 de noviembre de 2026 a las 10:31 p.m. (hora de México). Fuente: <a href="https://weather.com/mx/hidalgo/city/pachuca/today" target="_blank" rel="noopener noreferrer">The Weather Channel</a></p>
+      </div>
+      <div class="foot-block" aria-label="Fecha y hora actuales">
+        <span class="foot-label">♥ Aquí y ahora</span>
+        <h3>Fecha y hora actuales</h3>
+        <p class="foot-date" id="liveDate" style="margin:8px 0 2px">Cargando fecha…</p>
+        <p class="foot-clock" id="liveClock" aria-live="off">--:--:--</p>
+        <p>Hora de Pachuca, Hidalgo (America/Mexico_City). El reloj se actualiza solo, segundo a segundo, para que siempre sepas qué hora es mientras lees esto, mi amor.</p>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <p>Última edición: <strong>miércoles 25 de noviembre de 2026, 07:20 a.m.</strong> ♥</p>
+      <p class="foot-copy">© <span id="copyYear">2026</span> <strong>Naomi Nazareth Carbajal Sánchez</strong>. Todos los derechos reservados.</p>
+    </div>
+  </div>
 </footer>
+
+
 
 <script>
 (function(){
@@ -597,7 +1603,1069 @@
     if(secret) secret.classList.add('show');
   }
   if(rainBtn) rainBtn.addEventListener('click', heartRain);
+
+  // Countdowns — 15 y 19 de diciembre de 2026, hora de México (UTC-6)
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function setupCountdown(cardId, targetISO){
+    var card = document.getElementById(cardId);
+    if(!card) return null;
+    var target = new Date(targetISO).getTime();
+    var nums = {
+      days: card.querySelector('[data-cd="days"]'),
+      hours: card.querySelector('[data-cd="hours"]'),
+      mins: card.querySelector('[data-cd="mins"]'),
+      secs: card.querySelector('[data-cd="secs"]')
+    };
+    function tick(){
+      var diff = target - Date.now();
+      if(diff <= 0){
+        card.classList.add('is-today');
+        if(nums.days) nums.days.textContent = '00';
+        if(nums.hours) nums.hours.textContent = '00';
+        if(nums.mins) nums.mins.textContent = '00';
+        if(nums.secs) nums.secs.textContent = '00';
+        return false;
+      }
+      var totalSecs = Math.floor(diff / 1000);
+      var d = Math.floor(totalSecs / 86400);
+      var h = Math.floor((totalSecs % 86400) / 3600);
+      var m = Math.floor((totalSecs % 3600) / 60);
+      var s = totalSecs % 60;
+      if(nums.days) nums.days.textContent = d;
+      if(nums.hours) nums.hours.textContent = pad(h);
+      if(nums.mins) nums.mins.textContent = pad(m);
+      if(nums.secs) nums.secs.textContent = pad(s);
+      return true;
+    }
+    return tick;
+  }
+  var tickBirthday = setupCountdown('cdBirthday', '2026-12-15T00:00:00-06:00');
+  var tickWedding = setupCountdown('cdWedding', '2026-12-19T00:00:00-06:00');
+  function tickAll(){
+    var a = tickBirthday ? tickBirthday() : false;
+    var b = tickWedding ? tickWedding() : false;
+    if(!a && !b && cdTimer) clearInterval(cdTimer);
+  }
+  var cdTimer = null;
+  tickAll();
+  cdTimer = setInterval(tickAll, 1000);
+
+  // Live date & time — Pachuca, Hidalgo (America/Mexico_City), updates every second
+  var liveDate = document.getElementById('liveDate');
+  var liveClock = document.getElementById('liveClock');
+  var copyYear = document.getElementById('copyYear');
+  function updateClock(){
+    try{
+      var now = new Date();
+      if(liveDate){
+        liveDate.textContent = new Intl.DateTimeFormat('es-MX', { timeZone:'America/Mexico_City', weekday:'long', day:'numeric', month:'long', year:'numeric' }).format(now);
+      }
+      if(liveClock){
+        liveClock.textContent = new Intl.DateTimeFormat('es-MX', { timeZone:'America/Mexico_City', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true }).format(now);
+      }
+      if(copyYear){
+        copyYear.textContent = new Intl.DateTimeFormat('es-MX', { timeZone:'America/Mexico_City', year:'numeric' }).format(now);
+      }
+    }catch(e){}
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Música — suena solo cuando Naomi toca un botón (sin autoplay al entrar)
+  var musicBtns = [
+    { el: document.getElementById('musicBtn1'), video: 'vGJTaP6anOU', label: '“Can’t Help Falling in Love” · Elvis Presley' },
+    { el: document.getElementById('musicBtn2'), video: 'H_BoCkFuaF0', label: '“Vamos bien” · Majo y Dan' }
+  ];
+  var playerWrap = document.getElementById('musicPlayerWrap');
+  var musicNow = document.getElementById('musicNow');
+  var musicStop = document.getElementById('musicStop');
+  var ytPlayer = null;
+  var ytApiLoading = false;
+  var ytPendingVideo = null;
+  var currentVideo = null;
+  var musicPlaying = false;
+
+  function refreshMusicUI(){
+    musicBtns.forEach(function(item){
+      if(!item.el) return;
+      var isCurrent = currentVideo === item.video;
+      var playing = isCurrent && musicPlaying;
+      item.el.classList.toggle('is-playing', playing);
+      item.el.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      var icon = item.el.querySelector('.music-play-icon');
+      var state = item.el.querySelector('.music-btn-state');
+      if(icon) icon.textContent = playing ? '❚❚' : '▶';
+      if(state) state.textContent = playing ? 'Sonando ahora… toca para pausar ♥' : (isCurrent && ytPlayer ? 'En pausa · toca para seguir escuchando' : 'Toca para escuchar ♥');
+    });
+    if(musicNow && currentVideo){
+      var found = null;
+      musicBtns.forEach(function(item){ if(item.video === currentVideo) found = item; });
+      if(found) musicNow.textContent = (musicPlaying ? 'Sonando para ti, mi amor: ' : 'En pausa: ') + found.label;
+    }
+  }
+
+  function createYtPlayer(videoId){
+    if(!window.YT || !window.YT.Player) return;
+    ytPlayer = new window.YT.Player('ytPlayer', {
+      videoId: videoId,
+      playerVars: { autoplay: 1, playsinline: 1, rel: 0 },
+      events: {
+        onReady: function(e){ try{ e.target.playVideo(); }catch(err){} },
+        onStateChange: function(e){
+          if(!window.YT) return;
+          if(e.data === window.YT.PlayerState.PLAYING){ musicPlaying = true; }
+          if(e.data === window.YT.PlayerState.PAUSED || e.data === window.YT.PlayerState.ENDED){ musicPlaying = false; }
+          refreshMusicUI();
+        }
+      }
+    });
+  }
+
+  function playVideo(videoId){
+    currentVideo = videoId;
+    if(playerWrap) playerWrap.hidden = false;
+    if(ytPlayer && typeof ytPlayer.loadVideoById === 'function'){
+      ytPlayer.loadVideoById(videoId);
+      musicPlaying = true;
+      refreshMusicUI();
+      return;
+    }
+    if(window.YT && window.YT.Player){
+      createYtPlayer(videoId);
+      musicPlaying = true;
+      refreshMusicUI();
+      return;
+    }
+    // Cargar la API de YouTube la primera vez, solo tras el toque de Naomi
+    ytPendingVideo = videoId;
+    musicPlaying = true;
+    refreshMusicUI();
+    if(ytApiLoading) return;
+    ytApiLoading = true;
+    var prevReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if(typeof prevReady === 'function'){ try{ prevReady(); }catch(e){} }
+      if(ytPendingVideo){
+        var v = ytPendingVideo;
+        ytPendingVideo = null;
+        createYtPlayer(v);
+      }
+    };
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  }
+
+  musicBtns.forEach(function(item){
+    if(!item.el) return;
+    item.el.addEventListener('click', function(){
+      if(currentVideo === item.video && ytPlayer){
+        if(musicPlaying){
+          try{ ytPlayer.pauseVideo(); }catch(e){}
+          musicPlaying = false;
+        } else {
+          try{ ytPlayer.playVideo(); }catch(e){}
+          musicPlaying = true;
+        }
+        refreshMusicUI();
+        return;
+      }
+      playVideo(item.video);
+      if(playerWrap){
+        setTimeout(function(){
+          playerWrap.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+        }, 350);
+      }
+    });
+  });
+
+  if(musicStop){
+    musicStop.addEventListener('click', function(){
+      if(ytPlayer){ try{ ytPlayer.stopVideo(); }catch(e){} }
+      musicPlaying = false;
+      currentVideo = null;
+      if(playerWrap) playerWrap.hidden = true;
+      refreshMusicUI();
+    });
+  }
+
+  // ===== Juegos para Naomi =====
+  // --- Navegación: cada juego vive en su propia pantalla ---
+  var gamesSection = document.getElementById('juegos');
+  var gameCardIds = ['screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith'];
+  var navReturn = null; // pantalla a la que regresa «Volver» (la lista de Juegos), o null = página principal
+  function openGame(id, fromId){
+    gameCardIds.forEach(function(cid){
+      var c = document.getElementById(cid);
+      if(c) c.classList.toggle('active', cid === id);
+    });
+    navReturn = fromId || null;
+    document.body.classList.add('game-open');
+    window.scrollTo(0, 0);
+  }
+  function closeGame(){
+    stopCatchGame();
+    if(navReturn){
+      var backTo = navReturn;
+      navReturn = null;
+      gameCardIds.forEach(function(cid){
+        var c = document.getElementById(cid);
+        if(c) c.classList.toggle('active', cid === backTo);
+      });
+      window.scrollTo(0, 0);
+      return;
+    }
+    gameCardIds.forEach(function(cid){
+      var c = document.getElementById(cid);
+      if(c) c.classList.remove('active');
+    });
+    document.body.classList.remove('game-open');
+    if(gamesSection) gamesSection.scrollIntoView({ block: 'start' });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open-game]'), function(btn){
+    btn.addEventListener('click', function(){
+      var inHub = btn.closest ? !!btn.closest('#screenGames') : false;
+      openGame(btn.getAttribute('data-open-game'), inHub ? 'screenGames' : null);
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-close-game]'), function(btn){
+    btn.addEventListener('click', closeGame);
+  });
+
+  // --- Atrapa corazones ---
+  var catchArea = document.getElementById('catchArea');
+  var catchScoreEl = document.getElementById('catchScore');
+  var catchCountEl = document.getElementById('catchCount');
+  var catchTimeEl = document.getElementById('catchTime');
+  var catchStartOverlay = document.getElementById('catchStartOverlay');
+  var catchEndOverlay = document.getElementById('catchEndOverlay');
+  var catchFinalMsg = document.getElementById('catchFinalMsg');
+  var catchGame = null;
+  var CATCH_TYPES = [
+    { size: 66, speed: 105, points: 1, color: '#C24365', golden: false, chance: 0.42 },
+    { size: 48, speed: 165, points: 2, color: '#E87A97', golden: false, chance: 0.36 },
+    { size: 34, speed: 245, points: 3, color: '#9E2F4E', golden: false, chance: 0.15 },
+    { size: 30, speed: 270, points: 5, color: '#C9962E', golden: true,  chance: 0.07 }
+  ];
+  function pickCatchType(){
+    var r = Math.random(), acc = 0;
+    for(var i = 0; i < CATCH_TYPES.length; i++){ acc += CATCH_TYPES[i].chance; if(r <= acc) return CATCH_TYPES[i]; }
+    return CATCH_TYPES[0];
+  }
+  function spawnCatchHeart(){
+    if(!catchGame || !catchGame.playing || !catchArea) return;
+    var type = pickCatchType();
+    var w = catchArea.clientWidth;
+    var el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'catch-heart' + (type.golden ? ' is-golden' : '');
+    el.textContent = '♥';
+    el.style.fontSize = type.size + 'px';
+    el.style.color = type.color;
+    el.setAttribute('aria-label', 'Atrapar corazón de ' + type.points + ' puntos');
+    var heart = {
+      el: el,
+      x: 6 + Math.random() * Math.max(10, w - type.size - 12),
+      y: -type.size - 16,
+      speed: type.speed * (reduceMotion ? 0.55 : 1) * (0.85 + Math.random() * 0.35),
+      size: type.size,
+      points: type.points,
+      sway: Math.random() * Math.PI * 2
+    };
+    el.style.transform = 'translate(' + heart.x + 'px,' + heart.y + 'px)';
+    el.addEventListener('pointerdown', function(ev){ ev.preventDefault(); catchHeartTap(heart); });
+    catchArea.appendChild(el);
+    catchGame.hearts.push(heart);
+  }
+  function catchHeartTap(heart){
+    if(!catchGame || !catchGame.playing) return;
+    var idx = catchGame.hearts.indexOf(heart);
+    if(idx === -1) return;
+    catchGame.hearts.splice(idx, 1);
+    catchGame.score += heart.points;
+    catchGame.caught += 1;
+    if(catchScoreEl) catchScoreEl.textContent = catchGame.score;
+    if(catchCountEl) catchCountEl.textContent = catchGame.caught;
+    var pop = document.createElement('span');
+    pop.className = 'catch-pop';
+    pop.textContent = '+' + heart.points;
+    pop.style.left = (heart.x + heart.size / 2) + 'px';
+    pop.style.top = Math.max(10, heart.y + heart.size / 2) + 'px';
+    catchArea.appendChild(pop);
+    setTimeout(function(){ pop.remove(); }, 780);
+    heart.el.remove();
+  }
+  function catchLoop(ts){
+    if(!catchGame || !catchGame.playing) return;
+    if(!catchGame.lastTs) catchGame.lastTs = ts;
+    var dt = Math.min(0.05, (ts - catchGame.lastTs) / 1000);
+    catchGame.lastTs = ts;
+    catchGame.timeLeft -= dt;
+    if(catchGame.timeLeft <= 0){ endCatchGame(); return; }
+    if(catchTimeEl) catchTimeEl.textContent = Math.ceil(catchGame.timeLeft);
+    catchGame.spawnIn -= dt;
+    if(catchGame.spawnIn <= 0){
+      spawnCatchHeart();
+      catchGame.spawnIn = 0.5 + Math.random() * 0.45;
+    }
+    var h = catchArea ? catchArea.clientHeight : 380;
+    for(var i = catchGame.hearts.length - 1; i >= 0; i--){
+      var heart = catchGame.hearts[i];
+      heart.y += heart.speed * dt;
+      heart.sway += dt * 2;
+      var sx = heart.x + Math.sin(heart.sway) * 8;
+      heart.el.style.transform = 'translate(' + sx + 'px,' + heart.y + 'px)';
+      if(heart.y > h + 24){
+        heart.el.remove();
+        catchGame.hearts.splice(i, 1);
+      }
+    }
+    catchGame.raf = requestAnimationFrame(catchLoop);
+  }
+  function startCatchGame(){
+    stopCatchGame();
+    catchGame = { playing: true, score: 0, caught: 0, timeLeft: 30, hearts: [], lastTs: 0, spawnIn: 0.15, raf: null };
+    if(catchStartOverlay) catchStartOverlay.hidden = true;
+    if(catchEndOverlay) catchEndOverlay.hidden = true;
+    if(catchArea) catchArea.classList.add('is-playing');
+    catchGame.raf = requestAnimationFrame(catchLoop);
+  }
+  function endCatchGame(){
+    if(!catchGame) return;
+    var s = catchGame.score, c = catchGame.caught;
+    catchGame.playing = false;
+    if(catchGame.raf) cancelAnimationFrame(catchGame.raf);
+    catchGame.hearts.forEach(function(hh){ hh.el.remove(); });
+    catchGame.hearts = [];
+    if(catchArea) catchArea.classList.remove('is-playing');
+    if(catchTimeEl) catchTimeEl.textContent = '0';
+    var line;
+    if(s >= 50) line = '¡Eres rapidísima, mi vida! Así, sin darme ni cuenta, me atrapaste el corazón tú a mí.';
+    else if(s >= 25) line = '¡Muy bien, mi amor! Cada corazoncito que atrapaste es uno de los míos… y son todos tuyos.';
+    else line = 'No importan los puntos, mi amor: cada corazón que cae es uno de los míos, y todos, toditos, son para ti.';
+    if(catchFinalMsg) catchFinalMsg.innerHTML = '¡Atrapaste ' + c + ' corazones, mi amor! ♥<span class="catch-final-sub">Sumaste ' + s + ' puntos. ' + line + '</span>';
+    if(catchEndOverlay) catchEndOverlay.hidden = false;
+  }
+  function stopCatchGame(){
+    if(catchGame){
+      catchGame.playing = false;
+      if(catchGame.raf) cancelAnimationFrame(catchGame.raf);
+      catchGame.hearts.forEach(function(hh){ hh.el.remove(); });
+      catchGame = null;
+    }
+    if(catchArea) catchArea.classList.remove('is-playing');
+    if(catchStartOverlay) catchStartOverlay.hidden = false;
+    if(catchEndOverlay) catchEndOverlay.hidden = true;
+    if(catchScoreEl) catchScoreEl.textContent = '0';
+    if(catchCountEl) catchCountEl.textContent = '0';
+    if(catchTimeEl) catchTimeEl.textContent = '30';
+  }
+  var catchStartBtn = document.getElementById('catchStartBtn');
+  var catchAgainBtn = document.getElementById('catchAgainBtn');
+  if(catchStartBtn) catchStartBtn.addEventListener('click', startCatchGame);
+  if(catchAgainBtn) catchAgainBtn.addEventListener('click', startCatchGame);
+
+  // --- Preguntas sobre nosotros ---
+  var QUIZ = [
+    { q: '¿Cuándo es el cumpleaños de Naomi?', opts: ['El 10 de diciembre', 'El 15 de diciembre', 'El 19 de diciembre'], answer: 1 },
+    { q: '¿Cuándo se casan Hagot y Naomi?', opts: ['El 15 de diciembre', 'El 24 de diciembre', 'El 19 de diciembre'], answer: 2 },
+    { q: '¿Cómo se llamarán los futuros hijos de Hagot y Naomi?', opts: ['Nimrod y Liahona', 'Noé y Sara', 'Abraham y Rebeca'], answer: 0 },
+    { q: '¿Qué canción es “Cómo inició nuestra historia”?', opts: ['“Perfect”, de Ed Sheeran', '“A Thousand Years”, de Christina Perri', '“Can’t Help Falling in Love”, de Elvis Presley'], answer: 2 },
+    { q: '¿Qué canción es “Cómo empezará nuestra eternidad”?', opts: ['“Vamos bien”, de Majo y Dan', '“Bésame mucho”, de Consuelo Velázquez', '“Eres mi todo”, de Kalimba'], answer: 0 }
+  ];
+  var quizStartWrap = document.getElementById('quizStartWrap');
+  var quizBody = document.getElementById('quizBody');
+  var quizEnd = document.getElementById('quizEnd');
+  var quizProgress = document.getElementById('quizProgress');
+  var quizScoreEl = document.getElementById('quizScore');
+  var quizQuestion = document.getElementById('quizQuestion');
+  var quizOptions = document.getElementById('quizOptions');
+  var quizFeedback = document.getElementById('quizFeedback');
+  var quizNextBtn = document.getElementById('quizNextBtn');
+  var quizFinalMsg = document.getElementById('quizFinalMsg');
+  var quizState = { idx: 0, score: 0, locked: false };
+  function renderQuizQuestion(){
+    var item = QUIZ[quizState.idx];
+    quizState.locked = false;
+    if(quizProgress) quizProgress.textContent = 'Pregunta ' + (quizState.idx + 1) + ' de ' + QUIZ.length;
+    if(quizScoreEl) quizScoreEl.textContent = quizState.score;
+    if(quizQuestion) quizQuestion.textContent = item.q;
+    if(quizFeedback) quizFeedback.textContent = '';
+    if(quizNextBtn) quizNextBtn.hidden = true;
+    if(quizOptions){
+      quizOptions.innerHTML = '';
+      item.opts.forEach(function(opt, i){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'quiz-opt';
+        b.textContent = opt;
+        b.addEventListener('click', function(){ answerQuiz(i, b); });
+        quizOptions.appendChild(b);
+      });
+    }
+  }
+  function answerQuiz(i, btn){
+    if(quizState.locked) return;
+    quizState.locked = true;
+    var item = QUIZ[quizState.idx];
+    var buttons = quizOptions ? quizOptions.querySelectorAll('.quiz-opt') : [];
+    Array.prototype.forEach.call(buttons, function(b, j){
+      b.disabled = true;
+      if(j === item.answer) b.classList.add('is-correct');
+    });
+    if(i === item.answer){
+      quizState.score++;
+      if(quizFeedback) quizFeedback.textContent = '¡Correcto, mi amor! ♥';
+    } else {
+      btn.classList.add('is-wrong');
+      if(quizFeedback) quizFeedback.textContent = 'Casi, mi vida… la respuesta era: ' + item.opts[item.answer];
+    }
+    if(quizScoreEl) quizScoreEl.textContent = quizState.score;
+    if(quizNextBtn){
+      quizNextBtn.textContent = quizState.idx === QUIZ.length - 1 ? 'Ver mi resultado ♥' : 'Siguiente pregunta ♥';
+      quizNextBtn.hidden = false;
+    }
+  }
+  function startQuiz(){
+    quizState = { idx: 0, score: 0, locked: false };
+    if(quizStartWrap) quizStartWrap.hidden = true;
+    if(quizEnd) quizEnd.hidden = true;
+    if(quizBody) quizBody.hidden = false;
+    renderQuizQuestion();
+  }
+  function endQuiz(){
+    if(quizBody) quizBody.hidden = true;
+    if(quizEnd) quizEnd.hidden = false;
+    var s = quizState.score, msg;
+    if(s === QUIZ.length) msg = '¡Perfecto, mi amor! Acertaste las 5 de 5: conoces nuestra historia de memoria… y cómo no, si es la historia más bonita que existe: la nuestra. Te amo con todo mi corazón. ♥';
+    else if(s >= 3) msg = '¡Muy bien, mi amor! Acertaste ' + s + ' de 5. Nuestra historia ya la llevas en el corazón, y lo que falta lo vamos a vivir juntitos, pasito a pasito, hasta la eternidad. ♥';
+    else msg = 'Acertaste ' + s + ' de 5, mi vida… pero no te preocupes: lo bonito de nuestra historia es que apenas está empezando, y la vamos a escribir juntos, tú y yo, para siempre. ♥';
+    if(quizFinalMsg) quizFinalMsg.textContent = msg;
+  }
+  var quizStartBtn = document.getElementById('quizStartBtn');
+  var quizRestartBtn = document.getElementById('quizRestartBtn');
+  if(quizStartBtn) quizStartBtn.addEventListener('click', startQuiz);
+  if(quizRestartBtn) quizRestartBtn.addEventListener('click', startQuiz);
+  if(quizNextBtn) quizNextBtn.addEventListener('click', function(){
+    quizState.idx++;
+    if(quizState.idx >= QUIZ.length) endQuiz(); else renderQuizQuestion();
+  });
+
+  // --- Memorama ---
+  var MEMO_IMGS = [
+    { src: 'images/foto-naomi-ramo.jpg', alt: 'Naomi con su ramo de rosas' },
+    { src: 'images/foto-juntos-puente.jpg', alt: 'Hagot y Naomi abrazados en el puente' },
+    { src: 'images/foto-2.jpg', alt: 'Pastel de cumpleaños rosa' },
+    { src: 'images/foto-3.jpg', alt: 'Ramo de rosas rosas' },
+    { src: 'images/foto-1.jpg', alt: 'Guirnalda de corazones' }
+  ];
+  var memoGrid = document.getElementById('memoGrid');
+  var memoAttemptsEl = document.getElementById('memoAttempts');
+  var memoPairsEl = document.getElementById('memoPairs');
+  var memoFinal = document.getElementById('memoFinal');
+  var memoFinalMsg = document.getElementById('memoFinalMsg');
+  var memoState = { first: null, lock: false, attempts: 0, matched: 0 };
+  function buildMemo(){
+    if(!memoGrid) return;
+    var deck = [];
+    MEMO_IMGS.forEach(function(img, i){ deck.push(i); deck.push(i); });
+    for(var i = deck.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = deck[i]; deck[i] = deck[j]; deck[j] = t;
+    }
+    memoState = { first: null, lock: false, attempts: 0, matched: 0 };
+    if(memoAttemptsEl) memoAttemptsEl.textContent = '0';
+    if(memoPairsEl) memoPairsEl.textContent = '0 de ' + MEMO_IMGS.length;
+    if(memoFinal) memoFinal.hidden = true;
+    memoGrid.innerHTML = '';
+    deck.forEach(function(imgIdx){
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'memo-card';
+      card.setAttribute('data-img', String(imgIdx));
+      card.setAttribute('aria-label', 'Tarjeta del memorama: toca para voltearla');
+      var inner = document.createElement('span');
+      inner.className = 'memo-inner';
+      var front = document.createElement('span');
+      front.className = 'memo-face memo-front';
+      front.setAttribute('aria-hidden', 'true');
+      front.textContent = '♥';
+      var back = document.createElement('span');
+      back.className = 'memo-face memo-back';
+      var im = document.createElement('img');
+      im.src = MEMO_IMGS[imgIdx].src;
+      im.alt = MEMO_IMGS[imgIdx].alt;
+      back.appendChild(im);
+      inner.appendChild(front);
+      inner.appendChild(back);
+      card.appendChild(inner);
+      card.addEventListener('click', function(){ flipMemo(card); });
+      memoGrid.appendChild(card);
+    });
+  }
+  function flipMemo(card){
+    if(memoState.lock || card.classList.contains('flipped')) return;
+    card.classList.add('flipped');
+    if(!memoState.first){ memoState.first = card; return; }
+    var first = memoState.first;
+    memoState.first = null;
+    memoState.attempts++;
+    if(memoAttemptsEl) memoAttemptsEl.textContent = memoState.attempts;
+    if(first.getAttribute('data-img') === card.getAttribute('data-img')){
+      first.classList.add('matched');
+      card.classList.add('matched');
+      memoState.matched++;
+      if(memoPairsEl) memoPairsEl.textContent = memoState.matched + ' de ' + MEMO_IMGS.length;
+      if(memoState.matched === MEMO_IMGS.length){
+        if(memoFinalMsg) memoFinalMsg.textContent = '¡Lo lograste, mi amor! Encontraste los 5 pares en ' + memoState.attempts + ' intentos. Así como juntaste cada parejita, Dios nos juntó a ti y a mí… y ya no nos soltamos nunca. ♥';
+        if(memoFinal) memoFinal.hidden = false;
+      }
+    } else {
+      memoState.lock = true;
+      setTimeout(function(){
+        first.classList.remove('flipped');
+        card.classList.remove('flipped');
+        memoState.lock = false;
+      }, 900);
+    }
+  }
+  var memoRestartBtn = document.getElementById('memoRestartBtn');
+  if(memoRestartBtn) memoRestartBtn.addEventListener('click', buildMemo);
+  buildMemo();
+
+  // --- Rueda de sorpresas ---
+  var WHEEL_PRIZES = [
+    { label: 'Un beso', msg: 'Reclámalo cuando quieras, mi vida: tengo miles guardados solo para ti.' },
+    { label: 'Un abrazo', msg: 'De esos largos y apretados, de los que no se quieren soltar nunca. Ven por él, mi amor.' },
+    { label: 'Un baile', msg: 'Tú y yo, nuestra canción sonando, y el mundo girando despacito alrededor de nosotros.' },
+    { label: 'Una cita', msg: 'Tú eliges el lugar, mi amor; yo llevo las ganas de verte sonreír toda la tarde.' },
+    { label: 'Una serenata', msg: 'Con nuestras canciones y todo mi corazón cantándote, mi Naomi hermosa.' },
+    { label: 'Un día juntos', msg: 'Un día entero, sin prisa y sin reloj: solo tú y yo. El mejor premio de todos.' }
+  ];
+  var WHEEL_COLORS = ['#C24365', '#EAD9A8', '#9E2F4E', '#F3A8BB', '#B98A2F', '#E87A97'];
+  var WHEEL_TEXT = ['#FFFFFF', '#4A2330', '#FFFFFF', '#4A2330', '#FFFFFF', '#4A2330'];
+  var wheelGroup = document.getElementById('wheelGroup');
+  var wheelResult = document.getElementById('wheelResult');
+  var wheelSpinBtn = document.getElementById('wheelSpinBtn');
+  var wheelRotation = 0;
+  var wheelSpinning = false;
+  function buildWheel(){
+    if(!wheelGroup) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var cx = 160, cy = 160, r = 152;
+    WHEEL_PRIZES.forEach(function(prize, i){
+      var a0 = (i * 60 - 90) * Math.PI / 180;
+      var a1 = ((i + 1) * 60 - 90) * Math.PI / 180;
+      var x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+      var x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', 'M' + cx + ' ' + cy + ' L' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' A' + r + ' ' + r + ' 0 0 1 ' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' Z');
+      path.setAttribute('fill', WHEEL_COLORS[i]);
+      path.setAttribute('stroke', '#FFF7F3');
+      path.setAttribute('stroke-width', '2');
+      wheelGroup.appendChild(path);
+      var am = (i * 60 + 30 - 90) * Math.PI / 180;
+      var tx = cx + r * 0.63 * Math.cos(am);
+      var ty = cy + r * 0.63 * Math.sin(am);
+      var text = document.createElementNS(NS, 'text');
+      text.setAttribute('x', tx.toFixed(1));
+      text.setAttribute('y', ty.toFixed(1));
+      text.setAttribute('fill', WHEEL_TEXT[i]);
+      text.setAttribute('font-size', prize.label.length > 10 ? '13.5' : '15.5');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('font-family', 'Quicksand, sans-serif');
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('transform', 'rotate(' + (i * 60 + 30) + ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + ')');
+      text.textContent = prize.label;
+      wheelGroup.appendChild(text);
+    });
+    var ring = document.createElementNS(NS, 'circle');
+    ring.setAttribute('cx', '160'); ring.setAttribute('cy', '160'); ring.setAttribute('r', '152');
+    ring.setAttribute('fill', 'none');
+    ring.setAttribute('stroke', '#B98A2F');
+    ring.setAttribute('stroke-width', '4');
+    wheelGroup.appendChild(ring);
+  }
+  function spinWheel(){
+    if(wheelSpinning || !wheelGroup) return;
+    wheelSpinning = true;
+    if(wheelResult) wheelResult.textContent = 'Girando, girando… ¿qué te tocará, mi amor?';
+    if(wheelSpinBtn){ wheelSpinBtn.disabled = true; wheelSpinBtn.textContent = 'Girando… ♥'; }
+    var p = Math.floor(Math.random() * WHEEL_PRIZES.length);
+    var target = -30 - p * 60 + (Math.random() * 36 - 18);
+    var currentMod = ((wheelRotation % 360) + 360) % 360;
+    var targetMod = ((target % 360) + 360) % 360;
+    var delta = targetMod - currentMod;
+    if(delta <= 0) delta += 360;
+    wheelRotation += 360 * 5 + delta;
+    wheelGroup.style.transition = 'transform 4.6s cubic-bezier(.12,.8,.16,1)';
+    wheelGroup.style.transform = 'rotate(' + wheelRotation + 'deg)';
+    setTimeout(function(){
+      wheelSpinning = false;
+      if(wheelSpinBtn){ wheelSpinBtn.disabled = false; wheelSpinBtn.textContent = '♥ ¡Girar otra vez!'; }
+      if(wheelResult) wheelResult.innerHTML = '¡Te tocó: <strong>' + WHEEL_PRIZES[p].label + '</strong>! ' + WHEEL_PRIZES[p].msg + ' ♥';
+    }, 4800);
+  }
+  buildWheel();
+  if(wheelSpinBtn) wheelSpinBtn.addEventListener('click', spinWheel);
+
+  // --- Cofre de promesas ---
+  var PROMISES = [
+    'Estar siempre a tu lado, en los días bonitos y en los difíciles, sin soltarte jamás.',
+    'Cuidarte con todo mi corazón, como el tesoro más preciado que Dios me confió.',
+    'Reír contigo todos los días, porque tu risa es mi sonido favorito de todo el mundo.',
+    'Escucharte siempre, con paciencia y con el corazón abierto, en todo momento.',
+    'Apoyar tus sueños como si fueran míos, y caminar contigo hasta verlos cumplidos.',
+    'Construir nuestra eternidad juntos, con Dios en el centro de nuestro hogar, hoy y siempre.'
+  ];
+  var chestGrid = document.getElementById('chestGrid');
+  var chestFinal = document.getElementById('chestFinal');
+  var chestOpened = 0;
+  function buildChests(){
+    if(!chestGrid) return;
+    chestGrid.innerHTML = '';
+    PROMISES.forEach(function(text, i){
+      var wrap = document.createElement('div');
+      wrap.className = 'chest';
+      var box = document.createElement('button');
+      box.type = 'button';
+      box.className = 'chest-box';
+      box.setAttribute('aria-expanded', 'false');
+      box.innerHTML = '<span class="chest-heart" aria-hidden="true">♥</span><span class="chest-num">Promesa ' + (i + 1) + '</span><span class="chest-state">Toca para abrir ♥</span>';
+      var p = document.createElement('p');
+      p.className = 'chest-promise';
+      p.hidden = true;
+      p.textContent = text;
+      box.addEventListener('click', function(){
+        if(wrap.classList.contains('open')) return;
+        wrap.classList.add('open');
+        box.setAttribute('aria-expanded', 'true');
+        var st = box.querySelector('.chest-state');
+        if(st) st.textContent = 'Abierta con amor ♥';
+        p.hidden = false;
+        chestOpened++;
+        if(chestOpened === PROMISES.length && chestFinal) chestFinal.hidden = false;
+      });
+      wrap.appendChild(box);
+      wrap.appendChild(p);
+      chestGrid.appendChild(wrap);
+    });
+  }
+  buildChests();
+
+  // --- Rompecabezas de nuestra foto ---
+  var puzzleGrid = document.getElementById('puzzleGrid');
+  var puzzleMovesEl = document.getElementById('puzzleMoves');
+  var puzzleFinal = document.getElementById('puzzleFinal');
+  var puzzleState = { order: [], selected: null, moves: 0, done: false };
+  function puzzlePos(piece){ return ((piece % 3) * 50) + '% ' + (Math.floor(piece / 3) * 50) + '%'; }
+  function buildPuzzle(){
+    if(!puzzleGrid) return;
+    var order = [0,1,2,3,4,5,6,7,8];
+    do {
+      for(var i = order.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = order[i]; order[i] = order[j]; order[j] = t;
+      }
+    } while(order.every(function(v, idx){ return v === idx; }));
+    puzzleState = { order: order, selected: null, moves: 0, done: false };
+    if(puzzleMovesEl) puzzleMovesEl.textContent = '0';
+    if(puzzleFinal) puzzleFinal.hidden = true;
+    puzzleGrid.classList.remove('done');
+    puzzleGrid.innerHTML = '';
+    order.forEach(function(piece, pos){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'puzzle-tile';
+      b.setAttribute('aria-label', 'Pieza del rompecabezas, posición ' + (pos + 1));
+      b.style.backgroundImage = 'url(images/foto-juntos-puente.jpg)';
+      b.style.backgroundSize = '300% 300%';
+      b.style.backgroundPosition = puzzlePos(piece);
+      b.addEventListener('click', function(){ tapPuzzleTile(pos); });
+      puzzleGrid.appendChild(b);
+    });
+  }
+  function tapPuzzleTile(pos){
+    if(puzzleState.done || !puzzleGrid) return;
+    var tiles = puzzleGrid.querySelectorAll('.puzzle-tile');
+    if(puzzleState.selected === null){
+      puzzleState.selected = pos;
+      tiles[pos].classList.add('selected');
+      return;
+    }
+    if(puzzleState.selected === pos){
+      tiles[pos].classList.remove('selected');
+      puzzleState.selected = null;
+      return;
+    }
+    var first = puzzleState.selected;
+    var tmp = puzzleState.order[first];
+    puzzleState.order[first] = puzzleState.order[pos];
+    puzzleState.order[pos] = tmp;
+    tiles[first].style.backgroundPosition = puzzlePos(puzzleState.order[first]);
+    tiles[pos].style.backgroundPosition = puzzlePos(puzzleState.order[pos]);
+    tiles[first].classList.remove('selected');
+    puzzleState.selected = null;
+    puzzleState.moves++;
+    if(puzzleMovesEl) puzzleMovesEl.textContent = puzzleState.moves;
+    var solved = puzzleState.order.every(function(v, idx){ return v === idx; });
+    if(solved){
+      puzzleState.done = true;
+      puzzleGrid.classList.add('done');
+      if(puzzleFinal){
+        puzzleFinal.textContent = '¡Lo lograste, mi amor! En ' + puzzleState.moves + ' movimientos armaste nuestra foto. Así se arma lo nuestro: pieza por pieza, tú y yo, siempre. ♥';
+        puzzleFinal.hidden = false;
+      }
+    }
+  }
+  var puzzleRestartBtn = document.getElementById('puzzleRestartBtn');
+  if(puzzleRestartBtn) puzzleRestartBtn.addEventListener('click', buildPuzzle);
+  buildPuzzle();
+
+  // --- Sopa de letras de amor ---
+  var WS_WORDS = ['NAOMI', 'HAGOT', 'ETERNIDAD', 'NIMROD', 'LIAHONA', 'AMOR', 'BODA', 'CUMPLEAÑOS'];
+  var WS_SIZE = 12;
+  var wsGrid = document.getElementById('wsGrid');
+  var wsWordsEl = document.getElementById('wsWords');
+  var wsFeedback = document.getElementById('wsFeedback');
+  var wsFinal = document.getElementById('wsFinal');
+  var wsState = { letters: [], start: null, found: {}, foundCount: 0 };
+  function placeWsWord(letters, word){
+    var dirs = [[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
+    for(var t = 0; t < 250; t++){
+      var d = dirs[Math.floor(Math.random() * dirs.length)];
+      var r = Math.floor(Math.random() * WS_SIZE);
+      var c = Math.floor(Math.random() * WS_SIZE);
+      var endR = r + d[0] * (word.length - 1);
+      var endC = c + d[1] * (word.length - 1);
+      if(endR < 0 || endR >= WS_SIZE || endC < 0 || endC >= WS_SIZE) continue;
+      var ok = true;
+      for(var i = 0; i < word.length; i++){
+        var cell = letters[(r + d[0] * i) * WS_SIZE + (c + d[1] * i)];
+        if(cell && cell !== word[i]){ ok = false; break; }
+      }
+      if(!ok) continue;
+      for(var j = 0; j < word.length; j++){
+        letters[(r + d[0] * j) * WS_SIZE + (c + d[1] * j)] = word[j];
+      }
+      return true;
+    }
+    return false;
+  }
+  function buildWordSearch(){
+    if(!wsGrid) return;
+    var letters = null, placed = false, attempts = 0;
+    while(!placed && attempts < 80){
+      attempts++;
+      letters = [];
+      for(var i = 0; i < WS_SIZE * WS_SIZE; i++) letters.push('');
+      placed = true;
+      for(var w = 0; w < WS_WORDS.length; w++){
+        if(!placeWsWord(letters, WS_WORDS[w])){ placed = false; break; }
+      }
+    }
+    var fill = 'AEIOULNMRSTDGCBPFV';
+    for(var k = 0; k < letters.length; k++){
+      if(!letters[k]) letters[k] = fill[Math.floor(Math.random() * fill.length)];
+    }
+    wsState = { letters: letters, start: null, found: {}, foundCount: 0 };
+    wsGrid.innerHTML = '';
+    letters.forEach(function(ch, idx){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ws-cell';
+      b.textContent = ch;
+      b.setAttribute('data-idx', String(idx));
+      b.setAttribute('aria-label', 'Letra ' + ch);
+      b.addEventListener('click', function(){ tapWsCell(idx); });
+      wsGrid.appendChild(b);
+    });
+    if(wsWordsEl){
+      wsWordsEl.innerHTML = '';
+      WS_WORDS.forEach(function(word){
+        var s = document.createElement('span');
+        s.className = 'ws-word';
+        s.setAttribute('data-word', word);
+        s.textContent = word;
+        wsWordsEl.appendChild(s);
+      });
+    }
+    if(wsFeedback) wsFeedback.textContent = 'Toca la primera letra de una palabra, mi amor.';
+    if(wsFinal) wsFinal.hidden = true;
+  }
+  function tapWsCell(idx){
+    if(!wsGrid) return;
+    var cells = wsGrid.querySelectorAll('.ws-cell');
+    if(wsState.start === null){
+      wsState.start = idx;
+      cells[idx].classList.add('start');
+      if(wsFeedback) wsFeedback.textContent = 'Ahora toca la última letra de esa palabra.';
+      return;
+    }
+    if(wsState.start === idx){
+      cells[idx].classList.remove('start');
+      wsState.start = null;
+      if(wsFeedback) wsFeedback.textContent = 'Toca la primera letra de una palabra, mi amor.';
+      return;
+    }
+    var s = wsState.start;
+    cells[s].classList.remove('start');
+    wsState.start = null;
+    var sr = Math.floor(s / WS_SIZE), sc = s % WS_SIZE;
+    var er = Math.floor(idx / WS_SIZE), ec = idx % WS_SIZE;
+    var dr = er - sr, dc = ec - sc;
+    if(!(dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc))){
+      if(wsFeedback) wsFeedback.textContent = 'Las palabras van en línea recta, mi amor: horizontal, vertical o diagonal. Intenta de nuevo.';
+      return;
+    }
+    var len = Math.max(Math.abs(dr), Math.abs(dc)) + 1;
+    var stepR = dr === 0 ? 0 : (dr > 0 ? 1 : -1);
+    var stepC = dc === 0 ? 0 : (dc > 0 ? 1 : -1);
+    var str = '', pathIdx = [];
+    for(var i = 0; i < len; i++){
+      var idxx = (sr + stepR * i) * WS_SIZE + (sc + stepC * i);
+      str += wsState.letters[idxx];
+      pathIdx.push(idxx);
+    }
+    var rev = str.split('').reverse().join('');
+    var match = null;
+    WS_WORDS.forEach(function(word){
+      if(!wsState.found[word] && (word === str || word === rev)) match = word;
+    });
+    if(match){
+      wsState.found[match] = true;
+      wsState.foundCount++;
+      pathIdx.forEach(function(idxx){ cells[idxx].classList.add('found'); });
+      var chip = wsWordsEl ? wsWordsEl.querySelector('[data-word="' + match + '"]') : null;
+      if(chip) chip.classList.add('found');
+      if(wsState.foundCount === WS_WORDS.length){
+        if(wsFeedback) wsFeedback.textContent = '';
+        if(wsFinal){
+          wsFinal.textContent = '¡Encontraste todas las palabras, mi amor! Naomi, Hagot, eternidad, Nimrod, Liahona, amor, boda y cumpleaños: las palabras más bonitas del mundo son las de nuestra historia. ♥';
+          wsFinal.hidden = false;
+        }
+      } else if(wsFeedback){
+        wsFeedback.textContent = '¡Encontraste "' + match + '", mi amor! Van ' + wsState.foundCount + ' de ' + WS_WORDS.length + '. ♥';
+      }
+    } else if(wsFeedback){
+      wsFeedback.textContent = 'Esa línea no forma una de nuestras palabras. ¡Sigue buscando, mi vida!';
+    }
+  }
+  var wsRestartBtn = document.getElementById('wsRestartBtn');
+  if(wsRestartBtn) wsRestartBtn.addEventListener('click', buildWordSearch);
+  buildWordSearch();
+
+  // --- Cápsula del tiempo: se abre el 15 de diciembre de 2026 (hora de México) ---
+  var capsuleLocked = document.getElementById('capsuleLocked');
+  var capsuleOpen = document.getElementById('capsuleOpen');
+  var capsuleOpenBtn = document.getElementById('capsuleOpenBtn');
+  var capsuleLetter = document.getElementById('capsuleLetter');
+  var capTarget = new Date('2026-12-15T00:00:00-06:00').getTime();
+  var capNums = {
+    days: document.querySelector('[data-cap="days"]'),
+    hours: document.querySelector('[data-cap="hours"]'),
+    mins: document.querySelector('[data-cap="mins"]'),
+    secs: document.querySelector('[data-cap="secs"]')
+  };
+  function tickCapsule(){
+    var diff = capTarget - Date.now();
+    if(diff <= 0){
+      if(capsuleLocked) capsuleLocked.hidden = true;
+      if(capsuleOpen) capsuleOpen.hidden = false;
+      return false;
+    }
+    var totalSecs = Math.floor(diff / 1000);
+    if(capNums.days) capNums.days.textContent = Math.floor(totalSecs / 86400);
+    if(capNums.hours) capNums.hours.textContent = pad(Math.floor((totalSecs % 86400) / 3600));
+    if(capNums.mins) capNums.mins.textContent = pad(Math.floor((totalSecs % 3600) / 60));
+    if(capNums.secs) capNums.secs.textContent = pad(totalSecs % 60);
+    return true;
+  }
+  if(capsuleLocked || capsuleOpen){
+    if(tickCapsule()){
+      var capTimer = setInterval(function(){ if(!tickCapsule()) clearInterval(capTimer); }, 1000);
+    }
+  }
+  if(capsuleOpenBtn) capsuleOpenBtn.addEventListener('click', function(){
+    if(capsuleLetter) capsuleLetter.hidden = false;
+    capsuleOpenBtn.hidden = true;
+    if(capsuleLetter) capsuleLetter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  });
+
+  // --- Nuestro mapa del tesoro ---
+  var CLUES = [
+    { text: 'Donde empieza nuestro mapa: una callecita de Pachuca, en El Saucillo, donde dejamos huella de nuestro amor…', place: '¡Calle Pandora, El Saucillo!', detail: 'Ahí empezó esta aventura, mi amor.' },
+    { text: 'Un rincón lleno de color, jardines y antojitos en la Ciudad de México, perfecto para caminar tomados de la mano…', place: '¡Coyoacán!', detail: 'De mis paseos favoritos contigo, mi vida.' },
+    { text: 'El lugar más sagrado de nuestro mapa: una Casa del Señor en la Ciudad de México, donde soñamos con nuestra eternidad…', place: '¡El Templo de Aragón!', detail: 'Ahí mira nuestro para siempre.' },
+    { text: 'Donde el mar nos abraza: arena, brisa y atardeceres dorados en Veracruz…', place: '¡Playa Norte, Veracruz!', detail: 'Y aquí, mi amor, junto al mar… está el tesoro.' }
+  ];
+  var treasureStep = document.getElementById('treasureStep');
+  var treasureText = document.getElementById('treasureText');
+  var treasureAnswer = document.getElementById('treasureAnswer');
+  var treasureBtn = document.getElementById('treasureBtn');
+  var treasureClue = document.getElementById('treasureClue');
+  var treasureFinal = document.getElementById('treasureFinal');
+  var treasureProgress = document.getElementById('treasureProgress');
+  var treasureState = { idx: 0, revealed: false };
+  function renderTreasure(){
+    if(treasureProgress){
+      treasureProgress.innerHTML = '';
+      CLUES.forEach(function(_, i){
+        var s = document.createElement('span');
+        s.textContent = '♥';
+        if(i < treasureState.idx || (i === treasureState.idx && treasureState.revealed)) s.className = 'on';
+        treasureProgress.appendChild(s);
+      });
+    }
+    var clue = CLUES[treasureState.idx];
+    if(treasureStep) treasureStep.textContent = 'Pista ' + (treasureState.idx + 1) + ' de ' + CLUES.length;
+    if(treasureText) treasureText.textContent = clue.text;
+    if(treasureAnswer){
+      treasureAnswer.hidden = true;
+      treasureAnswer.innerHTML = '';
+    }
+    treasureState.revealed = false;
+    if(treasureBtn) treasureBtn.textContent = 'Revelar el lugar ♥';
+  }
+  if(treasureBtn) treasureBtn.addEventListener('click', function(){
+    var clue = CLUES[treasureState.idx];
+    if(!treasureState.revealed){
+      treasureState.revealed = true;
+      if(treasureAnswer){
+        treasureAnswer.innerHTML = clue.place + '<span class="treasure-detail">' + clue.detail + '</span>';
+        treasureAnswer.hidden = false;
+      }
+      if(treasureProgress){
+        var hearts = treasureProgress.querySelectorAll('span');
+        if(hearts[treasureState.idx]) hearts[treasureState.idx].className = 'on';
+      }
+      treasureBtn.textContent = treasureState.idx === CLUES.length - 1 ? '¡Ver el tesoro! ♥' : 'Siguiente pista ♥';
+      return;
+    }
+    if(treasureState.idx === CLUES.length - 1){
+      if(treasureClue) treasureClue.style.display = 'none';
+      if(treasureProgress) treasureProgress.style.display = 'none';
+      if(treasureFinal) treasureFinal.hidden = false;
+      return;
+    }
+    treasureState.idx++;
+    renderTreasure();
+  });
+  var treasureRestartBtn = document.getElementById('treasureRestartBtn');
+  if(treasureRestartBtn) treasureRestartBtn.addEventListener('click', function(){
+    treasureState = { idx: 0, revealed: false };
+    if(treasureClue) treasureClue.style.display = '';
+    if(treasureProgress) treasureProgress.style.display = '';
+    if(treasureFinal) treasureFinal.hidden = true;
+    renderTreasure();
+  });
+  renderTreasure();
+
+  // --- Nuestra fe y nuestro matrimonio eterno ---
+  var SCRIPTURES = [
+    { ref: 'Mateo 19:6', text: 'Así que no son ya más dos, sino una sola carne; por tanto, lo que Dios juntó, no lo separe el hombre.' },
+    { ref: 'Génesis 2:24', text: 'Por tanto, dejará el hombre a su padre y a su madre, y se unirá a su mujer, y serán una sola carne.' },
+    { ref: 'Eclesiastés 4:9–12', text: 'Mejores son dos que uno, porque tienen mejor paga de su trabajo. Porque si cayeren, el uno levantará a su compañero; pero ¡ay del solo!, que cuando cayere, no habrá segundo que lo levante. También si dos durmieren juntos, se calentarán mutuamente; mas, ¿cómo se calentará uno solo? Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto.' },
+    { ref: '1 Corintios 13:4–7', text: 'La caridad es sufrida, es benigna; la caridad no tiene envidia, la caridad no es jactanciosa, no se envanece; no hace nada indebido, no busca lo suyo, no se irrita, no guarda rencor; no se goza de la injusticia, mas se goza de la verdad. Todo lo sufre, todo lo cree, todo lo espera, todo lo soporta.' },
+    { ref: 'Doctrina y Convenios 131:2', text: 'Y a fin de que un hombre obtenga el más alto, debe entrar en este orden del sacerdocio [es decir, el nuevo y sempiterno convenio del matrimonio].' },
+    { ref: 'Doctrina y Convenios 132:19', text: 'Y además, de cierto te digo que si un hombre se casa con una mujer por mi palabra, la cual es mi ley, y por el nuevo y sempiterno convenio, y les es sellado por el Santo Espíritu de la promesa, por conducto del que es ungido, a quien yo he designado este poder y las llaves de este sacerdocio; y se les dirá: Saldréis en la primera resurrección; y si fuere después de la primera resurrección, en la siguiente resurrección; y heredaréis tronos, reinos, principados y potestades, dominios, toda altura y profundidad; entonces se escribirá en el Libro de la Vida del Cordero que no cometerán asesinato para derramar sangre inocente; y si cumplen mi convenio y no cometen asesinato, derramando sangre inocente, les será hecho en todo cuanto mi siervo haya dicho sobre ellos, en el tiempo y por toda la eternidad; y estará en plena vigencia cuando estén fuera del mundo; y pasarán por donde están los ángeles y los dioses que allí están, a su exaltación y gloria en todas las cosas, como ha sido sellado sobre sus cabezas, la cual gloria será una plenitud y continuación de las simientes por siempre jamás.' },
+    { ref: 'Mosíah 4:15', text: 'Mas los enseñaréis a andar en los caminos de la verdad y la sobriedad; los enseñaréis a amarse mutuamente y a servirse el uno al otro.' },
+    { ref: 'Alma 37:37', text: 'Consulta al Señor en todos tus hechos, y él te dirigirá para bien; sí, cuando te acuestes por la noche, acuéstate en el Señor, para que él te cuide en tu sueño; y cuando te levantes por la mañana, rebose tu corazón de gratitud a Dios; y si haces estas cosas, serás enaltecido en el postrer día.' }
+  ];
+  var dailyVerse = document.getElementById('dailyVerse');
+  var dailyRef = document.getElementById('dailyRef');
+  var faithList = document.getElementById('faithList');
+  function renderFaith(){
+    if(faithList){
+      SCRIPTURES.forEach(function(s){
+        var item = document.createElement('div');
+        item.className = 'faith-item';
+        var h = document.createElement('h5');
+        h.textContent = s.ref;
+        var p = document.createElement('p');
+        p.textContent = s.text;
+        item.appendChild(h);
+        item.appendChild(p);
+        faithList.appendChild(item);
+      });
+    }
+    var idx = 0;
+    try{
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Mexico_City', year: 'numeric', month: 'numeric', day: 'numeric' }).formatToParts(new Date());
+      var y = 2026, m = 1, d = 1;
+      parts.forEach(function(pt){
+        if(pt.type === 'year') y = parseInt(pt.value, 10);
+        if(pt.type === 'month') m = parseInt(pt.value, 10);
+        if(pt.type === 'day') d = parseInt(pt.value, 10);
+      });
+      var dayNum = Math.floor(Date.UTC(y, m - 1, d) / 86400000);
+      idx = ((dayNum % SCRIPTURES.length) + SCRIPTURES.length) % SCRIPTURES.length;
+    }catch(e){ idx = 0; }
+    if(dailyVerse) dailyVerse.textContent = '“' + SCRIPTURES[idx].text + '”';
+    if(dailyRef) dailyRef.textContent = SCRIPTURES[idx].ref;
+  }
+  renderFaith();
+
+  // Nuestros lugares — mapa interactivo con un corazoncito en cada lugar
+  var placesMapEl = document.getElementById('placesMap');
+  var placesFallback = document.getElementById('placesFallback');
+  var places = [
+    { label: 'Calle Pandora, El Saucillo', locality: 'Pachuca', region: 'Hidalgo', lat: 20.06608, lng: -98.72996 },
+    { label: 'Casa de los abuelitos de Naomi', locality: 'Ermita, Ciudad de México', lat: 19.35803, lng: -99.14221 },
+    { label: 'Coyoacán', locality: 'Ciudad de México', lat: 19.34684, lng: -99.16034 },
+    { label: 'Templo de Aragón', locality: 'Ciudad de México', lat: 19.46529, lng: -99.08661 },
+    { label: 'Casa de los abuelitos de Hagot', locality: 'Cuautepec, Ciudad de México', lat: 19.5570043, lng: -99.1335651 },
+    { label: 'Puerto de Veracruz', locality: 'Veracruz', region: 'Veracruz', lat: 19.20821, lng: -96.14598 },
+    { label: 'Playa Norte', locality: 'Veracruz', region: 'Veracruz', lat: 19.2210379, lng: -96.1686536 },
+    { label: 'Reserva Uno', locality: 'Veracruz', region: 'Veracruz', lat: 19.1959744, lng: -96.1730906 }
+  ];
+  function showPlacesFallback(){
+    if(placesMapEl) placesMapEl.style.display = 'none';
+    if(placesFallback) placesFallback.hidden = false;
+  }
+  if(placesMapEl){
+    var placeRows = Array.prototype.slice.call(document.querySelectorAll('.place-row'));
+    placeRows.forEach(function(row){
+      row.addEventListener('keydown', function(ev){
+        if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); row.click(); }
+      });
+    });
+    if(window.MapHelpers){
+      try{
+        MapHelpers.mountPlaceListMap(placesMapEl, { places: places, rows: placeRows, baseStyle: 'light' }, showPlacesFallback);
+      }catch(e){ showPlacesFallback(); }
+    } else {
+      showPlacesFallback();
+    }
+  }
 })();
+</script>
+<script>
+  // ===== Menú del encabezado fijo =====
+  (function(){
+    var menuBtn = document.getElementById('menuBtn');
+    var navMenu = document.getElementById('navMenu');
+    if(!menuBtn || !navMenu) return;
+    function closeMenu(){
+      navMenu.hidden = true;
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Abrir el menú');
+    }
+    menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var willOpen = navMenu.hidden;
+      navMenu.hidden = !willOpen;
+      menuBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', willOpen ? 'Cerrar el menú' : 'Abrir el menú');
+    });
+    navMenu.addEventListener('click', function(e){ e.stopPropagation(); });
+    Array.prototype.forEach.call(navMenu.querySelectorAll('[data-open-game]'), function(item){
+      item.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('click', function(){ if(!navMenu.hidden) closeMenu(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !navMenu.hidden) closeMenu(); });
+  })();
 </script>
 </body>
 </html>

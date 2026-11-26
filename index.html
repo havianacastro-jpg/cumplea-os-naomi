@@ -840,6 +840,8 @@
     padding:18px 18px 10px; max-width:520px; margin:4px auto 6px;
   }
   .adv-piece-note{ margin-top:14px; font-weight:700; color:var(--gold); font-size:.95rem }
+  .adv-extra{ margin-top:22px; padding-top:20px; border-top:2px dashed var(--gold-soft) }
+  .adv-extra h4{ font-size:1.28rem }
   .adv-answer-btn{
     margin-top:6px; background:var(--rose-deep); color:#fff; border:none; border-radius:999px;
     padding:11px 24px; font-family:"Quicksand",sans-serif; font-weight:700; cursor:pointer; min-height:44px;
@@ -2857,8 +2859,11 @@
   renderFaith();
 
   // --- Calendario de Adviento (pantalla de Navidad) ---
-  // Las sorpresas rotan cada año: hay tres juegos completos de contenido y se
-  // elige según el año de la temporada de diciembre que se esté viendo.
+  // Las sorpresas se organizan por año. El juego de 2026 es el especial: es la
+  // primera Navidad de Hagot y Naomi ya casados, así que cada puertecita de
+  // ese año trae su sorpresa principal MÁS las actividades extra de
+  // ADV_EXTRA_2026. Los juegos de 2027 y 2028 traen contenido nuevo, distinto
+  // al de 2026, y el ciclo de tres juegos se repite en los años siguientes.
   var ADV_SETS = [
     {
       sign: "Con todo mi amor, hoy y por toda la eternidad, siempre tuyo, Hagot ♥",
@@ -2897,80 +2902,183 @@
       ]
     },
     {
-      sign: "Feliz Navidad, mi esposa hermosa. Tuyo por siempre, Hagot ♥",
+      sign: "Tu esposo, que te elige cada día, Hagot ♥",
       frags: [
-        "Mi amor: otro diciembre nos encontró, y esta vez te escribo ya como tu esposo, con un año entero de «para siempre» recorrido tomados de la mano.",
-        "Este calendario volvió a cambiar, como cambian los años, pero hay algo que no cambia ni cambiará jamás: lo que siento por ti crece con cada temporada.",
-        "Gracias por nuestro hogar, por las oraciones juntos, por las risas en la cocina y por hacer de cada día común un día especial.",
-        "Este mes celebramos tu cumpleaños y nuestro primer aniversario: doce meses de elegirnos, y te volvería a elegir en cada uno de ellos, sin dudarlo ni un segundo.",
-        "Que vengan muchos diciembres más, mi Naomi: con luces, con tamales, con nuestra familia creciendo en fe. Yo estaré en todos, justo a tu lado."
+        "Mi amor: este diciembre te escribo con un anillo en la mano y un año entero de historias en el corazón. Ser tu esposo es el regalo que se repite todos los días, sin envolver y sin fecha de caducidad.",
+        "Quiero darte las gracias por nuestro primer año: por las mañanas de prisa y los domingos despacio, por tu risa que llena la casa y por tu mano, que siempre termina buscando la mía.",
+        "Aprendí que el amor no vive solo en el día de la boda: vive en el café que se comparte, en la oración antes de dormir y en ese «ya llegué» que, viniendo de ti, suena a hogar.",
+        "Celebramos tu cumpleaños y nuestro primer aniversario, y sigo maravillado: de todas las decisiones de mi vida, la de caminar contigo es la que más paz me da, una y otra vez.",
+        "Que este diciembre nos encuentre así: juntitos, agradecidos y con Cristo en el centro de la casa. Lo mejor de nuestra historia todavía está por escribirse, mi Naomi."
       ],
       days: [
-        { k: "nota", t: "¡Otro diciembre juntitos!", b: "Volvió nuestro calendario, mi amor, y volvió renovado: sorpresas nuevas para un diciembre nuevo. Esta vez te lo entrega tu esposo, con un año de matrimonio en el corazón y el mismo brillo en los ojos del primer día." },
-        { k: "escritura", t: "Paz en la tierra", b: "¡Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres!", ref: "Lucas 2:14", note: "Paz en la tierra… y paz en nuestro hogar, mi amor, que es mi pedacito de tierra favorito en todo el mundo." },
+        { k: "nota", t: "¡Diciembre otra vez, mi esposa!", b: "Este es nuestro primer diciembre completito como esposos, mi amor: del primer día al último, con anillo, con hogar y con un año de recuerdos nuevos en el corazón. Tu calendario volvió, con sorpresas nuevas creadas solo para ti." },
+        { k: "escritura", t: "Dios con nosotros", b: "He aquí, una virgen concebirá y dará a luz un hijo, y llamarás su nombre Emanuel, que traducido es: Dios con nosotros.", ref: "Mateo 1:23", note: "Dios con nosotros, mi amor: así ha estado en nuestro primer año de casados, en cada paso, en cada día ordinario y en cada milagro chiquito." },
         { k: "carta", f: 0 },
-        { k: "vale", t: "Vale por un paseo para ver las luces", b: "Una tarde-noche de diciembre, tomados de la mano, caminando sin rumbo entre las luces de Navidad, con parada obligada para un chocolate calientito." },
-        { k: "adivinanza", b: "Cuanto más pasa el tiempo, más valgo; no me compras con dinero y me guardas en el corazón. ¿Qué soy?", a: "¡Nuestros recuerdos juntos! Y este diciembre, mi amor, vamos a fabricar muchos más." },
-        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Un año después, la misma sonrisa", b: "Nuestra foto en el puente cumple otro diciembre con nosotros. Míranos: así de felices éramos… y así de felices somos, mi amor, porque lo nuestro crece y crece." },
-        { k: "razon", t: "Razón para amarte: nuestro hogar", b: "Porque haces que nuestro hogar se sienta como el cielo en la tierra: tu manera de amar, de orar y de reír convierte cualquier casa en nuestro lugar favorito del mundo." },
+        { k: "vale", t: "Vale por una tarde de galletas caseras", b: "Una tarde de diciembre nos ponemos el delantal los dos, horneamos galletas y decoramos las más bonitas para regalar. Las quemaditas nos las comemos nosotros, riendo, porque también saben a amor." },
+        { k: "adivinanza", b: "Me cuelgan del árbol una vez al año, brillo sin tener luz propia y guardo un deseo en mi interior. ¿Qué soy?", a: "¡Una esfera de Navidad! Y conste, mi amor: mi deseo más grande ya se cumplió, porque despierto cada día a tu lado." },
+        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "El puente, un año después", b: "Mira nuestra foto del puente, mi amor: ahí éramos novios llenos de sueños; hoy somos esposos cumpliéndolos uno a uno. El puente era solo el principio del camino." },
+        { k: "razon", t: "Razón para amarte: tu abrazo de bienvenida", b: "Porque no importa cómo haya ido el día: llegar a casa y sentir tu abrazo es como escuchar «todo va a estar bien» sin necesidad de palabras. Eres mi lugar seguro." },
         { k: "carta", f: 1 },
-        { k: "cancion", t: "“Vamos bien” · Majo y Dan", b: "La canción de «Cómo empezará nuestra eternidad». Un año después te lo confirmo con todo mi corazón, mi amor: vamos bien, vamos muy bien." },
-        { k: "vale", t: "Vale por cocinarte tu comida favorita", b: "Yo cocino, con todo mi amor y mi mejor esfuerzo; tú solo llega, siéntate hermosa y deja que te consienta. Postre incluido, por supuesto." },
-        { k: "escritura", t: "El amor más grande", b: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", ref: "Juan 3:16", note: "El amor más grande de todos es el de nuestro Padre Celestial. De ese amor aprendemos a amarnos tú y yo, mi vida." },
-        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "La dueña de mi corazón", b: "Tu foto con el ramo sigue siendo mi favorita: esa sonrisa tuya es mi paisaje preferido, en diciembre y en cualquier mes del año." },
+        { k: "cancion", t: "“A Thousand Years” · Christina Perri", b: "«Te he amado por mil años y te amaré por mil años más»: así suena nuestro primer aniversario, mi amor. Y aun así, mil años se me hacen pocos." },
+        { k: "vale", t: "Vale por una tarde de recuerdos", b: "Sacamos las fotos de nuestro primer año de casados, las vemos despacito con un chocolate caliente y elegimos la favorita de cada mes. Spoiler: en todas sales hermosa." },
+        { k: "escritura", t: "Nuestro hogar habla de Cristo", b: "Y hablamos de Cristo, nos regocijamos en Cristo, predicamos de Cristo, profetizamos de Cristo y escribimos según nuestras profecías, para que nuestros hijos sepan a qué fuente han de acudir para la remisión de sus pecados.", ref: "2 Nefi 25:26", note: "Así quiero nuestro hogar, mi amor: que en esta casa se hable de Cristo, hoy y cuando nuestra familia crezca." },
+        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "La sonrisa de mi esposa", b: "Esa sonrisa tuya con el ramo sigue siendo mi vista favorita del mundo, mi amor. Un año de esposos y todavía me derrite igual que el primer día." },
         { k: "carta", f: 2 },
-        { k: "adivinanza", b: "No soy estrella, pero guío; no soy mapa, pero llevo a casa. En Belén brilló una igual que yo. ¿Qué soy?", a: "La luz de Cristo… y la fe que guía nuestro matrimonio, mi amor." },
-        { k: "cumple", t: "¡Feliz cumpleaños, mi esposa! 🎂", b: "¡Hoy cumples años, mi Naomi! Otro cumpleaños tuyo a mi lado, y pienso celebrarte así toda la vida: con gratitud a Dios por ti y con el corazón de fiesta. ¡Feliz cumpleaños, mi amor!" },
-        { k: "nota", t: "Cuenta regresiva al aniversario", b: "En tres días cumplimos un año de casados, mi vida. Un año enterito… y ya sé que ni la eternidad me va a alcanzar para amarte como mereces." },
-        { k: "vale", t: "Vale por una tarde de fotos juntos", b: "Salimos con nuestras mejores sonrisas a tomarnos fotos por los lugares bonitos de la ciudad, para seguir llenando nuestro álbum de momentitos." },
+        { k: "adivinanza", b: "Nazco en diciembre, vivo en la cocina y desaparezco entre risas y mordidas calientito. ¿Qué soy?", a: "¡El tamal de la tamalada, mi amor! Desaparece rápido… aunque no tan rápido como yo desaparezco entre tus abrazos." },
+        { k: "cumple", t: "¡Feliz cumpleaños, mi esposa hermosa! 🎂", b: "Hoy cumples años, mi Naomi, y yo cumplo otro año de agradecerle a Dios por ti. Que este año te devuelva multiplicado todo el amor que repartes por donde pasas. ¡Feliz cumpleaños, mi esposa!" },
+        { k: "nota", t: "En tres días: un año de «sí»", b: "Ya viene nuestro primer aniversario, mi vida, y yo sigo contando los días como cuando éramos novios. Un año de esposos… y siento que apenas estamos calentando para la eternidad." },
+        { k: "vale", t: "Vale por tu cena favorita, cocinada por mí", b: "Para celebrar la víspera de nuestro aniversario: yo cocino tu cena favorita, pongo la mesa bonita y brindo contigo por el año más bonito de mi vida. Tú solo llega hermosa, como siempre." },
         { k: "carta", f: 3 },
-        { k: "boda", t: "¡Un año de casados! 💍", b: "Hoy hace un año te tomé de la mano para siempre, mi amor, y ha sido el año más bonito de mi vida. Gracias por cada día, por cada risa y por cada oración juntos. ¡Feliz primer aniversario, mi esposa! Y los que faltan… todos, juntitos." },
-        { k: "escritura", t: "Siempre hay lugar para Él", b: "Y dio a luz a su hijo primogénito, y lo envolvió en pañales, y lo acostó en un pesebre, porque no había lugar para ellos en el mesón.", ref: "Lucas 2:7", note: "No hubo lugar en el mesón para el Salvador… pero en nuestro hogar y en nuestro corazón, mi amor, Él siempre tiene el primer lugar." },
-        { k: "cancion", t: "“Thinking Out Loud” · Ed Sheeran", b: "«Te seguiré amando hasta que tengamos setenta años», dice la canción… y yo te corrijo, mi amor: yo te amaré por toda la eternidad." },
+        { k: "boda", t: "¡Feliz primer aniversario, mi esposa! 💍", b: "Hoy hace un año te dije «sí» para siempre, mi amor, y ha sido el año más feliz de mi vida. Gracias por cada día, por cada risa, por cada oración tomada de mi mano. Un año down… y toda la eternidad por delante, juntitos." },
+        { k: "escritura", t: "Guardar tesoros en el corazón", b: "Pero María guardaba todas estas cosas, meditándolas en su corazón.", ref: "Lucas 2:19", note: "Como María, mi amor, yo guardo en el corazón cada momento de este primer año contigo: son mis tesoros más grandes." },
+        { k: "cancion", t: "“Perfect” · Ed Sheeran", b: "«Te ves perfecta esta noche», dice la canción. Yo te lo digo sin necesidad de canción, mi amor: perfecta el día de la boda, perfecta hoy, perfecta en cada diciembre." },
         { k: "carta", f: 4 },
-        { k: "adivinanza", b: "Tengo 24 puertecitas y un solo tesoro al final. ¿Qué soy?", a: "¡Este calendario de Adviento! Y sí, mi vida: el tesoro siempre fuiste tú." },
+        { k: "adivinanza", b: "Somos dos, compartimos techo, mesa y un mismo «para siempre»; nadie nos gana a reírnos juntos. ¿Quiénes somos?", a: "¡Los Viana Carbajal! Tú y yo, mi amor: un equipo, un hogar, una eternidad." },
         { k: "final", t: "Tu carta completa, mi amor" }
       ]
     },
     {
-      sign: "Por tiempo y por toda la eternidad, tu Hagot ♥",
+      sign: "Navidad tras navidad, mi respuesta sigue siendo tú. Tu Hagot ♥",
       frags: [
-        "Mi amor: tercer diciembre de este calendario, y mi corazón sigue haciendo lo mismo que el primer día: latir más fuerte cuando pienso en ti.",
-        "Las sorpresas cambian cada año, porque quiero que siempre descubras algo nuevo de mi amor; lo que nunca cambia es la razón de todo esto: tú.",
-        "Gracias por estos años de matrimonio, por tu paciencia, por tu fe y por tu manera de convertir nuestra casa en un pedacito de cielo.",
-        "Celebramos tu cumpleaños y dos años de esposos, y sigo sin creer mi suerte: el Padre Celestial me confió a la mujer más maravillosa del mundo.",
-        "Sigamos armando nuestra eternidad pieza por pieza, diciembre a diciembre, hasta que el tiempo ya no importe. Te amo hoy y siempre."
+        "Mi amor: tercer diciembre de este calendario y segundo de casados… y todavía me emociona abrir cada puertecita pensando en tu sonrisa, igual que la primera vez.",
+        "Gracias por estos dos años de matrimonio: por construir conmigo un hogar donde se ora fuerte, se ríe más fuerte y se perdona rapidito, antes de que se ponga el sol.",
+        "Sueño con lo que viene para nosotros: con nuestra familia creciendo, con los nombres que ya guardamos en el corazón y con seguir tomándote la mano en cada etapa que Dios nos regale.",
+        "Celebramos tu cumpleaños y dos años de esposos, y mi gratitud solo crece: eres mi compañera, mi mejor amiga y el amor de mi vida, todo en una sola persona hermosa.",
+        "Que cada diciembre nos encuentre más unidos y más cerca del Padre Celestial. Nuestra eternidad se sigue escribiendo, mi Naomi, y es, por mucho, mi historia favorita."
       ],
       days: [
-        { k: "nota", t: "¡Tercer diciembre, mismo amor!", b: "Nuestro calendario vuelve con sorpresas nuevas, mi vida, porque mi amor por ti siempre encuentra formas nuevas de decirse. Bienvenida a tu diciembre, mi Naomi hermosa." },
-        { k: "escritura", t: "Dios cumple Sus promesas", b: "Pero tú, Belén Efrata, pequeña para estar entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad.", ref: "Miqueas 5:2", note: "Siglos antes ya se sabía dónde nacería el Salvador: Dios cumple Sus promesas, mi amor… y yo quiero cumplirte todas las mías." },
+        { k: "nota", t: "¡Tercer diciembre de nuestro calendario!", b: "Nuestro calendario cumple tres diciembres, mi vida, y tú sigues siendo la razón de cada puertecita. Este año trae sorpresas nuevas otra vez, porque mi amor por ti nunca se repite: siempre encuentra una forma nueva de decirse." },
+        { k: "escritura", t: "La promesa anunciada", b: "Por tanto, el Señor mismo os dará señal: He aquí que la virgen concebirá, y dará a luz un hijo, y llamará su nombre Emanuel.", ref: "Isaías 7:14", note: "Siglos antes de Belén, la promesa ya estaba escrita. Así confío yo en las promesas que nos esperan, mi amor: Dios ya escribió lo mejor de nuestra historia." },
         { k: "carta", f: 0 },
-        { k: "vale", t: "Vale por una carta escrita a mano", b: "De puño y letra, en papel de verdad, para que la guardes entre tus tesoros y la releas cada vez que quieras sentirme cerquita de ti." },
-        { k: "adivinanza", b: "Empiezo con una mirada, sigo con una sonrisa y termino en una eternidad. ¿Qué soy?", a: "¡Nuestra historia de amor! Empezó con una mirada… y no va a terminar nunca." },
-        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "Diciembre te queda hermoso", b: "Entre rosas y luces, la más hermosa siempre eres tú. Esta foto me recuerda por qué diciembre es mi mes favorito: porque en diciembre llegaste tú." },
-        { k: "razon", t: "Otra razón, de las infinitas", b: "Porque después de estos años sigues siendo mi persona favorita para todo: para reír, para orar, para soñar y hasta para no hacer nada, juntitos los dos." },
+        { k: "vale", t: "Vale por una posada solo para dos", b: "Una noche de diciembre hacemos nuestra propia posada en casa: pedimos posada de la sala a la cocina, con ponche calientito, villancicos desafinados y mucha risa. La mejor posada del mundo, porque es contigo." },
+        { k: "adivinanza", b: "Tengo escamas y no soy pez, tengo bolas y no juego, y en diciembre soy el rey de la sala. ¿Qué soy?", a: "¡El arbolito de Navidad! Y la reina de la sala, de la casa y de mi corazón… esa eres tú, mi amor." },
+        { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "Rosas para mi reina", b: "Tú y tus rosas, mi amor: la combinación que me robó el corazón. Dos años de casados y esta foto todavía me hace sonreír como niño con regalo nuevo." },
+        { k: "razon", t: "Razón para amarte: tu manera de soñar", b: "Porque sueñas en grande para nuestra familia y me invitas a soñar contigo: los planes, el futuro, los hijos que vendrán. Contigo, hasta el futuro se siente como hogar." },
         { k: "carta", f: 1 },
-        { k: "cancion", t: "“Can’t Help Falling in Love” · Elvis Presley", b: "La de nuestra historia, la de siempre. Los años pasan y las versiones cambian, mi amor, pero esta canción siempre me va a sonar a ti." },
-        { k: "vale", t: "Vale por una noche de estrellas", b: "Cobija, chocolate caliente y el cielo de diciembre: salimos a mirar las estrellas tomados de la mano y a darle gracias a Dios por nosotros." },
-        { k: "escritura", t: "Un día para gozarse", b: "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él.", ref: "Salmos 118:24", note: "Cada día contigo es un día para gozarse, mi amor. Pero los de diciembre… los de diciembre brillan más." },
-        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Nuestro puente a la eternidad", b: "En ese puente nos abrazamos sin saber todo lo que venía. Hoy ya lo sé: venía una vida entera contigo. Y volvería a cruzar ese puente mil veces, siempre hacia ti." },
+        { k: "cancion", t: "“All I Want for Christmas Is You” · Mariah Carey", b: "Lo dice clarito la canción, mi amor: no quiero regalos, ni luces, ni nieve. Todo lo que quiero en Navidad —y en cada mes del año— eres tú." },
+        { k: "vale", t: "Vale por un día sin celulares", b: "Un día entero de diciembre, solo para nosotros: sin pantallas, sin prisas, solo tú, yo, algo rico de comer y todas las pláticas que se nos ocurran. El mejor regalo no se envuelve." },
+        { k: "escritura", t: "El gozo de los magos", b: "Y al ver la estrella, se regocijaron con muy grande gozo.", ref: "Mateo 2:10", note: "Los magos se llenaron de gozo al ver la estrella, mi amor. Yo siento ese mismo gozo cada vez que te veo llegar a casa." },
+        { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Siempre hacia ti", b: "Nuestro puente otra vez, mi vida. Cada año lo miro y pienso lo mismo: qué bonito camino hemos cruzado, y qué bonito que todos mis caminos terminan en ti." },
         { k: "carta", f: 2 },
-        { k: "adivinanza", b: "Soy chiquito en diciembre y enorme en tu corazón; nací en un pesebre y te amo desde antes de que nacieras. ¿Quién soy?", a: "¡Jesús, nuestro Salvador! El centro de la Navidad y el centro de nuestro hogar." },
-        { k: "cumple", t: "¡Feliz cumpleaños, mi reina! 🎂", b: "Hoy celebro tu vida, mi Naomi: tu corazón enorme, tu fe firme y esa luz que llevas a donde quiera que vas. Que este año te abrace tan bonito como tú abrazas a todos. ¡Feliz cumpleaños, mi amor eterno!" },
-        { k: "nota", t: "Ya casi, aniversario", b: "En tres días cumplimos dos años de casados, mi vida, y sigo contando los días para celebrarte como si fuera la primera vez. Porque contigo, todo se siente nuevo." },
-        { k: "vale", t: "Vale por un masaje de hombros", b: "Después de un día largo, tú te sientas, cierras los ojos y dejas que estas manos que te aman te quiten el cansancio. Incluye beso en la frente al final." },
+        { k: "adivinanza", b: "Vivo en el frío, me derrito con los abrazos y una vez al año me visto de fiesta con bufanda y sombrero. ¿Quién soy?", a: "¡El muñeco de nieve! Y que conste, mi amor: yo también me derrito con tus abrazos." },
+        { k: "cumple", t: "¡Feliz cumpleaños, mi amor eterno! 🎂", b: "Hoy celebro tu vida, mi Naomi: otro cumpleaños tuyo y mi corazón sigue de fiesta como el primero. Que Dios te regale un año tan hermoso como el corazón que tienes. ¡Feliz cumpleaños, mi esposa!" },
+        { k: "nota", t: "Dos años en tres días", b: "En tres días cumplimos dos años de casados, mi vida, y todavía me pongo nervioso de emoción contando los días. Dos años… y te volvería a decir que sí en cada uno de ellos." },
+        { k: "vale", t: "Vale por escribir juntos nuestra historia", b: "Una tarde tranquila, con café o chocolate, nos sentamos a escribir cómo nos conocimos y todo lo que hemos vivido, para guardarlo y releerlo cuando seamos viejitos. Nuestra historia merece estar escrita, mi amor." },
         { k: "carta", f: 3 },
-        { k: "boda", t: "¡Dos años de eternidad! 💍", b: "Dos años tomados de la mano, mi amor, y cada día confirmo que decirte «sí» fue la mejor decisión de mi vida. Gracias por construir conmigo este para siempre. ¡Feliz segundo aniversario, mi esposa!" },
-        { k: "escritura", t: "Él habita con nosotros", b: "Y aquel Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.", ref: "Juan 1:14", note: "Él habitó entre nosotros… y habita en nuestro hogar, mi amor, cada vez que lo invitamos con nuestras oraciones." },
-        { k: "cancion", t: "“Marry You” · Bruno Mars", b: "Una canción alegre que dice que casarse es lo más bonito que se puede hacer. Yo ya lo hice contigo, mi amor… y lo volvería a hacer en cada vida." },
+        { k: "boda", t: "¡Feliz segundo aniversario, mi esposa! 💍", b: "Dos años tomados de la mano, mi amor: dos años de hogar, de fe, de risas y de elegirnos cada mañana. Gracias por construir conmigo este para siempre. ¡Feliz segundo aniversario! Y que vengan todos los demás, juntitos." },
+        { k: "escritura", t: "La luz de la vida", b: "Yo soy la luz del mundo; el que me sigue, no andará en tinieblas, sino que tendrá la luz de la vida.", ref: "Juan 8:12", note: "Él es nuestra luz, mi amor: la que guía nuestro matrimonio en los días claros y en los que cuestan un poquito más." },
+        { k: "cancion", t: "“Lover” · Taylor Swift", b: "«¿Puedo ir a donde tú vayas? ¿Podemos estar siempre así de cerca, para siempre?» Sí y sí, mi amor: a donde tú vayas, yo voy; así de cerca, para siempre." },
         { k: "carta", f: 4 },
-        { k: "adivinanza", b: "Dos letras me bastan para decirlo todo: soy la palabra que se dice el 19 de diciembre y se repite cada día después. ¿Qué palabra soy?", a: "La palabra es «sí»: la del 19 de diciembre… y la que te repito todos los días, mi amor." },
+        { k: "adivinanza", b: "Me escriben en diciembre, viajo sin pies y llego cargado de deseos a su destino. ¿Qué soy?", a: "¡La cartita de Navidad! La mía ya la leyó el cielo hace tiempo: pedí una eternidad contigo… y me la concedieron." },
         { k: "final", t: "Tu carta completa, mi amor" }
       ]
     }
   ];
-  var ADV_KIND_LABEL = { nota: "Notita de amor", razon: "Una razón para amarte", foto: "Un recuerdo nuestro", vale: "Vale navideño", escritura: "Escritura para ti", cancion: "Cancioncita para ti", adivinanza: "Adivinanza de amor", carta: "Pedacito de tu carta", cumple: "¡Día especial!", boda: "¡Día especial!", final: "Tu carta completa" };
-  var ADV_KIND_ICON = { nota: "♥", razon: "★", foto: "✿", vale: "✉", escritura: "☀", cancion: "♪", adivinanza: "?", carta: "✎", cumple: "🎂", boda: "💍", final: "✉" };
+  // Actividades extra SOLO de 2026: como es la primera Navidad de Hagot y Naomi
+  // ya casados, cada puertecita de este año trae, además de su sorpresa
+  // principal, estas actividades y cositas para que cada día sea muy especial.
+  var ADV_EXTRA_2026 = {
+    1: [
+      { k: "actividad", t: "Pongamos juntos el arbolito 🎄", b: "Actividad de hoy, mi amor: pongamos juntos el arbolito y el nacimiento. Tú decides dónde va cada esfera, yo cuelgo las luces, y al final nos tomamos una foto junto al árbol para guardar el inicio de este diciembre tan especial: el de nuestra boda." },
+      { k: "vale", t: "Vale por un paseo para ver las luces", b: "Una tarde-noche de diciembre, tomados de la mano, caminando sin rumbo entre las luces de Navidad, con parada obligada para un chocolate calientito. Porque este mes, todo se celebra el doble." }
+    ],
+    2: [
+      { k: "escritura", t: "Paz en la tierra", b: "¡Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres!", ref: "Lucas 2:14", note: "Paz en la tierra… y paz en el hogar que estamos por estrenar como esposos, mi amor." },
+      { k: "actividad", t: "Leamos juntos Lucas 2 📖", b: "Actividad de hoy: leamos juntitos todo el capítulo 2 de Lucas, despacito, y al final cada uno dice qué frase le llegó más al corazón. Así, con Él en el centro, empieza nuestro diciembre." }
+    ],
+    3: [
+      { k: "razon", t: "Otra razón, de las infinitas", b: "Porque sigues siendo mi persona favorita para todo: para reír, para orar, para soñar y hasta para no hacer nada, juntitos los dos. Y en unos días, por fin, mi esposa." },
+      { k: "actividad", t: "Nuestra lista de sueños de casados ✎", b: "Actividad de hoy: escribamos juntos nuestra lista de sueños para el primer año de casados —lugares, metas, antojos, todo— y guardémosla en un sobre sellado para abrirla el próximo diciembre y ver cuánto se cumplió." }
+    ],
+    4: [
+      { k: "vale", t: "Vale por cocinarte tu comida favorita", b: "Yo cocino, con todo mi amor y mi mejor esfuerzo; tú solo llega, siéntate hermosa y deja que te consienta. Postre incluido, por supuesto." },
+      { k: "adivinanza", b: "Empiezo con una mirada, sigo con una sonrisa y termino en una eternidad. ¿Qué soy?", a: "¡Nuestra historia de amor! Empezó con una mirada… y este mes se firma para siempre." }
+    ],
+    5: [
+      { k: "cancion", t: "“Vamos bien” · Majo y Dan", b: "La canción de «Cómo empezará nuestra eternidad». En catorce días empieza, mi amor, y yo lo sé con todo mi corazón: vamos bien, vamos muy bien." },
+      { k: "actividad", t: "Armemos la lista de canciones de la boda ♪", b: "Actividad de hoy: armemos juntos la lista de canciones para nuestra boda —las de bailar, las de llorar bonito y las de cantar a todo pulmón—, para que el 19 de diciembre suene a nosotros de principio a fin." }
+    ],
+    6: [
+      { k: "foto", img: "imagenes/foto-juntos-puente.jpg", alt: "Hagot y Naomi abrazados y sonriendo en un puente de madera junto a un lago, rodeados de árboles", t: "Tú y yo, en el puente", b: "Míranos en el puente, mi amor: abrazados, riendo, sin prisa. Guárdala cerquita, porque en unos días empezamos a coleccionar fotos ya como esposos." },
+      { k: "vale", t: "Vale por una carta escrita a mano", b: "De puño y letra, en papel de verdad, para que la guardes entre tus tesoros y la releas cada vez que quieras sentirme cerquita de ti." }
+    ],
+    7: [
+      { k: "razon", t: "Razón para amarte: el hogar que viene", b: "Porque ya sueño con nuestro hogar, mi vida: sé que tu manera de amar, de orar y de reír va a convertir cualquier casita en nuestro lugar favorito del mundo." },
+      { k: "actividad", t: "Siete gracias antes de dormir 🙏", b: "Actividad de hoy: antes de dormir, digamos en voz alta siete cosas por las que le damos gracias al Padre Celestial este año. Te adelanto la mía, la número uno de la lista: tú." }
+    ],
+    8: [
+      { k: "escritura", t: "Un día para gozarse", b: "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él.", ref: "Salmos 118:24", note: "Cada día contigo es un día para gozarse, mi amor. Pero los de diciembre… los de diciembre brillan más." },
+      { k: "vale", t: "Vale por una tarde de fotos juntos", b: "Salimos con nuestras mejores sonrisas a tomarnos fotos por los lugares bonitos, para seguir llenando nuestro álbum de momentitos antes de la boda." }
+    ],
+    9: [
+      { k: "cancion", t: "“Marry You” · Bruno Mars", b: "Una canción alegre que dice que casarse es lo más bonito que se puede hacer. En diez días lo hago oficial contigo, mi amor… y lo volvería a hacer en cada vida." },
+      { k: "actividad", t: "Practiquemos nuestro primer baile 💃", b: "Actividad de hoy: pon «Can’t Help Falling in Love» bajito y practiquemos nuestro baile de boda en la sala, descalzos y riéndonos. Si nos equivocamos, mejor: así se practica para la eternidad." }
+    ],
+    10: [
+      { k: "vale", t: "Vale por una noche de estrellas", b: "Cobija, chocolate caliente y el cielo de diciembre: salimos a mirar las estrellas tomados de la mano y a darle gracias a Dios por nosotros." },
+      { k: "adivinanza", b: "Cuanto más pasa el tiempo, más valgo; no me compras con dinero y me guardas en el corazón. ¿Qué soy?", a: "¡Nuestros recuerdos juntos! Y este diciembre, mi amor, vamos a fabricar los más importantes de todos." }
+    ],
+    11: [
+      { k: "escritura", t: "El amor más grande", b: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", ref: "Juan 3:16", note: "El amor más grande de todos es el de nuestro Padre Celestial. De ese amor aprendemos a amarnos tú y yo, mi vida." },
+      { k: "actividad", t: "Un acto de servicio juntitos ♥", b: "Actividad de hoy: hagamos juntos un acto de servicio navideño —llevar pan dulce a alguien, visitar a quien esté solito o ayudar en lo que se necesite—. La Navidad se celebra mejor dando, mi amor." }
+    ],
+    12: [
+      { k: "foto", img: "imagenes/foto-naomi-ramo.jpg", alt: "Naomi sonriendo con un ramo de rosas rosas en las manos, con Hagot detrás de ella sosteniendo un paraguas rojo", t: "Diciembre te queda hermoso", b: "Entre rosas y luces, la más hermosa siempre eres tú. Esta foto me recuerda por qué diciembre es mi mes favorito: porque en diciembre llegaste tú… y en este diciembre te quedas para siempre." },
+      { k: "vale", t: "Vale por un masaje de hombros", b: "Después de un día largo, tú te sientas, cierras los ojos y dejas que estas manos que te aman te quiten el cansancio. Incluye beso en la frente al final." }
+    ],
+    13: [
+      { k: "adivinanza", b: "Soy chiquito en diciembre y enorme en tu corazón; nací en un pesebre y te amo desde antes de que nacieras. ¿Quién soy?", a: "¡Jesús, nuestro Salvador! El centro de la Navidad y el centro de nuestro hogar." },
+      { k: "actividad", t: "Tarjetitas de Navidad para la familia ✉", b: "Actividad de hoy: escribamos juntos tarjetitas de Navidad para nuestras familias, con un mensaje bonito para cada quien. Que todos sientan el amor de esta temporada… y el de los futuros esposos." }
+    ],
+    14: [
+      { k: "adivinanza", b: "No soy estrella, pero guío; no soy mapa, pero llevo a casa. En Belén brilló una igual que yo. ¿Qué soy?", a: "La luz de Cristo… y la fe que guía nuestro matrimonio, mi amor." },
+      { k: "escritura", t: "Dios cumple Sus promesas", b: "Pero tú, Belén Efrata, pequeña para estar entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad.", ref: "Miqueas 5:2", note: "Dios cumple Sus promesas, mi amor… y yo quiero cumplirte todas las mías, empezando por la del 19 de diciembre." }
+    ],
+    15: [
+      { k: "nota", t: "¡Feliz cumpleaños, mi futura esposa! 🎂", b: "Hoy celebro tu vida, mi Naomi, y en cuatro días celebro que serás mi esposa. Doble fiesta y doble gratitud: este diciembre es tuyo, mi amor, todito tuyo." },
+      { k: "actividad", t: "Tu día, tus reglas 👑", b: "Actividad de hoy, cumpleañera: tú eliges todo —qué comemos, qué hacemos, qué canción suena— y yo solo obedezco feliz. Hoy la reina manda, y la reina eres tú." },
+      { k: "vale", t: "Vale por tu postre favorito", b: "Canjeable hoy mismo: tu postre favorito, una velita encima y yo cantándote Las Mañanitas, desafinado pero con todo el corazón." }
+    ],
+    16: [
+      { k: "nota", t: "Tres días, tres verdades", b: "Faltan tres días para la boda, mi amor, y te digo tres verdades: eres la respuesta a mis oraciones, eres mi mejor decisión y eres el amor de mi vida. Y el 19 de diciembre te las repito frente a todos." },
+      { k: "actividad", t: "Revisemos la listita de la boda ✔", b: "Actividad de hoy: revisemos juntos la listita del gran día —qué falta, qué sobra, qué soñamos— y terminemos orando juntitos por nuestra boda. Ya casi, mi amor, ya casi." }
+    ],
+    17: [
+      { k: "vale", t: "Vale por un abrazo sin límite de tiempo", b: "Válido en cualquier momento y sin fecha de caducidad: un abrazo largo, fuerte y sin prisas, de esos que reinician el corazón. Se puede canjear varias veces al día." },
+      { k: "escritura", t: "Él habita con nosotros", b: "Y aquel Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.", ref: "Juan 1:14", note: "Él habitó entre nosotros… y habitará en nuestro hogar de esposos, mi amor, cada vez que lo invitemos con nuestras oraciones." }
+    ],
+    18: [
+      { k: "cancion", t: "“Thinking Out Loud” · Ed Sheeran", b: "«Te seguiré amando hasta que tengamos setenta años», dice la canción… y yo te corrijo, mi amor: yo te amaré por toda la eternidad. Mañana empieza lo nuestro." },
+      { k: "actividad", t: "Noche de víspera, juntitos 🌙", b: "Actividad de hoy: dejemos todo listo para mañana y escribamos cada uno una notita secreta para el otro, para leerla ya casados. Duerme temprano, mi amor: mañana te casas conmigo." }
+    ],
+    19: [
+      { k: "actividad", t: "Nuestro primer baile de esposos 💍", b: "Actividad de hoy, mi esposa: pon «Vamos bien» y bailemos nuestro primer baile como esposos, despacito y sin soltarnos. Que quede grabado en el corazón para siempre." },
+      { k: "nota", t: "Ya eres mi esposa ♥", b: "Todavía no me lo creo y ya es verdad: eres mi esposa, mi Naomi. Hoy empieza nuestro para siempre, y te prometo recordártelo con una sonrisa cada diciembre que venga." },
+      { k: "vale", t: "Vale por nuestra primera cena de casados", b: "Esta noche o la que tú elijas: nuestra primera cena como esposos, con brindis de agua de jamaica y el postre que más te guste. Porque hoy se celebra en grande." }
+    ],
+    20: [
+      { k: "escritura", t: "Siempre hay lugar para Él", b: "Y dio a luz a su hijo primogénito, y lo envolvió en pañales, y lo acostó en un pesebre, porque no había lugar para ellos en el mesón.", ref: "Lucas 2:7", note: "No hubo lugar en el mesón para el Salvador… pero en nuestro hogar —¡nuestro primer hogar de esposos!— Él siempre tiene el primer lugar." },
+      { k: "actividad", t: "Estrenemos nuestro hogar 🏠", b: "Actividad de hoy, mi esposa: hagamos nuestra primera oración juntos en nuestro hogar ya como esposos y colguemos nuestra foto favorita de la boda. Que esta casa nazca llena de amor y de fe." }
+    ],
+    21: [
+      { k: "actividad", t: "Cartita para los esposos del futuro ✉", b: "Actividad de hoy: escribamos juntos una cartita para los Naomi y Hagot del próximo diciembre —cómo nos sentimos, qué soñamos, qué le agradecemos a Dios— y guardémosla para abrirla en un año." },
+      { k: "vale", t: "Vale por un domingo de pijamas", b: "Nuestro primer domingo de casados, con calma: desayuno tardío, pijamas todo el día y cero prisas. Porque también así se construye una eternidad, mi amor: despacito y juntitos." }
+    ],
+    22: [
+      { k: "adivinanza", b: "Dos letras me bastan para decirlo todo: soy la palabra que se dijo el 19 de diciembre y se repite cada día después. ¿Qué palabra soy?", a: "La palabra es «sí»: la del 19 de diciembre… y la que te repito todos los días, mi esposa." },
+      { k: "actividad", t: "Elijamos las fotos de la boda 📷", b: "Actividad de hoy: veamos juntos las fotos de la boda y elijamos nuestras favoritas para imprimir y enmarcar. Spoiler, mi amor: en todas sales hermosa." }
+    ],
+    23: [
+      { k: "adivinanza", b: "Tengo 24 puertecitas y un solo tesoro al final. ¿Qué soy?", a: "¡Este calendario de Adviento! Y sí, mi vida: el tesoro siempre fuiste tú." },
+      { k: "nota", t: "Mañana es Nochebuena, mi esposa 🎄", b: "Mañana celebramos nuestra primera Nochebuena de casados, mi amor. Prepara tu sonrisa y tu corazón: va a ser una noche para guardarla toda la vida." }
+    ],
+    24: [
+      { k: "actividad", t: "Nuestra primera Nochebuena de esposos 🕯", b: "Actividad de hoy: leamos juntos Lucas 2 junto al arbolito, oremos dando gracias por este diciembre inolvidable y brindemos por nuestra primera Navidad de casados. Esto apenas empieza, mi amor." },
+      { k: "vale", t: "Vale por un beso bajo el muérdago… todo el año", b: "Este vale no caduca en diciembre: un beso bajo el muérdago cada día del año, estemos donde estemos. Porque contigo, mi esposa, todo el año es Navidad." }
+    ]
+  };
+  var ADV_KIND_LABEL = { nota: "Notita de amor", actividad: "Actividad para hoy juntitos", razon: "Una razón para amarte", foto: "Un recuerdo nuestro", vale: "Vale navideño", escritura: "Escritura para ti", cancion: "Cancioncita para ti", adivinanza: "Adivinanza de amor", carta: "Pedacito de tu carta", cumple: "¡Día especial!", boda: "¡Día especial!", final: "Tu carta completa" };
+  var ADV_KIND_ICON = { nota: "♥", actividad: "🎄", razon: "★", foto: "✿", vale: "✉", escritura: "☀", cancion: "♪", adivinanza: "?", carta: "✎", cumple: "🎂", boda: "💍", final: "✉" };
   var ADV_SONGS = [
     { video: "YJoXVyHLauU", start: 3185, label: "“La Tamalada” · Las Ardillitas de Lalo Guerrero" },
     { video: "N8NcQzMQN_U", start: 0, label: "“Feliz Navidad” · José Feliciano" },
@@ -3078,9 +3186,34 @@
     if(complete) txt += ' ¡Y con esta pieza el rompecabezas quedó completo! Míralo aquí abajito. 🎉';
     return txt;
   }
+  function advExtraHtml(item){
+    var html = '';
+    if(item.k === 'escritura'){
+      html += '<h4>' + item.t + '</h4>';
+      html += '<p class="adv-verse">“' + item.b + '”</p>';
+      html += '<p class="adv-ref">' + item.ref + '</p>';
+      if(item.note) html += '<p class="adv-note">' + item.note + '</p>';
+    } else if(item.k === 'foto'){
+      html += '<h4>' + item.t + '</h4>';
+      html += '<img src="' + item.img + '" alt="' + item.alt + '" />';
+      html += '<p>' + item.b + '</p>';
+    } else if(item.k === 'vale'){
+      html += '<h4>' + item.t + '</h4>';
+      html += '<div class="adv-vale"><p>' + item.b + '</p><p class="adv-note">Válido hoy, mañana y siempre · Se canjea conmigo, en persona, con un beso de por medio ♥</p></div>';
+    } else if(item.k === 'adivinanza'){
+      html += '<h4>¿Qué soy, mi amor?</h4>';
+      html += '<p>' + item.b + '</p>';
+      html += '<button class="adv-answer-btn adv-extra-btn" type="button">Ver la respuesta ♥</button>';
+      html += '<p class="adv-verse adv-extra-answer" hidden style="margin-top:14px">' + item.a + '</p>';
+    } else {
+      html += '<h4>' + item.t + '</h4><p>' + item.b + '</p>';
+    }
+    return html;
+  }
   function advRenderReveal(day){
     if(!advReveal) return;
     var item = advSet.days[day - 1];
+    var extras = (advSeasonYear === 2026 && typeof ADV_EXTRA_2026 !== 'undefined' && ADV_EXTRA_2026[day]) ? ADV_EXTRA_2026[day] : null;
     var html = '<span class="adv-reveal-tag">Día ' + day + ' de diciembre · ' + ADV_KIND_LABEL[item.k] + '</span>';
     if(item.k === 'carta'){
       html += '<h4>Pedacito ' + (item.f + 1) + ' de 5 de tu carta secreta</h4>';
@@ -3111,6 +3244,11 @@
     } else {
       html += '<h4>' + item.t + '</h4><p>' + item.b + '</p>';
     }
+    if(extras){
+      extras.forEach(function(ex){
+        html += '<div class="adv-extra"><span class="adv-reveal-tag">Y también hoy · ' + ADV_KIND_LABEL[ex.k] + '</span>' + advExtraHtml(ex) + '</div>';
+      });
+    }
     html += '<p class="adv-piece-note">' + advPieceNote(day) + '</p>';
     advReveal.innerHTML = html;
     var ansBtn = document.getElementById('advAnswerBtn');
@@ -3118,6 +3256,13 @@
       var ans = document.getElementById('advAnswer');
       if(ans) ans.hidden = false;
       ansBtn.hidden = true;
+    });
+    Array.prototype.forEach.call(advReveal.querySelectorAll('.adv-extra-btn'), function(b){
+      b.addEventListener('click', function(){
+        var ans = b.parentNode.querySelector('.adv-extra-answer');
+        if(ans) ans.hidden = false;
+        b.hidden = true;
+      });
     });
   }
   function advSparkle(door){

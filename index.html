@@ -1057,6 +1057,82 @@
     .adv-spark{ display:none }
   }
 
+  /* Actividades de Navidad: arbolito, nacimiento y escrituras */
+  .tree-tools{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:14px }
+  .tree-tool{
+    display:inline-flex; align-items:center; gap:8px; padding:9px 16px; min-height:44px;
+    background:var(--bg-soft); border:1.5px solid var(--line); border-radius:999px;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.92rem; color:var(--ink); cursor:pointer;
+  }
+  .tree-tool[aria-pressed="true"]{ background:var(--rose-pale); border-color:var(--rose-deep); color:var(--rose-deep) }
+  .tree-tool:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .tree-tool .sw{ width:18px; height:18px; border-radius:50%; flex:0 0 auto; box-shadow:inset -2px -3px 5px rgba(0,0,0,.25), 0 1px 3px rgba(74,35,48,.3) }
+  .sw-pink{ background:radial-gradient(circle at 32% 30%, #FBD3DE, #E87A97 55%, #B03A5B) }
+  .sw-gold{ background:radial-gradient(circle at 32% 30%, #FFF0C2, #E3C87E 55%, #A87C22) }
+  .sw-red{ background:radial-gradient(circle at 32% 30%, #FFC4C4, #D64545 55%, #8E2323) }
+  .sw-blue{ background:radial-gradient(circle at 32% 30%, #CFE4FF, #6FA3DC 55%, #2F5C8E) }
+  .sw-light{ background:radial-gradient(circle at 40% 40%, #FFF6C8, #FFD166); box-shadow:0 0 8px 2px rgba(255,209,102,.8) }
+  .sw-star{ background:none; box-shadow:none; color:var(--gold); font-size:1.05rem; line-height:1; width:auto; height:auto }
+  .tree-stage{
+    position:relative; max-width:430px; margin:0 auto; aspect-ratio:3/3.4;
+    background:linear-gradient(180deg, var(--bg-soft), var(--surface-warm));
+    border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; cursor:crosshair;
+  }
+  .tree-stage svg.tree-art{ position:absolute; inset:0; width:100%; height:100% }
+  .tree-orn{
+    position:absolute; transform:translate(-50%,-50%); border:none; background:none; padding:6px; margin:-6px;
+    cursor:pointer; line-height:1; -webkit-tap-highlight-color:transparent; z-index:3;
+  }
+  .tree-orn:focus-visible{ outline:3px solid var(--gold); outline-offset:1px; border-radius:50% }
+  .orn-ball{ display:block; width:22px; height:22px; border-radius:50%; box-shadow:inset -3px -4px 6px rgba(0,0,0,.25), 0 2px 5px rgba(74,35,48,.3) }
+  .orn-pink{ background:radial-gradient(circle at 32% 30%, #FBD3DE, #E87A97 55%, #B03A5B) }
+  .orn-gold{ background:radial-gradient(circle at 32% 30%, #FFF0C2, #E3C87E 55%, #A87C22) }
+  .orn-red{ background:radial-gradient(circle at 32% 30%, #FFC4C4, #D64545 55%, #8E2323) }
+  .orn-blue{ background:radial-gradient(circle at 32% 30%, #CFE4FF, #6FA3DC 55%, #2F5C8E) }
+  .orn-light{ display:block; width:11px; height:11px; border-radius:50%; background:radial-gradient(circle at 40% 40%, #FFF6C8, #FFD166); box-shadow:0 0 10px 3px rgba(255,209,102,.85); animation:advTwinkle 1.4s ease-in-out infinite alternate }
+  .orn-star{ display:block; font-size:2rem; color:var(--gold); text-shadow:0 0 12px rgba(255,209,102,.8); line-height:1 }
+  .tree-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px }
+  .tree-count{ font-weight:700; color:var(--rose-deep); margin:14px 0 0 }
+  @media (prefers-reduced-motion: reduce){ .orn-light{ animation:none } }
+
+  .nat-scene{
+    position:relative; max-width:640px; margin:0 auto; aspect-ratio:4/3.1;
+    border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden;
+    background:linear-gradient(180deg, #1D2B52 0%, #2C4470 55%, #4A5B3A 55.2%, #5C7048 100%);
+  }
+  .nat-scene svg.nat-bg{ position:absolute; inset:0; width:100%; height:100% }
+  .nat-fig{
+    position:absolute; transform:translate(-50%,-88%); width:15%; min-width:44px; max-width:92px;
+    background:none; border:none; padding:0; cursor:grab; z-index:3; touch-action:none;
+    -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none;
+  }
+  .nat-fig:active{ cursor:grabbing }
+  .nat-fig:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; border-radius:10px }
+  .nat-fig svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 3px 4px rgba(0,0,0,.35)); pointer-events:none }
+  .nat-fig .nat-name{
+    display:block; margin-top:1px; font-size:.6rem; font-weight:700; letter-spacing:.02em; color:#FFF6E8;
+    text-shadow:0 1px 3px rgba(0,0,0,.8); text-align:center; line-height:1.15; pointer-events:none;
+  }
+  .nat-fig.is-star{ width:11%; min-width:34px }
+  .nat-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px }
+
+  .scr-list{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:18px }
+  .scr-chip{
+    padding:9px 15px; min-height:42px; background:var(--bg-soft); border:1.5px solid var(--line); border-radius:999px;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.88rem; color:var(--ink); cursor:pointer;
+  }
+  .scr-chip[aria-pressed="true"]{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .scr-chip[aria-pressed="true"]{ color:#241419 } }
+  .scr-chip:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .scr-panel{
+    background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
+    padding:26px 24px; max-width:620px; margin:0 auto; text-align:left;
+  }
+  .scr-ref{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.25rem; color:var(--rose-deep); margin:0 0 10px }
+  .scr-text{ font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.65; margin:0 }
+  .scr-nav{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px }
+  .scr-count{ font-size:.9rem; font-weight:700; color:var(--ink-soft); margin:12px 0 0; text-align:center }
+
   footer{ text-align:center; padding:44px 20px 54px; color:var(--ink-soft); position:relative; z-index:2}
   footer .foot-hearts{ color:var(--rose); letter-spacing:.5em; font-size:1rem; margin-bottom:10px}
   footer p{margin:4px 0; font-size:.95rem}
@@ -2132,7 +2208,7 @@
       <div class="game-menu">
         <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuJuegos">
           <span class="game-menu-icon" aria-hidden="true">♥</span>
-          <span class="game-menu-title">Juegos</span>
+          <span class="game-menu-title">Recreación</span>
           <span class="game-menu-desc">Todos tus jueguitos juntos, mi amor: corazones, preguntas, memorama, sorpresas y un mapa del tesoro.</span>
           <span class="game-menu-play">Entrar ♥</span>
         </button>
@@ -2157,16 +2233,16 @@
         <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuSueltos">
           <span class="game-menu-icon" aria-hidden="true">♡</span>
           <span class="game-menu-title">Apartados sueltos</span>
-          <span class="game-menu-desc">Dos apartados muy especiales, mi amor: el mensajito para cuando estés enojada conmigo y mi lista de canciones para ti.</span>
+          <span class="game-menu-desc">Un apartado muy especial, mi amor: el mensajito para cuando estés enojada conmigo.</span>
           <span class="game-menu-play">Entrar ♥</span>
         </button>
       </div>
     </div>
 
-    <!-- Submenú: Juegos -->
+    <!-- Submenú: Recreación -->
     <div class="game-card hub-card submenu-screen" id="screenMenuJuegos">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
-      <h3 class="game-title">Juegos</h3>
+      <h3 class="game-title">Recreación</h3>
       <div class="game-menu menu-grid">
         <button class="game-menu-card" type="button" data-open-game="screenGames">
           <span class="game-menu-icon" aria-hidden="true">♥</span>
@@ -2174,11 +2250,11 @@
           <span class="game-menu-desc">Todos tus jueguitos juntos, mi amor: corazones, preguntas, memorama, sorpresas y un mapa del tesoro.</span>
           <span class="game-menu-play">Entrar ♥</span>
         </button>
-        <button class="game-menu-card" type="button" data-open-game="screenConoces">
-          <span class="game-menu-icon" aria-hidden="true">?</span>
-          <span class="game-menu-title">¿Cuánto me conoces?</span>
-          <span class="game-menu-desc">Un jueguito de preguntitas sobre mí, mi amor: mis gustos, mis sueños y lo que más amo de ti. A ver cuántas aciertas.</span>
-          <span class="game-menu-play">Jugar ♥</span>
+        <button class="game-menu-card" type="button" data-open-game="screenPlaylist">
+          <span class="game-menu-icon" aria-hidden="true">♪</span>
+          <span class="game-menu-title">Mi lista de canciones para ti</span>
+          <span class="game-menu-desc">La playlist que armé para ti en Apple Music, mi amor: «Cumpleaños Naomi», para escucharla juntitos cuando quieras.</span>
+          <span class="game-menu-play">Escuchar ♥</span>
         </button>
       </div>
     </div>
@@ -2246,6 +2322,42 @@
           <span class="game-menu-desc">Tu calendario de Adviento, mi amor: 24 puertecitas de diciembre con una sorpresa cada día, música navideña y dos rompecabezas nuestros.</span>
           <span class="game-menu-play">Entrar ♥</span>
         </button>
+        <button class="game-menu-card" type="button" data-open-game="screenArbolito">
+          <span class="game-menu-icon" aria-hidden="true">🎄</span>
+          <span class="game-menu-title">Nuestro arbolito de Navidad</span>
+          <span class="game-menu-desc">Un arbolito para decorar juntitos, mi amor: ponle esferas, lucecitas y su estrella, y así se queda guardado para ti.</span>
+          <span class="game-menu-play">Decorar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCartitaNavidad">
+          <span class="game-menu-icon" aria-hidden="true">✉</span>
+          <span class="game-menu-title">Cartita de deseos de Navidad</span>
+          <span class="game-menu-desc">Escribe lo que deseas para esta Navidad, mi vida, y guárdalo en tu cartita. Aquí quedan también tus deseos de Navidades pasadas.</span>
+          <span class="game-menu-play">Escribir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenTriviaNavidad">
+          <span class="game-menu-icon" aria-hidden="true">★</span>
+          <span class="game-menu-title">Trivia del nacimiento de Jesús</span>
+          <span class="game-menu-desc">Preguntitas sobre la primera Navidad: Belén, el pesebre, los pastores, los ángeles y la estrella, como lo cuentan las Escrituras.</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenDeseosAnio">
+          <span class="game-menu-icon" aria-hidden="true">✨</span>
+          <span class="game-menu-title">Nuestros deseos para el Año Nuevo</span>
+          <span class="game-menu-desc">Un espacio para escribir juntitos nuestros propósitos y deseos para el año que viene, mi amor, y guardarlos con su fecha.</span>
+          <span class="game-menu-play">Escribir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenNacimiento">
+          <span class="game-menu-icon" aria-hidden="true">✦</span>
+          <span class="game-menu-title">Arma tu nacimiento</span>
+          <span class="game-menu-desc">Acomoda el nacimiento como quieras, mi amor: mueve a María, a José, al Niño Jesús, a los pastores, los ángeles, los Reyes Magos y los animalitos, y así se queda guardado.</span>
+          <span class="game-menu-play">Armar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenEscriturasNavidad">
+          <span class="game-menu-icon" aria-hidden="true">📖</span>
+          <span class="game-menu-title">Escrituras de Navidad</span>
+          <span class="game-menu-desc">Una colección de escrituras sobre el nacimiento de Jesucristo, mi vida, para leerlas una por una con calma: profecías y relatos de las Escrituras.</span>
+          <span class="game-menu-play">Leer ♥</span>
+        </button>
       </div>
     </div>
 
@@ -2259,12 +2371,6 @@
           <span class="game-menu-title">Cuando estés enojada</span>
           <span class="game-menu-desc">Un mensajito que te dejé guardado para esos días, mi amor: ábrelo cuando estés enojada conmigo.</span>
           <span class="game-menu-play">Leer ♥</span>
-        </button>
-        <button class="game-menu-card" type="button" data-open-game="screenPlaylist">
-          <span class="game-menu-icon" aria-hidden="true">♪</span>
-          <span class="game-menu-title">Mi lista de canciones para ti</span>
-          <span class="game-menu-desc">La playlist que armé para ti en Apple Music, mi amor: «Cumpleaños Naomi», para escucharla juntitos cuando quieras.</span>
-          <span class="game-menu-play">Escuchar ♥</span>
         </button>
       </div>
     </div>
@@ -2322,6 +2428,12 @@
           <span class="game-menu-title">Nuestro mapa del tesoro</span>
           <span class="game-menu-desc">Pistas por nuestros lugares que te llevan, paso a paso, a un tesoro.</span>
           <span class="game-menu-play">Seguir el mapa ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenConoces">
+          <span class="game-menu-icon" aria-hidden="true">?</span>
+          <span class="game-menu-title">¿Cuánto me conoces?</span>
+          <span class="game-menu-desc">Un jueguito de preguntitas sobre mí, mi amor: mis gustos, mis sueños y lo que más amo de ti. A ver cuántas aciertas.</span>
+          <span class="game-menu-play">Jugar ♥</span>
         </button>
       </div>
     </div>
@@ -2928,6 +3040,147 @@
           <img src="imagenes/navidad-naomi.jpg" alt="Naomi sonriendo frente a los árboles de Navidad iluminados de la plaza" />
           <figcaption>La más hermosa y única señora Claus de mi corazón</figcaption>
         </figure>
+      </div>
+    </div>
+
+    <!-- Navidad: Nuestro arbolito -->
+    <div class="game-card" id="screenArbolito">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro arbolito de Navidad 🎄</h3>
+      <p class="game-desc">Este arbolito es de los dos, mi amor. Elige un adorno y toca el arbolito para ponerlo donde quieras: esferas, lucecitas y la estrella hasta arriba. Todo lo que pongas se queda guardado en este dispositivo, tal como lo dejaste. Si quieres quitar un adorno, tócalo y desaparece.</p>
+      <div class="tree-tools" role="group" aria-label="Elige un adorno">
+        <button class="tree-tool" type="button" data-orn-tool="pink" aria-pressed="true"><span class="sw sw-pink" aria-hidden="true"></span>Esfera rosa</button>
+        <button class="tree-tool" type="button" data-orn-tool="gold" aria-pressed="false"><span class="sw sw-gold" aria-hidden="true"></span>Esfera dorada</button>
+        <button class="tree-tool" type="button" data-orn-tool="red" aria-pressed="false"><span class="sw sw-red" aria-hidden="true"></span>Esfera roja</button>
+        <button class="tree-tool" type="button" data-orn-tool="blue" aria-pressed="false"><span class="sw sw-blue" aria-hidden="true"></span>Esfera azul</button>
+        <button class="tree-tool" type="button" data-orn-tool="light" aria-pressed="false"><span class="sw sw-light" aria-hidden="true"></span>Lucecita</button>
+        <button class="tree-tool" type="button" data-orn-tool="star" aria-pressed="false"><span class="sw sw-star" aria-hidden="true">★</span>Estrella</button>
+      </div>
+      <div class="tree-stage" id="treeStage" role="application" aria-label="Arbolito de Navidad para decorar: toca para poner el adorno elegido">
+        <svg class="tree-art" viewBox="0 0 300 340" aria-hidden="true">
+          <ellipse cx="150" cy="322" rx="118" ry="14" fill="#FFFFFF" opacity=".65"/>
+          <rect x="139" y="282" width="22" height="38" rx="3" fill="#7A4A2B"/>
+          <path d="M150 26 L198 122 Q150 134 102 122 Z" fill="#1F5C3A"/>
+          <path d="M150 92 L222 204 Q150 218 78 204 Z" fill="#256B45"/>
+          <path d="M150 160 L246 292 Q150 308 54 292 Z" fill="#1F5C3A"/>
+          <path d="M114 116 Q150 130 186 116" stroke="#E3C87E" stroke-width="3.5" fill="none" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+          <path d="M94 194 Q150 212 206 194" stroke="#E3C87E" stroke-width="3.5" fill="none" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+          <path d="M76 280 Q150 298 224 280" stroke="#E3C87E" stroke-width="3.5" fill="none" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+          <circle cx="128" cy="70" r="3" fill="#FFFFFF" opacity=".5"/><circle cx="176" cy="150" r="3.4" fill="#FFFFFF" opacity=".45"/><circle cx="104" cy="238" r="3" fill="#FFFFFF" opacity=".5"/><circle cx="204" cy="246" r="2.6" fill="#FFFFFF" opacity=".45"/>
+        </svg>
+        <div id="treeOrns"></div>
+      </div>
+      <p class="tree-count" id="treeCount" role="status"></p>
+      <div class="tree-actions">
+        <button class="music-stop" type="button" id="treeUndoBtn">Quitar el último adorno</button>
+        <button class="music-stop" type="button" id="treeClearBtn">Empezar de nuevo</button>
+      </div>
+    </div>
+
+    <!-- Navidad: Arma tu nacimiento -->
+    <div class="game-card" id="screenNacimiento">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Arma tu nacimiento ✦</h3>
+      <p class="game-desc">Aquí está nuestro nacimiento, mi amor, para acomodarlo como tú quieras: arrastra con el dedo a María, a José, al Niño Jesús en su pesebre, al ángel, al pastor, a los tres Reyes Magos, al burrito, a la ovejita y a la estrella. Como lo dejes, así se queda guardado en este dispositivo.</p>
+      <div class="nat-scene" id="natScene">
+        <svg class="nat-bg" viewBox="0 0 400 310" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle cx="30" cy="30" r="1.7" fill="#FFFFFF" opacity=".85"/><circle cx="82" cy="16" r="1.2" fill="#FFFFFF" opacity=".7"/><circle cx="142" cy="42" r="1.4" fill="#FFFFFF" opacity=".8"/><circle cx="212" cy="20" r="1.2" fill="#FFFFFF" opacity=".7"/><circle cx="298" cy="34" r="1.7" fill="#FFFFFF" opacity=".85"/><circle cx="362" cy="18" r="1.3" fill="#FFFFFF" opacity=".75"/><circle cx="330" cy="72" r="1.1" fill="#FFFFFF" opacity=".6"/><circle cx="58" cy="82" r="1.1" fill="#FFFFFF" opacity=".6"/><circle cx="182" cy="70" r="1.2" fill="#FFFFFF" opacity=".65"/><circle cx="252" cy="82" r="1" fill="#FFFFFF" opacity=".6"/>
+          <path d="M0 171 v-12 h16 v-11 h13 v11 h15 v12 Z" fill="#141F38"/>
+          <path d="M356 171 v-9 h12 v-8 h11 v8 h13 v9 Z" fill="#141F38"/>
+          <rect x="158" y="150" width="84" height="80" fill="#000000" opacity=".18"/>
+          <rect x="156" y="148" width="7" height="82" fill="#3A2818"/>
+          <rect x="237" y="148" width="7" height="82" fill="#3A2818"/>
+          <path d="M136 152 L200 106 L264 152 L251 163 L200 121 L149 163 Z" fill="#4A3220"/>
+          <ellipse cx="200" cy="226" rx="48" ry="8" fill="#8A6D3B" opacity=".8"/>
+          <ellipse cx="200" cy="292" rx="230" ry="26" fill="#000000" opacity=".14"/>
+        </svg>
+      </div>
+      <div class="nat-actions">
+        <button class="music-stop" type="button" id="natResetBtn">Acomodarlo como al principio</button>
+      </div>
+      <p class="diary-note">Arrastra cada figurita con el dedo (o con el ratón) y suéltala donde quieras, mi vida. ♥</p>
+    </div>
+
+    <!-- Navidad: Cartita de deseos -->
+    <div class="game-card" id="screenCartitaNavidad">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Cartita de deseos de Navidad 🎄</h3>
+      <p class="game-desc">Escríbele tu cartita a esta Navidad, mi vida: lo que deseas, lo que sueñas, lo que le pides a Dios para nosotros. Se guarda con su fecha en este dispositivo, y abajo quedan tus deseos de las Navidades pasadas, para leerlos y sonreír.</p>
+      <div class="diary-form">
+        <label class="diary-label" for="wishInput">¿Qué deseas para esta Navidad, mi amor?</label>
+        <textarea class="diary-input" id="wishInput" rows="5" placeholder="Querida Navidad: este año deseo…"></textarea>
+        <div class="diary-save-wrap">
+          <button class="game-start-btn" id="wishSaveBtn" type="button">Guardar mi deseo ♥</button>
+        </div>
+        <p class="diary-note">Tu cartita se guarda solo en este dispositivo, para que la leas cuando tú quieras. ♥</p>
+        <p class="diary-msg" id="wishMsg" role="status"></p>
+      </div>
+      <h4 class="faith-h">Tus deseos anteriores ♥</h4>
+      <div class="diary-list" id="wishList"></div>
+    </div>
+
+    <!-- Navidad: Trivia del nacimiento de Jesús -->
+    <div class="game-card" id="screenTriviaNavidad">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Trivia del nacimiento de Jesús ★</h3>
+      <p class="game-desc">Diez preguntitas sobre la primera Navidad, mi amor: el nacimiento de nuestro Salvador, como lo cuentan las Escrituras en Lucas 2 y Mateo 1 y 2. A ver cuántas aciertas… yo sé que todas. ♥</p>
+      <div id="navQuizStartWrap">
+        <button class="game-start-btn" id="navQuizStartBtn" type="button">★ ¡Empezar!</button>
+      </div>
+      <div id="navQuizBody" hidden>
+        <div class="quiz-meta">
+          <span id="navQuizProgress">Pregunta 1 de 10</span>
+          <span>Aciertos: <strong id="navQuizScore">0</strong></span>
+        </div>
+        <p class="quiz-q" id="navQuizQuestion"></p>
+        <div class="quiz-options" id="navQuizOptions"></div>
+        <p class="quiz-feedback" id="navQuizFeedback" role="status"></p>
+        <button class="game-next-btn" id="navQuizNextBtn" type="button" hidden>Siguiente pregunta ♥</button>
+      </div>
+      <div id="navQuizEnd" hidden>
+        <p class="game-final" id="navQuizFinalMsg"></p>
+        <button class="game-start-btn" id="navQuizRestartBtn" type="button">Jugar otra vez ★</button>
+      </div>
+    </div>
+
+    <!-- Navidad: Nuestros deseos para el Año Nuevo -->
+    <div class="game-card" id="screenDeseosAnio">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestros deseos para el Año Nuevo ✨</h3>
+      <p class="game-desc">Este espacio es de los dos, mi amor: escribamos juntitos nuestros propósitos y deseos para el año que viene —los tuyos, los míos y los que soñamos como esposos— y guardémoslos con su fecha para leerlos al final del año y ver todo lo que Dios nos concedió.</p>
+      <div class="diary-form">
+        <span class="diary-label" id="nyWhoLabel">¿De quién es este deseo?</span>
+        <div class="emerg-who" role="group" aria-labelledby="nyWhoLabel">
+          <button class="emerg-who-btn" type="button" id="nyWhoNaomi" aria-pressed="false">Naomi</button>
+          <button class="emerg-who-btn" type="button" id="nyWhoHagot" aria-pressed="false">Hagot</button>
+          <button class="emerg-who-btn" type="button" id="nyWhoJuntos" aria-pressed="false">Juntos</button>
+        </div>
+        <label class="diary-label" for="nyInput">Escribe el deseo o propósito:</label>
+        <textarea class="diary-input" id="nyInput" rows="4" placeholder="Para este año que viene, deseamos…"></textarea>
+        <div class="diary-save-wrap">
+          <button class="game-start-btn" id="nySaveBtn" type="button">Guardar nuestro deseo ♥</button>
+        </div>
+        <p class="diary-note">Nuestros deseos se guardan solo en este dispositivo, con su fecha y de quién son. ♥</p>
+        <p class="diary-msg" id="nyMsg" role="status"></p>
+      </div>
+      <h4 class="faith-h">Nuestros deseos guardados ♥</h4>
+      <div class="diary-list" id="nyList"></div>
+    </div>
+
+    <!-- Navidad: Escrituras de Navidad -->
+    <div class="game-card" id="screenEscriturasNavidad">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Escrituras de Navidad 📖</h3>
+      <p class="game-desc">Una colección de escrituras sobre la Navidad y el nacimiento de Jesucristo, mi vida: las profecías que lo anunciaron y los relatos de aquella noche santa. Toca una cita para leerla completa, una por una y con calma.</p>
+      <div class="scr-list" id="scrList" role="group" aria-label="Citas de las escrituras de Navidad"></div>
+      <div class="scr-panel">
+        <p class="scr-ref" id="scrRef"></p>
+        <p class="scr-text" id="scrText"></p>
+        <p class="scr-count" id="scrCount"></p>
+      </div>
+      <div class="scr-nav">
+        <button class="music-stop" type="button" id="scrPrevBtn">← Anterior</button>
+        <button class="music-stop" type="button" id="scrNextBtn">Siguiente →</button>
       </div>
     </div>
 
@@ -4253,7 +4506,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
+  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenEnojada', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -4271,14 +4524,17 @@
     screenDiaPerfecto: 'screenDetallitos', screenRazones: 'screenDetallitos',
     screenAhorcado: 'screenDetallitos', screenAniversario: 'screenDetallitos',
     screenQueAmo: 'screenDetallitos',
-    screenGames: 'screenMenuJuegos', screenConoces: 'screenMenuJuegos',
+    screenGames: 'screenMenuJuegos', screenConoces: 'screenGames',
     screenFaith: 'screenMenuHistoria', screenCapsule: 'screenMenuHistoria',
     screenHistoria: 'screenMenuHistoria',
     screenEnamora: 'screenMenuHistoria', screenArbolFamiliar: 'screenMenuHistoria',
     screenDetallitos: 'screenMenuDetallitos',
     screenAdvent: 'screenMenuNavidad',
+    screenArbolito: 'screenMenuNavidad', screenCartitaNavidad: 'screenMenuNavidad',
+    screenTriviaNavidad: 'screenMenuNavidad', screenDeseosAnio: 'screenMenuNavidad',
+    screenNacimiento: 'screenMenuNavidad', screenEscriturasNavidad: 'screenMenuNavidad',
     screenEnojada: 'screenMenuSueltos',
-    screenPlaylist: 'screenMenuSueltos',
+    screenPlaylist: 'screenMenuJuegos',
     screenMenuJuegos: 'screenMenu', screenMenuHistoria: 'screenMenu',
     screenMenuDetallitos: 'screenMenu', screenMenuNavidad: 'screenMenu',
     screenMenuSueltos: 'screenMenu',
@@ -4357,7 +4613,7 @@
     function swipeBlockedTarget(target){
       // No interferir con el mapa, ni con campos de texto, ni con el círculo del video
       // de perdón (ahí el desliz cambia entre el corazón y el video, no regresa)
-      return !!(target && target.closest && target.closest('.leaflet-container, input, textarea, select, .sorry-heart'));
+      return !!(target && target.closest && target.closest('.leaflet-container, input, textarea, select, .sorry-heart, .nat-scene'));
     }
     function goBack(){
       // Solo hay «atrás» cuando una pantalla está abierta (un juego, un apartado o la página del menú)
@@ -6736,6 +6992,493 @@
     }
     renderDiary();
 
+    // --- Nuestro arbolito de Navidad ---
+    var TREE_KEY = 'arbolito-navidad-naomi';
+    var treeStage = document.getElementById('treeStage');
+    var treeOrnsWrap = document.getElementById('treeOrns');
+    var treeCount = document.getElementById('treeCount');
+    var treeOrns = [];
+    try{
+      var treeSaved = window.localStorage.getItem(TREE_KEY);
+      if(treeSaved){
+        var treeParsed = JSON.parse(treeSaved);
+        if(treeParsed && treeParsed.length) treeOrns = treeParsed;
+      }
+    }catch(e){ treeOrns = []; }
+    var treeTool = 'pink';
+    function persistTree(){
+      try{ window.localStorage.setItem(TREE_KEY, JSON.stringify(treeOrns)); }catch(e){}
+    }
+    var ORN_CLASS = { pink: 'orn-ball orn-pink', gold: 'orn-ball orn-gold', red: 'orn-ball orn-red', blue: 'orn-ball orn-blue', light: 'orn-light', star: 'orn-star' };
+    var ORN_LABEL = { pink: 'Esfera rosa', gold: 'Esfera dorada', red: 'Esfera roja', blue: 'Esfera azul', light: 'Lucecita', star: 'Estrella' };
+    function renderTree(){
+      if(!treeOrnsWrap) return;
+      treeOrnsWrap.innerHTML = '';
+      treeOrns.forEach(function(orn, idx){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tree-orn';
+        b.style.left = orn.x + '%';
+        b.style.top = orn.y + '%';
+        b.setAttribute('aria-label', (ORN_LABEL[orn.t] || 'Adorno') + ': toca para quitarlo');
+        var s = document.createElement('span');
+        s.className = ORN_CLASS[orn.t] || 'orn-ball orn-pink';
+        if(orn.t === 'star') s.textContent = '★';
+        b.appendChild(s);
+        b.addEventListener('click', function(e){
+          e.stopPropagation();
+          treeOrns.splice(idx, 1);
+          persistTree();
+          renderTree();
+        });
+        treeOrnsWrap.appendChild(b);
+      });
+      if(treeCount){
+        treeCount.textContent = treeOrns.length
+          ? ('Nuestro arbolito ya tiene ' + treeOrns.length + (treeOrns.length === 1 ? ' adorno' : ' adornos') + ', mi amor. 🎄')
+          : 'Nuestro arbolito está esperando sus primeros adornos, mi amor. 🎄';
+      }
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-orn-tool]'), function(btn){
+      btn.addEventListener('click', function(){
+        treeTool = btn.getAttribute('data-orn-tool');
+        Array.prototype.forEach.call(document.querySelectorAll('[data-orn-tool]'), function(b2){
+          b2.setAttribute('aria-pressed', b2 === btn ? 'true' : 'false');
+        });
+      });
+    });
+    if(treeStage){
+      treeStage.addEventListener('click', function(e){
+        var rect = treeStage.getBoundingClientRect();
+        if(!rect.width || !rect.height) return;
+        var x = (e.clientX - rect.left) / rect.width * 100;
+        var y = (e.clientY - rect.top) / rect.height * 100;
+        if(x < 3) x = 3; if(x > 97) x = 97;
+        if(y < 2) y = 2; if(y > 98) y = 98;
+        if(treeTool === 'star'){
+          treeOrns = treeOrns.filter(function(o){ return o.t !== 'star'; });
+        }
+        treeOrns.push({ t: treeTool, x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 });
+        persistTree();
+        renderTree();
+      });
+    }
+    var treeUndoBtn = document.getElementById('treeUndoBtn');
+    if(treeUndoBtn) treeUndoBtn.addEventListener('click', function(){
+      treeOrns.pop();
+      persistTree();
+      renderTree();
+    });
+    var treeClearBtn = document.getElementById('treeClearBtn');
+    if(treeClearBtn) treeClearBtn.addEventListener('click', function(){
+      treeOrns = [];
+      persistTree();
+      renderTree();
+    });
+    renderTree();
+
+    // --- Arma tu nacimiento ---
+    var NAT_KEY = 'nacimiento-naomi';
+    var natScene = document.getElementById('natScene');
+    var NAT_FIGS = [
+      { id: 'estrella', name: 'La estrella', x: 50, y: 16, cls: 'is-star', svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><polygon points="30,4 37,25 59,25 41,38 47,60 30,47 13,60 19,38 1,25 23,25" fill="#FFD166" stroke="#E3C87E" stroke-width="2"/></svg>' },
+      { id: 'angel', name: 'El ángel', x: 83, y: 32, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><ellipse cx="13" cy="32" rx="9" ry="16" fill="#DCE9F7" transform="rotate(-18 13 32)"/><ellipse cx="47" cy="32" rx="9" ry="16" fill="#DCE9F7" transform="rotate(18 47 32)"/><path d="M30 18 L48 72 Q30 78 12 72 Z" fill="#FBF6E9"/><circle cx="30" cy="13" r="8" fill="#F7D3AC"/><ellipse cx="30" cy="2.6" rx="7" ry="2.4" fill="none" stroke="#E3C87E" stroke-width="2"/></svg>' },
+      { id: 'maria', name: 'María', x: 41, y: 64, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M30 17 L50 72 Q30 78 10 72 Z" fill="#3D5A99"/><circle cx="30" cy="12" r="8" fill="#F2C9A4"/><path d="M20 11 a10 10 0 0 1 20 0 l4 16 q-14 -7 -28 0 Z" fill="#5B7DBB"/></svg>' },
+      { id: 'jose', name: 'José', x: 61, y: 64, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M30 17 L50 72 Q30 78 10 72 Z" fill="#7A4A2B"/><circle cx="30" cy="12" r="8" fill="#E8B98D"/><path d="M22.5 15 a8.5 7 0 0 0 15 0 l-1.2 7 h-12.6 Z" fill="#54351E"/></svg>' },
+      { id: 'nino', name: 'El Niño Jesús', x: 51, y: 78, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M13 42 h34 l-5 15 h-24 Z" fill="#8A5A33"/><path d="M19 57 l-4 13 M41 57 l4 13" stroke="#6E4525" stroke-width="4" stroke-linecap="round"/><path d="M17 36 q13 -9 26 0" stroke="#E3C87E" stroke-width="3.4" fill="none" stroke-linecap="round"/><ellipse cx="30" cy="39" rx="13" ry="7.5" fill="#F5EFE0"/><circle cx="30" cy="29" r="6.5" fill="#F7D3AC"/></svg>' },
+      { id: 'pastor', name: 'El pastor', x: 21, y: 68, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M27 17 L45 72 Q27 78 9 72 Z" fill="#B08954"/><circle cx="27" cy="12" r="8" fill="#E8B98D"/><rect x="46" y="12" width="3.4" height="56" rx="1.7" fill="#6E4525"/><path d="M46 12 a6 6 0 1 1 6 6" fill="none" stroke="#6E4525" stroke-width="3"/></svg>' },
+      { id: 'rey1', name: 'Rey Mago', x: 74, y: 72, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M30 19 L50 72 Q30 78 10 72 Z" fill="#6B3FA0"/><circle cx="30" cy="14" r="7.5" fill="#C68863"/><path d="M21.5 9 l3 5 5.5 -6.5 5.5 6.5 3 -5 v7 h-17 Z" fill="#E3C87E"/><rect x="37" y="52" width="11" height="9" rx="1.5" fill="#E3C87E"/></svg>' },
+      { id: 'rey2', name: 'Rey Mago', x: 86, y: 80, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M30 19 L50 72 Q30 78 10 72 Z" fill="#1F7A6D"/><circle cx="30" cy="14" r="7.5" fill="#8A5A3B"/><path d="M21.5 9 l3 5 5.5 -6.5 5.5 6.5 3 -5 v7 h-17 Z" fill="#E3C87E"/><rect x="12" y="52" width="11" height="9" rx="1.5" fill="#C24365"/></svg>' },
+      { id: 'rey3', name: 'Rey Mago', x: 65, y: 84, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><path d="M30 19 L50 72 Q30 78 10 72 Z" fill="#A02C4A"/><circle cx="30" cy="14" r="7.5" fill="#F2C9A4"/><path d="M21.5 9 l3 5 5.5 -6.5 5.5 6.5 3 -5 v7 h-17 Z" fill="#E3C87E"/><rect x="37" y="52" width="11" height="9" rx="1.5" fill="#6B3FA0"/></svg>' },
+      { id: 'burrito', name: 'El burrito', x: 12, y: 84, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><rect x="17" y="53" width="4.5" height="15" fill="#83838C"/><rect x="37" y="53" width="4.5" height="15" fill="#83838C"/><ellipse cx="28" cy="46" rx="18" ry="11.5" fill="#9A9AA2"/><circle cx="45" cy="34" r="8.5" fill="#9A9AA2"/><path d="M40 27 l-3 -9 6 3 Z" fill="#83838C"/><path d="M47 26 l1 -10 5 5 Z" fill="#83838C"/><circle cx="48" cy="33" r="1.4" fill="#333333"/><path d="M11 41 q-5 8 -2 15" stroke="#83838C" stroke-width="3" fill="none" stroke-linecap="round"/></svg>' },
+      { id: 'oveja', name: 'La ovejita', x: 31, y: 86, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><rect x="19" y="53" width="4" height="13" fill="#4A3A30"/><rect x="35" y="53" width="4" height="13" fill="#4A3A30"/><circle cx="21" cy="43" r="9" fill="#FBF6E9"/><circle cx="30" cy="37" r="10" fill="#FBF6E9"/><circle cx="39" cy="43" r="9" fill="#FBF6E9"/><circle cx="30" cy="47" r="10" fill="#FBF6E9"/><ellipse cx="46" cy="41" rx="6" ry="7.5" fill="#4A3A30"/><circle cx="48" cy="39" r="1.2" fill="#FFFFFF"/></svg>' }
+    ];
+    var natPos = {};
+    NAT_FIGS.forEach(function(f){ natPos[f.id] = { x: f.x, y: f.y }; });
+    try{
+      var natSaved = window.localStorage.getItem(NAT_KEY);
+      if(natSaved){
+        var natParsed = JSON.parse(natSaved);
+        if(natParsed){
+          NAT_FIGS.forEach(function(f){
+            if(natParsed[f.id] && typeof natParsed[f.id].x === 'number' && typeof natParsed[f.id].y === 'number'){
+              natPos[f.id] = natParsed[f.id];
+            }
+          });
+        }
+      }
+    }catch(e){}
+    function persistNat(){
+      try{ window.localStorage.setItem(NAT_KEY, JSON.stringify(natPos)); }catch(e){}
+    }
+    if(natScene){
+      NAT_FIGS.forEach(function(f){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'nat-fig' + (f.cls ? ' ' + f.cls : '');
+        b.setAttribute('aria-label', f.name + ': arrastra para moverlo');
+        b.innerHTML = f.svg + '<span class="nat-name">' + f.name + '</span>';
+        b.style.left = natPos[f.id].x + '%';
+        b.style.top = natPos[f.id].y + '%';
+        var dragging = false;
+        function moveFig(e){
+          var rect = natScene.getBoundingClientRect();
+          if(!rect.width || !rect.height) return;
+          var x = (e.clientX - rect.left) / rect.width * 100;
+          var y = (e.clientY - rect.top) / rect.height * 100;
+          if(x < 4) x = 4; if(x > 96) x = 96;
+          if(y < 8) y = 8; if(y > 98) y = 98;
+          natPos[f.id] = { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+          b.style.left = natPos[f.id].x + '%';
+          b.style.top = natPos[f.id].y + '%';
+        }
+        b.addEventListener('pointerdown', function(e){
+          dragging = true;
+          try{ b.setPointerCapture(e.pointerId); }catch(err){}
+          moveFig(e);
+          e.preventDefault();
+        });
+        b.addEventListener('pointermove', function(e){
+          if(dragging) moveFig(e);
+        });
+        b.addEventListener('pointerup', function(){
+          if(dragging){ dragging = false; persistNat(); }
+        });
+        b.addEventListener('pointercancel', function(){
+          if(dragging){ dragging = false; persistNat(); }
+        });
+        b.addEventListener('keydown', function(e){
+          var step = 2, p = natPos[f.id], used = true;
+          if(e.key === 'ArrowLeft') p.x -= step;
+          else if(e.key === 'ArrowRight') p.x += step;
+          else if(e.key === 'ArrowUp') p.y -= step;
+          else if(e.key === 'ArrowDown') p.y += step;
+          else used = false;
+          if(used){
+            if(p.x < 4) p.x = 4; if(p.x > 96) p.x = 96;
+            if(p.y < 8) p.y = 8; if(p.y > 98) p.y = 98;
+            b.style.left = p.x + '%';
+            b.style.top = p.y + '%';
+            persistNat();
+            e.preventDefault();
+          }
+        });
+        natScene.appendChild(b);
+        f.el = b;
+      });
+    }
+    var natResetBtn = document.getElementById('natResetBtn');
+    if(natResetBtn) natResetBtn.addEventListener('click', function(){
+      NAT_FIGS.forEach(function(f){
+        natPos[f.id] = { x: f.x, y: f.y };
+        if(f.el){ f.el.style.left = f.x + '%'; f.el.style.top = f.y + '%'; }
+      });
+      persistNat();
+    });
+
+    // --- Cartita de deseos de Navidad ---
+    var WISH_KEY = 'cartita-deseos-navidad-naomi';
+    var wishInput = document.getElementById('wishInput');
+    var wishSaveBtn = document.getElementById('wishSaveBtn');
+    var wishMsg = document.getElementById('wishMsg');
+    var wishList = document.getElementById('wishList');
+    var wishEntries = [];
+    try{
+      var wishSaved = window.localStorage.getItem(WISH_KEY);
+      if(wishSaved){
+        var wishParsed = JSON.parse(wishSaved);
+        if(wishParsed && wishParsed.length) wishEntries = wishParsed;
+      }
+    }catch(e){ wishEntries = []; }
+    function persistWish(){
+      try{ window.localStorage.setItem(WISH_KEY, JSON.stringify(wishEntries)); }catch(e){}
+    }
+    function renderWish(){
+      if(!wishList) return;
+      wishList.innerHTML = '';
+      if(!wishEntries.length){
+        var empty = document.createElement('p');
+        empty.className = 'diary-empty';
+        empty.textContent = 'Todavía no has guardado ningún deseo, mi amor. Tu primera cartita te está esperando… ♥';
+        wishList.appendChild(empty);
+        return;
+      }
+      wishEntries.forEach(function(entry, idx){
+        var card = document.createElement('article');
+        card.className = 'diary-entry';
+        var head = document.createElement('div');
+        head.className = 'diary-entry-date';
+        var dateSpan = document.createElement('span');
+        var d = new Date(entry.t);
+        dateSpan.textContent = isNaN(d.getTime()) ? '' : d.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'diary-del';
+        del.textContent = 'Borrar';
+        del.setAttribute('aria-label', 'Borrar este deseo de la cartita');
+        del.addEventListener('click', function(){
+          wishEntries.splice(idx, 1);
+          persistWish();
+          renderWish();
+          if(wishMsg) wishMsg.textContent = 'Deseo borrado, mi amor.';
+        });
+        head.appendChild(dateSpan);
+        head.appendChild(del);
+        var p = document.createElement('p');
+        p.textContent = entry.text;
+        card.appendChild(head);
+        card.appendChild(p);
+        wishList.appendChild(card);
+      });
+    }
+    if(wishSaveBtn && wishInput){
+      wishSaveBtn.addEventListener('click', function(){
+        var text = wishInput.value.replace(/^\s+|\s+$/g, '');
+        if(!text){
+          if(wishMsg) wishMsg.textContent = 'Escribe tu deseo primero, mi vida… lo que más anhele tu corazón para esta Navidad. ♥';
+          wishInput.focus();
+          return;
+        }
+        wishEntries.unshift({ t: Date.now(), text: text });
+        persistWish();
+        wishInput.value = '';
+        renderWish();
+        if(wishMsg) wishMsg.textContent = 'Tu deseo quedó guardado en tu cartita, mi amor. Que Dios te lo conceda. ♥';
+      });
+    }
+    renderWish();
+
+    // --- Trivia del nacimiento de Jesús ---
+    var NAVQ = [
+      { q: '¿En qué ciudad nació Jesús?', opts: ['En Nazaret', 'En Belén', 'En Jerusalén'], a: 1, fb: 'En Belén de Judea, tal como lo había profetizado Miqueas (Miqueas 5:2; Lucas 2:7).' },
+      { q: '¿Por qué viajaron José y María hasta Belén?', opts: ['Por el censo de Augusto César', 'Por una fiesta en el templo', 'Para visitar a sus familiares'], a: 0, fb: 'Así es: se estaba haciendo un censo y cada quien debía empadronarse en su ciudad; José era de la casa de David (Lucas 2:1-5).' },
+      { q: 'Al nacer, ¿dónde acostó María al Niño Jesús?', opts: ['En una cunita de madera', 'En la cama del mesón', 'En un pesebre'], a: 2, fb: 'En un pesebre, «porque no había lugar para ellos en el mesón» (Lucas 2:7). ¡Tan humilde fue su llegada!' },
+      { q: '¿A quiénes anunció primero el ángel el nacimiento de Jesús?', opts: ['A los pastores', 'A los sacerdotes del templo', 'A los soldados romanos'], a: 0, fb: 'A los pastores que velaban sus rebaños en el campo (Lucas 2:8-20). Dios escogió a los más sencillos para la noticia más grande.' },
+      { q: '¿Qué cantaron los ángeles aquella noche?', opts: ['«Paz a los hombres de buena voluntad en la tierra»', '«¡Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres!»', '«Ha nacido el Rey de reyes en Jerusalén»'], a: 1, fb: '«¡Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres!» (Lucas 2:14).' },
+      { q: '¿Qué guiaba a los Reyes Magos hasta donde estaba el Niño?', opts: ['Un ángel', 'Un sueño', 'Una estrella'], a: 2, fb: 'Su estrella en el oriente, que se detuvo sobre el lugar donde estaba el Niño (Mateo 2:2, 9).' },
+      { q: '¿Qué presentes ofrecieron los Reyes Magos al Niño?', opts: ['Oro, incienso y mirra', 'Plata, perlas y miel', 'Pan, vino y aceite'], a: 0, fb: 'Oro, incienso y mirra, y postrándose lo adoraron (Mateo 2:11).' },
+      { q: 'Según el ángel, ¿qué nombre pondría José al Niño, «porque él salvará a su pueblo de sus pecados»?', opts: ['Emanuel', 'Jesús', 'Juan'], a: 1, fb: 'Jesús (Mateo 1:21). Y también se le llama Emanuel, que significa «Dios con nosotros» (Mateo 1:23).' },
+      { q: '¿Qué ángel anunció a María que sería la madre del Salvador?', opts: ['El ángel Miguel', 'El ángel Rafael', 'El ángel Gabriel'], a: 2, fb: 'El ángel Gabriel, enviado por Dios a Nazaret (Lucas 1:26-31).' },
+      { q: '¿Qué profeta anunció: «Porque un niño nos es nacido, hijo nos es dado… y se llamará su nombre Admirable, Consejero, Dios Fuerte, Padre Eterno, Príncipe de Paz»?', opts: ['El profeta Isaías', 'El profeta Jeremías', 'El profeta Daniel'], a: 0, fb: 'El profeta Isaías, cientos de años antes de que Jesús naciera (Isaías 9:6).' }
+    ];
+    var navQuizState = { idx: 0, score: 0, locked: false };
+    var navQuizStartWrap = document.getElementById('navQuizStartWrap');
+    var navQuizBody = document.getElementById('navQuizBody');
+    var navQuizEnd = document.getElementById('navQuizEnd');
+    var navQuizProgress = document.getElementById('navQuizProgress');
+    var navQuizScoreEl = document.getElementById('navQuizScore');
+    var navQuizQuestion = document.getElementById('navQuizQuestion');
+    var navQuizOptions = document.getElementById('navQuizOptions');
+    var navQuizFeedback = document.getElementById('navQuizFeedback');
+    var navQuizNextBtn = document.getElementById('navQuizNextBtn');
+    var navQuizFinalMsg = document.getElementById('navQuizFinalMsg');
+    function renderNavQuiz(){
+      var item = NAVQ[navQuizState.idx];
+      navQuizState.locked = false;
+      if(navQuizProgress) navQuizProgress.textContent = 'Pregunta ' + (navQuizState.idx + 1) + ' de ' + NAVQ.length;
+      if(navQuizScoreEl) navQuizScoreEl.textContent = navQuizState.score;
+      if(navQuizQuestion) navQuizQuestion.textContent = item.q;
+      if(navQuizFeedback) navQuizFeedback.textContent = '';
+      if(navQuizNextBtn) navQuizNextBtn.hidden = true;
+      if(navQuizOptions){
+        navQuizOptions.innerHTML = '';
+        item.opts.forEach(function(opt, oi){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-opt';
+          b.textContent = opt;
+          b.addEventListener('click', function(){
+            if(navQuizState.locked) return;
+            navQuizState.locked = true;
+            var buttons = navQuizOptions.querySelectorAll('.quiz-opt');
+            Array.prototype.forEach.call(buttons, function(bb, bi){
+              bb.disabled = true;
+              if(bi === item.a) bb.classList.add('is-correct');
+            });
+            if(oi === item.a){
+              navQuizState.score++;
+              if(navQuizScoreEl) navQuizScoreEl.textContent = navQuizState.score;
+              if(navQuizFeedback) navQuizFeedback.textContent = '¡Correcto, mi amor! ' + item.fb;
+            }else{
+              b.classList.add('is-wrong');
+              if(navQuizFeedback) navQuizFeedback.textContent = 'Casi, mi vida. ' + item.fb;
+            }
+            if(navQuizNextBtn){
+              navQuizNextBtn.hidden = false;
+              navQuizNextBtn.textContent = navQuizState.idx === NAVQ.length - 1 ? 'Ver mi resultado ★' : 'Siguiente pregunta ♥';
+            }
+          });
+          navQuizOptions.appendChild(b);
+        });
+      }
+    }
+    function startNavQuiz(){
+      navQuizState.idx = 0;
+      navQuizState.score = 0;
+      if(navQuizStartWrap) navQuizStartWrap.hidden = true;
+      if(navQuizEnd) navQuizEnd.hidden = true;
+      if(navQuizBody) navQuizBody.hidden = false;
+      renderNavQuiz();
+    }
+    function endNavQuiz(){
+      if(navQuizBody) navQuizBody.hidden = true;
+      if(navQuizEnd) navQuizEnd.hidden = false;
+      var s = navQuizState.score, msg;
+      if(s === NAVQ.length) msg = '¡Perfecto, mi amor! ' + s + ' de ' + NAVQ.length + '. Conoces la historia del nacimiento de nuestro Salvador como nadie. Que esa luz de Belén brille siempre en nuestro hogar. ★♥';
+      else if(s >= 7) msg = '¡Muy bien, mi vida! ' + s + ' de ' + NAVQ.length + '. Casi perfecto: la historia de la primera Navidad vive en tu corazoncito. ★';
+      else if(s >= 4) msg = 'Bien, mi amor: ' + s + ' de ' + NAVQ.length + '. Si quieres, lee conmigo Lucas 2 y Mateo 2 y la próxima vez aciertas todas. ♥';
+      else msg = 'Ay, mi vida: ' + s + ' de ' + NAVQ.length + '. No pasa nada: esta historia tan hermosa se aprende leyéndola juntitos. ¿La leemos hoy en la noche? ♥';
+      if(navQuizFinalMsg) navQuizFinalMsg.textContent = msg;
+    }
+    var navQuizStartBtn = document.getElementById('navQuizStartBtn');
+    if(navQuizStartBtn) navQuizStartBtn.addEventListener('click', startNavQuiz);
+    var navQuizRestartBtn = document.getElementById('navQuizRestartBtn');
+    if(navQuizRestartBtn) navQuizRestartBtn.addEventListener('click', startNavQuiz);
+    if(navQuizNextBtn) navQuizNextBtn.addEventListener('click', function(){
+      navQuizState.idx++;
+      if(navQuizState.idx >= NAVQ.length) endNavQuiz(); else renderNavQuiz();
+    });
+
+    // --- Nuestros deseos para el Año Nuevo ---
+    var NY_KEY = 'deseos-anio-nuevo-naomi';
+    var nyInput = document.getElementById('nyInput');
+    var nySaveBtn = document.getElementById('nySaveBtn');
+    var nyMsg = document.getElementById('nyMsg');
+    var nyList = document.getElementById('nyList');
+    var nyWho = '';
+    var nyEntries = [];
+    try{
+      var nySaved = window.localStorage.getItem(NY_KEY);
+      if(nySaved){
+        var nyParsed = JSON.parse(nySaved);
+        if(nyParsed && nyParsed.length) nyEntries = nyParsed;
+      }
+    }catch(e){ nyEntries = []; }
+    function persistNy(){
+      try{ window.localStorage.setItem(NY_KEY, JSON.stringify(nyEntries)); }catch(e){}
+    }
+    [['nyWhoNaomi', 'Naomi'], ['nyWhoHagot', 'Hagot'], ['nyWhoJuntos', 'Juntos']].forEach(function(pair){
+      var btn = document.getElementById(pair[0]);
+      if(btn) btn.addEventListener('click', function(){
+        nyWho = pair[1];
+        ['nyWhoNaomi', 'nyWhoHagot', 'nyWhoJuntos'].forEach(function(id){
+          var b2 = document.getElementById(id);
+          if(b2) b2.setAttribute('aria-pressed', b2 === btn ? 'true' : 'false');
+        });
+      });
+    });
+    function renderNy(){
+      if(!nyList) return;
+      nyList.innerHTML = '';
+      if(!nyEntries.length){
+        var empty = document.createElement('p');
+        empty.className = 'diary-empty';
+        empty.textContent = 'Todavía no hemos guardado ningún deseo, mi amor. El primero lo escribimos juntitos… ♥';
+        nyList.appendChild(empty);
+        return;
+      }
+      nyEntries.forEach(function(entry, idx){
+        var card = document.createElement('article');
+        card.className = 'diary-entry';
+        var head = document.createElement('div');
+        head.className = 'diary-entry-date';
+        var dateSpan = document.createElement('span');
+        var d = new Date(entry.t);
+        var dateStr = isNaN(d.getTime()) ? '' : d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+        dateSpan.textContent = (entry.who || 'Juntos') + (dateStr ? ' · ' + dateStr : '');
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'diary-del';
+        del.textContent = 'Borrar';
+        del.setAttribute('aria-label', 'Borrar este deseo de Año Nuevo');
+        del.addEventListener('click', function(){
+          nyEntries.splice(idx, 1);
+          persistNy();
+          renderNy();
+          if(nyMsg) nyMsg.textContent = 'Deseo borrado, mi amor.';
+        });
+        head.appendChild(dateSpan);
+        head.appendChild(del);
+        var p = document.createElement('p');
+        p.textContent = entry.text;
+        card.appendChild(head);
+        card.appendChild(p);
+        nyList.appendChild(card);
+      });
+    }
+    if(nySaveBtn && nyInput){
+      nySaveBtn.addEventListener('click', function(){
+        var text = nyInput.value.replace(/^\s+|\s+$/g, '');
+        if(!nyWho){
+          if(nyMsg) nyMsg.textContent = 'Elige primero de quién es el deseo, mi amor: tuyo, mío o de los dos juntitos. ♥';
+          return;
+        }
+        if(!text){
+          if(nyMsg) nyMsg.textContent = 'Escribe el deseo primero, mi vida… ese sueño que queremos ver cumplido el año que viene. ♥';
+          nyInput.focus();
+          return;
+        }
+        nyEntries.unshift({ t: Date.now(), who: nyWho, text: text });
+        persistNy();
+        nyInput.value = '';
+        renderNy();
+        if(nyMsg) nyMsg.textContent = 'Deseo guardado, mi amor. A trabajar por él juntitos, con Dios por delante. ♥';
+      });
+    }
+    renderNy();
+
+    // --- Escrituras de Navidad ---
+    var SCR = [
+      { ref: 'Isaías 7:14', text: 'Por tanto, el Señor mismo os dará señal: He aquí que la virgen concebirá, y dará a luz un hijo, y llamará su nombre Emanuel.' },
+      { ref: 'Isaías 9:6', text: 'Porque un niño nos es nacido, hijo nos es dado, y el principado sobre su hombro; y se llamará su nombre Admirable, Consejero, Dios Fuerte, Padre Eterno, Príncipe de Paz.' },
+      { ref: 'Miqueas 5:2', text: 'Mas tú, Belén Efrata, pequeña para estar entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad.' },
+      { ref: 'Helamán 14:3', text: 'Y he aquí, esto os daré por señal al tiempo de su venida; porque he aquí, habrá grandes luces en el cielo, de tal manera que la noche antes de su venida no habrá obscuridad, de modo que parecerá a los hombres como si fuera de día.' },
+      { ref: 'Mosíah 3:8', text: 'Y se llamará Jesucristo, el Hijo de Dios, el Padre del cielo y de la tierra, el Creador de todas las cosas desde el principio; y su madre se llamará María.' },
+      { ref: 'Lucas 1:30-31', text: 'Entonces el ángel le dijo: María, no temas, porque has hallado gracia delante de Dios. Y ahora, concebirás en tu vientre, y darás a luz un hijo, y llamarás su nombre Jesús.' },
+      { ref: 'Lucas 1:38', text: 'Entonces María dijo: He aquí la sierva del Señor; hágase conmigo conforme a tu palabra. Y el ángel se fue de su presencia.' },
+      { ref: 'Mateo 1:21', text: 'Y dará a luz un hijo, y llamarás su nombre Jesús, porque él salvará a su pueblo de sus pecados.' },
+      { ref: 'Mateo 1:23', text: 'He aquí, una virgen concebirá y dará a luz un hijo, y llamarás su nombre Emanuel, que traducido es: Dios con nosotros.' },
+      { ref: 'Lucas 2:7', text: 'Y dio a luz a su hijo primogénito, y lo envolvió en pañales, y lo acostó en un pesebre, porque no había lugar para ellos en el mesón.' },
+      { ref: 'Lucas 2:10-11', text: 'Pero el ángel les dijo: No temáis; porque he aquí os doy nuevas de gran gozo, que será para todo el pueblo: que os ha nacido hoy, en la ciudad de David, un Salvador, que es Cristo el Señor.' },
+      { ref: 'Lucas 2:14', text: '¡Gloria a Dios en las alturas, y en la tierra paz, buena voluntad para con los hombres!' },
+      { ref: 'Lucas 2:20', text: 'Y volvieron los pastores glorificando y alabando a Dios por todas las cosas que habían oído y visto, como se les había dicho.' },
+      { ref: 'Mateo 2:10-11', text: 'Y al ver la estrella, se regocijaron con muy grande gozo. Y al entrar en la casa, vieron al niño con su madre María, y postrándose, lo adoraron; y abriendo sus tesoros, le ofrecieron presentes: oro, incienso y mirra.' },
+      { ref: 'Juan 1:14', text: 'Y aquel Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.' },
+      { ref: 'Gálatas 4:4', text: 'Pero cuando vino el cumplimiento del tiempo, Dios envió a su Hijo, nacido de mujer y nacido bajo la ley.' }
+    ];
+    var scrList = document.getElementById('scrList');
+    var scrRef = document.getElementById('scrRef');
+    var scrText = document.getElementById('scrText');
+    var scrCount = document.getElementById('scrCount');
+    var scrIdx = 0;
+    var scrChips = [];
+    function showScr(i){
+      scrIdx = ((i % SCR.length) + SCR.length) % SCR.length;
+      if(scrRef) scrRef.textContent = SCR[scrIdx].ref;
+      if(scrText) scrText.textContent = SCR[scrIdx].text;
+      if(scrCount) scrCount.textContent = (scrIdx + 1) + ' de ' + SCR.length;
+      scrChips.forEach(function(chip, ci){
+        chip.setAttribute('aria-pressed', ci === scrIdx ? 'true' : 'false');
+      });
+    }
+    if(scrList){
+      SCR.forEach(function(item, i){
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'scr-chip';
+        chip.textContent = item.ref;
+        chip.setAttribute('aria-pressed', 'false');
+        chip.addEventListener('click', function(){ showScr(i); });
+        scrList.appendChild(chip);
+        scrChips.push(chip);
+      });
+      showScr(0);
+    }
+    var scrPrevBtn = document.getElementById('scrPrevBtn');
+    if(scrPrevBtn) scrPrevBtn.addEventListener('click', function(){ showScr(scrIdx - 1); });
+    var scrNextBtn = document.getElementById('scrNextBtn');
+    if(scrNextBtn) scrNextBtn.addEventListener('click', function(){ showScr(scrIdx + 1); });
+
     // --- Barrita de progreso de lectura ---
     var scrollProgress = document.getElementById('scrollProgress');
     if(scrollProgress){
@@ -7411,6 +8154,9 @@
     screenMemo: 'screenGames', screenWheel: 'screenGames', screenChest: 'screenGames',
     screenPuzzle: 'screenGames', screenWords: 'screenGames', screenTreasure: 'screenGames',
     screenFaith: 'screenFaith', screenCapsule: 'screenCapsule', screenAdvent: 'screenAdvent',
+    screenArbolito: 'screenArbolito', screenCartitaNavidad: 'screenCartitaNavidad',
+    screenTriviaNavidad: 'screenTriviaNavidad', screenDeseosAnio: 'screenDeseosAnio',
+    screenNacimiento: 'screenNacimiento', screenEscriturasNavidad: 'screenEscriturasNavidad',
     screenDetallitos: 'screenDetallitos', screenIdiomas: 'screenDetallitos',
     screenPensamiento: 'screenDetallitos', screenCitas: 'screenDetallitos',
     screenPacto: 'screenDetallitos', screenAdivina: 'screenDetallitos',
@@ -7425,7 +8171,7 @@
     screenEnojada: 'screenEnojada', screenHistoria: 'screenHistoria',
     screenEnamora: 'screenEnamora',
     screenArbolFamiliar: 'screenArbolFamiliar',
-    screenConoces: 'screenConoces',
+    screenConoces: 'screenGames',
     screenPlaylist: 'screenPlaylist'
   };
   function updateNavCurrent(){

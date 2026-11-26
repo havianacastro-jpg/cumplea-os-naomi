@@ -3311,30 +3311,17 @@
   }
 
   // --- Gesto: deslizar hacia la izquierda regresa un paso, igual que «← Volver» ---
+  // Se reconoce durante el propio movimiento (touchmove), no solo al soltar el
+  // dedo: así funciona aunque el navegador se quede el gesto para desplazar la
+  // página y cancele el toque antes del touchend. Los umbrales son tolerantes
+  // para que un deslizamiento normal, con su deriva vertical y sin prisa, cuente.
   (function(){
-    var swipeX = null, swipeY = null, swipeT = 0, swipeTarget = null;
-    document.addEventListener('touchstart', function(e){
-      if(e.touches.length !== 1){ swipeX = null; return; }
-      var t = e.touches[0];
-      swipeX = t.clientX;
-      swipeY = t.clientY;
-      swipeT = Date.now();
-      swipeTarget = e.target;
-    }, { passive: true });
-    document.addEventListener('touchcancel', function(){ swipeX = null; }, { passive: true });
-    document.addEventListener('touchend', function(e){
-      if(swipeX === null || !e.changedTouches.length) return;
-      var t = e.changedTouches[0];
-      var dx = t.clientX - swipeX;
-      var dy = t.clientY - swipeY;
-      var dt = Date.now() - swipeT;
-      var target = swipeTarget;
-      swipeX = null;
-      // Solo un deslizamiento claro hacia la izquierda:
-      if(dx > -90) return;                          // al menos 90 px hacia la izquierda
-      if(Math.abs(dy) > 60) return;                 // casi horizontal: no cuenta al bajar o subir la página
-      if(Math.abs(dy) > Math.abs(dx) * 0.45) return; // el movimiento principal es horizontal
-      if(dt > 700) return;                          // un gesto rápido, no un arrastre lento sobre un juego
+    var swipeX = null, swipeY = null, swipeDone = false;
+    function swipeBlockedTarget(target){
+      // No interferir con el mapa ni con campos de texto
+      return !!(target && target.closest && target.closest('.leaflet-container, input, textarea, select'));
+    }
+    function goBack(){
       // Con el menú ☰ abierto, el gesto lo cierra y regresa un paso
       var navMenuEl = document.getElementById('navMenu');
       if(navMenuEl && !navMenuEl.hidden){
@@ -3349,9 +3336,38 @@
       }
       // Solo hay «atrás» cuando una pantalla está abierta (un juego o un apartado)
       if(!document.body.classList.contains('game-open')) return;
-      // No interferir con el mapa ni con campos de texto
-      if(target && target.closest && target.closest('.leaflet-container, input, textarea, select')) return;
       closeGame(); // un solo paso atrás: del juego a su apartado, del apartado al menú, del menú a la página principal
+    }
+    document.addEventListener('touchstart', function(e){
+      if(e.touches.length !== 1){ swipeX = null; return; }
+      var t = e.touches[0];
+      swipeX = t.clientX;
+      swipeY = t.clientY;
+      swipeDone = swipeBlockedTarget(e.target);
+    }, { passive: true });
+    document.addEventListener('touchmove', function(e){
+      if(swipeX === null || swipeDone || !e.touches.length) return;
+      var t = e.touches[0];
+      var dx = t.clientX - swipeX;
+      var dy = t.clientY - swipeY;
+      // Ya en pleno gesto: al menos 64 px a la izquierda y el movimiento
+      // claramente horizontal (la deriva vertical puede ser hasta ~60% de lo
+      // avanzado). Sin límite de tiempo: un deslizamiento lento también cuenta.
+      if(dx <= -64 && Math.abs(dx) >= Math.abs(dy) * 1.6){
+        swipeDone = true;
+        goBack();
+      }
+    }, { passive: true });
+    document.addEventListener('touchcancel', function(){ swipeX = null; }, { passive: true });
+    document.addEventListener('touchend', function(e){
+      if(swipeX === null || swipeDone || !e.changedTouches.length) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - swipeX;
+      var dy = t.clientY - swipeY;
+      swipeX = null;
+      // Al soltar el dedo se acepta un gesto más corto o más diagonal:
+      // basta que avance 48 px a la izquierda y que lo horizontal gane a lo vertical.
+      if(dx <= -48 && Math.abs(dx) > Math.abs(dy)) goBack();
     }, { passive: true });
   })();
 

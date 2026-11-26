@@ -908,23 +908,436 @@
   .foot-meta p{ font-size:.9rem}
   .foot-copy{ font-size:.92rem; color:var(--ink)}
   .foot-copy strong{ color:var(--rose-deep)}
+
+  /* ===== Detallitos para ti, modo noche y volver arriba ===== */
+  /* Modo noche: el mismo tema oscuro y romántico de la página, activado con el botón del encabezado */
+  html[data-theme="night"]{
+    --bg:#241419; --bg-soft:#2E1B22; --surface:#332028; --surface-warm:#3A232B;
+    --ink:#FDEDF0; --ink-soft:#E8BFC8; --rose:#F08AA6; --rose-deep:#F6B0C2;
+    --rose-light:#8A4458; --rose-pale:#4A2A35; --gold:#E3C87E; --gold-soft:#5A4A2A;
+    --line:#5A3542; --shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  html[data-theme="night"] .hero-cta, html[data-theme="night"] .letter::before,
+  html[data-theme="night"] .album-btn, html[data-theme="night"] #rainBtn,
+  html[data-theme="night"] .video-link, html[data-theme="night"] .music-btn .music-play-icon,
+  html[data-theme="night"] .pin, html[data-theme="night"] .place-row.map-selected .place-num,
+  html[data-theme="night"] .game-start-btn, html[data-theme="night"] .game-next-btn,
+  html[data-theme="night"] .game-menu-play, html[data-theme="night"] .chest-box,
+  html[data-theme="night"] .ws-cell.start, html[data-theme="night"] .adv-answer-btn,
+  html[data-theme="night"] .to-top{ color:#241419 }
+  html[data-theme="night"] .video-link.alt{ color:var(--rose-deep) }
+  .topbar-actions{ display:flex; align-items:center; gap:10px; flex:0 0 auto }
+  .night-btn{
+    width:48px; height:48px; border-radius:50%; padding:0; cursor:pointer;
+    background:var(--rose-pale); border:1.5px solid var(--rose-light);
+    color:var(--rose-deep); font-size:1.3rem; line-height:1;
+    display:grid; place-items:center;
+  }
+  .night-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+
+  /* Botón flotante para volver arriba */
+  .to-top{
+    position:fixed; right:18px; bottom:18px; z-index:70;
+    width:52px; height:52px; border-radius:50%; padding:0; cursor:pointer;
+    background:var(--rose-deep); color:#fff; border:1.5px solid var(--rose-light);
+    box-shadow:var(--shadow); font-size:1.35rem; line-height:1;
+    display:grid; place-items:center;
+    transition:transform .25s ease;
+  }
+  .to-top.visible{ transform:translateY(-3px) }
+  .to-top:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  body.game-open .to-top{ display:none }
+  @media (prefers-reduced-motion: reduce){ .to-top{ transition:none } }
+
+  /* Te amo en muchos idiomas */
+  .lang-grid{ display:grid; gap:12px; max-width:560px; margin:0 auto; text-align:left }
+  @media(min-width:620px){ .lang-grid{ grid-template-columns:1fr 1fr } }
+  .lang-card{
+    width:100%; background:var(--bg-soft); border:1.5px solid var(--line); border-radius:16px;
+    padding:16px 18px; cursor:pointer; text-align:left; color:var(--ink);
+    font-family:"Quicksand",sans-serif;
+    transition:border-color .15s ease, background .2s ease;
+  }
+  .lang-card:hover{ border-color:var(--rose-light) }
+  .lang-card:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .lang-name{ display:block; font-weight:700; font-size:.95rem; color:var(--rose-deep) }
+  .lang-hint{ display:block; margin-top:4px; font-size:.92rem; color:var(--ink-soft) }
+  .lang-phrase{ display:none; margin-top:4px; font-family:"Playfair Display",serif; font-weight:700; font-size:1.35rem; line-height:1.25; color:var(--ink) }
+  .lang-sound{ display:none; margin-top:2px; font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.05rem; color:var(--ink-soft) }
+  .lang-card.open{ background:var(--rose-pale); border-color:var(--gold) }
+  .lang-card.open .lang-hint{ display:none }
+  .lang-card.open .lang-phrase, .lang-card.open .lang-sound{ display:block }
+
+  /* Un pensamiento para ti hoy */
+  .thought-card{
+    background:var(--surface-warm); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:30px 26px; max-width:560px; margin:0 auto;
+  }
+  .thought-date{ font-size:.85rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin:0 0 12px }
+  .thought-text{ font-family:"Cormorant Garamond",serif; font-size:1.45rem; line-height:1.6; margin:0; color:var(--ink) }
+  .thought-sign{ font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep); margin:16px 0 0 }
+
+  /* 12 citas para nuestro primer año de casados */
+  .dates-list{ display:grid; gap:12px; max-width:620px; margin:0 auto; text-align:left }
+  .date-item{ display:flex; gap:14px; background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px }
+  .date-badge{ flex:0 0 auto; width:58px; text-align:center }
+  .date-badge .date-month{ display:block; font-family:"Playfair Display",serif; font-weight:800; font-size:1.02rem; color:var(--rose-deep); line-height:1.15 }
+  .date-badge .date-year{ display:block; font-size:.8rem; font-weight:700; color:var(--gold) }
+  .date-item h4{ margin:0 0 4px; font-family:"Playfair Display",serif; font-size:1.08rem; line-height:1.25 }
+  .date-item p{ margin:0; font-size:.95rem; color:var(--ink-soft); line-height:1.55 }
+
+  /* Nuestro pacto de esposos */
+  .pact-list{ list-style:none; margin:0 auto; padding:0; max-width:600px; text-align:left; display:grid; gap:12px }
+  .pact-list li{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px 16px 52px; position:relative; line-height:1.55 }
+  .pact-list li::before{ content:"♥"; position:absolute; left:18px; top:15px; color:var(--rose); font-size:1.05rem }
+  .pact-list strong{ color:var(--rose-deep) }
+
+  /* Adivina el lugar */
+  .guess-clue{ background:var(--surface-warm); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; max-width:560px; margin:0 auto 6px }
+  .guess-clue p{ font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.55; margin:0 }
+
+  /* Mi diario de amor */
+  .diary-form{ max-width:560px; margin:0 auto; text-align:left }
+  .diary-label{ display:block; font-weight:700; font-size:.95rem; color:var(--rose-deep); margin-bottom:8px }
+  .diary-input{
+    width:100%; min-height:120px; resize:vertical; padding:14px 16px;
+    border:1.5px solid var(--line); border-radius:var(--radius-md);
+    background:var(--bg-soft); color:var(--ink);
+    font-family:"Cormorant Garamond",serif; font-size:1.2rem; line-height:1.55;
+  }
+  .diary-input:focus{ outline:3px solid var(--gold); outline-offset:2px; border-color:var(--gold) }
+  .diary-save-wrap{ text-align:center; margin-top:14px }
+  .diary-note{ font-size:.88rem; color:var(--ink-soft); margin:10px 0 0; text-align:center }
+  .diary-msg{ min-height:1.5em; font-weight:700; color:var(--rose-deep); text-align:center; margin:12px 0 0 }
+  .diary-list{ display:grid; gap:12px; max-width:560px; margin:22px auto 0; text-align:left }
+  .diary-entry{ background:var(--surface-warm); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px }
+  .diary-entry-date{ display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:.85rem; font-weight:700; color:var(--gold); text-transform:capitalize; margin-bottom:6px }
+  .diary-del{ background:none; border:none; color:var(--rose); font-family:"Quicksand",sans-serif; font-weight:700; font-size:.85rem; cursor:pointer; padding:6px 8px; min-height:36px }
+  .diary-del:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .diary-entry p{ margin:0; font-family:"Cormorant Garamond",serif; font-size:1.18rem; line-height:1.6; white-space:pre-wrap; overflow-wrap:break-word }
+  .diary-empty{ color:var(--ink-soft); font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.15rem; text-align:center; margin:0 }
+
+  /* ===== Segunda tanda de Detallitos: barra de progreso, abrazo, canción, sueños, oración y árbol ===== */
+  /* Barrita de progreso de lectura, arriba de todo */
+  #scrollProgress{
+    position:fixed; top:0; left:0; height:4px; width:0; z-index:95;
+    background:linear-gradient(90deg, var(--rose), var(--gold));
+    border-radius:0 4px 4px 0; pointer-events:none;
+  }
+
+  /* Botón «Mándame un abrazo» en la página principal */
+  .hug-btn{
+    background:var(--rose-deep); color:#fff; border:none; border-radius:999px;
+    padding:14px 28px; font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+  @media (prefers-color-scheme: dark){ .hug-btn{color:#241419} }
+  html[data-theme="night"] .hug-btn{ color:#241419 }
+  .hug-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  .hug-msg{
+    display:none; margin-top:24px; padding-top:22px; border-top:1px dashed var(--line);
+    font-family:"Cormorant Garamond",serif; font-size:1.35rem; line-height:1.6;
+  }
+  .hug-msg.show{ display:block }
+  .hug-msg .from{ display:block; margin-top:10px; font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep); font-size:1.15rem }
+
+  /* Sueños por cumplir juntos */
+  .dreams-count{ text-align:center; font-weight:700; color:var(--rose-deep); margin:0 0 18px; font-size:1.02rem }
+  .dreams-list{ display:grid; gap:12px; max-width:600px; margin:0 auto; text-align:left }
+  .dream-item{
+    display:flex; gap:14px; align-items:flex-start;
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:15px 18px; cursor:pointer; line-height:1.55;
+    transition:border-color .15s ease, background .2s ease;
+  }
+  .dream-item:hover{ border-color:var(--rose-light) }
+  .dream-item input{ flex:0 0 auto; width:24px; height:24px; margin-top:2px; accent-color:var(--rose-deep); cursor:pointer }
+  .dream-item input:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .dream-item.done{ background:var(--gold-soft); border-color:var(--gold) }
+  .dream-item.done span::after{ content:" ♥"; color:var(--rose-deep); font-weight:700 }
+
+  /* Oración de la noche */
+  .prayer-card{
+    background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
+    padding:30px 26px; max-width:560px; margin:0 auto; text-align:left;
+  }
+  .prayer-card p{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.7; margin:0 0 14px }
+  .prayer-card p:last-child{ margin-bottom:0 }
+  .prayer-open{ font-family:"Playfair Display",serif; font-weight:700; color:var(--rose-deep) }
+  .prayer-amen{ text-align:right; font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep) }
+
+  /* Árbol de gratitud */
+  .gtree{ position:relative; width:min(330px, 88vw); height:400px; margin:4px auto 0 }
+  .gtree-star{
+    position:absolute; top:-4px; left:50%; transform:translateX(-50%); z-index:5;
+    color:var(--gold); font-size:2.1rem; line-height:1; text-shadow:0 0 16px rgba(185,138,47,.65);
+  }
+  .gtree-layer{ position:absolute; left:50%; transform:translateX(-50%); z-index:2; clip-path:polygon(50% 0, 100% 100%, 0 100%) }
+  .gt-l1{ top:30px; width:132px; height:118px; background:linear-gradient(180deg, var(--rose-light), var(--rose)) }
+  .gt-l2{ top:116px; width:202px; height:132px; background:linear-gradient(180deg, var(--rose), var(--rose-deep)) }
+  .gt-l3{ top:204px; width:276px; height:142px; background:linear-gradient(180deg, var(--rose-deep), var(--rose)) }
+  .gtree-trunk{
+    position:absolute; bottom:4px; left:50%; transform:translateX(-50%); z-index:1;
+    width:36px; height:46px; background:var(--gold); border-radius:8px;
+  }
+  .gt-orn{
+    position:absolute; transform:translate(-50%,-50%); z-index:4;
+    width:46px; height:46px; min-height:46px; border-radius:50%; padding:0;
+    background:var(--rose-pale); border:2px solid var(--gold-soft); color:var(--rose-deep);
+    font-size:1.15rem; line-height:1; display:grid; place-items:center; cursor:pointer;
+    box-shadow:var(--shadow); -webkit-tap-highlight-color:transparent;
+    transition:background .25s ease, box-shadow .25s ease;
+  }
+  .gt-orn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .gt-orn.lit{ background:var(--gold); border-color:var(--gold); color:#4A2330; box-shadow:0 0 20px 5px rgba(185,138,47,.55) }
+  .gt-reveal{
+    margin:22px auto 0; max-width:560px; background:var(--surface-warm);
+    border:1px dashed var(--gold); border-radius:var(--radius-md); padding:20px 22px;
+  }
+  .gt-reveal-tag{ font-size:.75rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gold) }
+  .gt-reveal-text{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.6; margin:8px 0 0 }
+
+  /* ===== Tercera tanda de Detallitos: letra grande, contador de abrazos, verdad o reto, cartitas, reto semanal y cuento ===== */
+  /* Botón de letra grande en el encabezado */
+  .textsize-btn{
+    height:48px; min-width:48px; border-radius:999px; padding:0 14px; cursor:pointer;
+    background:var(--rose-pale); border:1.5px solid var(--rose-light);
+    color:var(--rose-deep); font-family:"Quicksand",sans-serif; font-weight:700; font-size:1.05rem; line-height:1;
+    display:grid; place-items:center;
+  }
+  .textsize-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .textsize-btn[aria-pressed="true"]{ background:var(--gold-soft); border-color:var(--gold) }
+  html[data-textsize="big"]{ font-size:19px }
+  html[data-textsize="big"] body{ font-size:20px }
+
+  /* Contador de abrazos bajo el botón «Mándame un abrazo» */
+  .hug-count{ margin:16px 0 0; font-weight:700; color:var(--rose-deep); font-size:1rem }
+
+  /* Verdad o reto de amor */
+  .vr-stage{ max-width:560px; margin:0 auto }
+  .vr-card{
+    background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
+    padding:28px 24px; min-height:172px; display:flex; flex-direction:column; justify-content:center; gap:12px;
+  }
+  .vr-tag{ align-self:center; font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:5px 14px; border-radius:999px; background:var(--rose-pale); color:var(--rose-deep) }
+  .vr-tag.reto{ background:var(--gold-soft) }
+  .vr-text{ font-family:"Cormorant Garamond",serif; font-size:1.35rem; line-height:1.6; margin:0 }
+  .draw-count{ color:var(--ink-soft); font-size:.95rem; margin:14px 0 16px }
+
+  /* Saca una cartita */
+  .deck-stage{ max-width:560px; margin:0 auto }
+  .deck-card{
+    background:var(--surface-warm); border:1.5px dashed var(--rose); border-radius:var(--radius-md);
+    padding:28px 24px; min-height:172px; display:flex; flex-direction:column; justify-content:center; gap:10px;
+  }
+  .deck-text{ font-family:"Cormorant Garamond",serif; font-size:1.35rem; line-height:1.6; margin:0 }
+  .deck-from{ font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep); margin:0; font-size:1.1rem }
+
+  /* Reto de amor de 7 días */
+  .week-list{ display:grid; gap:12px; max-width:600px; margin:0 auto; text-align:left }
+  .week-day{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px }
+  .week-day h4{ font-family:"Playfair Display",serif; color:var(--rose-deep); margin:0 0 6px; font-size:1.12rem }
+  .week-day p{ margin:0; line-height:1.6 }
+
+  /* Nuestro cuento */
+  .story-card{ background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md); padding:30px 26px; max-width:600px; margin:0 auto; text-align:left }
+  .story-card p{ font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.75; margin:0 0 16px }
+  .story-card p:last-child{ margin-bottom:0 }
+  .story-first::first-letter{ font-family:"Playfair Display",serif; font-size:2.1em; color:var(--rose-deep); line-height:1 }
+
+  /* ===== Cuarta tanda de Detallitos: bingo, conversemos, día perfecto, medidor, flor e índice ===== */
+  /* Bingo de amor */
+  .bingo-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; max-width:520px; margin:0 auto }
+  .bingo-cell{
+    border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:14px; padding:12px 6px; min-height:86px; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.82rem; line-height:1.35;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center;
+  }
+  .bingo-cell .bingo-heart{ font-size:1.05rem; color:var(--rose-pale); line-height:1 }
+  .bingo-cell.on{ background:var(--rose-pale); border-color:var(--rose); color:var(--rose-deep) }
+  .bingo-cell.on .bingo-heart{ color:var(--rose) }
+  .bingo-cell:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .bingo-msg{ max-width:520px; margin:18px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.55; color:var(--rose-deep); min-height:1.6em }
+  .bingo-reset{ margin-top:14px; background:none; border:0; cursor:pointer; color:var(--ink-soft); font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem; text-decoration:underline; text-underline-offset:3px }
+  .bingo-reset:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+
+  /* Conversemos, mi amor */
+  .talk-stage{ max-width:560px; margin:0 auto }
+  .talk-card{
+    background:var(--surface-warm); border:1.5px solid var(--rose-light); border-radius:var(--radius-md);
+    padding:28px 24px; min-height:172px; display:flex; flex-direction:column; justify-content:center; gap:12px;
+  }
+  .talk-tag{ align-self:center; font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:5px 14px; border-radius:999px; background:var(--gold-soft); color:var(--rose-deep) }
+  .talk-text{ font-family:"Cormorant Garamond",serif; font-size:1.4rem; line-height:1.6; margin:0 }
+
+  /* Un día perfecto juntos */
+  .day-group{ max-width:600px; margin:0 auto 22px; text-align:left }
+  .day-group h4{ font-family:"Playfair Display",serif; color:var(--rose-deep); margin:0 0 10px; font-size:1.15rem; text-align:center }
+  .day-opts{ display:grid; gap:9px }
+  .day-opt{
+    border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:14px; padding:13px 16px; cursor:pointer; text-align:left;
+    font-family:"Quicksand",sans-serif; font-size:.98rem; line-height:1.5; font-weight:600;
+  }
+  .day-opt.sel{ background:var(--rose-pale); border-color:var(--rose); color:var(--rose-deep) }
+  .day-opt:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .day-story{
+    max-width:600px; margin:8px auto 0; background:var(--surface-warm); border:1.5px solid var(--gold);
+    border-radius:var(--radius-md); padding:26px 24px; text-align:left;
+  }
+  .day-story h4{ font-family:"Playfair Display",serif; color:var(--rose-deep); margin:0 0 10px; font-size:1.2rem; text-align:center }
+  .day-story p{ font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.7; margin:0 0 12px }
+  .day-story p:last-child{ margin-bottom:0 }
+
+  /* El medidor de amor (página principal) */
+  .meter-heart{
+    position:relative; display:inline-block; border:0; background:none; cursor:pointer; padding:6px 10px;
+    font-size:118px; line-height:1; font-family:inherit;
+  }
+  .meter-heart:focus-visible{ outline:3px solid var(--gold); outline-offset:4px; border-radius:18px }
+  .meter-base{ color:var(--rose-pale) }
+  .meter-fillbox{ position:absolute; left:0; right:0; bottom:6px; height:0%; overflow:hidden; transition:height .45s ease }
+  .meter-fillheart{ position:absolute; left:0; right:0; bottom:0; display:block; text-align:center; color:var(--rose) }
+  .meter-pct{ font-family:"Playfair Display",serif; font-size:1.5rem; color:var(--rose-deep); margin:6px 0 2px }
+  .meter-msg{ max-width:480px; margin:8px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.6; color:var(--ink) }
+
+  /* Nuestra flor (página principal) */
+  .flor-svg{ display:block; margin:0 auto; max-width:230px; width:100%; height:auto }
+  .flor-msg{ max-width:480px; margin:10px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.3rem; line-height:1.6; color:var(--ink) }
+  .flor-count{ color:var(--rose-deep); font-weight:700; margin-top:8px }
+
+  /* Índice rápido al final de la página principal */
+  .index-list{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:640px; margin:0 auto }
+  .index-link{
+    border:1.5px solid var(--rose-light); background:var(--surface); color:var(--rose-deep);
+    border-radius:999px; padding:11px 20px; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem;
+  }
+  .index-link:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  html[data-theme="night"] .index-link{ color:var(--rose-deep) }
+
+  /* ===== Quinta tanda de Detallitos: 50 razones, ahorcado, carta de aniversario, qué amo más, beso y menú actual ===== */
+  /* Menú hamburguesa: corazoncito en la sección actual */
+  .nav-item.nav-current{ background:var(--rose-pale) }
+  .nav-item.nav-current .nav-icon{ background:var(--rose); color:#fff }
+  @media (prefers-color-scheme: dark){ .nav-item.nav-current .nav-icon{ color:#241419 } }
+  html[data-theme="night"] .nav-item.nav-current .nav-icon{ color:#241419 }
+  .nav-item .nav-here{ display:none; margin-left:auto; color:var(--rose); font-size:1.15rem; line-height:1 }
+  .nav-item.nav-current .nav-here{ display:block }
+
+  /* 50 razones por las que te amo */
+  .reasons-count{ font-weight:700; color:var(--rose-deep); margin:0 0 18px; font-size:1.02rem }
+  .reasons-grid{ display:grid; gap:10px; max-width:640px; margin:0 auto; text-align:left }
+  .reason-item{
+    display:flex; align-items:center; gap:14px; width:100%; text-align:left; cursor:pointer;
+    border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:16px; padding:14px 16px;
+    font-family:"Quicksand",sans-serif; font-size:1rem; line-height:1.5;
+  }
+  .reason-num{
+    flex:0 0 auto; width:40px; height:40px; border-radius:50%;
+    background:var(--rose-pale); color:var(--rose-deep);
+    display:grid; place-items:center; font-weight:800; font-size:.95rem;
+  }
+  .reason-hint{ color:var(--ink-soft); font-weight:600 }
+  .reason-item.open{ background:var(--surface-warm); border-color:var(--gold); cursor:default }
+  .reason-item.open .reason-num{ background:var(--rose); color:#fff }
+  @media (prefers-color-scheme: dark){ .reason-item.open .reason-num{ color:#241419 } }
+  html[data-theme="night"] .reason-item.open .reason-num{ color:#241419 }
+  .reason-item.open .reason-text{ font-family:"Cormorant Garamond",serif; font-size:1.25rem; line-height:1.55; color:var(--ink) }
+  .reason-item:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+
+  /* Ahorcado de amor */
+  .hang-hearts{ font-size:1.5rem; letter-spacing:.35em; color:var(--rose); margin:4px 0 2px; min-height:1.6em }
+  .hang-hearts .lost{ color:var(--rose-pale) }
+  .hang-hint{ max-width:520px; margin:10px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.28rem; line-height:1.55; color:var(--ink-soft) }
+  .hang-word{ display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin:22px auto 6px; max-width:560px }
+  .hang-slot{
+    width:40px; height:52px; border-bottom:3px solid var(--rose); border-radius:6px 6px 0 0;
+    background:var(--surface-warm); display:grid; place-items:center;
+    font-family:"Playfair Display",serif; font-weight:800; font-size:1.45rem; color:var(--rose-deep);
+  }
+  .hang-tries{ font-weight:700; color:var(--rose-deep); margin:12px 0 0 }
+  .hang-keys{ display:flex; flex-wrap:wrap; gap:7px; justify-content:center; max-width:520px; margin:18px auto 0 }
+  .hang-key{
+    width:42px; height:46px; border-radius:12px; cursor:pointer;
+    border:1.5px solid var(--rose-light); background:var(--surface); color:var(--rose-deep);
+    font-family:"Quicksand",sans-serif; font-weight:800; font-size:1.02rem;
+  }
+  .hang-key.good{ background:var(--rose); border-color:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .hang-key.good{ color:#241419 } }
+  html[data-theme="night"] .hang-key.good{ color:#241419 }
+  .hang-key.bad{ background:var(--bg-soft); border-color:var(--line); color:var(--ink-soft); opacity:.55 }
+  .hang-key:disabled{ cursor:default }
+  .hang-key:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .hang-msg{ max-width:520px; margin:20px auto 0; font-family:"Cormorant Garamond",serif; font-size:1.32rem; line-height:1.6; color:var(--rose-deep); min-height:1.6em }
+  .hang-again{ margin-top:16px }
+
+  /* Carta para nuestro primer aniversario */
+  .anni-visual{
+    width:110px; height:110px; margin:6px auto 16px; border-radius:50%;
+    background:var(--gold-soft); border:2px dashed var(--rose); color:var(--rose-deep);
+    display:grid; place-items:center; font-size:2.6rem;
+  }
+  #anniLocked[hidden], #anniOpen[hidden], #anniLetter[hidden]{ display:none }
+
+  /* ¿Qué amo más de ti hoy? */
+  .queamo-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; max-width:560px; margin:0 auto }
+  .queamo-opt{
+    border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:16px; padding:16px 12px; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; line-height:1.4;
+  }
+  .queamo-opt.sel{ background:var(--rose-pale); border-color:var(--rose); color:var(--rose-deep) }
+  .queamo-opt:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .queamo-msg{
+    max-width:560px; margin:22px auto 0; background:var(--surface-warm); border:1.5px solid var(--gold);
+    border-radius:var(--radius-md); padding:24px 22px;
+    font-family:"Cormorant Garamond",serif; font-size:1.32rem; line-height:1.65; color:var(--ink);
+  }
+  .queamo-msg[hidden]{ display:none }
+  .queamo-msg .from{ display:block; margin-top:12px; font-family:"Playfair Display",serif; font-style:italic; color:var(--rose-deep); font-size:1.12rem }
+
+  /* Botón «Mándame un beso» en la página principal */
+  .kiss-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold); color:#241419; border:none; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1.05rem;
+    padding:15px 30px; border-radius:999px; box-shadow:var(--shadow);
+    transition:transform .18s ease;
+  }
+  .kiss-btn:hover{ transform:translateY(-2px) }
+  .kiss-btn:focus-visible{ outline:3px solid var(--rose-deep); outline-offset:3px }
+  .kiss-count{ margin:16px 0 0; font-weight:700; color:var(--rose-deep); font-size:1rem }
+  .kiss-muak{
+    display:block; font-family:"Playfair Display",serif; font-weight:800; font-style:italic;
+    font-size:1.7rem; color:var(--rose-deep); margin-bottom:8px;
+  }
 </style>
 </head>
 <body>
+
+<div id="scrollProgress" aria-hidden="true"></div>
 
 <div id="heartsLayer" aria-hidden="true"></div>
 
 <div class="topbar">
   <div class="topbar-inner">
     <p class="topbar-title"><span class="tb-heart" aria-hidden="true">♥</span>Feliz cumpleaños</p>
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="navMenu">
-      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-    </button>
+    <div class="topbar-actions">
+      <button class="textsize-btn" id="textSizeBtn" type="button" aria-pressed="false" aria-label="Hacer la letra más grande">A+</button>
+      <button class="night-btn" id="nightBtn" type="button" aria-pressed="false" aria-label="Activar el modo noche"><span id="nightIcon" aria-hidden="true">☾</span></button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="navMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
     <nav class="nav-menu" id="navMenu" aria-label="Menú de secciones" hidden>
-      <button class="nav-item" type="button" data-open-game="screenGames"><span class="nav-icon" aria-hidden="true">♥</span>Juegos</button>
-      <button class="nav-item" type="button" data-open-game="screenFaith"><span class="nav-icon" aria-hidden="true">☀</span>Nuestra fe y nuestro matrimonio eterno</button>
-      <button class="nav-item" type="button" data-open-game="screenCapsule"><span class="nav-icon" aria-hidden="true">◷</span>Cápsula del tiempo</button>
-      <button class="nav-item" type="button" data-open-game="screenAdvent"><span class="nav-icon" aria-hidden="true">❄</span>Navidad</button>
+      <button class="nav-item" type="button" data-open-game="screenGames"><span class="nav-icon" aria-hidden="true">♥</span>Juegos<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenFaith"><span class="nav-icon" aria-hidden="true">☀</span>Nuestra fe y nuestro matrimonio eterno<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenCapsule"><span class="nav-icon" aria-hidden="true">◷</span>Cápsula del tiempo<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenAdvent"><span class="nav-icon" aria-hidden="true">❄</span>Navidad<span class="nav-here" aria-hidden="true">♥</span></button>
+      <button class="nav-item" type="button" data-open-game="screenDetallitos"><span class="nav-icon" aria-hidden="true">✦</span>Detallitos para ti<span class="nav-here" aria-hidden="true">♥</span></button>
     </nav>
   </div>
 </div>
@@ -1734,6 +2147,655 @@
         </figure>
       </div>
     </div>
+
+    <!-- Apartado: Detallitos para ti -->
+    <div class="game-card hub-card" id="screenDetallitos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Detallitos para ti ♥</h3>
+      <p class="game-desc">Un rinconcito nuevo que te preparé con mucho amor, mi vida: cositas bonitas para descubrir, un pensamiento nuevo cada día, ideas para nuestro primer año de casados, un jueguito de nuestros lugares y un espacio solo tuyo para escribir. Todo, todito, es para ti.</p>
+      <div class="game-menu">
+        <button class="game-menu-card" type="button" data-open-game="screenIdiomas">
+          <span class="game-menu-icon" aria-hidden="true">10</span>
+          <span class="game-menu-title">Te amo en muchos idiomas</span>
+          <span class="game-menu-desc">Descubre cómo se dice «te amo» en 10 idiomas distintos, mi amor. En todos suena bonito, pero en el mío suena a tu nombre.</span>
+          <span class="game-menu-play">Descubrir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenPensamiento">
+          <span class="game-menu-icon" aria-hidden="true">✿</span>
+          <span class="game-menu-title">Un pensamiento para ti hoy</span>
+          <span class="game-menu-desc">Cada día te espera un pensamiento de amor distinto, escrito solo para ti. Ven a leer el de hoy, mi vida.</span>
+          <span class="game-menu-play">Leer el de hoy ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCitas">
+          <span class="game-menu-icon" aria-hidden="true">12</span>
+          <span class="game-menu-title">12 citas para nuestro primer año de casados</span>
+          <span class="game-menu-desc">Una idea de cita romántica para cada mes de nuestro primer año de esposos, de diciembre de 2026 a noviembre de 2027.</span>
+          <span class="game-menu-play">Ver las ideas ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenPacto">
+          <span class="game-menu-icon" aria-hidden="true">♡</span>
+          <span class="game-menu-title">Nuestro pacto de esposos</span>
+          <span class="game-menu-desc">Los hábitos bonitos que quiero que guardemos siempre: orar juntitos, cuidarnos y no dejar de enamorarnos nunca.</span>
+          <span class="game-menu-play">Leer nuestro pacto ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenAdivina">
+          <span class="game-menu-icon" aria-hidden="true">?</span>
+          <span class="game-menu-title">Adivina el lugar</span>
+          <span class="game-menu-desc">Te doy una pista de uno de nuestros lugares del mapa y tú adivinas cuál es. ¡A ver cuántos puntos juntas, mi amor!</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenDiario">
+          <span class="game-menu-icon" aria-hidden="true">✎</span>
+          <span class="game-menu-title">Mi diario de amor</span>
+          <span class="game-menu-desc">Un espacio solo tuyo, mi vida: escribe tus pensamientos y guárdalos con su fecha para leerlos cuando quieras.</span>
+          <span class="game-menu-play">Escribir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCancion">
+          <span class="game-menu-icon" aria-hidden="true">♪</span>
+          <span class="game-menu-title">Adivina la canción</span>
+          <span class="game-menu-desc">Te leo una frase de nuestras canciones y de los villancicos de la página, y tú adivinas de cuál es. ¡Diez rondas, mi amor!</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenSuenos">
+          <span class="game-menu-icon" aria-hidden="true">★</span>
+          <span class="game-menu-title">Sueños por cumplir juntos</span>
+          <span class="game-menu-desc">Doce sueños bonitos para nuestra vida de casados. Cuando cumplamos uno, márcalo aquí y se guarda en tu dispositivo.</span>
+          <span class="game-menu-play">Ver nuestros sueños ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenOracion">
+          <span class="game-menu-icon" aria-hidden="true">☾</span>
+          <span class="game-menu-title">Oración de la noche</span>
+          <span class="game-menu-desc">Una oracioncita cortita y nuestra, para leerla juntitos cada noche antes de dormir, tomados de la mano.</span>
+          <span class="game-menu-play">Orar juntitos ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenArbol">
+          <span class="game-menu-icon" aria-hidden="true">❧</span>
+          <span class="game-menu-title">Árbol de gratitud</span>
+          <span class="game-menu-desc">Un arbolito con ocho adornitos: detrás de cada uno hay algo por lo que le damos gracias a Dios. Tócalos y descúbrelos.</span>
+          <span class="game-menu-play">Descubrir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenVerdadReto">
+          <span class="game-menu-icon" aria-hidden="true">V·R</span>
+          <span class="game-menu-title">Verdad o reto de amor</span>
+          <span class="game-menu-desc">Un jueguito para jugar juntitos: sacas una carta y te toca una verdad dulce o un reto romántico para hacer entre los dos.</span>
+          <span class="game-menu-play">Jugar juntitos ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCartita">
+          <span class="game-menu-icon" aria-hidden="true">✉</span>
+          <span class="game-menu-title">Saca una cartita</span>
+          <span class="game-menu-desc">Un mazo de cartitas de amor escritas solo para ti: cada vez que tocas, sacas una distinta al azar. Saca todas las que quieras.</span>
+          <span class="game-menu-play">Sacar una ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenRetoSemana">
+          <span class="game-menu-icon" aria-hidden="true">7</span>
+          <span class="game-menu-title">Reto de amor de 7 días</span>
+          <span class="game-menu-desc">Siete actos de amor, uno por día, para hacer juntitos durante una semana entera: orar, cocinar, escribirse notitas y más.</span>
+          <span class="game-menu-play">Ver el reto ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCuento">
+          <span class="game-menu-icon" aria-hidden="true">❦</span>
+          <span class="game-menu-title">Nuestro cuento</span>
+          <span class="game-menu-desc">Una historia cortita de amor en tono de cuento: dos personas que se encontraron, pusieron a Dios en el centro y sueñan con una familia eterna.</span>
+          <span class="game-menu-play">Leer el cuento ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenBingo">
+          <span class="game-menu-icon" aria-hidden="true">✿</span>
+          <span class="game-menu-title">Bingo de amor</span>
+          <span class="game-menu-desc">Una tarjetita de bingo con momentitos románticos que ya vivimos. Toca los que ya pasaron y completa una línea para ganar un mensaje de amor.</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenConversemos">
+          <span class="game-menu-icon" aria-hidden="true">☕</span>
+          <span class="game-menu-title">Conversemos, mi amor</span>
+          <span class="game-menu-desc">Tarjetitas con preguntitas profundas y bonitas para platicar juntitos: de nuestros sueños, de nuestro hogar y de nuestra fe. Una por una, sin prisa.</span>
+          <span class="game-menu-play">Platicar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenDiaPerfecto">
+          <span class="game-menu-icon" aria-hidden="true">☀</span>
+          <span class="game-menu-title">Un día perfecto juntos</span>
+          <span class="game-menu-desc">Elige qué haríamos en la mañana, en la tarde y en la noche de un día, y al final lee la historia de nuestro día perfecto juntitos.</span>
+          <span class="game-menu-play">Armar nuestro día ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenRazones">
+          <span class="game-menu-icon" aria-hidden="true">50</span>
+          <span class="game-menu-title">50 razones por las que te amo</span>
+          <span class="game-menu-desc">Cincuenta razones, una por una, de por qué te amo tanto. Tócalas y ve descubriéndolas todas, mi vida.</span>
+          <span class="game-menu-play">Descubrir ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenAhorcado">
+          <span class="game-menu-icon" aria-hidden="true">A</span>
+          <span class="game-menu-title">Ahorcado de amor</span>
+          <span class="game-menu-desc">El clásico juego del ahorcado, pero con palabras de nuestra historia. Adivina letra por letra antes de que se acaben tus corazoncitos.</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenAniversario">
+          <span class="game-menu-icon" aria-hidden="true">✉</span>
+          <span class="game-menu-title">Carta para nuestro primer aniversario</span>
+          <span class="game-menu-desc">Una carta sellada que te escribí para abrirla el 19 de diciembre de 2027, cuando cumplamos un año de casados.</span>
+          <span class="game-menu-play">Ver la carta ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenQueAmo">
+          <span class="game-menu-icon" aria-hidden="true">♡</span>
+          <span class="game-menu-title">¿Qué amo más de ti hoy?</span>
+          <span class="game-menu-desc">Elige una cosita de ti y te digo con un mensajito por qué hoy, justo hoy, es lo que más amo de ti.</span>
+          <span class="game-menu-play">Elegir ♥</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Te amo en muchos idiomas -->
+    <div class="game-card" id="screenIdiomas">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Te amo en muchos idiomas ♥</h3>
+      <p class="game-desc">En cada rincón del mundo hay una forma de decirlo, mi amor. Toca cada idioma y descubre cómo suena… pero mi favorita siempre será decírtelo yo, mirándote a los ojos.</p>
+      <div class="lang-grid" id="langGrid"></div>
+      <p class="game-final" style="margin-top:22px; margin-bottom:0">Diez idiomas, mi vida… y en todos significa lo mismo: eres tú, siempre tú. ♥</p>
+    </div>
+
+    <!-- Un pensamiento para ti hoy -->
+    <div class="game-card" id="screenPensamiento">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Un pensamiento para ti hoy ♥</h3>
+      <p class="game-desc">Cada día del mes te espera un pensamiento distinto, mi amor. Este es el que te toca hoy:</p>
+      <div class="thought-card">
+        <p class="thought-date" id="thoughtDate"></p>
+        <p class="thought-text" id="thoughtText"></p>
+        <p class="thought-sign">— Tu Hagot, que te ama ♥</p>
+      </div>
+      <p class="game-desc" style="margin-top:18px; margin-bottom:0">Vuelve mañana, mi vida: habrá otro esperándote. ♥</p>
+    </div>
+
+    <!-- 12 citas para nuestro primer año de casados -->
+    <div class="game-card" id="screenCitas">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">12 citas para nuestro primer año de casados ♥</h3>
+      <p class="game-desc">Una idea para cada mes de nuestro primer año de esposos, mi amor: de diciembre de 2026 a noviembre de 2027. Para que nunca nos falten momentos bonitos, ni motivos para sonreír juntos.</p>
+      <div class="dates-list">
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Dic</span><span class="date-year">2026</span></div>
+          <div>
+            <h4>Nuestra primera Navidad de esposos</h4>
+            <p>Recién casados, preparamos una cena casera con velas, nos escribimos una cartita de Navidad y salimos a caminar tomados de la mano para ver las lucecitas de la ciudad.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Ene</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Picnic al atardecer</h4>
+            <p>Una cobija, tu comida favorita y el cielo pintándose de colores: nos quedamos hasta que salga la primera estrella y pedimos un deseo juntos.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Feb</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Cocineros por una noche</h4>
+            <p>Elegimos una receta que ninguno de los dos haya preparado, ponemos música, nos ponemos delantales y cocinamos nuestro mes de los enamorados desde cero.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Mar</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>La misma foto, otra vez</h4>
+            <p>Volvemos a un lugar bonito, nos tomamos la misma foto abrazados de nuestra foto del puente y enmarcamos las dos versiones, una junto a la otra.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Abr</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Cine en nuestro fuerte de cobijas</h4>
+            <p>Armamos un fuerte con cobijas en la sala, preparamos palomitas con mantequilla y vemos tu película favorita abrazados, sin celulares.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">May</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Flores y caminata sin rumbo</h4>
+            <p>Vamos al mercado, te compro tus flores favoritas y caminamos sin destino fijo, platicando de todo y de nada, como tanto nos gusta.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Jun</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Cartas bajo un árbol</h4>
+            <p>Día de campo: cada uno escribe una carta de amor en secreto y la leemos en voz alta, sentados a la sombra de un árbol.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Jul</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Noche de juegos y chocolate caliente</h4>
+            <p>Juegos de mesa, chocolate calientito y una competencia amistosa entre esposos: quien pierda, lava los trastes… y quien gane, cobra en besos.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Ago</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Nuestras canciones en el sillón</h4>
+            <p>Preparamos una lista con las canciones de nuestra historia y las escuchamos completitas, abrazados, recordando dónde estábamos en cada una.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Sep</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Turistas en nuestra propia ciudad</h4>
+            <p>Exploramos un rincón que ninguno de los dos conozca: una calle nueva, un museito, un cafecito escondido. Nuestra ciudad también guarda sorpresas para nosotros.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Oct</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>Cena elegante sin salir de casa</h4>
+            <p>Nos vestimos bonitos como si fuera un restaurante fino, ponemos la mesa con velas y preparamos una cena de tres tiempos hecha por los dos.</p>
+          </div>
+        </div>
+        <div class="date-item">
+          <div class="date-badge"><span class="date-month">Nov</span><span class="date-year">2027</span></div>
+          <div>
+            <h4>La lista de nuestro primer año</h4>
+            <p>Antes de nuestro primer aniversario, hacemos una lista de todo lo bonito que vivimos en el año, la leemos juntos con un postre y damos gracias a Dios por tanto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nuestro pacto de esposos -->
+    <div class="game-card" id="screenPacto">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro pacto de esposos ♥</h3>
+      <p class="game-desc">Esto no es una lista de reglas, mi amor: es nuestro pacto. Los hábitos bonitos que quiero que guardemos toda la vida, con Dios en el centro de nuestro hogar.</p>
+      <ul class="pact-list">
+        <li><strong>Orar juntos cada noche.</strong> Tomados de la mano, antes de dormir, le damos gracias a nuestro Padre Celestial y le confiamos nuestro hogar.</li>
+        <li><strong>Leer las Escrituras juntitos.</strong> Aunque sean unos minutos al día: su palabra nos acerca a Él y el uno al otro.</li>
+        <li><strong>Una cita a la semana.</strong> Solo tú y yo, sin celulares ni prisas, para seguir conociéndonos y enamorándonos como el primer día.</li>
+        <li><strong>Nunca dormirnos enojados.</strong> Si algo nos molesta, lo hablamos con ternura, nos perdonamos y nos abrazamos antes de cerrar los ojos.</li>
+        <li><strong>Decirnos «te amo» todos los días.</strong> Al despertar, al despedirnos y al dormir. Que nunca pase un día sin que lo escuches de mi boca.</li>
+        <li><strong>Nuestra noche de hogar.</strong> Cada lunes: una pequeña lección, algo divertido juntos y un postrecito para cerrar el día en familia.</li>
+        <li><strong>Ir al templo juntos.</strong> Con regularidad, para recordar las promesas que nos hicimos y renovar nuestro amor eterno.</li>
+        <li><strong>Servirnos en lo pequeño.</strong> Un vaso de agua, una notita escondida, un abrazo sin motivo: el amor grande vive en los detalles chiquitos.</li>
+        <li><strong>Guardar el día de reposo.</strong> Un día para el Señor, para descansar y para estar juntos sin la prisa de la semana.</li>
+        <li><strong>Soñar juntos, con fe.</strong> Hablar de nuestras metas y de la familia que anhelamos —de nuestro Nimrod y nuestra Liahona— y planear tomados de la mano de Dios.</li>
+      </ul>
+      <p class="game-final" style="margin-top:22px; margin-bottom:0">Este es nuestro pacto, mi vida: amarnos como Cristo nos ama, todos los días, por tiempo y por toda la eternidad. ♥</p>
+    </div>
+
+    <!-- Adivina el lugar -->
+    <div class="game-card" id="screenAdivina">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Adivina el lugar ♥</h3>
+      <p class="game-desc">Nuestros lugares del mapa guardan pistas, mi amor. Te leo una y tú adivinas de qué lugar se trata: son 8 rondas, una por cada lugar donde dejamos huella de nuestro amor.</p>
+      <div id="guessStartWrap">
+        <button class="game-start-btn" id="guessStartBtn" type="button">♥ ¡A adivinar!</button>
+      </div>
+      <div id="guessBody" hidden>
+        <div class="quiz-meta">
+          <span id="guessProgress">Ronda 1 de 8</span>
+          <span>Puntos: <strong id="guessScore">0</strong></span>
+        </div>
+        <div class="guess-clue"><p id="guessClue"></p></div>
+        <div class="quiz-options" id="guessOptions"></div>
+        <p class="quiz-feedback" id="guessFeedback" role="status"></p>
+        <button class="game-next-btn" id="guessNextBtn" type="button" hidden>Siguiente pista ♥</button>
+      </div>
+      <div id="guessEnd" hidden>
+        <p class="game-final" id="guessFinalMsg"></p>
+        <button class="game-start-btn" id="guessRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+    </div>
+
+    <!-- Mi diario de amor -->
+    <div class="game-card" id="screenDiario">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Mi diario de amor ♥</h3>
+      <p class="game-desc">Este espacio es solo tuyo, mi vida. Escribe lo que traigas en el corazón —un pensamiento, un sueño, un recuerdo bonito— y guárdalo con su fecha para leerlo cuando quieras.</p>
+      <div class="diary-form">
+        <label class="diary-label" for="diaryInput">¿Qué quieres guardar hoy, mi amor?</label>
+        <textarea class="diary-input" id="diaryInput" rows="5" placeholder="Escribe aquí, mi vida…"></textarea>
+        <div class="diary-save-wrap">
+          <button class="game-start-btn" id="diarySaveBtn" type="button">Guardar en mi diario ♥</button>
+        </div>
+        <p class="diary-note">Todo lo que escribas se guarda solo en este dispositivo, para que lo leas cuando tú quieras. ♥</p>
+        <p class="diary-msg" id="diaryMsg" role="status"></p>
+      </div>
+      <div class="diary-list" id="diaryList"></div>
+    </div>
+
+    <!-- Adivina la canción -->
+    <div class="game-card" id="screenCancion">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Adivina la canción ♪</h3>
+      <p class="game-desc">Te leo una frase de una de las canciones de esta página —nuestras dos canciones y los villancicos de Navidad— y tú adivinas de cuál es, mi amor. Son 10 rondas, con 3 opciones cada una: ¡a ver cuántos puntos juntas!</p>
+      <div id="songStartWrap">
+        <button class="game-start-btn" id="songStartBtn" type="button">♪ ¡A adivinar!</button>
+      </div>
+      <div id="songBody" hidden>
+        <div class="quiz-meta">
+          <span id="songProgress">Ronda 1 de 10</span>
+          <span>Puntos: <strong id="songScore">0</strong></span>
+        </div>
+        <div class="guess-clue"><p id="songLyric"></p></div>
+        <div class="quiz-options" id="songOptions"></div>
+        <p class="quiz-feedback" id="songFeedback" role="status"></p>
+        <button class="game-next-btn" id="songNextBtn" type="button" hidden>Siguiente frase ♥</button>
+      </div>
+      <div id="songEnd" hidden>
+        <p class="game-final" id="songFinalMsg"></p>
+        <button class="game-start-btn" id="songRestartBtn" type="button">Jugar otra vez ♪</button>
+      </div>
+    </div>
+
+    <!-- Sueños por cumplir juntos -->
+    <div class="game-card" id="screenSuenos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Sueños por cumplir juntos ★</h3>
+      <p class="game-desc">Estos son algunos de los sueños que quiero cumplir contigo en nuestra vida de casados, mi amor. Cuando cumplamos uno, márcalo aquí con una palomita: se guarda en tu dispositivo, para que veamos juntitos cómo la lista se va llenando de recuerdos cumplidos.</p>
+      <p class="dreams-count" id="dreamsCount" role="status"></p>
+      <div class="dreams-list" id="dreamsList">
+        <label class="dream-item"><input type="checkbox" data-dream="0"><span>Despertar en nuestro primer hogar como esposos y dar gracias juntos por él.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="1"><span>Ver el amanecer en la playa tomados de la mano, sin prisa y sin reloj.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="2"><span>Viajar a un lugar nuevo que ninguno de los dos conozca todavía.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="3"><span>Plantar un arbolito en nuestro hogar y verlo crecer junto con nosotros.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="4"><span>Colgar en la sala nuestra foto de bodas, grande y hermosa.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="5"><span>Abrazar por primera vez a nuestro Nimrod y decirle cuánto lo esperamos.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="6"><span>Cantarle su primera canción de cuna a nuestra Liahona.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="7"><span>Celebrar nuestro primer aniversario con un viajecito sorpresa.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="8"><span>Llenar una cajita con los recuerditos de cada viaje que hagamos juntos.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="9"><span>Ver a nuestros hijos dar sus primeros pasos en nuestro hogar.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="10"><span>Comprar algún día la casa de nuestros sueños, con un jardín para los niños.</span></label>
+        <label class="dream-item"><input type="checkbox" data-dream="11"><span>Llegar a viejitos tomados de la mano, rodeados de nuestra familia eterna.</span></label>
+      </div>
+      <p class="game-final" id="dreamsFinal" hidden style="margin-top:24px; margin-bottom:0">¡Los doce sueños cumplidos, mi amor! Lo que un día fue una lista hoy es nuestra historia. Y que conste: ya estoy soñando los siguientes doce… contigo, siempre contigo. ♥</p>
+    </div>
+
+    <!-- Oración de la noche -->
+    <div class="game-card" id="screenOracion">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Oración de la noche ☾</h3>
+      <p class="game-desc">Una oracioncita cortita y muy nuestra, mi amor, para leerla juntitos cada noche antes de dormir, tomados de la mano. Guárdala en tu corazón:</p>
+      <div class="prayer-card">
+        <p class="prayer-open">Padre Celestial:</p>
+        <p>Antes de dormir, venimos a darte las gracias por este día y por tenernos el uno al otro. Gracias por tu amor que nunca nos suelta, por cuidarnos en el camino y por guiar nuestros pasos hasta este momento tan bonito de nuestras vidas.</p>
+        <p>Te pedimos que bendigas nuestro hogar: el que ya tenemos y el que estamos por construir como esposos. Llénalo de tu paz, de tu Espíritu y de mucha fe, para que en esta casa siempre se te busque a Ti primero.</p>
+        <p>Bendice también a nuestras familias y a cada persona que amamos. Perdona las faltas que hoy cometimos y ayúdanos a despertar mañana siendo un poquito más pacientes, más humildes y más parecidos a tu Hijo.</p>
+        <p>Cuida nuestro descanso esta noche, Padre, y que al abrir los ojos recordemos siempre que lo nuestro es un regalo tuyo.</p>
+        <p class="prayer-amen">Te lo pedimos con todo nuestro corazón, en el nombre de Jesucristo. Amén.</p>
+      </div>
+      <p class="game-desc" style="margin-top:18px; margin-bottom:0">Que duermas cerquita de Dios y de mi corazón, mi vida. ♥</p>
+    </div>
+
+    <!-- Árbol de gratitud -->
+    <div class="game-card" id="screenArbol">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Árbol de gratitud ❧</h3>
+      <p class="game-desc">Este arbolito guarda ocho adornitos, mi amor, y detrás de cada uno hay algo por lo que le damos gracias a nuestro Padre Celestial. Tócalos uno por uno, enciéndelos todos y descubre cada gratitud.</p>
+      <div class="gtree">
+        <div class="gtree-star" aria-hidden="true">★</div>
+        <div class="gtree-layer gt-l1" aria-hidden="true"></div>
+        <div class="gtree-layer gt-l2" aria-hidden="true"></div>
+        <div class="gtree-layer gt-l3" aria-hidden="true"></div>
+        <div class="gtree-trunk" aria-hidden="true"></div>
+        <button class="gt-orn" type="button" data-g="0" style="top:23%; left:50%" aria-label="Adornito de gratitud número 1">♥</button>
+        <button class="gt-orn" type="button" data-g="1" style="top:36%; left:36%" aria-label="Adornito de gratitud número 2">♥</button>
+        <button class="gt-orn" type="button" data-g="2" style="top:38%; left:64%" aria-label="Adornito de gratitud número 3">♥</button>
+        <button class="gt-orn" type="button" data-g="3" style="top:52%; left:50%" aria-label="Adornito de gratitud número 4">♥</button>
+        <button class="gt-orn" type="button" data-g="4" style="top:56%; left:25%" aria-label="Adornito de gratitud número 5">♥</button>
+        <button class="gt-orn" type="button" data-g="5" style="top:58%; left:75%" aria-label="Adornito de gratitud número 6">♥</button>
+        <button class="gt-orn" type="button" data-g="6" style="top:71%; left:37%" aria-label="Adornito de gratitud número 7">♥</button>
+        <button class="gt-orn" type="button" data-g="7" style="top:73%; left:63%" aria-label="Adornito de gratitud número 8">♥</button>
+      </div>
+      <div class="gt-reveal">
+        <span class="gt-reveal-tag" id="gtTag">Nuestro árbol de gratitud</span>
+        <p class="gt-reveal-text" id="gtText">Toca un adornito del árbol, mi amor, y descubre una de las cosas por las que damos gracias hoy.</p>
+      </div>
+    </div>
+
+    <!-- Verdad o reto de amor -->
+    <div class="game-card" id="screenVerdadReto">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Verdad o reto de amor ♥</h3>
+      <p class="game-desc">Un jueguito para jugar juntitos, mi amor: toca el botón, saca una carta y descubre si les toca una verdad dulce para platicar o un reto romántico para hacer entre los dos. Todo tierno, todo nuestro, con Dios en el centro.</p>
+      <div class="vr-stage">
+        <div class="vr-card">
+          <span class="vr-tag" id="vrTag">Tu carta te espera</span>
+          <p class="vr-text" id="vrText">Cuando estés lista, mi vida, saca tu primera carta… y a jugar juntitos. ♥</p>
+        </div>
+        <p class="draw-count" id="vrCount" role="status"></p>
+        <button class="game-start-btn" id="vrDrawBtn" type="button">Sacar una carta ♥</button>
+      </div>
+    </div>
+
+    <!-- Saca una cartita -->
+    <div class="game-card" id="screenCartita">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Saca una cartita ✉</h3>
+      <p class="game-desc">Te dejé un mazo de cartitas de amor, mi vida, escritas solo para ti. Cada vez que toques el botón sacas una distinta al azar: saca una cuando necesites sonreír, o sácalas todas de una vez, que para eso son tuyas.</p>
+      <div class="deck-stage">
+        <div class="deck-card">
+          <p class="deck-text" id="deckText">Tu primera cartita está aquí dentro, dobladita y esperándote… sácala cuando quieras, mi amor. ♥</p>
+          <p class="deck-from" id="deckFrom"></p>
+        </div>
+        <p class="draw-count" id="deckCount" role="status"></p>
+        <button class="game-start-btn" id="deckDrawBtn" type="button">Sacar una cartita ♥</button>
+      </div>
+    </div>
+
+    <!-- Reto de amor de 7 días -->
+    <div class="game-card" id="screenRetoSemana">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Reto de amor de 7 días ♥</h3>
+      <p class="game-desc">Una semanita entera de amor en acción, mi vida: siete actos de amor, uno por día, para hacer juntitos. Elijan el día en que quieren empezar y vayan cumpliendo uno a uno, sin prisa y con mucho corazón.</p>
+      <div class="week-list">
+        <div class="week-day">
+          <h4>Día 1 · Orar el uno por el otro</h4>
+          <p>Tómense de las manos y oren en voz alta, uno a la vez, pidiendo por los sueños, las preocupaciones y las alegrías del otro. Escuchar cómo oran por ti es de lo más bonito que existe.</p>
+        </div>
+        <div class="week-day">
+          <h4>Día 2 · Cocinar juntitos</h4>
+          <p>Elijan una receta —la que sea, aunque salga chistosa— y prepárenla entre los dos, con música de fondo y besitos de cocinero. Lo importante no es el platillo: es el equipo que forman.</p>
+        </div>
+        <div class="week-day">
+          <h4>Día 3 · Notitas escondidas</h4>
+          <p>Cada uno escribe una notita corta y la esconde donde el otro la encuentre sin esperarla: en su bolsa, junto al espejo, dentro de un zapato. Y prohibidísimo decir dónde está.</p>
+        </div>
+        <div class="week-day">
+          <h4>Día 4 · Una hora sin pantallas</h4>
+          <p>Guarden los celulares una hora y dedíquenla solo a estar: platicar, reírse y contarse el día con calma. El mundo puede esperar un ratito; ustedes dos, no.</p>
+        </div>
+        <div class="week-day">
+          <h4>Día 5 · Servicio sorpresa</h4>
+          <p>Cada uno hace algo por el otro sin anunciarlo: su bebida favorita lista, su lugar ordenado, esa cosita que siempre se le pasa. Amar también es servir en silencio.</p>
+        </div>
+        <div class="week-day">
+          <h4>Día 6 · Cartas de gratitud</h4>
+          <p>Antes de dormir, escriban tres cosas que agradecen del otro y léanlas en voz alta, mirándose a los ojos. Guárdenlas bien: en los días difíciles, se vuelven a leer.</p>
+        </div>
+        <div class="week-day">
+          <h4>Día 7 · Paseo de sueños</h4>
+          <p>Den un paseo tomados de la mano, sin prisa, y sueñen en voz alta: un deseo para su matrimonio que quieran pedirle a Dios en la semana que viene. Y luego… a seguir caminando juntitos.</p>
+        </div>
+      </div>
+      <p class="game-final" style="margin-top:22px; margin-bottom:0">Siete días, mi amor, y una sola conclusión: amarte es mi actividad favorita de todas. ♥</p>
+    </div>
+
+    <!-- Nuestro cuento -->
+    <div class="game-card" id="screenCuento">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro cuento ❦</h3>
+      <p class="game-desc">Te escribí un cuentito, mi vida. No es la historia de nadie más: es la de dos personas que se buscaron sin saberlo, se encontraron, y pusieron a Dios en el centro de todo. Léelo despacito.</p>
+      <div class="story-card">
+        <p class="story-first">Había una vez, en un mundo muy grande y a veces muy ruidoso, dos personas que todavía no se conocían. Cada una vivía su vida, con sus días buenos y sus días difíciles, sin saber que en algún lugar había alguien orando por exactamente lo mismo que ellas pedían.</p>
+        <p>Porque los dos, cada uno por su lado, le pedían a Dios lo mismo: un amor de verdad. De esos que no se cansan, que perdonan rápido, que ríen mucho y que duran más que esta vida. Y Dios, que escucha hasta los susurros, fue acomodando los caminos sin que ellos se dieran cuenta.</p>
+        <p>Y un día de lo más común y corriente —sin trompetas ni fuegos artificiales— sus caminos se cruzaron. Ella sonrió. Él sintió que algo en su corazón decía bajito: «es ella». Y desde ese día nada volvió a ser igual… ni falta que hizo.</p>
+        <p>Lo suyo creció despacito y con cimientos firmes: pusieron a Dios en el centro de todo, oraron juntos, se sirvieron el uno al otro en lo pequeño y aprendieron que amarse también es pedirse perdón a tiempo y volver a elegirse cada mañana.</p>
+        <p>Cuando llegó el momento, se arrodillaron en un lugar santo y se prometieron algo más grande que el «para siempre» de los cuentos: se prometieron la eternidad. Con el anillo en la mano y el corazón en las manos de Dios, empezaron su «érase una vez» de esposos.</p>
+        <p>Ahora sueñan con un hogar lleno de risas, con una mesa donde siempre quepa uno más, con hijitos que aprendan a orar antes que a temer, y con envejecer juntitos contándose la misma historia una y otra vez.</p>
+        <p>Y colorín colorado… no, mi amor: este cuento no se ha acabado. Este cuento apenas empieza, y lo vamos a escribir tú y yo, página a página, en esta vida y por todas las que siguen. ♥</p>
+      </div>
+    </div>
+
+    <!-- Bingo de amor -->
+    <div class="game-card" id="screenBingo">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Bingo de amor ✿</h3>
+      <p class="game-desc">Mira esta tarjetita, mi amor: cada cuadrito es un momentito romántico nuestro. Toca los que ya vivimos juntitos y márcalos con un corazoncito; cuando completes una línea —de lado, hacia abajo o en diagonal— te espera un mensaje de amor. Tu tarjetita se guarda en tu dispositivo, para que la sigas llenando con nuestra historia.</p>
+      <div class="bingo-grid" id="bingoGrid" role="group" aria-label="Tarjetita de bingo de amor"></div>
+      <p class="bingo-msg" id="bingoMsg" role="status">A marcar momentitos, mi vida… ¡a ver qué línea completas primero! ♥</p>
+      <button class="bingo-reset" id="bingoReset" type="button">Empezar la tarjetita de nuevo</button>
+    </div>
+
+    <!-- Conversemos, mi amor -->
+    <div class="game-card" id="screenConversemos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Conversemos, mi amor ♥</h3>
+      <p class="game-desc">Estas tarjetitas son para cuando estemos juntitos y con calma, mi vida: cada una trae una preguntita profunda y bonita para platicar de nuestros sueños, de nuestro hogar y de nuestra fe. Saca una, léela en voz alta y escúchense con el corazón.</p>
+      <div class="talk-stage">
+        <div class="talk-card">
+          <span class="talk-tag" id="talkTag">Para platicar juntitos</span>
+          <p class="talk-text" id="talkText">Cuando quieras, mi amor, toca el botón y saca la primera preguntita… y a platicar juntitos, sin prisa. ♥</p>
+        </div>
+        <p class="draw-count" id="talkCount" role="status"></p>
+        <button class="game-start-btn" id="talkDrawBtn" type="button">Sacar una preguntita ♥</button>
+      </div>
+    </div>
+
+    <!-- Un día perfecto juntos -->
+    <div class="game-card" id="screenDiaPerfecto">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Un día perfecto juntos ☀</h3>
+      <p class="game-desc">Vamos a armar nuestro día perfecto, mi amor: elige una cosita para la mañana, una para la tarde y una para la noche. Cuando tengas las tres, te leo la historia completa de ese día tan nuestro.</p>
+      <div class="day-group">
+        <h4>☀ En la mañana…</h4>
+        <div class="day-opts" id="dayOptsManana"></div>
+      </div>
+      <div class="day-group">
+        <h4>✿ En la tarde…</h4>
+        <div class="day-opts" id="dayOptsTarde"></div>
+      </div>
+      <div class="day-group">
+        <h4>☾ En la noche…</h4>
+        <div class="day-opts" id="dayOptsNoche"></div>
+      </div>
+      <div class="day-story" id="dayStory" hidden>
+        <h4>Nuestro día perfecto ♥</h4>
+        <p id="dayStoryText"></p>
+        <p>Y así, mi amor, cualquier día se vuelve perfecto… porque lo pasamos juntitos. ♥</p>
+      </div>
+      <p class="game-desc" id="dayHint" style="margin-bottom:0">Elige una opción de cada momento del día, mi vida, y tu historia aparece aquí abajito. ♥</p>
+    </div>
+
+    <!-- 50 razones por las que te amo -->
+    <div class="game-card" id="screenRazones">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">50 razones por las que te amo ♥</h3>
+      <p class="game-desc">Me senté a pensar en ti, mi amor, y las razones no me alcanzaron en una sola lista… pero aquí van cincuenta, para que las descubras una por una, tocando cada numerito. Y que conste: me quedé corto.</p>
+      <p class="reasons-count" id="reasonsCount" role="status"></p>
+      <div class="reasons-grid" id="reasonsGrid"></div>
+      <p class="game-final" id="reasonsFinal" style="margin-top:24px; margin-bottom:0" hidden>¡Las descubriste todas, mi vida! Cincuenta razones… y cada día contigo me da una nueva. Mañana ya tendré cincuenta y una. Te amo, mi Naomi. ♥</p>
+    </div>
+
+    <!-- Ahorcado de amor -->
+    <div class="game-card" id="screenAhorcado">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Ahorcado de amor ♥</h3>
+      <p class="game-desc">Adivina la palabra de nuestra historia, letra por letra, mi amor. Tienes seis corazoncitos: cada letra que no esté te quita uno. ¡No dejes que se acaben!</p>
+      <div class="hang-hearts" id="hangHearts" aria-hidden="true"></div>
+      <p class="hang-hint" id="hangHint"></p>
+      <div class="hang-word" id="hangWord" role="status" aria-label="Palabra por adivinar"></div>
+      <p class="hang-tries" id="hangTries" role="status"></p>
+      <div class="hang-keys" id="hangKeys"></div>
+      <p class="hang-msg" id="hangMsg" role="status"></p>
+      <button class="game-next-btn hang-again" id="hangAgainBtn" type="button" hidden>Otra palabra, mi amor ♥</button>
+    </div>
+
+    <!-- Carta para nuestro primer aniversario -->
+    <div class="game-card" id="screenAniversario">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Carta para nuestro primer aniversario ♥</h3>
+      <p class="game-desc">Esta no es la cápsula, mi amor: es una carta distinta, que te escribo hoy pensando en la esposa increíble que serás. Está sellada y se abre en una fecha muy especial.</p>
+      <div id="anniLocked">
+        <div class="anni-visual" aria-hidden="true">✉</div>
+        <p style="color:var(--ink-soft); max-width:480px; margin:0 auto">La carta se abre el <strong style="color:var(--rose-deep)">19 de diciembre de 2027</strong>, el día de nuestro primer aniversario de casados. Esto es lo que falta para leerla:</p>
+        <div class="cd-timer capsule-timer" role="timer" aria-label="Cuenta regresiva para abrir la carta de aniversario">
+          <div class="cd-unit"><span class="cd-num" data-anni="days">--</span><span class="cd-label">Días</span></div>
+          <div class="cd-unit"><span class="cd-num" data-anni="hours">--</span><span class="cd-label">Horas</span></div>
+          <div class="cd-unit"><span class="cd-num" data-anni="mins">--</span><span class="cd-label">Minutos</span></div>
+          <div class="cd-unit"><span class="cd-num" data-anni="secs">--</span><span class="cd-label">Segundos</span></div>
+        </div>
+        <p class="cd-note">Un año de esposos nos espera antes de abrirla, mi vida… y va a ser el año más bonito. ♥</p>
+      </div>
+      <div id="anniOpen" hidden>
+        <div class="anni-visual" aria-hidden="true">♥</div>
+        <p style="color:var(--ink-soft); max-width:480px; margin:0 auto 20px">¡Feliz primer aniversario, mi esposa hermosa! Un año de casados… y por fin puedes abrir tu carta:</p>
+        <button class="game-start-btn" id="anniOpenBtn" type="button">♥ Abrir mi carta</button>
+        <article class="letter capsule-letter" id="anniLetter" hidden>
+          <p>Mi Naomi, mi esposa:</p>
+          <p>Te escribí esta carta mucho antes de este día, cuando todavía contábamos los días para casarnos, porque ya desde entonces sabía una cosa: que un año después de decir «sí» en el altar, te iba a amar todavía más que aquel día. Y míranos: aquí estamos, celebrando nuestro primer aniversario.</p>
+          <p>Este primer año nos enseñó lo que es construir un hogar juntitos: las mañanas apuradas, las noches de oración tomados de la mano, las risas en la cocina y también los días difíciles, que resolvimos como lo prometimos: con Dios en el centro y sin soltarnos nunca.</p>
+          <p>Gracias por este año, mi amor. Por tu paciencia, por tu fe, por hacer de cada día ordinario algo que vale la pena recordar. Si así fue el primer año, imagínate los que vienen: nuestra familia creciendo, nuestros sueños cumpliéndose uno a uno, y una eternidad entera por delante.</p>
+          <p>Hoy te vuelvo a elegir, como te elegí el 19 de diciembre de 2026 y como te elegiré cada día de mi vida. Feliz primer aniversario, mi vida. El primero de todos los que nos esperan, en esta vida y por toda la eternidad.</p>
+          <p class="sign">Con todo mi amor, hoy más que ayer,<br>Tu esposo, Hagot</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- ¿Qué amo más de ti hoy? -->
+    <div class="game-card" id="screenQueAmo">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">¿Qué amo más de ti hoy? ♥</h3>
+      <p class="game-desc">Cada día amo todo de ti, mi vida, pero siempre hay algo que ese día me roba el corazón un poquito más. Toca una opción y descubre qué es lo que hoy amo más de ti:</p>
+      <div class="queamo-grid" id="queAmoGrid"></div>
+      <div class="queamo-msg" id="queAmoMsg" role="status" hidden></div>
+    </div>
+  </section>
+
+  <!-- ABRAZO -->
+  <section class="surprise" aria-labelledby="abrazo-title" style="padding-top:8px">
+    <div class="surprise-box">
+      <h2 id="abrazo-title">¿Un abrazo, mi amor?</h2>
+      <p>Si en cualquier momento del día necesitas uno de mis abrazos, toca este botón y te lo mando volando hasta donde estés.</p>
+      <button class="hug-btn" id="hugBtn" type="button">♥ &nbsp;Mándame un abrazo</button>
+      <p class="hug-count" id="hugCount" role="status"></p>
+      <div class="hug-msg" id="hugMsg" role="status">
+        ¡Abrazo en camino, mi vida! Fuerte, calientito y sin prisa por soltarte: así, juntito a ti, te lo doy con todo mi corazón. Cierra los ojos un segundito y siénteme ahí, abrazándote como solo yo sé hacerlo.
+        <span class="from">— Tu Hagot, abrazándote desde aquí ♥</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BESO -->
+  <section class="surprise" aria-labelledby="beso-title" style="padding-top:8px">
+    <div class="surprise-box">
+      <h2 id="beso-title">¿Un beso, mi amor?</h2>
+      <p>Y si lo que necesitas es un besito, también te lo mando volando: toca el botón y va derechito hasta tus labios, con corazoncitos incluidos.</p>
+      <button class="kiss-btn" id="kissBtn" type="button">♡ &nbsp;Mándame un beso</button>
+      <p class="kiss-count" id="kissCount" role="status"></p>
+      <div class="hug-msg" id="kissMsg" role="status">
+        <span class="kiss-muak">¡Muak!</span>
+        Besito en camino, mi vida: suavecito, con todo mi cariño, directo a esos labios que tanto amo. Ciérrale los ojitos a la distancia, que este beso viaja sin escalas hasta ti.
+        <span class="from">— Tu Hagot, besándote desde aquí ♥</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIDOR DE AMOR -->
+  <section class="surprise" aria-labelledby="medidor-title" style="padding-top:8px">
+    <div class="surprise-box">
+      <h2 id="medidor-title">El medidor de amor</h2>
+      <p>¿Quieres saber cuánto te amo, mi amor? Toca el corazoncito una y otra vez y mira cómo se va llenando…</p>
+      <button class="meter-heart" id="meterBtn" type="button" aria-label="Tocar el corazón para llenar el medidor de amor"><span class="meter-base" aria-hidden="true">♥</span><span class="meter-fillbox" id="meterFillBox" aria-hidden="true"><span class="meter-fillheart">♥</span></span></button>
+      <p class="meter-pct" id="meterPct" role="status">Mi amor por ti va en: 0%</p>
+      <p class="meter-msg" id="meterMsg">Tócalo, mi vida… y prepárate, porque esto se llena rápido. ♥</p>
+    </div>
+  </section>
+
+  <!-- NUESTRA FLOR -->
+  <section class="surprise" aria-labelledby="flor-title" style="padding-top:8px">
+    <div class="surprise-box">
+      <h2 id="flor-title">Nuestra flor</h2>
+      <p>Esta florecita es nuestra, mi amor: crece un pétalo cada vez que abres esta página, hasta florecer completa con doce pétalos. Se guarda en tu dispositivo, para que veas cómo florece con tus visitas.</p>
+      <svg class="flor-svg" id="florSvg" viewBox="0 0 200 240" role="img" aria-label="Nuestra flor que crece un pétalo con cada visita"></svg>
+      <p class="flor-msg" id="florMsg" role="status"></p>
+      <p class="flor-count" id="florCount" role="status"></p>
+    </div>
   </section>
 
   <!-- SORPRESA -->
@@ -1751,7 +2813,24 @@
     </div>
   </section>
 
+  <!-- ÍNDICE RÁPIDO -->
+  <section class="surprise" aria-labelledby="indice-title" style="padding-top:8px">
+    <div class="surprise-box">
+      <h2 id="indice-title">Índice rápido, mi amor</h2>
+      <p>Para que saltes directo a tu rinconcito favorito, sin buscar: toca uno y vas derechito.</p>
+      <div class="index-list">
+        <button class="index-link" type="button" data-open-game="screenGames">♥ Juegos</button>
+        <button class="index-link" type="button" data-open-game="screenFaith">☀ Nuestra fe</button>
+        <button class="index-link" type="button" data-open-game="screenCapsule">◷ Cápsula del tiempo</button>
+        <button class="index-link" type="button" data-open-game="screenAdvent">❄ Navidad</button>
+        <button class="index-link" type="button" data-open-game="screenDetallitos">✦ Detallitos para ti</button>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<button class="to-top" id="toTopBtn" type="button" aria-label="Volver arriba"><span aria-hidden="true">↑</span></button>
 
 <footer>
   <div class="foot-hearts" aria-hidden="true">♥ ♥ ♥</div>
@@ -2041,7 +3120,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent'];
+  var gameCardIds = ['screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo'];
   var navReturn = null; // pantalla a la que regresa «Volver» (la lista de Juegos), o null = página principal
   function openGame(id, fromId){
     if(id !== 'screenAdvent' && typeof stopAdventMusic === 'function') stopAdventMusic();
@@ -2075,8 +3154,8 @@
   }
   Array.prototype.forEach.call(document.querySelectorAll('[data-open-game]'), function(btn){
     btn.addEventListener('click', function(){
-      var inHub = btn.closest ? !!btn.closest('#screenGames') : false;
-      openGame(btn.getAttribute('data-open-game'), inHub ? 'screenGames' : null);
+      var hubEl = btn.closest ? btn.closest('#screenGames, #screenDetallitos') : null;
+      openGame(btn.getAttribute('data-open-game'), hubEl ? hubEl.id : null);
     });
   });
   Array.prototype.forEach.call(document.querySelectorAll('[data-close-game]'), function(btn){
@@ -3493,6 +4572,1250 @@
     document.addEventListener('click', function(){ if(!navMenu.hidden) closeMenu(); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !navMenu.hidden) closeMenu(); });
   })();
+</script>
+<script>
+  // ===== Detallitos para ti, modo noche y volver arriba =====
+  (function(){
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- Modo noche ---
+    var nightBtn = document.getElementById('nightBtn');
+    var nightIcon = document.getElementById('nightIcon');
+    if(nightBtn){
+      nightBtn.addEventListener('click', function(){
+        var root = document.documentElement;
+        var on = root.getAttribute('data-theme') === 'night';
+        if(on){
+          root.removeAttribute('data-theme');
+          nightBtn.setAttribute('aria-pressed', 'false');
+          nightBtn.setAttribute('aria-label', 'Activar el modo noche');
+          if(nightIcon) nightIcon.textContent = '☾';
+        } else {
+          root.setAttribute('data-theme', 'night');
+          nightBtn.setAttribute('aria-pressed', 'true');
+          nightBtn.setAttribute('aria-label', 'Quitar el modo noche');
+          if(nightIcon) nightIcon.textContent = '☀';
+        }
+      });
+    }
+
+    // --- Volver arriba ---
+    var toTopBtn = document.getElementById('toTopBtn');
+    if(toTopBtn){
+      var onScroll = function(){
+        toTopBtn.classList.toggle('visible', window.scrollY > 600);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      toTopBtn.addEventListener('click', function(){
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    }
+
+    // --- Te amo en muchos idiomas ---
+    var LANGS = [
+      { lang: 'Español', phrase: 'Te amo', sound: 'Así, como te lo digo todos los días ♥' },
+      { lang: 'Inglés', phrase: 'I love you', sound: 'Se pronuncia: ai lov iu' },
+      { lang: 'Francés', phrase: 'Je t\u2019aime', sound: 'Se pronuncia: ye tem' },
+      { lang: 'Italiano', phrase: 'Ti amo', sound: 'Se pronuncia: ti amo' },
+      { lang: 'Portugués', phrase: 'Eu te amo', sound: 'Se pronuncia: eu chi amu' },
+      { lang: 'Alemán', phrase: 'Ich liebe dich', sound: 'Se pronuncia: ij libe dij' },
+      { lang: 'Japonés', phrase: '愛してる', sound: 'Se pronuncia: aishiteru' },
+      { lang: 'Coreano', phrase: '사랑해요', sound: 'Se pronuncia: sarangueio' },
+      { lang: 'Náhuatl', phrase: 'Nimitztlazohtla', sound: 'La lengua de nuestros antepasados de México ♥' },
+      { lang: 'Hebreo', phrase: 'אני אוהב אותך', sound: 'Se pronuncia: ani ohev otaj' }
+    ];
+    var langGrid = document.getElementById('langGrid');
+    if(langGrid){
+      LANGS.forEach(function(item){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'lang-card';
+        b.setAttribute('aria-expanded', 'false');
+        var name = document.createElement('span');
+        name.className = 'lang-name';
+        name.textContent = item.lang;
+        var hint = document.createElement('span');
+        hint.className = 'lang-hint';
+        hint.textContent = 'Toca para descubrir cómo se dice ♥';
+        var phrase = document.createElement('span');
+        phrase.className = 'lang-phrase';
+        phrase.textContent = item.phrase;
+        var sound = document.createElement('span');
+        sound.className = 'lang-sound';
+        sound.textContent = item.sound;
+        b.appendChild(name);
+        b.appendChild(hint);
+        b.appendChild(phrase);
+        b.appendChild(sound);
+        b.addEventListener('click', function(){
+          var open = b.classList.toggle('open');
+          b.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        langGrid.appendChild(b);
+      });
+    }
+
+    // --- Un pensamiento para ti hoy ---
+    var THOUGHTS = [
+      'Si hoy el día se siente pesado, acuérdate de esto: hay alguien que te mira y piensa que eres lo mejor que le ha pasado en la vida. Ese alguien soy yo.',
+      'Tu sonrisa tiene un superpoder: convierte cualquier día común en mi día favorito.',
+      'No necesito una fecha especial para celebrarte, mi amor: tenerte es la celebración.',
+      'Cada mañana que despierto y pienso en ti, el mundo se siente un poquito más bonito.',
+      'Eres mi lugar favorito en todo el mundo… y no es un lugar: eres tú.',
+      'Gracias por tu paciencia, por tu ternura y por esa forma tan tuya de hacer que todo esté bien.',
+      'Si pudiera pedir un deseo hoy, pediría mil años más contigo… y luego, otros mil.',
+      'Tu risa es la melodía que quiero escuchar en nuestra casa todos los días.',
+      'Contigo aprendí que el amor no se grita: se demuestra en los detallitos de cada día.',
+      'Eres la respuesta más bonita a todas mis oraciones.',
+      'Hoy quiero que te mires como yo te veo: hermosa, valiosa y capaz de todo.',
+      'No hay distancia ni día difícil que le gane a lo que siento por ti.',
+      'Mi plan favorito, hoy y siempre, va a ser el que te incluya a ti.',
+      'Que hoy te pase algo tan bonito como lo que tú me haces sentir a mí.',
+      'Tu mano en la mía es mi brújula: agarrado de ti, nunca me pierdo.',
+      'Eres mi calma en los días de tormenta y mi fiesta en los días de sol.',
+      'Si el amor tuviera otro nombre, el mío llevaría el tuyo: Naomi.',
+      'Cada día contigo es una página nueva de mi historia favorita.',
+      'Hoy te abrazo con palabras… pero en cuanto te vea, te abrazo de verdad.',
+      'Eres fuerte, eres dulce, eres luz. Y eres mía, como yo soy tuyo.',
+      'Que nunca se te olvide: eres amada hoy, mañana y por toda la eternidad.',
+      'Tu forma de querer a los demás dice todo de ese corazón enorme que tienes.',
+      'A tu lado, hasta hacer fila se siente como una cita.',
+      'Dios me ha dado muchos regalos, pero el más bonito de todos lleva tu nombre.',
+      'Si hoy dudas de ti, ven y mírate en mis ojos: ahí eres perfecta.',
+      'Nuestro amor no es perfecto, pero es verdadero… y eso lo hace eterno.',
+      'Eres mi primer pensamiento al despertar y el último antes de dormir.',
+      'Hoy celebro que existes, que me elegiste y que caminamos juntos de la mano.',
+      'Que tu día tenga tanto color como el que tú le das a mi vida.',
+      'Prometo buscarte una sonrisa nueva cada día, aunque sea con un chiste malo.',
+      'Cierra los ojos un segundo e imagina mi abrazo: así de cerquita te llevo siempre.'
+    ];
+    var thoughtDate = document.getElementById('thoughtDate');
+    var thoughtText = document.getElementById('thoughtText');
+    if(thoughtText){
+      var now = new Date();
+      if(thoughtDate){
+        var fecha = now.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+        thoughtDate.textContent = 'Hoy es ' + fecha;
+      }
+      thoughtText.textContent = THOUGHTS[(now.getDate() - 1) % THOUGHTS.length];
+    }
+
+    // --- Adivina el lugar ---
+    var GUESS = [
+      { clue: 'Está en Pachuca, en una colonia de tardes tranquilas. Su nombre suena a la caja de los mitos griegos, pero la única sorpresa que guarda es nuestro amor.', opts: ['Calle Pandora, El Saucillo', 'Coyoacán', 'Reserva Uno'], answer: 0 },
+      { clue: 'En la Ciudad de México, por Ermita, hay una casa donde siempre huele a comida rica y donde tu familia me recibió con los brazos abiertos.', opts: ['Casa de los abuelitos de Hagot', 'Casa de los abuelitos de Naomi', 'Templo de Aragón'], answer: 1 },
+      { clue: 'Un barrio de la Ciudad de México con kiosco, jardines y calles empedradas, famoso por sus coyotes de piedra y sus churros calientitos.', opts: ['Puerto de Veracruz', 'Calle Pandora, El Saucillo', 'Coyoacán'], answer: 2 },
+      { clue: 'Una Casa del Señor en la Ciudad de México, blanca e imponente, llena de paz: el lugar donde nuestro para siempre se siente más cerquita.', opts: ['Templo de Aragón', 'Casa de los abuelitos de Naomi', 'Playa Norte'], answer: 0 },
+      { clue: 'Al norte de la Ciudad de México, en Cuautepec, está la casa de mis abuelitos: otro hogar que, desde que llegaste tú, también es tuyo.', opts: ['Coyoacán', 'Casa de los abuelitos de Hagot', 'Puerto de Veracruz'], answer: 1 },
+      { clue: 'Malecón, barcos y música frente al Golfo: el puerto de Veracruz donde el mar nos contó sus secretos.', opts: ['Playa Norte', 'Reserva Uno', 'Puerto de Veracruz'], answer: 2 },
+      { clue: 'Su nombre es un punto cardinal y está en Veracruz: arena suave, brisa rica y el mar cerquita para mojarnos los pies.', opts: ['Playa Norte', 'Puerto de Veracruz', 'Calle Pandora, El Saucillo'], answer: 0 },
+      { clue: 'Un rincón verde y tranquilo de Veracruz, de esos escondidos que solo conocen los que aman explorar juntitos.', opts: ['Coyoacán', 'Reserva Uno', 'Templo de Aragón'], answer: 1 }
+    ];
+    var guessStartWrap = document.getElementById('guessStartWrap');
+    var guessBody = document.getElementById('guessBody');
+    var guessEnd = document.getElementById('guessEnd');
+    var guessProgress = document.getElementById('guessProgress');
+    var guessScoreEl = document.getElementById('guessScore');
+    var guessClueEl = document.getElementById('guessClue');
+    var guessOptions = document.getElementById('guessOptions');
+    var guessFeedback = document.getElementById('guessFeedback');
+    var guessNextBtn = document.getElementById('guessNextBtn');
+    var guessFinalMsg = document.getElementById('guessFinalMsg');
+    var guessState = { idx: 0, score: 0, locked: false };
+    function renderGuess(){
+      var item = GUESS[guessState.idx];
+      guessState.locked = false;
+      if(guessProgress) guessProgress.textContent = 'Ronda ' + (guessState.idx + 1) + ' de ' + GUESS.length;
+      if(guessScoreEl) guessScoreEl.textContent = guessState.score;
+      if(guessClueEl) guessClueEl.textContent = item.clue;
+      if(guessFeedback) guessFeedback.textContent = '';
+      if(guessNextBtn) guessNextBtn.hidden = true;
+      if(guessOptions){
+        guessOptions.innerHTML = '';
+        item.opts.forEach(function(opt, i){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-opt';
+          b.textContent = opt;
+          b.addEventListener('click', function(){ answerGuess(i, b); });
+          guessOptions.appendChild(b);
+        });
+      }
+    }
+    function answerGuess(i, btn){
+      if(guessState.locked) return;
+      guessState.locked = true;
+      var item = GUESS[guessState.idx];
+      var buttons = guessOptions ? guessOptions.querySelectorAll('.quiz-opt') : [];
+      Array.prototype.forEach.call(buttons, function(b, j){
+        b.disabled = true;
+        if(j === item.answer) b.classList.add('is-correct');
+      });
+      if(i === item.answer){
+        guessState.score++;
+        if(guessFeedback) guessFeedback.textContent = '¡Ese es, mi amor! ♥';
+      } else {
+        btn.classList.add('is-wrong');
+        if(guessFeedback) guessFeedback.textContent = 'Casi, mi vida… era: ' + item.opts[item.answer];
+      }
+      if(guessScoreEl) guessScoreEl.textContent = guessState.score;
+      if(guessNextBtn){
+        guessNextBtn.textContent = guessState.idx === GUESS.length - 1 ? 'Ver mi resultado ♥' : 'Siguiente pista ♥';
+        guessNextBtn.hidden = false;
+      }
+    }
+    function startGuess(){
+      guessState = { idx: 0, score: 0, locked: false };
+      if(guessStartWrap) guessStartWrap.hidden = true;
+      if(guessEnd) guessEnd.hidden = true;
+      if(guessBody) guessBody.hidden = false;
+      renderGuess();
+    }
+    function endGuess(){
+      if(guessBody) guessBody.hidden = true;
+      if(guessEnd) guessEnd.hidden = false;
+      var s = guessState.score, msg;
+      if(s === GUESS.length) msg = '¡Los 8 lugares, mi amor! Conoces nuestro mapa de memoria, porque cada lugar lo llevas guardado en el corazón… igual que yo te llevo a ti. ♥';
+      else if(s >= 5) msg = '¡Muy bien, mi vida! Acertaste ' + s + ' de 8 lugares. Nuestro mapa ya casi lo conoces completo… y los que faltan, los recorremos juntos otra vez. ♥';
+      else msg = 'Acertaste ' + s + ' de 8, mi amor… y eso solo significa una cosa: tenemos que volver a pasear por nuestros lugares, tú y yo, para refrescar la memoria. ♥';
+      if(guessFinalMsg) guessFinalMsg.textContent = msg;
+    }
+    var guessStartBtn = document.getElementById('guessStartBtn');
+    var guessRestartBtn = document.getElementById('guessRestartBtn');
+    if(guessStartBtn) guessStartBtn.addEventListener('click', startGuess);
+    if(guessRestartBtn) guessRestartBtn.addEventListener('click', startGuess);
+    if(guessNextBtn) guessNextBtn.addEventListener('click', function(){
+      guessState.idx++;
+      if(guessState.idx >= GUESS.length) endGuess(); else renderGuess();
+    });
+
+    // --- Mi diario de amor ---
+    var DIARY_KEY = 'diario-de-amor-naomi';
+    var diaryInput = document.getElementById('diaryInput');
+    var diarySaveBtn = document.getElementById('diarySaveBtn');
+    var diaryMsg = document.getElementById('diaryMsg');
+    var diaryList = document.getElementById('diaryList');
+    var diaryEntries = [];
+    try{
+      var saved = window.localStorage.getItem(DIARY_KEY);
+      if(saved){
+        var parsed = JSON.parse(saved);
+        if(parsed && parsed.length) diaryEntries = parsed;
+      }
+    }catch(e){ diaryEntries = []; }
+    function persistDiary(){
+      try{ window.localStorage.setItem(DIARY_KEY, JSON.stringify(diaryEntries)); }catch(e){}
+    }
+    function renderDiary(){
+      if(!diaryList) return;
+      diaryList.innerHTML = '';
+      if(!diaryEntries.length){
+        var empty = document.createElement('p');
+        empty.className = 'diary-empty';
+        empty.textContent = 'Todavía no has escrito nada, mi amor. Tu primera página te está esperando… ♥';
+        diaryList.appendChild(empty);
+        return;
+      }
+      diaryEntries.forEach(function(entry, idx){
+        var card = document.createElement('article');
+        card.className = 'diary-entry';
+        var head = document.createElement('div');
+        head.className = 'diary-entry-date';
+        var dateSpan = document.createElement('span');
+        var d = new Date(entry.t);
+        dateSpan.textContent = isNaN(d.getTime()) ? '' : d.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'diary-del';
+        del.textContent = 'Borrar';
+        del.setAttribute('aria-label', 'Borrar esta entrada del diario');
+        del.addEventListener('click', function(){
+          diaryEntries.splice(idx, 1);
+          persistDiary();
+          renderDiary();
+          if(diaryMsg) diaryMsg.textContent = 'Entrada borrada, mi amor.';
+        });
+        head.appendChild(dateSpan);
+        head.appendChild(del);
+        var p = document.createElement('p');
+        p.textContent = entry.text;
+        card.appendChild(head);
+        card.appendChild(p);
+        diaryList.appendChild(card);
+      });
+    }
+    if(diarySaveBtn && diaryInput){
+      diarySaveBtn.addEventListener('click', function(){
+        var text = diaryInput.value.replace(/^\s+|\s+$/g, '');
+        if(!text){
+          if(diaryMsg) diaryMsg.textContent = 'Escribe algo primero, mi vida… lo que sea que traigas en el corazón. ♥';
+          diaryInput.focus();
+          return;
+        }
+        diaryEntries.unshift({ t: Date.now(), text: text });
+        persistDiary();
+        diaryInput.value = '';
+        renderDiary();
+        if(diaryMsg) diaryMsg.textContent = 'Guardado en tu diario, mi amor. Aquí se queda, con su fecha, para cuando quieras volver a leerlo. ♥';
+      });
+    }
+    renderDiary();
+
+    // --- Barrita de progreso de lectura ---
+    var scrollProgress = document.getElementById('scrollProgress');
+    if(scrollProgress){
+      var onProgress = function(){
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if(pct < 0) pct = 0;
+        if(pct > 100) pct = 100;
+        scrollProgress.style.width = pct + '%';
+      };
+      window.addEventListener('scroll', onProgress, { passive: true });
+      window.addEventListener('resize', onProgress);
+      onProgress();
+    }
+
+    // --- Botón «Mándame un abrazo» (con contador guardado en este dispositivo) ---
+    var hugBtn = document.getElementById('hugBtn');
+    var hugMsg = document.getElementById('hugMsg');
+    var hugCountEl = document.getElementById('hugCount');
+    var HUG_KEY = 'abrazos-para-naomi';
+    var hugTotal = 0;
+    try{ hugTotal = parseInt(window.localStorage.getItem(HUG_KEY), 10) || 0; }catch(e){ hugTotal = 0; }
+    function renderHugs(){
+      if(!hugCountEl) return;
+      hugCountEl.textContent = hugTotal === 0
+        ? 'Todavía no te he mandado ninguno por aquí… ¡tócame y estrena el contador, mi amor!'
+        : 'Abrazos que te he mandado: ' + hugTotal + ' ♥';
+    }
+    renderHugs();
+    var HUG_COLORS = ['#F3A8BB', '#E87A97', '#C24365', '#EAD9A8'];
+    if(hugBtn){
+      hugBtn.addEventListener('click', function(){
+        var count = reduceMotion ? 8 : 36;
+        for(var i = 0; i < count; i++){
+          (function(idx){
+            setTimeout(function(){
+              var h = document.createElement('span');
+              h.className = 'rain-heart';
+              h.textContent = Math.random() > .25 ? '♥' : '♡';
+              h.style.left = (Math.random() * 96) + 'vw';
+              h.style.fontSize = (18 + Math.random() * 30) + 'px';
+              h.style.color = HUG_COLORS[Math.floor(Math.random() * HUG_COLORS.length)];
+              h.style.animationDuration = (1.6 + Math.random() * 1.8) + 's';
+              document.body.appendChild(h);
+              setTimeout(function(){ h.remove(); }, 3800);
+            }, idx * 55);
+          })(i);
+        }
+        if(hugMsg) hugMsg.classList.add('show');
+        hugTotal++;
+        try{ window.localStorage.setItem(HUG_KEY, String(hugTotal)); }catch(e){}
+        renderHugs();
+      });
+    }
+
+    // --- Adivina la canción ---
+    var SONGS = [
+      { lyric: '“Wise men say only fools rush in…”', opts: ['“Can’t Help Falling in Love” · Elvis Presley', '“Vamos bien” · Majo y Dan', '“Feliz Navidad” · José Feliciano'], answer: 0 },
+      { lyric: '“Sabes tú cuánto te amo y he esperado, el vivir mi vida aquí a tu lado…”', opts: ['“Noche de Paz” · Matisse y El David', '“Vamos bien” · Majo y Dan', '“Can’t Help Falling in Love” · Elvis Presley'], answer: 1 },
+      { lyric: '“Feliz Navidad, próspero año y felicidad…”', opts: ['“El Burrito de Belén” · La Rondallita', '“Los Peces en el Río” · Pandora', '“Feliz Navidad” · José Feliciano'], answer: 2 },
+      { lyric: '“Con mi burrito sabanero voy camino de Belén…”', opts: ['“El Burrito de Belén” · La Rondallita', '“Feliz Navidad” · José Feliciano', '“Noche de Paz” · Matisse y El David'], answer: 0 },
+      { lyric: '“Pero mira cómo beben los peces en el río…”', opts: ['“Away in a Manger” · Lauren Daigle', '“El Burrito de Belén” · La Rondallita', '“Los Peces en el Río” · Pandora'], answer: 2 },
+      { lyric: '“Noche de paz, noche de amor, todo duerme en derredor…”', opts: ['“Light of the World” · Lauren Daigle', '“Noche de Paz” · Matisse y El David', '“Feliz Navidad” · José Feliciano'], answer: 1 },
+      { lyric: '“Take my hand, take my whole life too…”', opts: ['“The Twelve Days of Christmas” · Frank Sinatra', '“Can’t Help Falling in Love” · Elvis Presley', '“Vamos bien” · Majo y Dan'], answer: 1 },
+      { lyric: '“The world waits for a miracle, the heart longs for a little bit of hope…”', opts: ['“Light of the World” · Lauren Daigle', '“Away in a Manger” · Lauren Daigle', '“Noche de Paz” · Matisse y El David'], answer: 0 },
+      { lyric: '“Si vamos juntos, vamos bien; todo en esta vida va a estar bien…”', opts: ['“Can’t Help Falling in Love” · Elvis Presley', '“Feliz Navidad” · José Feliciano', '“Vamos bien” · Majo y Dan'], answer: 2 },
+      { lyric: '“On the first day of Christmas, my true love gave to me a partridge in a pear tree…”', opts: ['“Away in a Manger” · Lauren Daigle', '“The Twelve Days of Christmas” · Frank Sinatra', '“Light of the World” · Lauren Daigle'], answer: 1 }
+    ];
+    var songStartWrap = document.getElementById('songStartWrap');
+    var songBody = document.getElementById('songBody');
+    var songEnd = document.getElementById('songEnd');
+    var songProgress = document.getElementById('songProgress');
+    var songScoreEl = document.getElementById('songScore');
+    var songLyric = document.getElementById('songLyric');
+    var songOptions = document.getElementById('songOptions');
+    var songFeedback = document.getElementById('songFeedback');
+    var songNextBtn = document.getElementById('songNextBtn');
+    var songFinalMsg = document.getElementById('songFinalMsg');
+    var songState = { idx: 0, score: 0, locked: false };
+    function renderSong(){
+      var item = SONGS[songState.idx];
+      songState.locked = false;
+      if(songProgress) songProgress.textContent = 'Ronda ' + (songState.idx + 1) + ' de ' + SONGS.length;
+      if(songScoreEl) songScoreEl.textContent = songState.score;
+      if(songLyric) songLyric.textContent = item.lyric;
+      if(songFeedback) songFeedback.textContent = '';
+      if(songNextBtn) songNextBtn.hidden = true;
+      if(songOptions){
+        songOptions.innerHTML = '';
+        item.opts.forEach(function(opt, i){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-opt';
+          b.textContent = opt;
+          b.addEventListener('click', function(){ answerSong(i, b); });
+          songOptions.appendChild(b);
+        });
+      }
+    }
+    function answerSong(i, btn){
+      if(songState.locked) return;
+      songState.locked = true;
+      var item = SONGS[songState.idx];
+      var buttons = songOptions ? songOptions.querySelectorAll('.quiz-opt') : [];
+      Array.prototype.forEach.call(buttons, function(b, j){
+        b.disabled = true;
+        if(j === item.answer) b.classList.add('is-correct');
+      });
+      if(i === item.answer){
+        songState.score++;
+        if(songFeedback) songFeedback.textContent = '¡Esa es, mi amor! Es ' + item.opts[item.answer] + ' ♥';
+      } else {
+        btn.classList.add('is-wrong');
+        if(songFeedback) songFeedback.textContent = 'Casi, mi vida… esa frase es de ' + item.opts[item.answer];
+      }
+      if(songScoreEl) songScoreEl.textContent = songState.score;
+      if(songNextBtn){
+        songNextBtn.textContent = songState.idx === SONGS.length - 1 ? 'Ver mi resultado ♥' : 'Siguiente frase ♥';
+        songNextBtn.hidden = false;
+      }
+    }
+    function startSong(){
+      songState = { idx: 0, score: 0, locked: false };
+      if(songStartWrap) songStartWrap.hidden = true;
+      if(songEnd) songEnd.hidden = true;
+      if(songBody) songBody.hidden = false;
+      renderSong();
+    }
+    function endSong(){
+      if(songBody) songBody.hidden = true;
+      if(songEnd) songEnd.hidden = false;
+      var s = songState.score, msg;
+      if(s === SONGS.length) msg = '¡Perfecto, mi amor! Acertaste las 10 de 10: conoces nuestras canciones de memoria, porque las llevas guardadas en el corazón… igual que yo te llevo a ti. ♥';
+      else if(s >= 7) msg = '¡Muy bien, mi vida! Acertaste ' + s + ' de 10. Nuestra música ya suena dentro de ti; las que faltaron, las cantamos juntos hasta aprendérnoslas de memoria. ♥';
+      else msg = 'Acertaste ' + s + ' de 10, mi amor… y no pasa nada: tenemos toda la eternidad para escuchar nuestras canciones juntitos, una y otra vez, hasta que sean parte de nosotros. ♥';
+      if(songFinalMsg) songFinalMsg.textContent = msg;
+    }
+    var songStartBtn = document.getElementById('songStartBtn');
+    var songRestartBtn = document.getElementById('songRestartBtn');
+    if(songStartBtn) songStartBtn.addEventListener('click', startSong);
+    if(songRestartBtn) songRestartBtn.addEventListener('click', startSong);
+    if(songNextBtn) songNextBtn.addEventListener('click', function(){
+      songState.idx++;
+      if(songState.idx >= SONGS.length) endSong(); else renderSong();
+    });
+
+    // --- Sueños por cumplir juntos (se guardan en este dispositivo) ---
+    var DREAMS_KEY = 'suenos-por-cumplir-naomi';
+    var dreamsList = document.getElementById('dreamsList');
+    var dreamsCount = document.getElementById('dreamsCount');
+    var dreamsFinal = document.getElementById('dreamsFinal');
+    var dreamsDone = [];
+    try{
+      var savedDreams = window.localStorage.getItem(DREAMS_KEY);
+      if(savedDreams){
+        var parsedDreams = JSON.parse(savedDreams);
+        if(parsedDreams && parsedDreams.length) dreamsDone = parsedDreams;
+      }
+    }catch(e){ dreamsDone = []; }
+    function persistDreams(){
+      try{ window.localStorage.setItem(DREAMS_KEY, JSON.stringify(dreamsDone)); }catch(e){}
+    }
+    function refreshDreams(){
+      if(!dreamsList) return;
+      var boxes = dreamsList.querySelectorAll('[data-dream]');
+      var total = boxes.length, done = 0;
+      Array.prototype.forEach.call(boxes, function(box){
+        var i = parseInt(box.getAttribute('data-dream'), 10);
+        var isDone = !!dreamsDone[i];
+        box.checked = isDone;
+        var label = box.closest ? box.closest('.dream-item') : null;
+        if(label) label.classList.toggle('done', isDone);
+        if(isDone) done++;
+      });
+      if(dreamsCount) dreamsCount.textContent = 'Sueños cumplidos: ' + done + ' de ' + total + ' ♥';
+      if(dreamsFinal) dreamsFinal.hidden = done !== total;
+    }
+    if(dreamsList){
+      Array.prototype.forEach.call(dreamsList.querySelectorAll('[data-dream]'), function(box){
+        box.addEventListener('change', function(){
+          var i = parseInt(box.getAttribute('data-dream'), 10);
+          dreamsDone[i] = box.checked;
+          persistDreams();
+          refreshDreams();
+        });
+      });
+      refreshDreams();
+    }
+
+    // --- Árbol de gratitud ---
+    var GRATITUDES = [
+      'Por nuestra fe: porque tener al Padre Celestial en el centro de lo nuestro hace que todo lo demás tenga sentido.',
+      'Por nuestras familias: por su amor, por sus consejos y por acompañarnos con tanta alegría en este camino.',
+      'Por el hogar que estamos por comenzar: chiquito o grande, será nuestro lugar favorito de todo el mundo.',
+      'Por la salud de cada día: por despertar, respirar y tener fuerzas para reír, trabajar y soñar juntos.',
+      'Por los abuelitos: por sus historias, sus abrazos y por todo el amor que sembraron en nosotros.',
+      'Por el pan de cada día: por la comida en nuestra mesa y por las manos que la preparan con cariño.',
+      'Por nuestros amigos y hermanos en la fe: por caminar con nosotros y alegrarse con nuestra alegría.',
+      'Por este diciembre inolvidable: tu cumpleaños, nuestra boda y el principio de nuestro para siempre.'
+    ];
+    var gtTag = document.getElementById('gtTag');
+    var gtText = document.getElementById('gtText');
+    var gtLit = {};
+    var gtCount = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('.gt-orn'), function(orn){
+      orn.addEventListener('click', function(){
+        var i = parseInt(orn.getAttribute('data-g'), 10);
+        if(!gtLit[i]){
+          gtLit[i] = true;
+          gtCount++;
+          orn.classList.add('lit');
+        }
+        if(gtTag) gtTag.textContent = 'Damos gracias… · ' + gtCount + ' de ' + GRATITUDES.length + ' adornitos encendidos';
+        if(gtText){
+          gtText.textContent = GRATITUDES[i] + (gtCount === GRATITUDES.length ? ' ¡Ya encendiste todo el arbolito, mi amor! Y aun así nos faltan adornitos, porque las razones para dar gracias por ti no se acaban nunca. ♥' : '');
+        }
+      });
+    });
+
+    // --- Botón de letra grande (accesibilidad): un toque agranda, otro regresa ---
+    var textSizeBtn = document.getElementById('textSizeBtn');
+    if(textSizeBtn){
+      textSizeBtn.addEventListener('click', function(){
+        var big = document.documentElement.getAttribute('data-textsize') === 'big';
+        if(big){
+          document.documentElement.removeAttribute('data-textsize');
+          textSizeBtn.setAttribute('aria-pressed', 'false');
+          textSizeBtn.setAttribute('aria-label', 'Hacer la letra más grande');
+          textSizeBtn.textContent = 'A+';
+        } else {
+          document.documentElement.setAttribute('data-textsize', 'big');
+          textSizeBtn.setAttribute('aria-pressed', 'true');
+          textSizeBtn.setAttribute('aria-label', 'Volver la letra a su tamaño normal');
+          textSizeBtn.textContent = 'A';
+        }
+      });
+    }
+
+    // --- Baraja sin repetir: mezcla índices y los va sacando uno a uno ---
+    function shuffledBag(total){
+      var bag = [];
+      for(var i = 0; i < total; i++) bag.push(i);
+      for(var j = bag.length - 1; j > 0; j--){
+        var k = Math.floor(Math.random() * (j + 1));
+        var tmp = bag[j]; bag[j] = bag[k]; bag[k] = tmp;
+      }
+      return bag;
+    }
+
+    // --- Verdad o reto de amor ---
+    var VR_CARDS = [
+      { t: 'verdad', x: '¿Qué cualidad mía te gustaría que nunca, nunca cambiara?' },
+      { t: 'verdad', x: '¿Cuál es tu sueño más bonito para nuestro primer año de casados?' },
+      { t: 'verdad', x: '¿Qué cosa chiquita que hago te hace sonreír sin darte cuenta?' },
+      { t: 'verdad', x: '¿Qué le agradeces hoy a Dios de nuestra historia?' },
+      { t: 'verdad', x: '¿Cuál es tu lugar favorito de todo el mundo para estar juntitos?' },
+      { t: 'verdad', x: '¿Qué palabra te gustaría que describiera siempre nuestro hogar?' },
+      { t: 'verdad', x: '¿Qué es lo que más te emociona de que seamos esposos?' },
+      { t: 'verdad', x: '¿En qué momento te has sentido más cerquita de Dios estando conmigo?' },
+      { t: 'reto', x: 'Pongan su canción favorita y bailen una pieza completa, abrazados y despacito, sin soltarla ni un segundo.' },
+      { t: 'reto', x: 'Mírense a los ojos y díganse, uno a la vez, una cosa que admiran muchísimo del otro.' },
+      { t: 'reto', x: 'Abrácense fuerte durante veinte segundos completos, en silencio, contando despacito.' },
+      { t: 'reto', x: 'Tómense de la mano y digan juntitos una oración cortita de agradecimiento, en voz alta.' },
+      { t: 'reto', x: 'Cada uno escriba en un papelito una palabra que describa al otro, y léanlas en voz alta al mismo tiempo.' },
+      { t: 'reto', x: 'Cántense el pedacito de una canción que les recuerde al otro. Se vale desafinar, se vale reírse.' },
+      { t: 'reto', x: 'Den un paseo cortito tomados de la mano, aunque sea dentro de la casa o a la esquina y de regreso.' },
+      { t: 'reto', x: 'Cuéntense un chiste —aunque sea malísimo— y ríanse juntitos como si fuera el mejor del mundo.' }
+    ];
+    var vrTag = document.getElementById('vrTag');
+    var vrText = document.getElementById('vrText');
+    var vrCount = document.getElementById('vrCount');
+    var vrDrawBtn = document.getElementById('vrDrawBtn');
+    var vrBag = shuffledBag(VR_CARDS.length);
+    var vrDrawn = 0;
+    if(vrDrawBtn){
+      vrDrawBtn.addEventListener('click', function(){
+        if(!vrBag.length){ vrBag = shuffledBag(VR_CARDS.length); vrDrawn = 0; }
+        var card = VR_CARDS[vrBag.pop()];
+        vrDrawn++;
+        if(vrTag){
+          vrTag.textContent = card.t === 'verdad' ? '♥ Verdad' : '★ Reto';
+          vrTag.className = 'vr-tag ' + card.t;
+        }
+        if(vrText) vrText.textContent = card.x;
+        if(vrCount){
+          vrCount.textContent = 'Cartas sacadas: ' + vrDrawn + ' de ' + VR_CARDS.length +
+            (vrBag.length ? '' : ' · ¡Ya salieron todas! Si sigues sacando, el mazo se vuelve a barajar, mi amor.');
+        }
+        vrDrawBtn.textContent = 'Sacar otra carta ♥';
+      });
+    }
+
+    // --- Saca una cartita ---
+    var CARTITAS = [
+      'Dondequiera que estés cuando leas esto, cierra los ojos un segundo: te estoy pensando y te estoy amando, justo ahora.',
+      'Eres la respuesta más bonita a oraciones que ni siquiera sabía que estaba haciendo.',
+      'Que hoy te pase algo chiquito y bonito que te haga sonreír… y que me lo cuentes en la noche.',
+      'No necesito un día especial para celebrarte: cualquier martes contigo ya es fiesta.',
+      'Tu risa es mi sonido favorito de todo el mundo. Guárdame siempre un pedacito.',
+      'Si pudiera darte un solo regalo hoy, te daría mis ojos, para que te vieras como yo te veo.',
+      'Dicen que el amor se construye de momentos chiquitos. Pues contigo, hasta los momentos chiquitos se sienten enormes.',
+      'Que el Padre Celestial te abrace hoy con su paz… y de todo lo demás me encargo yo.',
+      'Eres mi calma y mi aventura al mismo tiempo. No sé cómo le haces, pero no pares nunca.',
+      'Cuando dudes de lo increíble que eres, pregúntame: tengo una lista larguísima y siempre actualizada.',
+      'Contigo, hasta hacer fila es bonito. Ahora imagínate lo que va a ser la eternidad.',
+      'Tu mano en la mía es mi lugar favorito de todo el planeta. Así de simple, así de siempre.',
+      'Que sueñes bonito esta noche; yo le pido a Dios que te cuide hasta en los sueños.',
+      'Brillas, mi amor. Y no hablo solo de hoy: hablo de todos los días en que decides ser tú.'
+    ];
+    var deckText = document.getElementById('deckText');
+    var deckFrom = document.getElementById('deckFrom');
+    var deckCount = document.getElementById('deckCount');
+    var deckDrawBtn = document.getElementById('deckDrawBtn');
+    var deckBag = shuffledBag(CARTITAS.length);
+    var deckDrawn = 0;
+    if(deckDrawBtn){
+      deckDrawBtn.addEventListener('click', function(){
+        if(!deckBag.length){ deckBag = shuffledBag(CARTITAS.length); deckDrawn = 0; }
+        var note = CARTITAS[deckBag.pop()];
+        deckDrawn++;
+        if(deckText) deckText.textContent = note;
+        if(deckFrom) deckFrom.textContent = '— Tu Hagot, que te ama ♥';
+        if(deckCount){
+          deckCount.textContent = 'Cartitas sacadas: ' + deckDrawn + ' de ' + CARTITAS.length +
+            (deckBag.length ? '' : ' · ¡Ya leíste todo el mazo! Si sigues, se vuelve a barajar con el mismo amor.');
+        }
+        deckDrawBtn.textContent = 'Sacar otra cartita ♥';
+      });
+    }
+
+    // --- Bingo de amor ---
+    var BINGO_ITEMS = [
+      'Un abrazo larguito, de esos que no queremos soltar',
+      'Cantar una canción juntitos, aunque desafinemos',
+      'Una oración en pareja, tomados de la mano',
+      'Bailar despacito en la sala, sin motivo ni ocasión',
+      'Una foto juntitos que nos encante',
+      'Desayunar juntitos sin prisa y sin celulares',
+      'Una caminata larga, de la mano, platicando de todo',
+      'Reírnos hasta que nos duela la pancita',
+      'Un beso en la frente, de esos que dicen «aquí estoy»',
+      'Cocinar algo rico entre los dos',
+      'Un mensajito de «te amo» a mitad del día',
+      'Mirar las estrellas abrazados',
+      'Contarnos un secreto bonito que nadie más sabe',
+      'Ver el atardecer juntitos, en silencio',
+      'Un piropo que nos sonroje a los dos',
+      'Decirnos «te amo» mirándonos a los ojos'
+    ];
+    var BINGO_LINES = [
+      [0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15],
+      [0,4,8,12],[1,5,9,13],[2,6,10,14],[3,7,11,15],
+      [0,5,10,15],[3,6,9,12]
+    ];
+    var BINGO_MSGS = [
+      '¡Línea completa, mi amor! Cada cuadrito marcado es un momentito nuestro que ya vivimos… y los que faltan, los vamos a vivir juntitos. ♥',
+      '¡Otra línea, mi vida! Qué bonito es mirar esta tarjetita y ver cuánto amor ya cabe en nuestra historia. ♥',
+      '¡Línea, mi amor! Si esto fuera un premio, yo ya me gané el mayor de todos: tu corazón. ♥',
+      '¡Línea completa! Este amor nuestro no deja de sumar momentitos, mi Naomi hermosa. ♥'
+    ];
+    var bingoGrid = document.getElementById('bingoGrid');
+    var bingoMsg = document.getElementById('bingoMsg');
+    var bingoReset = document.getElementById('bingoReset');
+    var BINGO_KEY = 'bingo-de-amor-naomi';
+    var bingoOn = [];
+    try{
+      var savedBingo = JSON.parse(window.localStorage.getItem(BINGO_KEY) || '[]');
+      if(savedBingo && savedBingo.length === BINGO_ITEMS.length) bingoOn = savedBingo;
+    }catch(e){}
+    if(bingoOn.length !== BINGO_ITEMS.length){ bingoOn = BINGO_ITEMS.map(function(){ return false; }); }
+    var bingoLinesDone = 0;
+    var bingoMsgIdx = 0;
+    function bingoCountLines(){
+      var n = 0;
+      BINGO_LINES.forEach(function(line){
+        if(line.every(function(i){ return bingoOn[i]; })) n++;
+      });
+      return n;
+    }
+    function bingoMarked(){
+      return bingoOn.filter(function(v){ return v; }).length;
+    }
+    function renderBingo(announce){
+      if(!bingoGrid) return;
+      bingoGrid.innerHTML = '';
+      BINGO_ITEMS.forEach(function(item, i){
+        var cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'bingo-cell' + (bingoOn[i] ? ' on' : '');
+        cell.setAttribute('aria-pressed', bingoOn[i] ? 'true' : 'false');
+        cell.setAttribute('aria-label', item + (bingoOn[i] ? ' (ya lo vivimos)' : ''));
+        var heart = document.createElement('span');
+        heart.className = 'bingo-heart';
+        heart.setAttribute('aria-hidden', 'true');
+        heart.textContent = bingoOn[i] ? '♥' : '♡';
+        var label = document.createElement('span');
+        label.textContent = item;
+        cell.appendChild(heart);
+        cell.appendChild(label);
+        cell.addEventListener('click', function(){
+          bingoOn[i] = !bingoOn[i];
+          try{ window.localStorage.setItem(BINGO_KEY, JSON.stringify(bingoOn)); }catch(e){}
+          renderBingo(true);
+        });
+        bingoGrid.appendChild(cell);
+      });
+      var lines = bingoCountLines();
+      var marked = bingoMarked();
+      if(bingoMsg){
+        if(marked === BINGO_ITEMS.length){
+          bingoMsg.textContent = '¡BINGO COMPLETO, mi amor! Ya vivimos todo, todito esto… y es apenas el comienzo: nos queda una vida entera —y una eternidad— de momentitos por marcar. Te amo. ♥';
+        } else if(announce && lines > bingoLinesDone){
+          bingoMsg.textContent = BINGO_MSGS[bingoMsgIdx % BINGO_MSGS.length] + ' Llevas ' + marked + ' de ' + BINGO_ITEMS.length + ' momentitos marcados.';
+          bingoMsgIdx++;
+        } else if(marked === 0){
+          bingoMsg.textContent = 'A marcar momentitos, mi vida… ¡a ver qué línea completas primero! ♥';
+        } else {
+          bingoMsg.textContent = 'Llevas ' + marked + ' de ' + BINGO_ITEMS.length + ' momentitos marcados' + (lines ? ' y ' + lines + (lines === 1 ? ' línea completa' : ' líneas completas') : '') + '. ¡A seguir viviendo amor, mi vida! ♥';
+        }
+      }
+      bingoLinesDone = lines;
+    }
+    renderBingo(false);
+    if(bingoReset){
+      bingoReset.addEventListener('click', function(){
+        bingoOn = BINGO_ITEMS.map(function(){ return false; });
+        bingoMsgIdx = 0;
+        try{ window.localStorage.setItem(BINGO_KEY, JSON.stringify(bingoOn)); }catch(e){}
+        renderBingo(false);
+      });
+    }
+
+    // --- Conversemos, mi amor ---
+    var TALK_CARDS = [
+      'Si pudieras describir nuestro hogar ideal con tres palabras, ¿cuáles serían y por qué?',
+      '¿Qué sueño tienes para nuestra familia que todavía no me has contado con calma?',
+      '¿Qué es lo que más te gustaría que nuestros hijos aprendieran viéndonos a nosotros?',
+      'Cuando imaginas nuestra casa dentro de diez años, ¿qué es lo primero que ves?',
+      '¿Qué momento de nuestra historia te gustaría revivir tal cual, sin cambiarle nada?',
+      'Si supieras que Dios te concede hoy una sola petición para nuestro matrimonio, ¿qué le pedirías?',
+      '¿Qué tradición nueva te gustaría que inventáramos nosotros, una que sea solo nuestra?',
+      '¿En qué rincón de la casa te imaginas platicando conmigo cuando ya seamos viejitos?',
+      '¿Qué cosa mía te hace sentir en casa, estemos donde estemos?',
+      'Si nuestro amor tuviera un lema colgado en la puerta, ¿qué frase te gustaría que dijera?',
+      '¿Qué servicio sueñas que hagamos juntitos algún día, para bendecir a otras personas?',
+      '¿Qué quieres que nunca cambie entre nosotros, pase lo que pase en la vida?'
+    ];
+    var talkTag = document.getElementById('talkTag');
+    var talkText = document.getElementById('talkText');
+    var talkCount = document.getElementById('talkCount');
+    var talkDrawBtn = document.getElementById('talkDrawBtn');
+    var talkBag = shuffledBag(TALK_CARDS.length);
+    var talkDrawn = 0;
+    if(talkDrawBtn){
+      talkDrawBtn.addEventListener('click', function(){
+        if(!talkBag.length){ talkBag = shuffledBag(TALK_CARDS.length); talkDrawn = 0; }
+        var q = TALK_CARDS[talkBag.pop()];
+        talkDrawn++;
+        if(talkTag) talkTag.textContent = 'Preguntita ' + talkDrawn + ' de ' + TALK_CARDS.length;
+        if(talkText) talkText.textContent = q;
+        if(talkCount){
+          talkCount.textContent = 'Una a la vez, mi amor: platíquenla con calma antes de sacar la siguiente.' +
+            (talkBag.length ? '' : ' ¡Ya salieron todas! Si siguen, las tarjetitas se vuelven a barajar.');
+        }
+        talkDrawBtn.textContent = 'Sacar otra preguntita ♥';
+      });
+    }
+
+    // --- Un día perfecto juntos ---
+    var DAY_OPTS = {
+      manana: [
+        'Despertar sin alarma y desayunar calientito en la cama, entre risas y besos de buenos días',
+        'Salir tempranito a caminar y ver salir el sol tomados de la mano',
+        'Preparar hot cakes juntitos en la cocina, con música de fondo y harina en la nariz',
+        'Quedarnos en pijama un ratito más, platicando de lo que soñamos en la noche'
+      ],
+      tarde: [
+        'Un picnic con nuestra comida favorita y una siestita cortita abrazados',
+        'Pasear sin rumbo fijo, deteniéndonos en cada lugar bonito que nos llame',
+        'Tarde de películas abrazados bajo una cobija, con palomitas y chocolate caliente',
+        'Ir a nuestro lugar favorito a platicar de todo y de nada, sin mirar el reloj'
+      ],
+      noche: [
+        'Cenar a la luz de las velas algo cocinado por los dos, despacito y sin prisa',
+        'Salir a mirar las estrellas y pedir un deseo juntitos por cada una que veamos',
+        'Bailar una canción lenta en la sala, abrazados, antes de ir a dormir',
+        'Orar juntitos, agradecer el día entero y dormirnos tomados de la mano'
+      ]
+    };
+    var dayPick = { manana: null, tarde: null, noche: null };
+    var dayStory = document.getElementById('dayStory');
+    var dayStoryText = document.getElementById('dayStoryText');
+    var dayHint = document.getElementById('dayHint');
+    function lowerFirst(s){ return s.charAt(0).toLowerCase() + s.slice(1); }
+    function renderDayStory(){
+      var ready = dayPick.manana && dayPick.tarde && dayPick.noche;
+      if(dayStory) dayStory.hidden = !ready;
+      if(dayHint) dayHint.hidden = !!ready;
+      if(ready && dayStoryText){
+        dayStoryText.textContent = 'Nuestro día perfecto empezaría así: ' + lowerFirst(dayPick.manana) +
+          '. Ya por la tarde, ' + lowerFirst(dayPick.tarde) +
+          '. Y para cerrar el día como se merece, en la noche tocaría ' + lowerFirst(dayPick.noche) + '.';
+      }
+    }
+    [['manana', 'dayOptsManana'], ['tarde', 'dayOptsTarde'], ['noche', 'dayOptsNoche']].forEach(function(pair){
+      var wrap = document.getElementById(pair[1]);
+      if(!wrap) return;
+      DAY_OPTS[pair[0]].forEach(function(opt){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'day-opt';
+        b.textContent = opt;
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function(){
+          dayPick[pair[0]] = opt;
+          Array.prototype.forEach.call(wrap.children, function(c){
+            c.classList.remove('sel');
+            c.setAttribute('aria-pressed', 'false');
+          });
+          b.classList.add('sel');
+          b.setAttribute('aria-pressed', 'true');
+          renderDayStory();
+        });
+        wrap.appendChild(b);
+      });
+    });
+    renderDayStory();
+
+    // --- El medidor de amor (página principal) ---
+    var meterBtn = document.getElementById('meterBtn');
+    var meterFillBox = document.getElementById('meterFillBox');
+    var meterPct = document.getElementById('meterPct');
+    var meterMsg = document.getElementById('meterMsg');
+    var meterLevel = 0;
+    var METER_MSGS = [
+      'Apenas va calentando, mi amor… sigue tocando. ♥',
+      'Ya se está llenando de todo lo que siento por ti…',
+      '¡Mira cómo crece! Y eso que apenas vamos a la mitad de la historia. ♥',
+      '¡Ya casi, mi vida! Unos toquecitos más…',
+      '¡Se llenó… y se desbordó! Porque mi amor por ti no cabe en ningún medidor, mi Naomi: es de esta vida y de toda la eternidad. Tócalo otra vez y lo volvemos a llenar, las veces que quieras. ♥'
+    ];
+    function renderMeter(){
+      if(meterFillBox) meterFillBox.style.height = meterLevel + '%';
+      if(meterPct) meterPct.textContent = 'Mi amor por ti va en: ' + meterLevel + '%';
+      if(meterMsg){
+        if(meterLevel === 0) meterMsg.textContent = 'Tócalo, mi vida… y prepárate, porque esto se llena rápido. ♥';
+        else if(meterLevel < 30) meterMsg.textContent = METER_MSGS[0];
+        else if(meterLevel < 60) meterMsg.textContent = METER_MSGS[1];
+        else if(meterLevel < 90) meterMsg.textContent = METER_MSGS[2];
+        else if(meterLevel < 100) meterMsg.textContent = METER_MSGS[3];
+        else meterMsg.textContent = METER_MSGS[4];
+      }
+    }
+    if(meterBtn){
+      meterBtn.addEventListener('click', function(){
+        if(meterLevel >= 100){ meterLevel = 0; renderMeter(); return; }
+        meterLevel = Math.min(100, meterLevel + 10);
+        renderMeter();
+        if(meterLevel === 100){
+          var count = reduceMotion ? 8 : 30;
+          for(var i = 0; i < count; i++){
+            (function(idx){
+              setTimeout(function(){
+                var h = document.createElement('span');
+                h.className = 'rain-heart';
+                h.textContent = Math.random() > .25 ? '♥' : '♡';
+                h.style.left = (Math.random() * 96) + 'vw';
+                h.style.fontSize = (18 + Math.random() * 30) + 'px';
+                h.style.color = HUG_COLORS[Math.floor(Math.random() * HUG_COLORS.length)];
+                h.style.animationDuration = (1.6 + Math.random() * 1.8) + 's';
+                document.body.appendChild(h);
+                setTimeout(function(){ h.remove(); }, 3800);
+              }, idx * 55);
+            })(i);
+          }
+        }
+      });
+    }
+    renderMeter();
+
+    // --- Nuestra flor (página principal): un pétalo por visita ---
+    var FLOR_KEY = 'nuestra-flor-naomi';
+    var florVisits = 0;
+    try{ florVisits = parseInt(window.localStorage.getItem(FLOR_KEY), 10) || 0; }catch(e){ florVisits = 0; }
+    florVisits++;
+    try{ window.localStorage.setItem(FLOR_KEY, String(florVisits)); }catch(e){}
+    var florPetals = Math.min(florVisits, 12);
+    var florSvg = document.getElementById('florSvg');
+    var florMsg = document.getElementById('florMsg');
+    var florCount = document.getElementById('florCount');
+    if(florSvg){
+      var svg = '';
+      svg += '<path d="M100 238 C 98 205, 102 175, 100 148" fill="none" stroke="#7A9A5B" stroke-width="5" stroke-linecap="round"/>';
+      svg += '<path d="M100 205 C 82 198, 70 186, 68 172 C 84 174, 96 186, 100 205 Z" fill="#8FAE6B"/>';
+      svg += '<path d="M100 218 C 118 211, 130 199, 132 185 C 116 187, 104 199, 100 218 Z" fill="#8FAE6B"/>';
+      for(var p = 0; p < 12; p++){
+        var ang = p * 30;
+        var grown = p < florPetals;
+        svg += '<ellipse cx="100" cy="66" rx="17" ry="32" transform="rotate(' + ang + ' 100 100)" fill="' +
+          (grown ? (p % 2 ? '#E87A97' : '#F3A8BB') : 'none') + '" stroke="' + (grown ? '#C24365' : '#E8BFC8') +
+          '" stroke-width="' + (grown ? '1.6' : '1.2') + '"/>';
+      }
+      svg += '<circle cx="100" cy="100" r="17" fill="#EAD9A8" stroke="#B98A2F" stroke-width="2"/>';
+      svg += '<circle cx="94" cy="96" r="2.4" fill="#B98A2F"/><circle cx="106" cy="96" r="2.4" fill="#B98A2F"/><circle cx="100" cy="106" r="2.4" fill="#B98A2F"/>';
+      florSvg.innerHTML = svg;
+    }
+    if(florMsg){
+      if(florPetals >= 12){
+        florMsg.textContent = '¡Ya floreció completa, mi amor! Doce pétalos hermosos, uno por cada visita tuya… y como nuestro amor, esta flor ya no deja de florecer. ♥';
+      } else if(florPetals <= 1){
+        florMsg.textContent = 'Mira, mi amor: con tu primera visita ya le nació su primer pétalo. Vuelve mañana y verás cómo sigue creciendo, igualito que lo nuestro. ♥';
+      } else {
+        florMsg.textContent = 'Nuestra flor ya tiene ' + florPetals + ' pétalos, mi amor, y le faltan ' + (12 - florPetals) + ' para florecer completa. Cada visita tuya la hace más bonita. ♥';
+      }
+    }
+    if(florCount){
+      florCount.textContent = 'Visitas tuyas a esta página: ' + florVisits + (florVisits === 1 ? ' ♥' : ' ♥');
+    }
+  })();
+</script>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var KISS_COLORS = ['#F3A8BB', '#E87A97', '#C24365', '#EAD9A8'];
+  function rainHearts(count){
+    var n = reduceMotion ? 8 : (count || 30);
+    for(var i = 0; i < n; i++){
+      (function(idx){
+        setTimeout(function(){
+          var h = document.createElement('span');
+          h.className = 'rain-heart';
+          h.textContent = Math.random() > .25 ? '♥' : '♡';
+          h.style.left = (Math.random() * 96) + 'vw';
+          h.style.fontSize = (18 + Math.random() * 30) + 'px';
+          h.style.color = KISS_COLORS[Math.floor(Math.random() * KISS_COLORS.length)];
+          h.style.animationDuration = (1.6 + Math.random() * 1.8) + 's';
+          document.body.appendChild(h);
+          setTimeout(function(){ h.remove(); }, 3800);
+        }, idx * 55);
+      })(i);
+    }
+  }
+
+  // ===== Menú hamburguesa: corazoncito en la sección actual =====
+  var NAV_MAP = {
+    screenGames: 'screenGames', screenCatch: 'screenGames', screenQuiz: 'screenGames',
+    screenMemo: 'screenGames', screenWheel: 'screenGames', screenChest: 'screenGames',
+    screenPuzzle: 'screenGames', screenWords: 'screenGames', screenTreasure: 'screenGames',
+    screenFaith: 'screenFaith', screenCapsule: 'screenCapsule', screenAdvent: 'screenAdvent',
+    screenDetallitos: 'screenDetallitos', screenIdiomas: 'screenDetallitos',
+    screenPensamiento: 'screenDetallitos', screenCitas: 'screenDetallitos',
+    screenPacto: 'screenDetallitos', screenAdivina: 'screenDetallitos',
+    screenDiario: 'screenDetallitos', screenCancion: 'screenDetallitos',
+    screenSuenos: 'screenDetallitos', screenOracion: 'screenDetallitos',
+    screenArbol: 'screenDetallitos', screenVerdadReto: 'screenDetallitos',
+    screenCartita: 'screenDetallitos', screenRetoSemana: 'screenDetallitos',
+    screenCuento: 'screenDetallitos', screenBingo: 'screenDetallitos',
+    screenConversemos: 'screenDetallitos', screenDiaPerfecto: 'screenDetallitos',
+    screenRazones: 'screenDetallitos', screenAhorcado: 'screenDetallitos',
+    screenAniversario: 'screenDetallitos', screenQueAmo: 'screenDetallitos'
+  };
+  function updateNavCurrent(){
+    var active = document.querySelector('.game-card.active');
+    var target = active ? (NAV_MAP[active.id] || null) : null;
+    Array.prototype.forEach.call(document.querySelectorAll('.nav-item'), function(item){
+      item.classList.toggle('nav-current', !!target && item.getAttribute('data-open-game') === target);
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open-game], [data-close-game]'), function(btn){
+    btn.addEventListener('click', function(){ setTimeout(updateNavCurrent, 0); });
+  });
+  updateNavCurrent();
+
+  // ===== 50 razones por las que te amo =====
+  var REASONS = [
+    'Tu sonrisa, que me desarma desde el primer día que te vi.',
+    'Tu fe: cómo pones a Dios en el centro de todo lo que haces.',
+    'Tu risa, porque se escucha y se me olvida cualquier enojo.',
+    'Tu paciencia conmigo, incluso en los días en que ni yo me aguanto.',
+    'Tu forma de quererme: sin condiciones, sin medida y sin prisa.',
+    'Tus ojitos, que se te hacen chiquitos cuando te ríes de verdad.',
+    'Tu voz cuando me dices «mi amor» bajito, solo para mí.',
+    'Tu ternura con todo el mundo, hasta con las personas que acabas de conocer.',
+    'Tu valentía: nunca te rindes, ni en los días más difíciles.',
+    'Tu manera de orar, porque contigo hasta el silencio se siente sagrado.',
+    'Tus manos, que encajan perfecto en las mías, como hechas a la medida.',
+    'Tu presencia, que me calma como nada más en este mundo.',
+    'Tu forma de bailar sin pena, donde sea y con la música que sea.',
+    'Tu manera de abrazarme como si el mundo entero pudiera esperar.',
+    'Tu inteligencia: aprendo algo nuevo de ti todos los días.',
+    'Tu corazón generoso, que siempre piensa en los demás antes que en ti.',
+    'Tu sentido del humor, que me hace reír hasta que me duele la panza.',
+    'Tu forma de soñar en grande, sin miedo a lo que venga.',
+    'Tu sencillez: no necesitas nada para brillar, brillas porque eres tú.',
+    'Tu fortaleza silenciosa cuando las cosas se ponen difíciles.',
+    'Tu manera de hacerme sentir el hombre más afortunado del mundo.',
+    'Tu fe en nosotros, firme incluso en los días en que yo dudo.',
+    'Tus detalles: siempre sabes lo que necesito antes de que te lo pida.',
+    'Tu forma de cantar bajito cuando estás contenta y no te das cuenta.',
+    'Tu mirada cuando me ves llegar, como si yo fuera tu lugar favorito.',
+    'Tu bondad, que se nota en todo lo que haces y en todo lo que tocas.',
+    'Tu manera de perdonar rápido y de corazón, sin guardar rencores.',
+    'Tus ocurrencias, que convierten cualquier día ordinario en una aventura.',
+    'Tu apoyo incondicional, en mis metas, en mis sueños y en mis días malos.',
+    'Tu forma de cuidar a tu familia: así imagino a la mamá increíble que serás para Nimrod y Liahona.',
+    'Tu elegancia natural, que no necesita esfuerzo para notarse.',
+    'Tu capacidad de hacerme reír justo cuando más lo necesito.',
+    'Tu honestidad, aunque a veces duela un poquito escucharla.',
+    'Tu don de hacer hogar en cualquier lugar donde estés tú.',
+    'Tu sonrisa de complicidad, esa que es solo para mí y que nadie más conoce.',
+    'Tu forma de escucharme de verdad, con el corazón y sin interrumpir.',
+    'Tu alegría contagiosa, que ilumina cualquier cuarto en el que entras.',
+    'Tu determinación: todo lo que te propones, lo cumples.',
+    'Tu manera de decirme «te amo» como si cada vez fuera la primera.',
+    'Tus notitas escondidas donde menos lo espero y más las necesito.',
+    'Tu certeza de que nuestro amor es eterno, y la forma tan bonita en que lo vives.',
+    'Tu forma de bailar conmigo aunque no haya música sonando.',
+    'Tu risita nerviosa cuando algo te da pena, que me derrite.',
+    'Tu capacidad de convertir un lunes cualquiera en un día especial.',
+    'Tu mirada cuando oras: se te nota la paz de Dios en el rostro.',
+    'Tu manera de celebrar mis logros como si fueran tuyos.',
+    'Tu dulzura al hablar con los niños y con los abuelitos.',
+    'Tu valentía para decir lo que sientes, sin miedo y sin rodeos.',
+    'Porque contigo, hasta el silencio es la mejor compañía.',
+    'Porque eres tú, mi Naomi: la respuesta a todas mis oraciones.'
+  ];
+  var reasonsGrid = document.getElementById('reasonsGrid');
+  var reasonsCount = document.getElementById('reasonsCount');
+  var reasonsFinal = document.getElementById('reasonsFinal');
+  var reasonsSeen = 0;
+  function renderReasonsCount(){
+    if(!reasonsCount) return;
+    reasonsCount.textContent = reasonsSeen === 0
+      ? 'Todavía no descubres ninguna… ¡toca la primera, mi amor!'
+      : 'Razones descubiertas: ' + reasonsSeen + ' de 50 ♥';
+  }
+  if(reasonsGrid){
+    REASONS.forEach(function(text, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'reason-item';
+      b.innerHTML = '<span class="reason-num" aria-hidden="true">' + (i + 1) + '</span><span class="reason-hint">Toca para descubrir la razón ' + (i + 1) + ' ♥</span>';
+      b.setAttribute('aria-label', 'Descubrir la razón número ' + (i + 1));
+      b.addEventListener('click', function(){
+        if(b.classList.contains('open')) return;
+        b.classList.add('open');
+        b.innerHTML = '<span class="reason-num" aria-hidden="true">♥</span><span class="reason-text">' + text + '</span>';
+        b.setAttribute('aria-label', 'Razón ' + (i + 1) + ': ' + text);
+        reasonsSeen++;
+        renderReasonsCount();
+        if(reasonsSeen === REASONS.length && reasonsFinal) reasonsFinal.hidden = false;
+      });
+      reasonsGrid.appendChild(b);
+    });
+    renderReasonsCount();
+  }
+
+  // ===== Ahorcado de amor =====
+  var HANG_WORDS = [
+    { word: 'PANDORA', hint: 'Pista: la calle de El Saucillo donde nuestra historia empezó a latir más fuerte.' },
+    { word: 'COYOACÁN', hint: 'Pista: ese rincón de la Ciudad de México de árboles, fuentes y paseos juntitos.' },
+    { word: 'VERACRUZ', hint: 'Pista: el puerto, la playa y Reserva Uno guardan recuerdos nuestros en este lugar.' },
+    { word: 'ESPOSOS', hint: 'Pista: lo que seremos a partir del 19 de diciembre, para siempre.' },
+    { word: 'TERNURA', hint: 'Pista: lo que siento cada vez que me miras con esos ojitos.' },
+    { word: 'FAMILIA', hint: 'Pista: lo que estamos formando juntitos, con Nimrod y Liahona en nuestros sueños.' },
+    { word: 'SONRISA', hint: 'Pista: lo primero tuyo que me enamoró y lo que más busco cada día.' },
+    { word: 'PROMESA', hint: 'Pista: la que nos hicimos de amarnos en esta vida y por toda la eternidad.' }
+  ];
+  var HANG_LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚ'.split('');
+  var hangHeartsEl = document.getElementById('hangHearts');
+  var hangHintEl = document.getElementById('hangHint');
+  var hangWordEl = document.getElementById('hangWord');
+  var hangTriesEl = document.getElementById('hangTries');
+  var hangKeysEl = document.getElementById('hangKeys');
+  var hangMsgEl = document.getElementById('hangMsg');
+  var hangAgainBtn = document.getElementById('hangAgainBtn');
+  var hang = null;
+  var hangLast = -1;
+  function hangRender(){
+    if(!hang) return;
+    if(hangHeartsEl){
+      var hearts = '';
+      for(var i = 0; i < 6; i++){
+        hearts += i < hang.misses ? '<span class="lost">♥</span>' : '♥';
+      }
+      hangHeartsEl.innerHTML = hearts;
+    }
+    if(hangHintEl) hangHintEl.textContent = hang.item.hint;
+    if(hangWordEl){
+      hangWordEl.innerHTML = '';
+      hang.item.word.split('').forEach(function(ch){
+        var s = document.createElement('span');
+        s.className = 'hang-slot';
+        s.textContent = hang.guessed[ch] ? ch : '';
+        hangWordEl.appendChild(s);
+      });
+    }
+    if(hangTriesEl){
+      hangTriesEl.textContent = hang.over
+        ? ''
+        : 'Corazoncitos que te quedan: ' + (6 - hang.misses) + ' de 6';
+    }
+  }
+  function hangCheck(){
+    var word = hang.item.word;
+    var won = word.split('').every(function(ch){ return hang.guessed[ch]; });
+    if(won){
+      hang.over = true;
+      if(hangMsgEl) hangMsgEl.textContent = '¡La adivinaste, mi amor! La palabra era «' + word + '»… y como esa palabra, todo lo nuestro se descubre pasito a pasito, juntitos. ♥';
+      if(hangAgainBtn) hangAgainBtn.hidden = false;
+      rainHearts(26);
+    } else if(hang.misses >= 6){
+      hang.over = true;
+      if(hangMsgEl) hangMsgEl.textContent = 'Se acabaron los corazoncitos, mi vida, pero no pasa nada: la palabra era «' + word + '». Mi amor por ti no se acaba ni perdiendo… ¿jugamos otra? ♥';
+      if(hangAgainBtn) hangAgainBtn.hidden = false;
+    }
+    if(hang.over && hangKeysEl){
+      Array.prototype.forEach.call(hangKeysEl.querySelectorAll('.hang-key'), function(k){ k.disabled = true; });
+    }
+    hangRender();
+  }
+  function hangStart(){
+    var idx;
+    do { idx = Math.floor(Math.random() * HANG_WORDS.length); } while(HANG_WORDS.length > 1 && idx === hangLast);
+    hangLast = idx;
+    hang = { item: HANG_WORDS[idx], guessed: {}, misses: 0, over: false };
+    if(hangMsgEl) hangMsgEl.textContent = '';
+    if(hangAgainBtn) hangAgainBtn.hidden = true;
+    if(hangKeysEl){
+      hangKeysEl.innerHTML = '';
+      HANG_LETTERS.forEach(function(ch){
+        var k = document.createElement('button');
+        k.type = 'button';
+        k.className = 'hang-key';
+        k.textContent = ch;
+        k.setAttribute('aria-label', 'Letra ' + ch);
+        k.addEventListener('click', function(){
+          if(!hang || hang.over || k.disabled) return;
+          k.disabled = true;
+          if(hang.item.word.indexOf(ch) !== -1){
+            hang.guessed[ch] = true;
+            k.classList.add('good');
+          } else {
+            hang.guessed[ch] = false;
+            hang.misses++;
+            k.classList.add('bad');
+          }
+          hangCheck();
+        });
+        hangKeysEl.appendChild(k);
+      });
+    }
+    hangRender();
+  }
+  if(hangAgainBtn) hangAgainBtn.addEventListener('click', hangStart);
+  if(hangWordEl) hangStart();
+
+  // ===== Carta para nuestro primer aniversario (19 de diciembre de 2027) =====
+  var anniLocked = document.getElementById('anniLocked');
+  var anniOpen = document.getElementById('anniOpen');
+  var anniOpenBtn = document.getElementById('anniOpenBtn');
+  var anniLetter = document.getElementById('anniLetter');
+  var ANNI_TARGET = new Date(2027, 11, 19, 0, 0, 0);
+  function pad2(n){ return (n < 10 ? '0' : '') + n; }
+  function tickAnni(){
+    var diff = ANNI_TARGET.getTime() - Date.now();
+    if(diff <= 0){
+      if(anniLocked) anniLocked.hidden = true;
+      if(anniOpen) anniOpen.hidden = false;
+      return false;
+    }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff % 86400000 / 3600000);
+    var m = Math.floor(diff % 3600000 / 60000);
+    var s = Math.floor(diff % 60000 / 1000);
+    var set = function(name, val){
+      var el = document.querySelector('[data-anni="' + name + '"]');
+      if(el) el.textContent = val;
+    };
+    set('days', d); set('hours', pad2(h)); set('mins', pad2(m)); set('secs', pad2(s));
+    return true;
+  }
+  if(anniLocked || anniOpen){
+    if(tickAnni()){
+      var anniTimer = setInterval(function(){ if(!tickAnni()) clearInterval(anniTimer); }, 1000);
+    }
+  }
+  if(anniOpenBtn) anniOpenBtn.addEventListener('click', function(){
+    if(anniLetter) anniLetter.hidden = false;
+    anniOpenBtn.hidden = true;
+    if(anniLetter) anniLetter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  });
+
+  // ===== ¿Qué amo más de ti hoy? =====
+  var QUEAMO = [
+    { opt: 'Tu sonrisa', msg: 'Hoy amo más tu sonrisa, mi vida: esa que aparece sin avisar y me arregla el día entero. Si hoy el mundo se me hiciera pesado, bastaría con verte sonreír una vez para acordarme de que todo, todito, vale la pena.' },
+    { opt: 'Tu forma de quererme', msg: 'Hoy amo más tu forma de quererme: tan tuya, tan completa, tan sin miedo. Me quieres en mis días buenos y en los no tan buenos, y esa manera tuya de amar me hace querer ser mejor hombre cada día, solo para estar a tu altura.' },
+    { opt: 'Tu fe', msg: 'Hoy amo más tu fe, mi amor: cómo confías en Dios con todo tu corazón y cómo esa confianza sostiene también lo nuestro. A tu lado aprendí que un amor con Dios en el centro no se tambalea: se fortalece.' },
+    { opt: 'Tu paciencia', msg: 'Hoy amo más tu paciencia: esa calma tuya que me espera, me escucha y me entiende aun cuando yo ando acelerado. Gracias por no rendirte conmigo nunca, mi vida. Tu paciencia es de las formas más bonitas en que me amas.' },
+    { opt: 'Tu risa', msg: 'Hoy amo más tu risa, mi vida: ese sonido que es mi favorito en todo el mundo. Cuando te ríes así, de verdad, siento que nuestra casa futura ya existe, porque donde suena tu risa, ahí es mi hogar.' },
+    { opt: 'Tu manera de orar conmigo', msg: 'Hoy amo más tu manera de orar conmigo: tomados de la mano, con el corazón abierto delante de Dios. Esos momentitos son de lo más sagrado que tenemos, y sé que serán el cimiento de nuestro matrimonio eterno.' },
+    { opt: 'Tu ternura', msg: 'Hoy amo más tu ternura: cómo tratas a todos con una dulzura que no se finge. Esa ternura tuya me derrite y me enseña, sin palabras, la clase de esposo y de papá que quiero ser.' },
+    { opt: 'Tus ojitos', msg: 'Hoy amo más tus ojitos, mi vida: los que se me quedan viendo como si yo fuera lo más importante del mundo. En esos ojos me pierdo y me encuentro al mismo tiempo. Ahí, justo ahí, quiero vivir para siempre.' }
+  ];
+  var queAmoGrid = document.getElementById('queAmoGrid');
+  var queAmoMsg = document.getElementById('queAmoMsg');
+  if(queAmoGrid){
+    QUEAMO.forEach(function(item){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'queamo-opt';
+      b.textContent = item.opt;
+      b.addEventListener('click', function(){
+        Array.prototype.forEach.call(queAmoGrid.querySelectorAll('.queamo-opt'), function(o){ o.classList.remove('sel'); });
+        b.classList.add('sel');
+        if(queAmoMsg){
+          queAmoMsg.innerHTML = '';
+          queAmoMsg.appendChild(document.createTextNode(item.msg));
+          var from = document.createElement('span');
+          from.className = 'from';
+          from.textContent = '— Tu Hagot, enamorado de ti hoy y siempre ♥';
+          queAmoMsg.appendChild(from);
+          queAmoMsg.hidden = false;
+        }
+      });
+      queAmoGrid.appendChild(b);
+    });
+  }
+
+  // ===== Botón «Mándame un beso» (con su propio contador en este dispositivo) =====
+  var kissBtn = document.getElementById('kissBtn');
+  var kissMsg = document.getElementById('kissMsg');
+  var kissCountEl = document.getElementById('kissCount');
+  var KISS_KEY = 'besos-para-naomi';
+  var kissTotal = 0;
+  try{ kissTotal = parseInt(window.localStorage.getItem(KISS_KEY), 10) || 0; }catch(e){ kissTotal = 0; }
+  function renderKisses(){
+    if(!kissCountEl) return;
+    kissCountEl.textContent = kissTotal === 0
+      ? 'Todavía no te he mandado ninguno por aquí… ¡tócame y estrena el contador, mi amor!'
+      : 'Besos que te he mandado: ' + kissTotal + ' ♥';
+  }
+  renderKisses();
+  if(kissBtn){
+    kissBtn.addEventListener('click', function(){
+      rainHearts(36);
+      if(kissMsg) kissMsg.classList.add('show');
+      kissTotal++;
+      try{ window.localStorage.setItem(KISS_KEY, String(kissTotal)); }catch(e){}
+      renderKisses();
+    });
+  }
+})();
 </script>
 </body>
 </html>

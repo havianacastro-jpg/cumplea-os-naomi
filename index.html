@@ -102,8 +102,18 @@
   .topbar-title{
     font-family:"Playfair Display",serif; font-weight:700; font-size:1.3rem;
     color:var(--rose-deep); margin:0; line-height:1.1; white-space:nowrap;
+    display:inline-flex; align-items:center; min-height:48px; min-width:0;
+    flex:0 1 auto; overflow:hidden;
+    background:var(--rose-pale); border:1.5px solid var(--rose-light); border-radius:999px;
+    padding:8px 16px; cursor:pointer; -webkit-tap-highlight-color:transparent;
+    box-shadow:0 4px 14px rgba(158,47,78,.14);
+    transition:background .18s ease, border-color .18s ease, transform .18s ease;
   }
   .topbar-title .tb-heart{ color:var(--gold); font-size:1.05rem; margin-right:8px }
+  .topbar-title:hover{ background:var(--gold-soft); border-color:var(--gold) }
+  .topbar-title:active{ transform:scale(.96) }
+  .topbar-title:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  @media (prefers-reduced-motion: reduce){ .topbar-title{ transition:none } }
   .menu-btn{
     flex:0 0 auto; width:48px; height:48px; border-radius:50%;
     background:var(--rose-pale); border:1.5px solid var(--rose-light);
@@ -1345,6 +1355,22 @@
     display:block; font-family:"Playfair Display",serif; font-weight:800; font-style:italic;
     font-size:1.7rem; color:var(--rose-deep); margin-bottom:8px;
   }
+
+  /* En pantallas chicas el título «Feliz cumpleaños» se encoge para caber completo
+     sin meterse debajo de los botones de la derecha (A+, modo noche y menú) */
+  @media (max-width:560px){
+    .topbar-inner{ padding:0 12px; gap:8px }
+    .topbar-title{ font-size:1rem; padding:6px 12px }
+    .topbar-title .tb-heart{ font-size:.85rem; margin-right:6px }
+    .topbar-actions{ gap:6px }
+    .textsize-btn{ height:44px; min-width:44px; padding:0 10px; font-size:.95rem }
+    .night-btn{ width:44px; height:44px }
+    .menu-btn{ width:44px; height:44px }
+  }
+  @media (max-width:380px){
+    .topbar-title{ font-size:.92rem; padding:6px 10px }
+    .topbar-title .tb-heart{ font-size:.78rem; margin-right:5px }
+  }
 </style>
 </head>
 <body>
@@ -1355,7 +1381,7 @@
 
 <div class="topbar">
   <div class="topbar-inner">
-    <p class="topbar-title"><span class="tb-heart" aria-hidden="true">♥</span>Feliz cumpleaños</p>
+    <button class="topbar-title" id="homeBtn" type="button" aria-label="Volver a la página de inicio"><span class="tb-heart" aria-hidden="true">♥</span>Feliz cumpleaños</button>
     <div class="topbar-actions">
       <button class="textsize-btn" id="textSizeBtn" type="button" aria-pressed="false" aria-label="Hacer la letra más grande">A+</button>
       <button class="night-btn" id="nightBtn" type="button" aria-pressed="false" aria-label="Activar el modo noche"><span id="nightIcon" aria-hidden="true">☾</span></button>
@@ -3194,6 +3220,32 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-close-game]'), function(btn){
     btn.addEventListener('click', closeGame);
   });
+
+  // --- El título «Feliz cumpleaños» del encabezado lleva a la página de inicio ---
+  var homeBtn = document.getElementById('homeBtn');
+  if(homeBtn){
+    homeBtn.addEventListener('click', function(){
+      stopCatchGame();
+      if(typeof stopAdventMusic === 'function') stopAdventMusic();
+      navReturn = null;
+      gameCardIds.forEach(function(cid){
+        var c = document.getElementById(cid);
+        if(c) c.classList.remove('active');
+      });
+      document.body.classList.remove('game-open');
+      Array.prototype.forEach.call(document.querySelectorAll('.nav-item.nav-current'), function(item){
+        item.classList.remove('nav-current');
+      });
+      var navMenuEl = document.getElementById('navMenu');
+      var menuBtnEl = document.getElementById('menuBtn');
+      if(navMenuEl) navMenuEl.hidden = true;
+      if(menuBtnEl){
+        menuBtnEl.setAttribute('aria-expanded', 'false');
+        menuBtnEl.setAttribute('aria-label', 'Abrir el menú');
+      }
+      window.scrollTo(0, 0);
+    });
+  }
 
   // --- Atrapa corazones ---
   var catchArea = document.getElementById('catchArea');

@@ -1829,6 +1829,45 @@
       </button>
     </div>
 
+    <!-- Pantalla: Menú de secciones (paso intermedio al regresar de un apartado) -->
+    <div class="game-card hub-card" id="screenMenu">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Menú ♥</h3>
+      <p class="game-desc">Aquí están todos tus apartados, mi vida. Toca el que quieras abrir.</p>
+      <div class="game-menu">
+        <button class="game-menu-card" type="button" data-open-game="screenGames">
+          <span class="game-menu-icon" aria-hidden="true">♥</span>
+          <span class="game-menu-title">Juegos</span>
+          <span class="game-menu-desc">Todos tus jueguitos juntos, mi amor: corazones, preguntas, memorama, sorpresas y un mapa del tesoro.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenFaith">
+          <span class="game-menu-icon" aria-hidden="true">☀</span>
+          <span class="game-menu-title">Nuestra fe y nuestro matrimonio eterno</span>
+          <span class="game-menu-desc">Escrituras y palabras de profetas y apóstoles sobre nuestro amor eterno.</span>
+          <span class="game-menu-play">Leer ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenCapsule">
+          <span class="game-menu-icon" aria-hidden="true">◷</span>
+          <span class="game-menu-title">Cápsula del tiempo</span>
+          <span class="game-menu-desc">Un mensaje guardado para ti, que se abre el día de tu cumpleaños.</span>
+          <span class="game-menu-play">Ver ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenAdvent">
+          <span class="game-menu-icon" aria-hidden="true">❄</span>
+          <span class="game-menu-title">Navidad</span>
+          <span class="game-menu-desc">Tu calendario de Adviento, mi amor: 24 puertecitas de diciembre con una sorpresa cada día, música navideña y dos rompecabezas nuestros.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenDetallitos">
+          <span class="game-menu-icon" aria-hidden="true">✦</span>
+          <span class="game-menu-title">Detallitos para ti</span>
+          <span class="game-menu-desc">Un rinconcito que te preparé con mucho amor, mi vida: cositas bonitas para descubrir y un pensamiento nuevo cada día.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
+      </div>
+    </div>
+
     <!-- Apartado: Juegos -->
     <div class="game-card hub-card" id="screenGames">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
@@ -3179,42 +3218,71 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo'];
-  var navReturn = null; // pantalla a la que regresa «Volver» (la lista de Juegos), o null = página principal
-  function openGame(id, fromId){
-    if(id !== 'screenAdvent' && typeof stopAdventMusic === 'function') stopAdventMusic();
+  var gameCardIds = ['screenMenu', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo'];
+  // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
+  // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
+  var NAV_PARENT = {
+    screenCatch: 'screenGames', screenQuiz: 'screenGames', screenMemo: 'screenGames',
+    screenWheel: 'screenGames', screenChest: 'screenGames', screenPuzzle: 'screenGames',
+    screenWords: 'screenGames', screenTreasure: 'screenGames',
+    screenIdiomas: 'screenDetallitos', screenPensamiento: 'screenDetallitos',
+    screenCitas: 'screenDetallitos', screenPacto: 'screenDetallitos',
+    screenAdivina: 'screenDetallitos', screenDiario: 'screenDetallitos',
+    screenCancion: 'screenDetallitos', screenSuenos: 'screenDetallitos',
+    screenOracion: 'screenDetallitos', screenArbol: 'screenDetallitos',
+    screenVerdadReto: 'screenDetallitos', screenCartita: 'screenDetallitos',
+    screenRetoSemana: 'screenDetallitos', screenCuento: 'screenDetallitos',
+    screenBingo: 'screenDetallitos', screenConversemos: 'screenDetallitos',
+    screenDiaPerfecto: 'screenDetallitos', screenRazones: 'screenDetallitos',
+    screenAhorcado: 'screenDetallitos', screenAniversario: 'screenDetallitos',
+    screenQueAmo: 'screenDetallitos',
+    screenGames: 'screenMenu', screenFaith: 'screenMenu', screenCapsule: 'screenMenu',
+    screenAdvent: 'screenMenu', screenDetallitos: 'screenMenu',
+    screenMenu: null
+  };
+  var currentScreen = null; // pantalla visible, o null = página principal
+  var savedScroll = {};     // posición guardada de cada pantalla y de la página principal ('home')
+  function showScreen(id){
     gameCardIds.forEach(function(cid){
       var c = document.getElementById(cid);
       if(c) c.classList.toggle('active', cid === id);
     });
-    navReturn = fromId || null;
-    document.body.classList.add('game-open');
+    currentScreen = id;
+    document.body.classList.toggle('game-open', !!id);
+  }
+  function restoreScroll(key){
+    var y = savedScroll[key] || 0;
+    window.scrollTo(0, y);
+    if(window.requestAnimationFrame){
+      window.requestAnimationFrame(function(){ window.scrollTo(0, y); });
+    }
+  }
+  function openGame(id){
+    if(id !== 'screenAdvent' && typeof stopAdventMusic === 'function') stopAdventMusic();
+    // Guarda la posición de la vista actual, para volver justo a ese punto
+    savedScroll[currentScreen || 'home'] = window.scrollY;
+    showScreen(id);
     window.scrollTo(0, 0);
   }
   function closeGame(){
     stopCatchGame();
     if(typeof stopAdventMusic === 'function') stopAdventMusic();
-    if(navReturn){
-      var backTo = navReturn;
-      navReturn = null;
-      gameCardIds.forEach(function(cid){
-        var c = document.getElementById(cid);
-        if(c) c.classList.toggle('active', cid === backTo);
-      });
-      window.scrollTo(0, 0);
+    if(currentScreen) savedScroll[currentScreen] = window.scrollY;
+    var parent = null;
+    if(currentScreen){
+      parent = (currentScreen in NAV_PARENT) ? NAV_PARENT[currentScreen] : 'screenMenu';
+    }
+    if(parent){
+      showScreen(parent);
+      restoreScroll(parent); // vuelve a la posición donde se quedó, no hasta arriba
       return;
     }
-    gameCardIds.forEach(function(cid){
-      var c = document.getElementById(cid);
-      if(c) c.classList.remove('active');
-    });
-    document.body.classList.remove('game-open');
-    if(gamesSection) gamesSection.scrollIntoView({ block: 'start' });
+    showScreen(null);
+    restoreScroll('home');
   }
   Array.prototype.forEach.call(document.querySelectorAll('[data-open-game]'), function(btn){
     btn.addEventListener('click', function(){
-      var hubEl = btn.closest ? btn.closest('#screenGames, #screenDetallitos') : null;
-      openGame(btn.getAttribute('data-open-game'), hubEl ? hubEl.id : null);
+      openGame(btn.getAttribute('data-open-game'));
     });
   });
   Array.prototype.forEach.call(document.querySelectorAll('[data-close-game]'), function(btn){
@@ -3227,12 +3295,7 @@
     homeBtn.addEventListener('click', function(){
       stopCatchGame();
       if(typeof stopAdventMusic === 'function') stopAdventMusic();
-      navReturn = null;
-      gameCardIds.forEach(function(cid){
-        var c = document.getElementById(cid);
-        if(c) c.classList.remove('active');
-      });
-      document.body.classList.remove('game-open');
+      showScreen(null);
       Array.prototype.forEach.call(document.querySelectorAll('.nav-item.nav-current'), function(item){
         item.classList.remove('nav-current');
       });
@@ -3246,6 +3309,51 @@
       window.scrollTo(0, 0);
     });
   }
+
+  // --- Gesto: deslizar hacia la izquierda regresa un paso, igual que «← Volver» ---
+  (function(){
+    var swipeX = null, swipeY = null, swipeT = 0, swipeTarget = null;
+    document.addEventListener('touchstart', function(e){
+      if(e.touches.length !== 1){ swipeX = null; return; }
+      var t = e.touches[0];
+      swipeX = t.clientX;
+      swipeY = t.clientY;
+      swipeT = Date.now();
+      swipeTarget = e.target;
+    }, { passive: true });
+    document.addEventListener('touchcancel', function(){ swipeX = null; }, { passive: true });
+    document.addEventListener('touchend', function(e){
+      if(swipeX === null || !e.changedTouches.length) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - swipeX;
+      var dy = t.clientY - swipeY;
+      var dt = Date.now() - swipeT;
+      var target = swipeTarget;
+      swipeX = null;
+      // Solo un deslizamiento claro hacia la izquierda:
+      if(dx > -90) return;                          // al menos 90 px hacia la izquierda
+      if(Math.abs(dy) > 60) return;                 // casi horizontal: no cuenta al bajar o subir la página
+      if(Math.abs(dy) > Math.abs(dx) * 0.45) return; // el movimiento principal es horizontal
+      if(dt > 700) return;                          // un gesto rápido, no un arrastre lento sobre un juego
+      // Con el menú ☰ abierto, el gesto lo cierra y regresa un paso
+      var navMenuEl = document.getElementById('navMenu');
+      if(navMenuEl && !navMenuEl.hidden){
+        navMenuEl.hidden = true;
+        var menuBtnEl = document.getElementById('menuBtn');
+        if(menuBtnEl){
+          menuBtnEl.setAttribute('aria-expanded', 'false');
+          menuBtnEl.setAttribute('aria-label', 'Abrir el menú');
+        }
+        if(document.body.classList.contains('game-open')) closeGame();
+        return;
+      }
+      // Solo hay «atrás» cuando una pantalla está abierta (un juego o un apartado)
+      if(!document.body.classList.contains('game-open')) return;
+      // No interferir con el mapa ni con campos de texto
+      if(target && target.closest && target.closest('.leaflet-container, input, textarea, select')) return;
+      closeGame(); // un solo paso atrás: del juego a su apartado, del apartado al menú, del menú a la página principal
+    }, { passive: true });
+  })();
 
   // --- Atrapa corazones ---
   var catchArea = document.getElementById('catchArea');

@@ -709,6 +709,59 @@
   .menu-grid .game-menu-play{ font-size:.82rem; padding:7px 16px; margin-top:4px }
   #screenMenu .game-menu-card.nav-current, .submenu-screen .game-menu-card.nav-current{ border-color:var(--rose-deep); background:var(--rose-pale) }
 
+  /* Buscador de apartados (página principal y menú) */
+  .page-search{ max-width:720px; margin:0 auto 10px; position:relative }
+  body.game-open .home-search{ display:none }
+  .search-label{
+    display:block; text-align:center; margin-bottom:10px;
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.22rem; color:var(--rose-deep);
+  }
+  .search-field{ position:relative }
+  .search-icon{
+    position:absolute; left:18px; top:50%; transform:translateY(-50%);
+    color:var(--rose); font-size:1.25rem; line-height:1; pointer-events:none;
+  }
+  .search-input{
+    width:100%; padding:15px 18px 15px 48px;
+    border:1.5px solid var(--line); border-radius:999px;
+    background:var(--surface); color:var(--ink);
+    font-family:"Quicksand",sans-serif; font-weight:600; font-size:1rem;
+    box-shadow:var(--shadow);
+  }
+  .search-input:focus{ outline:3px solid var(--gold); outline-offset:2px; border-color:var(--gold) }
+  .search-input::placeholder{ color:var(--ink-soft); font-weight:500 }
+  .search-results{ display:grid; gap:8px; margin-top:12px; text-align:left }
+  .search-results[hidden]{ display:none }
+  .search-result{
+    display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+    background:var(--surface); border:1.5px solid var(--line); border-radius:14px;
+    padding:12px 16px; cursor:pointer; color:var(--ink);
+    font-family:"Quicksand",sans-serif;
+  }
+  .search-result:hover{ border-color:var(--rose-light); background:var(--rose-pale) }
+  .search-result:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .search-result .sr-name{ display:block; font-weight:700; font-size:1rem; line-height:1.3 }
+  .search-result .sr-where{ display:block; font-size:.82rem; color:var(--ink-soft) }
+  .search-result .sr-arrow{ margin-left:auto; flex:0 0 auto; color:var(--rose); font-weight:700; font-size:1.1rem }
+  .search-empty{ text-align:center; color:var(--ink-soft); font-size:.95rem; margin:12px 0 0 }
+  .search-empty[hidden]{ display:none }
+  .menu-search{ margin:4px auto 22px }
+
+  /* Mapa de la página: lista de todo el contenido */
+  .map-list{ display:grid; gap:8px; max-width:640px; margin:12px auto 0; text-align:left }
+  .map-entry{
+    display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+    background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px;
+    padding:12px 16px; cursor:pointer; color:var(--ink);
+    font-family:"Quicksand",sans-serif;
+  }
+  .map-entry:hover{ border-color:var(--rose-light); background:var(--rose-pale) }
+  .map-entry:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .map-entry.sub{ margin-left:20px; width:calc(100% - 20px) }
+  .map-entry-name{ display:block; font-weight:700; font-size:1rem; line-height:1.3 }
+  .map-entry-desc{ display:block; font-size:.86rem; color:var(--ink-soft); line-height:1.45 }
+  .map-entry-arrow{ margin-left:auto; flex:0 0 auto; color:var(--rose); font-weight:700; font-size:1.1rem }
+
   /* Rueda de sorpresas */
   .wheel-wrap{ position:relative; max-width:340px; margin:0 auto 20px }
   .wheel-svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 10px 22px rgba(158,47,78,.18)) }
@@ -1938,6 +1991,17 @@
 
 <main class="wrap">
 
+  <!-- BUSCADOR DE APARTADOS -->
+  <div class="page-search home-search">
+    <label class="search-label" for="searchInputHome">¿Buscas algo en tu paginita, mi amor? Escríbelo aquí y te llevo directo ♥</label>
+    <div class="search-field">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input class="search-input" id="searchInputHome" type="search" placeholder="Escribe por ejemplo: memorama, cápsula, arbolito…" autocomplete="off" />
+    </div>
+    <div class="search-results" id="searchResultsHome" hidden></div>
+    <p class="search-empty" id="searchEmptyHome" hidden>Uy, eso no lo encuentro, mi amor. Prueba con otra palabra… o busca en el Mapa de la página, en el menú. ♥</p>
+  </div>
+
   <!-- CONTADOR DE VISITAS -->
   <div class="visit-counter" role="status">
     <span class="vc-heart" aria-hidden="true">♥</span>
@@ -2358,6 +2422,15 @@
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Menú ♥</h3>
       <p class="game-desc">Aquí están todos tus apartados, mi vida. Toca el que quieras abrir.</p>
+      <div class="page-search menu-search">
+        <label class="search-label" for="searchInputMenu">¿Buscas algo? Escríbelo aquí ♥</label>
+        <div class="search-field">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input class="search-input" id="searchInputMenu" type="search" placeholder="Escribe por ejemplo: memorama, cápsula, arbolito…" autocomplete="off" />
+        </div>
+        <div class="search-results" id="searchResultsMenu" hidden></div>
+        <p class="search-empty" id="searchEmptyMenu" hidden>Uy, eso no lo encuentro, mi amor. Prueba con otra palabra. ♥</p>
+      </div>
       <div class="game-menu">
         <button class="game-menu-card cat-card" type="button" data-open-game="screenMenuJuegos">
           <span class="game-menu-icon" aria-hidden="true">♥</span>
@@ -2388,6 +2461,12 @@
           <span class="game-menu-title">Apartados sueltos</span>
           <span class="game-menu-desc">Un apartado muy especial, mi amor: el mensajito para cuando estés enojada conmigo.</span>
           <span class="game-menu-play">Entrar ♥</span>
+        </button>
+        <button class="game-menu-card cat-card" type="button" data-open-game="screenMapa">
+          <span class="game-menu-icon" aria-hidden="true">🗺</span>
+          <span class="game-menu-title">Mapa de la página</span>
+          <span class="game-menu-desc">Todo lo que hay en tu paginita, mi amor, juntito y ordenado por carpetas: toca cualquier renglón de la lista y te llevo directo.</span>
+          <span class="game-menu-play">Ver todo ♥</span>
         </button>
       </div>
     </div>
@@ -2585,6 +2664,113 @@
           <span class="game-menu-desc">Una oración que digo por ti y una cancioncita bajita para arrullarte, mi amor, para que el descanso te encuentre tranquila.</span>
           <span class="game-menu-play">Escuchar ♥</span>
         </button>
+      </div>
+    </div>
+
+    <!-- Mapa de la página: todo el contenido, agrupado por carpetas -->
+    <div class="game-card hub-card" id="screenMapa">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Mapa de la página ♥</h3>
+      <p class="game-desc">Todo lo que hay en tu paginita, mi amor, juntito y en orden. Toca cualquier renglón y te llevo directo a ese lugar.</p>
+
+      <h4 class="menu-group-title">En la página principal</h4>
+      <div class="map-list">
+        <button class="map-entry" type="button" data-goto-home="musica-title"><span><span class="map-entry-name">Nuestra música</span><span class="map-entry-desc">Nuestras dos canciones: la de cómo inició nuestra historia y la de cómo empezará nuestra eternidad.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="carta-title"><span><span class="map-entry-name">Una cartita para ti</span><span class="map-entry-desc">La carta que te escribí de corazón, para leerla despacito.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="fotos-title"><span><span class="map-entry-name">Nuestros momentitos</span><span class="map-entry-desc">Nuestras fotos y el botón para ver nuestro álbum completo.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="lugares-title"><span><span class="map-entry-name">Nuestros lugares</span><span class="map-entry-desc">El mapa con los lugares donde dejamos huella de nuestro amor.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="gracias-title"><span><span class="map-entry-name">Gracias por tanto</span><span class="map-entry-desc">Una listita de todo lo que te agradezco, mi amor.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="cuenta-title"><span><span class="map-entry-name">Cuenta atrás</span><span class="map-entry-desc">Los días, horas, minutos y segundos que faltan para tu cumpleaños y para nuestra boda.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="boda-title"><span><span class="map-entry-name">Nuestra boda y la eternidad</span><span class="map-entry-desc">El 19 de diciembre nos casamos: lo que viene para nuestro para siempre.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="mensajes-title"><span><span class="map-entry-name">Mensajes para nosotros</span><span class="map-entry-desc">Los videítos que nos dedicamos, para verlos cuando quieras.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="deseos-title"><span><span class="map-entry-name">Todo lo que deseo para ti</span><span class="map-entry-desc">Mis deseos para ti en tu cumpleaños y en nuestra vida juntos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="abrazo-title"><span><span class="map-entry-name">¿Un abrazo?</span><span class="map-entry-desc">Un botoncito para mandarte un abrazo volando hasta donde estés.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="beso-title"><span><span class="map-entry-name">¿Un beso?</span><span class="map-entry-desc">Un botoncito para mandarte un besito derechito a tus labios.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="medidor-title"><span><span class="map-entry-name">El medidor de amor</span><span class="map-entry-desc">Toca el corazoncito y mira cómo se llena mi amor por ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="flor-title"><span><span class="map-entry-name">Nuestra flor</span><span class="map-entry-desc">Una florecita que crece un pétalo cada vez que abres esta página.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-goto-home="sorpresa-title"><span><span class="map-entry-name">La sorpresa final</span><span class="map-entry-desc">Que lluevan corazones, mi amor: un mensajito secreto para cerrar tu día.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+      </div>
+
+      <h4 class="menu-group-title">Recreación</h4>
+      <div class="map-list">
+        <button class="map-entry" type="button" data-open-game="screenGames"><span><span class="map-entry-name">Juegos</span><span class="map-entry-desc">La carpeta con todos tus jueguitos juntos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenCatch"><span><span class="map-entry-name">Atrapa corazones</span><span class="map-entry-desc">Corazones que caen por 30 segundos: atrapa todos los que puedas.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenQuiz"><span><span class="map-entry-name">Preguntas sobre nosotros</span><span class="map-entry-desc">Cinco preguntitas de nuestra historia.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenConoces"><span><span class="map-entry-name">¿Cuánto me conoces?</span><span class="map-entry-desc">Preguntitas sobre mí: mis gustos, mis sueños y lo que más amo de ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenMemo"><span><span class="map-entry-name">Memorama</span><span class="map-entry-desc">Encuentra las parejitas de nuestras fotos y dibujitos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenWheel"><span><span class="map-entry-name">Rueda de sorpresas</span><span class="map-entry-desc">Gira la rueda y gana un premio romántico para reclamar conmigo.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenChest"><span><span class="map-entry-name">Cofre de promesas</span><span class="map-entry-desc">Cofrecitos cerrados con promesas mías para ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenPuzzle"><span><span class="map-entry-name">Rompecabezas de nuestra foto</span><span class="map-entry-desc">Nuestra foto en el puente, partida en piezas para armarla.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenWords"><span><span class="map-entry-name">Sopa de letras de amor</span><span class="map-entry-desc">Las palabras de nuestra historia escondidas entre letras.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenTreasure"><span><span class="map-entry-name">Nuestro mapa del tesoro</span><span class="map-entry-desc">Pistas por nuestros lugares que te llevan, paso a paso, a un tesoro.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenPlaylist"><span><span class="map-entry-name">Mi lista de canciones para ti</span><span class="map-entry-desc">La playlist «Cumpleaños Naomi» que armé para ti en Apple Music.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenKaraoke"><span><span class="map-entry-name">Nuestro karaoke</span><span class="map-entry-desc">Nuestras dos canciones con su video, para cantarlas juntitos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenMenuDomingo"><span><span class="map-entry-name">Recreación domingo</span><span class="map-entry-desc">La carpeta de juegos y actividades tranquilos para nuestros domingos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenSegundaMilla"><span><span class="map-entry-name">La Segunda Milla: Trivia de la Biblia</span><span class="map-entry-desc">Dados y preguntas de toda la Biblia: acierta y avanza millas hasta la meta.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenTriviaMormon"><span><span class="map-entry-name">Trivia del Libro de Mormón</span><span class="map-entry-desc">Diez preguntitas de las historias del Libro de Mormón.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenAdivinaProfeta"><span><span class="map-entry-name">Adivina el profeta o apóstol</span><span class="map-entry-desc">Pistas de un profeta o apóstol de esta dispensación para adivinar quién es.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenEstudioFamiliar"><span><span class="map-entry-name">Estudio de las Escrituras en familia</span><span class="map-entry-desc">Un pasaje para leer juntitos cada domingo, con preguntitas para platicar.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenAdivinaHimno"><span><span class="map-entry-name">Adivina el himno</span><span class="map-entry-desc">Una pista o una línea de un himno, y tú adivinas cuál es.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenRetoGratitud"><span><span class="map-entry-name">Reto de gratitud dominical</span><span class="map-entry-desc">Un retito de gratitud para cada domingo, para agradecer juntos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+      </div>
+
+      <h4 class="menu-group-title">Nuestra historia y familia</h4>
+      <div class="map-list">
+        <button class="map-entry" type="button" data-open-game="screenHistoria"><span><span class="map-entry-name">Nuestra historia</span><span class="map-entry-desc">La línea de tiempo de lo nuestro, momento por momento.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenEnamora"><span><span class="map-entry-name">Lo que me enamora de ti</span><span class="map-entry-desc">Una listita que se revela corazoncito a corazoncito.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenArbolFamiliar"><span><span class="map-entry-name">Nuestro árbol familiar eterno</span><span class="map-entry-desc">Nuestra familia eterna: tú, yo, Nimrod, Liahona y los que Dios nos confíe.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenCapsule"><span><span class="map-entry-name">Cápsula del tiempo</span><span class="map-entry-desc">Un mensaje guardado para ti, que se abre el día de tu cumpleaños.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenFaith"><span><span class="map-entry-name">Nuestra fe y nuestro matrimonio eterno</span><span class="map-entry-desc">Escrituras y palabras de profetas y apóstoles sobre nuestro amor eterno.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenPrimerBaile"><span><span class="map-entry-name">Nuestro primer baile</span><span class="map-entry-desc">La guía paso a paso para practicar nuestro primer baile de casados.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenArbolDeseos"><span><span class="map-entry-name">El árbol de los deseos</span><span class="map-entry-desc">Un arbolito para colgar nuestros sueños de casados.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+      </div>
+
+      <h4 class="menu-group-title">Detallitos para ti</h4>
+      <div class="map-list">
+        <button class="map-entry" type="button" data-open-game="screenDetallitos"><span><span class="map-entry-name">Detallitos para ti</span><span class="map-entry-desc">La carpeta del rinconcito con cositas bonitas para descubrir.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenIdiomas"><span><span class="map-entry-name">Te amo en muchos idiomas</span><span class="map-entry-desc">Cómo se dice «te amo» en 10 idiomas distintos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenPensamiento"><span><span class="map-entry-name">Un pensamiento para ti hoy</span><span class="map-entry-desc">Un pensamiento de amor distinto cada día, solo para ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenCitas"><span><span class="map-entry-name">12 citas para nuestro primer año de casados</span><span class="map-entry-desc">Una idea de cita romántica para cada mes de nuestro primer año de esposos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenPacto"><span><span class="map-entry-name">Nuestro pacto de esposos</span><span class="map-entry-desc">Los hábitos bonitos que queremos guardar siempre como esposos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenAdivina"><span><span class="map-entry-name">Adivina el lugar</span><span class="map-entry-desc">Una pista de uno de nuestros lugares del mapa, y tú adivinas cuál es.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenDiario"><span><span class="map-entry-name">Mi diario de amor</span><span class="map-entry-desc">Un espacio solo tuyo para escribir tus pensamientos con su fecha.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenCancion"><span><span class="map-entry-name">Adivina la canción</span><span class="map-entry-desc">Una frase de nuestras canciones y villancicos, y tú adivinas de cuál es.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenSuenos"><span><span class="map-entry-name">Sueños por cumplir juntos</span><span class="map-entry-desc">Doce sueños de casados para ir marcando cuando los cumplamos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenOracion"><span><span class="map-entry-name">Oremos juntos en la noche</span><span class="map-entry-desc">Una guía para orar juntitos de corazón antes de dormir.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenArbol"><span><span class="map-entry-name">Árbol de gratitud</span><span class="map-entry-desc">Ocho adornitos con cosas por las que damos gracias a Dios.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenVerdadReto"><span><span class="map-entry-name">Verdad o reto de amor</span><span class="map-entry-desc">Una carta al azar: una verdad dulce o un reto romántico para los dos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenCartita"><span><span class="map-entry-name">Saca una cartita</span><span class="map-entry-desc">Un mazo de cartitas de amor: cada toque saca una distinta al azar.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenRetoSemana"><span><span class="map-entry-name">Reto de amor de 7 días</span><span class="map-entry-desc">Siete actos de amor, uno por día, para hacer juntitos en una semana.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenCuento"><span><span class="map-entry-name">Nuestro cuento</span><span class="map-entry-desc">Una historia cortita de amor en tono de cuento.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenBingo"><span><span class="map-entry-name">Bingo de amor</span><span class="map-entry-desc">Una tarjetita de bingo con momentitos románticos que ya vivimos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenConversemos"><span><span class="map-entry-name">Conversemos, mi amor</span><span class="map-entry-desc">Tarjetitas con preguntitas profundas y bonitas para platicar juntitos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenDiaPerfecto"><span><span class="map-entry-name">Un día perfecto juntos</span><span class="map-entry-desc">Elige mañana, tarde y noche, y lee la historia de nuestro día perfecto.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenRazones"><span><span class="map-entry-name">50 razones por las que te amo</span><span class="map-entry-desc">Cincuenta razones, una por una, de por qué te amo tanto.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenAhorcado"><span><span class="map-entry-name">Ahorcado de amor</span><span class="map-entry-desc">El clásico ahorcado, pero con palabras de nuestra historia.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenAniversario"><span><span class="map-entry-name">Carta para nuestro primer aniversario</span><span class="map-entry-desc">Una carta sellada para abrirla el 19 de diciembre de 2027.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenQueAmo"><span><span class="map-entry-name">¿Qué amo más de ti hoy?</span><span class="map-entry-desc">Elige una cosita de ti y te digo por qué hoy es lo que más amo.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenCupones"><span><span class="map-entry-name">Cupones de amor</span><span class="map-entry-desc">Cupones tuyos para canjear conmigo cuando quieras.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenBuenasNoches"><span><span class="map-entry-name">Cartitas de buenas noches</span><span class="map-entry-desc">Una notita tierna para cada noche de la semana.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenPoema"><span><span class="map-entry-name">Un poema para ti</span><span class="map-entry-desc">Poemas cortitos en verso, escritos solo para ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+      </div>
+
+      <h4 class="menu-group-title">Navidad</h4>
+      <div class="map-list">
+        <button class="map-entry" type="button" data-open-game="screenAdvent"><span><span class="map-entry-name">Calendario de Adviento</span><span class="map-entry-desc">24 puertecitas de diciembre con una sorpresa cada día, música navideña y dos rompecabezas.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenArbolito"><span><span class="map-entry-name">Nuestro arbolito de Navidad</span><span class="map-entry-desc">Un arbolito para decorar juntitos con esferas, lucecitas y su estrella.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenCartitaNavidad"><span><span class="map-entry-name">Cartita de deseos de Navidad</span><span class="map-entry-desc">Escribe y guarda lo que deseas para esta Navidad.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenTriviaNavidad"><span><span class="map-entry-name">Trivia del nacimiento de Jesús</span><span class="map-entry-desc">Preguntitas sobre la primera Navidad, como la cuentan las Escrituras.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenDeseosAnio"><span><span class="map-entry-name">Nuestros deseos para el Año Nuevo</span><span class="map-entry-desc">Nuestros propósitos y deseos para el año que viene, guardados con su fecha.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenNacimiento"><span><span class="map-entry-name">Arma tu nacimiento</span><span class="map-entry-desc">Acomoda las figuritas del nacimiento como quieras y déjalo guardado.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenEscriturasNavidad"><span><span class="map-entry-name">Escrituras de Navidad</span><span class="map-entry-desc">Escrituras sobre el nacimiento de Jesucristo para leer con calma.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+      </div>
+
+      <h4 class="menu-group-title">Apartados sueltos</h4>
+      <div class="map-list">
+        <button class="map-entry" type="button" data-open-game="screenEnojada"><span><span class="map-entry-name">Cuando estés enojada</span><span class="map-entry-desc">Un mensajito guardado para cuando estés enojada conmigo.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenTriste"><span><span class="map-entry-name">Cuando estés triste</span><span class="map-entry-desc">Una cartita de consuelo para los días grises.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenExtranes"><span><span class="map-entry-name">Cuando me extrañes</span><span class="map-entry-desc">Un mensaje para cuando no esté cerquita de ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenDormir"><span><span class="map-entry-name">Cuando no puedas dormir</span><span class="map-entry-desc">Una oración por ti y una cancioncita bajita para arrullarte.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
 
@@ -5289,7 +5475,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist', 'screenSegundaMilla', 'screenPrimerBaile', 'screenArbolDeseos', 'screenKaraoke', 'screenMenuDomingo', 'screenTriviaMormon', 'screenAdivinaProfeta', 'screenEstudioFamiliar', 'screenAdivinaHimno', 'screenRetoGratitud'];
+  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenMapa', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist', 'screenSegundaMilla', 'screenPrimerBaile', 'screenArbolDeseos', 'screenKaraoke', 'screenMenuDomingo', 'screenTriviaMormon', 'screenAdivinaProfeta', 'screenEstudioFamiliar', 'screenAdivinaHimno', 'screenRetoGratitud'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -5330,6 +5516,7 @@
     screenMenuJuegos: 'screenMenu', screenMenuHistoria: 'screenMenu',
     screenMenuDetallitos: 'screenMenu', screenMenuNavidad: 'screenMenu',
     screenMenuSueltos: 'screenMenu',
+    screenMapa: 'screenMenu',
     screenMenu: null
   };
   var currentScreen = null; // pantalla visible, o null = página principal
@@ -10190,7 +10377,7 @@
   var NAV_MAP = {
     screenMenuJuegos: 'screenMenuJuegos', screenMenuHistoria: 'screenMenuHistoria',
     screenMenuDetallitos: 'screenMenuDetallitos', screenMenuNavidad: 'screenMenuNavidad',
-    screenMenuSueltos: 'screenMenuSueltos',
+    screenMenuSueltos: 'screenMenuSueltos', screenMapa: 'screenMapa',
     screenGames: 'screenGames', screenCatch: 'screenGames', screenQuiz: 'screenGames',
     screenMemo: 'screenGames', screenWheel: 'screenGames', screenChest: 'screenGames',
     screenPuzzle: 'screenGames', screenWords: 'screenGames', screenTreasure: 'screenGames',
@@ -10977,6 +11164,167 @@
     renderEnamoraCount();
   }
 
+})();
+</script>
+<script>
+(function(){
+  // ===== Buscador de apartados y saltos a la página principal =====
+  // Catálogo de todo lo que hay en la página: nombre, carpeta y destino
+  // (s = pantalla que se abre, h = título de la página principal al que se baja).
+  var CATALOGO = [
+    { n:'Nuestra música', w:'Página principal', h:'musica-title' },
+    { n:'Una cartita para ti', w:'Página principal', h:'carta-title' },
+    { n:'Nuestros momentitos', w:'Página principal', h:'fotos-title' },
+    { n:'Nuestros lugares', w:'Página principal', h:'lugares-title' },
+    { n:'Gracias por tanto', w:'Página principal', h:'gracias-title' },
+    { n:'Cuenta atrás', w:'Página principal', h:'cuenta-title' },
+    { n:'Nuestra boda y la eternidad', w:'Página principal', h:'boda-title' },
+    { n:'Mensajes para nosotros', w:'Página principal', h:'mensajes-title' },
+    { n:'Todo lo que deseo para ti', w:'Página principal', h:'deseos-title' },
+    { n:'¿Un abrazo?', w:'Página principal', h:'abrazo-title' },
+    { n:'¿Un beso?', w:'Página principal', h:'beso-title' },
+    { n:'El medidor de amor', w:'Página principal', h:'medidor-title' },
+    { n:'Nuestra flor', w:'Página principal', h:'flor-title' },
+    { n:'La sorpresa final: que lluevan corazones', w:'Página principal', h:'sorpresa-title' },
+    { n:'Mapa de la página', w:'Menú', s:'screenMapa' },
+    { n:'Juegos', w:'Recreación', s:'screenGames' },
+    { n:'Atrapa corazones', w:'Recreación · Juegos', s:'screenCatch' },
+    { n:'Preguntas sobre nosotros', w:'Recreación · Juegos', s:'screenQuiz' },
+    { n:'¿Cuánto me conoces?', w:'Recreación · Juegos', s:'screenConoces' },
+    { n:'Memorama', w:'Recreación · Juegos', s:'screenMemo' },
+    { n:'Rueda de sorpresas', w:'Recreación · Juegos', s:'screenWheel' },
+    { n:'Cofre de promesas', w:'Recreación · Juegos', s:'screenChest' },
+    { n:'Rompecabezas de nuestra foto', w:'Recreación · Juegos', s:'screenPuzzle' },
+    { n:'Sopa de letras de amor', w:'Recreación · Juegos', s:'screenWords' },
+    { n:'Nuestro mapa del tesoro', w:'Recreación · Juegos', s:'screenTreasure' },
+    { n:'Mi lista de canciones para ti', w:'Recreación', s:'screenPlaylist' },
+    { n:'Nuestro karaoke', w:'Recreación', s:'screenKaraoke' },
+    { n:'Recreación domingo', w:'Recreación', s:'screenMenuDomingo' },
+    { n:'La Segunda Milla: Trivia de la Biblia', w:'Recreación · Recreación domingo', s:'screenSegundaMilla' },
+    { n:'Trivia del Libro de Mormón', w:'Recreación · Recreación domingo', s:'screenTriviaMormon' },
+    { n:'Adivina el profeta o apóstol', w:'Recreación · Recreación domingo', s:'screenAdivinaProfeta' },
+    { n:'Estudio de las Escrituras en familia', w:'Recreación · Recreación domingo', s:'screenEstudioFamiliar' },
+    { n:'Adivina el himno', w:'Recreación · Recreación domingo', s:'screenAdivinaHimno' },
+    { n:'Reto de gratitud dominical', w:'Recreación · Recreación domingo', s:'screenRetoGratitud' },
+    { n:'Nuestra historia', w:'Nuestra historia y familia', s:'screenHistoria' },
+    { n:'Lo que me enamora de ti', w:'Nuestra historia y familia', s:'screenEnamora' },
+    { n:'Nuestro árbol familiar eterno', w:'Nuestra historia y familia', s:'screenArbolFamiliar' },
+    { n:'Cápsula del tiempo', w:'Nuestra historia y familia', s:'screenCapsule' },
+    { n:'Nuestra fe y nuestro matrimonio eterno', w:'Nuestra historia y familia', s:'screenFaith' },
+    { n:'Nuestro primer baile', w:'Nuestra historia y familia', s:'screenPrimerBaile' },
+    { n:'El árbol de los deseos', w:'Nuestra historia y familia', s:'screenArbolDeseos' },
+    { n:'Detallitos para ti', w:'Detallitos para ti', s:'screenDetallitos' },
+    { n:'Te amo en muchos idiomas', w:'Detallitos para ti', s:'screenIdiomas' },
+    { n:'Un pensamiento para ti hoy', w:'Detallitos para ti', s:'screenPensamiento' },
+    { n:'12 citas para nuestro primer año de casados', w:'Detallitos para ti', s:'screenCitas' },
+    { n:'Nuestro pacto de esposos', w:'Detallitos para ti', s:'screenPacto' },
+    { n:'Adivina el lugar', w:'Detallitos para ti', s:'screenAdivina' },
+    { n:'Mi diario de amor', w:'Detallitos para ti', s:'screenDiario' },
+    { n:'Adivina la canción', w:'Detallitos para ti', s:'screenCancion' },
+    { n:'Sueños por cumplir juntos', w:'Detallitos para ti', s:'screenSuenos' },
+    { n:'Oremos juntos en la noche', w:'Detallitos para ti', s:'screenOracion' },
+    { n:'Árbol de gratitud', w:'Detallitos para ti', s:'screenArbol' },
+    { n:'Verdad o reto de amor', w:'Detallitos para ti', s:'screenVerdadReto' },
+    { n:'Saca una cartita', w:'Detallitos para ti', s:'screenCartita' },
+    { n:'Reto de amor de 7 días', w:'Detallitos para ti', s:'screenRetoSemana' },
+    { n:'Nuestro cuento', w:'Detallitos para ti', s:'screenCuento' },
+    { n:'Bingo de amor', w:'Detallitos para ti', s:'screenBingo' },
+    { n:'Conversemos, mi amor', w:'Detallitos para ti', s:'screenConversemos' },
+    { n:'Un día perfecto juntos', w:'Detallitos para ti', s:'screenDiaPerfecto' },
+    { n:'50 razones por las que te amo', w:'Detallitos para ti', s:'screenRazones' },
+    { n:'Ahorcado de amor', w:'Detallitos para ti', s:'screenAhorcado' },
+    { n:'Carta para nuestro primer aniversario', w:'Detallitos para ti', s:'screenAniversario' },
+    { n:'¿Qué amo más de ti hoy?', w:'Detallitos para ti', s:'screenQueAmo' },
+    { n:'Cupones de amor', w:'Detallitos para ti', s:'screenCupones' },
+    { n:'Cartitas de buenas noches', w:'Detallitos para ti', s:'screenBuenasNoches' },
+    { n:'Un poema para ti', w:'Detallitos para ti', s:'screenPoema' },
+    { n:'Calendario de Adviento', w:'Navidad', s:'screenAdvent' },
+    { n:'Nuestro arbolito de Navidad', w:'Navidad', s:'screenArbolito' },
+    { n:'Cartita de deseos de Navidad', w:'Navidad', s:'screenCartitaNavidad' },
+    { n:'Trivia del nacimiento de Jesús', w:'Navidad', s:'screenTriviaNavidad' },
+    { n:'Nuestros deseos para el Año Nuevo', w:'Navidad', s:'screenDeseosAnio' },
+    { n:'Arma tu nacimiento', w:'Navidad', s:'screenNacimiento' },
+    { n:'Escrituras de Navidad', w:'Navidad', s:'screenEscriturasNavidad' },
+    { n:'Cuando estés enojada', w:'Apartados sueltos', s:'screenEnojada' },
+    { n:'Cuando estés triste', w:'Apartados sueltos', s:'screenTriste' },
+    { n:'Cuando me extrañes', w:'Apartados sueltos', s:'screenExtranes' },
+    { n:'Cuando no puedas dormir', w:'Apartados sueltos', s:'screenDormir' }
+  ];
+  function normalizar(t){
+    return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[¿?¡!]/g, '').trim();
+  }
+  CATALOGO.forEach(function(e){ e._n = normalizar(e.n); e._w = normalizar(e.w); });
+
+  function irASeccion(anchorId){
+    var homeBtn = document.getElementById('homeBtn');
+    if(homeBtn) homeBtn.click();
+    setTimeout(function(){
+      var el = document.getElementById(anchorId);
+      if(!el) return;
+      var y = el.getBoundingClientRect().top + window.scrollY - 78;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    }, 60);
+  }
+  function abrirDestino(entry){
+    if(entry.s){
+      var btn = document.querySelector('[data-open-game="' + entry.s + '"]');
+      if(btn) btn.click();
+    } else if(entry.h){
+      irASeccion(entry.h);
+    }
+  }
+
+  // Los renglones del Mapa de la página que llevan a la página principal
+  Array.prototype.forEach.call(document.querySelectorAll('[data-goto-home]'), function(btn){
+    btn.addEventListener('click', function(){ irASeccion(btn.getAttribute('data-goto-home')); });
+  });
+
+  function conectarBuscador(inputId, resultsId, emptyId){
+    var input = document.getElementById(inputId);
+    var box = document.getElementById(resultsId);
+    var empty = document.getElementById(emptyId);
+    if(!input || !box) return;
+    function limpiar(){
+      box.innerHTML = '';
+      box.hidden = true;
+      if(empty) empty.hidden = true;
+    }
+    input.addEventListener('input', function(){
+      var q = normalizar(input.value);
+      if(q.length < 2){ limpiar(); return; }
+      var hallados = CATALOGO.filter(function(e){
+        return e._n.indexOf(q) !== -1 || e._w.indexOf(q) !== -1;
+      }).slice(0, 10);
+      box.innerHTML = '';
+      hallados.forEach(function(e){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'search-result';
+        var txt = document.createElement('span');
+        var nm = document.createElement('span');
+        nm.className = 'sr-name'; nm.textContent = e.n;
+        var wh = document.createElement('span');
+        wh.className = 'sr-where'; wh.textContent = 'En: ' + e.w;
+        txt.appendChild(nm); txt.appendChild(wh);
+        var ar = document.createElement('span');
+        ar.className = 'sr-arrow'; ar.setAttribute('aria-hidden', 'true'); ar.textContent = '→';
+        b.appendChild(txt); b.appendChild(ar);
+        b.addEventListener('click', function(){
+          input.value = '';
+          limpiar();
+          abrirDestino(e);
+        });
+        box.appendChild(b);
+      });
+      box.hidden = hallados.length === 0;
+      if(empty) empty.hidden = hallados.length !== 0;
+    });
+    input.addEventListener('keydown', function(ev){
+      if(ev.key === 'Escape'){ input.value = ''; limpiar(); }
+    });
+  }
+  conectarBuscador('searchInputHome', 'searchResultsHome', 'searchEmptyHome');
+  conectarBuscador('searchInputMenu', 'searchResultsMenu', 'searchEmptyMenu');
 })();
 </script>
 </body>

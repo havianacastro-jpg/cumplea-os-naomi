@@ -4850,6 +4850,7 @@
     });
     currentScreen = id;
     document.body.classList.toggle('game-open', !!id);
+    saveNavPos(); // recuerda esta pantalla, para quedarse en ella si se refresca la página
   }
   function restoreScroll(key){
     var y = savedScroll[key] || 0;
@@ -4881,6 +4882,93 @@
     showScreen(null);
     restoreScroll('home');
   }
+
+  // --- Memoria de navegación: al refrescar la página se queda en la pantalla
+  // --- donde estaba, con su mismo camino de regreso y sus posiciones guardadas.
+  // --- Se guarda cada vez que se navega (showScreen llama a saveNavPos) y otra
+  // --- vez al refrescar o salir, para conservar también el punto exacto de la
+  // --- pantalla actual. El regreso sigue siendo el de siempre: «← Volver» y el
+  // --- deslizamiento recorren paso a paso la cadena de NAV_PARENT. ---
+  var NAV_POS_KEY = 'naomi-nav-pos-v1';
+  var navRestoreState = null; // lo guardado al cargar; lo usan también la cápsula y sus cartas, más abajo
+  function navBackPath(id){
+    // El camino de regreso desde una pantalla: su apartado, luego el menú, luego el inicio
+    var path = [];
+    var seen = {};
+    var cur = id;
+    while(cur && !seen[cur]){
+      seen[cur] = true;
+      var parent = (cur in NAV_PARENT) ? NAV_PARENT[cur] : 'screenMenu';
+      if(parent) path.push(parent);
+      cur = parent;
+    }
+    return path;
+  }
+  function navCapsuleState(){
+    // Qué tanto de la cápsula estaba abierto: sus secciones ya reveladas y qué
+    // cartas de los niños estaban abiertas. Se lee del DOM tal cual se ve; las
+    // variables de la cápsula se declaran más abajo en este mismo script, por
+    // eso se comprueban con typeof (al restaurar, aún pueden no existir).
+    var open = false, letters = [];
+    if(typeof capsuleLetter !== 'undefined' && capsuleLetter && !capsuleLetter.hidden) open = true;
+    if(typeof BABY_LETTERS !== 'undefined' && BABY_LETTERS){
+      for(var kid in BABY_LETTERS){
+        if(Object.prototype.hasOwnProperty.call(BABY_LETTERS, kid)){
+          var el = BABY_LETTERS[kid];
+          if(el && !el.hidden) letters.push(kid);
+        }
+      }
+    }
+    return { open: open, letters: letters };
+  }
+  function saveNavPos(){
+    try{
+      var cap = navCapsuleState();
+      var lc = document.getElementById('letterCard');
+      window.localStorage.setItem(NAV_POS_KEY, JSON.stringify({
+        screen: currentScreen,
+        path: navBackPath(currentScreen),
+        scroll: savedScroll,
+        capsuleOpen: cap.open,
+        letters: cap.letters,
+        letterOpen: !!(lc && lc.classList.contains('open'))
+      }));
+    }catch(e){}
+  }
+  function captureNavPos(){
+    savedScroll[currentScreen || 'home'] = window.scrollY;
+    saveNavPos();
+  }
+  window.addEventListener('pagehide', captureNavPos);
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'hidden') captureNavPos();
+  });
+  function restoreNavPos(){
+    var st = null;
+    try{ st = JSON.parse(window.localStorage.getItem(NAV_POS_KEY) || 'null'); }catch(e){}
+    if(!st) return;
+    navRestoreState = st;
+    // La cartita de la página principal, desplegada tal como estaba
+    if(st.letterOpen){
+      var lc = document.getElementById('letterCard');
+      var tg = document.getElementById('letterToggle');
+      if(lc) lc.classList.add('open');
+      if(tg) tg.setAttribute('aria-expanded', 'true');
+    }
+    if(!st.screen) return;
+    if(gameCardIds.indexOf(st.screen) === -1 || !document.getElementById(st.screen)) return;
+    if(st.scroll){
+      for(var k in st.scroll){
+        if(Object.prototype.hasOwnProperty.call(st.scroll, k) && typeof st.scroll[k] === 'number'){
+          savedScroll[k] = st.scroll[k];
+        }
+      }
+    }
+    showScreen(st.screen);
+    restoreScroll(st.screen);
+  }
+  restoreNavPos();
+
   Array.prototype.forEach.call(document.querySelectorAll('[data-open-game]'), function(btn){
     btn.addEventListener('click', function(){
       openGame(btn.getAttribute('data-open-game'));
@@ -5774,6 +5862,15 @@
     if(capsuleLetter) capsuleLetter.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   });
 
+  // Si al refrescar la cápsula ya estaba abierta, se vuelve a dejar abierta tal
+  // cual (solo si su fecha ya llegó: capsuleOpen visible lo decide tickCapsule)
+  if(navRestoreState && navRestoreState.capsuleOpen && capsuleOpen && !capsuleOpen.hidden){
+    if(capsuleLetter) capsuleLetter.hidden = false;
+    if(capsuleFuture) capsuleFuture.hidden = false;
+    if(capsuleKids) capsuleKids.hidden = false;
+    if(capsuleOpenBtn) capsuleOpenBtn.hidden = true;
+  }
+
   // --- Cartas para Nimrod y Liahona: el candado se abre SOLO con los dos requisitos juntos: confirmar en la página que ya son papás Y la foto del bebé. La foto tiene doble opción para que la carta nunca se quede sin abrirse: Opción A (la preferida), la foto ya está en la página porque papá la puso en el repo como todas las demás fotos (imagenes/bebe-nimrod.jpg e imagenes/bebe-liahona.jpg), así queda fija para todos los dispositivos; Opción B (respaldo), si la foto no está en el repo, la suben directo desde el teléfono en la misma página y se guarda en ese dispositivo como los demás recuerdos de la página, y con eso se abre la carta ahí. Sin foto por ningún lado no se abre aunque confirmen; sin confirmar no se abre aunque la foto ya esté. ---
   var BABY_PHOTO_SRC = { nimrod: 'imagenes/bebe-nimrod.jpg', liahona: 'imagenes/bebe-liahona.jpg' };
   // Las DOS cartas de Naomi (una para cuando nazca Nimrod y otra, completamente distinta, para cuando nazca Liahona) usan el MISMO candado que las de los niños, pero cada una se abre SOLO con su propio bebé: la de Nimrod con la confirmación y la foto imagenes/bebe-nimrod.jpg (o la subida desde el teléfono para Nimrod, guardada en su propia llave local), y la de Liahona con la confirmación y la foto imagenes/bebe-liahona.jpg (o la subida desde el teléfono para Liahona, en su propia llave local).
@@ -5837,6 +5934,7 @@
         babyState[kid].photo = true;
         babyState[kid].photoSrc = src;
         if(!tryUnlockBaby(kid, false)) renderBabyLocked(kid);
+        restoreOpenBabyLetters(); // si al refrescar esta carta estaba abierta, se reabre en cuanto se confirma la foto
       };
       probe.onerror = function(){
         if(!babyState[kid].photo) renderBabyLocked(kid);
@@ -5915,6 +6013,20 @@
       }
     });
   });
+
+  // Si al refrescar estaba leyendo una de estas cartas, se vuelve a abrir tal
+  // cual, pero solo si su candado sigue abierto (confirmación y foto), como
+  // manda la regla de siempre: sin los dos requisitos, la carta no se muestra.
+  function restoreOpenBabyLetters(){
+    if(!navRestoreState || !navRestoreState.letters) return;
+    navRestoreState.letters.forEach(function(kid){
+      var st = babyState[kid];
+      var letterEl = BABY_LETTERS[kid];
+      if(st && letterEl && st.confirmed && (st.photo || st.localPhoto)) letterEl.hidden = false;
+    });
+  }
+  restoreOpenBabyLetters();
+  saveNavPos(); // deja guardado el estado ya restaurado por completo (pantalla, cápsula y cartas)
 
   // --- Nuestro mapa del tesoro ---
   var CLUES = [

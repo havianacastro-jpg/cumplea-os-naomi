@@ -1950,10 +1950,239 @@
   .emerg-history{ margin-top:30px; border-top:1px solid var(--line); padding-top:22px }
   .emerg-history h4{ text-align:center; color:var(--rose-deep); margin:0 0 6px; font-size:1.12rem }
 
+  /* Naomi, la guerrera del amor */
+  .game-start-btn[hidden]{ display:none }
+  .gw-progress{ font-weight:700; color:var(--rose-deep); margin:0 auto 16px }
+  .gw-levels{ display:grid; gap:10px; max-width:540px; margin:0 auto 8px; text-align:left }
+  @media(min-width:620px){ .gw-levels{ grid-template-columns:1fr 1fr } }
+  .gw-level-btn{
+    display:flex; align-items:center; gap:12px; width:100%; padding:14px 16px; min-height:64px;
+    background:var(--bg-soft); border:1.5px solid var(--line); border-radius:var(--radius-md);
+    font-family:"Quicksand",sans-serif; color:var(--ink); cursor:pointer; text-align:left;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .gw-level-btn:hover:not(:disabled){ border-color:var(--rose-light); transform:translateY(-2px) }
+  .gw-level-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .gw-level-btn:disabled{ opacity:.55; cursor:not-allowed }
+  .gw-level-btn.is-won{ border-color:var(--gold); background:var(--surface-warm) }
+  .gw-level-ico{ font-size:1.7rem; line-height:1; width:44px; height:44px; flex:none; display:grid; place-items:center; background:var(--surface); border:1px solid var(--line); border-radius:50% }
+  .gw-level-name{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.05rem; line-height:1.25; display:block }
+  .gw-level-sub{ font-size:.85rem; color:var(--ink-soft); display:block; line-height:1.35 }
+  .gw-level-state{ margin-left:auto; flex:none; font-size:.8rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.04em }
+  .gw-arena{
+    background:linear-gradient(180deg, var(--bg-soft), var(--rose-pale));
+    border:1px solid var(--line); border-radius:var(--radius-md); padding:20px 16px 16px; margin-bottom:16px;
+  }
+  .gw-fighters{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px }
+  .gw-fighter{ flex:1; min-width:0 }
+  .gw-avatar{
+    width:84px; height:84px; margin:0 auto 8px; border-radius:50%; display:grid; place-items:center;
+    font-size:2.5rem; line-height:1; background:var(--surface); border:2px solid var(--rose-light);
+    box-shadow:var(--shadow); transition:transform .18s ease;
+  }
+  .gw-avatar.foe{ border-color:var(--gold-soft) }
+  .gw-avatar.is-hit{ transform:translateX(6px) scale(.96) }
+  .gw-avatar.foe.is-hit{ transform:translateX(-6px) scale(.96) }
+  .gw-fighter-name{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.05rem; margin:0 0 6px; line-height:1.25 }
+  .gw-vs{ font-family:"Playfair Display",serif; font-weight:800; font-style:italic; color:var(--gold); font-size:1.2rem; padding-top:26px }
+  .gw-hpbar{ height:15px; border-radius:999px; background:var(--surface); border:1px solid var(--line); overflow:hidden }
+  .gw-hpfill{ height:100%; width:100%; border-radius:999px; background:linear-gradient(90deg, var(--rose-light), var(--rose-deep)); transition:width .45s ease }
+  .gw-hpfill.foe{ background:linear-gradient(90deg, var(--gold-soft), var(--ink-soft)) }
+  .gw-hptext{ font-size:.85rem; font-weight:700; color:var(--ink-soft); margin:5px 0 0; font-variant-numeric:tabular-nums }
+  .gw-log{
+    min-height:3.2em; margin:0 auto 16px; max-width:520px; color:var(--ink);
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.18rem; line-height:1.45;
+  }
+  .gw-actions{ display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:540px; margin:0 auto }
+  .gw-act{
+    border-radius:var(--radius-md); padding:14px 10px; min-height:66px; cursor:pointer;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem; line-height:1.3;
+    border:1.5px solid var(--rose-light); background:var(--surface); color:var(--ink);
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .gw-act small{ display:block; font-weight:600; font-size:.78rem; color:var(--ink-soft); margin-top:2px }
+  .gw-act:hover:not(:disabled){ transform:translateY(-2px); border-color:var(--rose) }
+  .gw-act:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .gw-act:disabled{ opacity:.45; cursor:not-allowed }
+  .gw-act-attack{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff }
+  .gw-act-attack small{ color:var(--rose-pale) }
+  @media (prefers-color-scheme: dark){ .gw-act-attack{ color:#241419 } .gw-act-attack small{ color:#4A2A35 } }
+  .gw-act-shield{ background:var(--gold-soft); border-color:var(--gold) }
+  .gw-act-heal{ background:var(--rose-pale); border-color:var(--rose-light) }
+  .gw-powers{ display:grid; gap:10px; max-width:540px; margin:14px auto 0; text-align:left }
+  .gw-power{
+    width:100%; padding:13px 16px; border-radius:var(--radius-md); cursor:pointer; text-align:left;
+    background:var(--surface); border:1.5px solid var(--gold-soft); color:var(--ink);
+    font-family:"Quicksand",sans-serif; transition:border-color .15s ease;
+  }
+  .gw-power:hover:not(:disabled){ border-color:var(--gold) }
+  .gw-power:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .gw-power:disabled{ opacity:.5; cursor:not-allowed }
+  .gw-power-name{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.05rem; color:var(--rose-deep); display:block }
+  .gw-power-verse{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.05rem; display:block; margin-top:2px }
+  .gw-power-src{ font-size:.8rem; font-weight:700; color:var(--gold); display:block; margin-top:1px }
+  .gw-power-fx{ font-size:.88rem; color:var(--ink-soft); display:block; margin-top:4px }
+  .gw-power-cd{ font-size:.8rem; font-weight:700; color:var(--rose); display:block; margin-top:2px }
+  .gw-result{ max-width:540px; margin:0 auto }
+  .gw-result-title{ font-family:"Playfair Display",serif; font-size:1.45rem; color:var(--rose-deep); margin:0 0 8px; line-height:1.3 }
+  .gw-result p{ color:var(--ink-soft); margin:0 auto 16px; max-width:480px }
+  .gw-final-scene{
+    background:var(--surface-warm); border:1.5px solid var(--gold-soft); border-radius:var(--radius-md);
+    padding:24px 20px; max-width:560px; margin:0 auto; text-align:center;
+  }
+  .gw-final-hearts{ font-size:1.7rem; color:var(--rose); letter-spacing:.35em; margin-bottom:10px }
+  .gw-final-scene h4{ font-family:"Playfair Display",serif; font-size:1.35rem; margin:0 0 10px; color:var(--rose-deep); line-height:1.3 }
+  .gw-final-scene p{ color:var(--ink); margin:0 auto 12px; max-width:480px }
+  .gw-final-verse{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.2rem; line-height:1.5 }
+  .gw-final-src{ font-size:.85rem; font-weight:700; color:var(--gold) }
+  .gw-final-sign{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.15rem; color:var(--rose-deep) }
+
+  /* Nuestro jardín */
+  .jd-seeds{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin:0 auto 18px; max-width:560px }
+  .jd-seed{
+    padding:11px 16px; min-height:48px; border-radius:999px; cursor:pointer;
+    background:var(--surface); border:1.5px solid var(--line); color:var(--ink);
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.95rem;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .jd-seed:hover{ border-color:var(--rose-light) }
+  .jd-seed:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .jd-seed[aria-pressed="true"]{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .jd-seed[aria-pressed="true"]{ color:#241419 } }
+  .jd-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:560px; margin:0 auto }
+  @media(min-width:620px){ .jd-grid{ grid-template-columns:repeat(3,1fr) } }
+  .jd-plot{
+    border:1.5px solid var(--gold-soft); border-radius:var(--radius-md); padding:16px 8px 12px;
+    background:linear-gradient(180deg, var(--surface-warm), var(--gold-soft));
+    min-height:132px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+    font-family:"Quicksand",sans-serif; color:var(--ink); width:100%;
+  }
+  button.jd-plot{ cursor:pointer; transition:transform .15s ease, border-color .15s ease }
+  button.jd-plot:hover{ transform:translateY(-2px); border-color:var(--gold) }
+  button.jd-plot:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .jd-plant{ font-size:2.5rem; line-height:1.1 }
+  .jd-plot-name{ font-weight:700; font-size:.92rem; color:var(--rose-deep); line-height:1.3 }
+  .jd-plot-stage{ font-size:.8rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.05em }
+  .jd-plot-date{ font-size:.76rem; color:var(--ink-soft) }
+  .jd-plot-hint{ font-size:.82rem; color:var(--ink-soft) }
+  .jd-msg{
+    max-width:520px; margin:20px auto 0; background:var(--bg-soft); border:1px solid var(--line);
+    border-radius:var(--radius-md); padding:18px 20px;
+  }
+  .jd-msg[hidden]{ display:none }
+  .jd-msg-title{ font-family:"Playfair Display",serif; font-weight:700; color:var(--rose-deep); margin:0 0 6px; font-size:1.12rem }
+  .jd-msg p{ margin:0; color:var(--ink) }
+  .jd-msg .game-next-btn{ margin-top:14px }
+
+  /* Nuestra historia inventada */
+  .hi-book{
+    max-width:560px; margin:0 auto; text-align:left; background:var(--surface-warm);
+    border:1px solid var(--line); border-radius:var(--radius-md); padding:20px 22px;
+  }
+  .hi-book p{ font-family:"Cormorant Garamond",serif; font-size:1.22rem; line-height:1.65; margin:0 0 10px; color:var(--ink) }
+  .hi-book p:last-child{ margin-bottom:0 }
+  .hi-who-tag{
+    display:inline-block; font-family:"Quicksand",sans-serif; font-weight:700; font-size:.72rem;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--gold);
+    border:1px solid var(--gold-soft); border-radius:999px; padding:2px 9px; margin-right:8px; vertical-align:2px;
+  }
+  .hi-turn{ font-weight:700; color:var(--rose-deep); margin:20px auto 10px; max-width:520px }
+  .hi-authors{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:14px }
+  .hi-author{
+    padding:13px 22px; min-height:52px; border-radius:999px; cursor:pointer;
+    background:var(--surface); border:1.5px solid var(--line); color:var(--ink);
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1rem;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .hi-author:hover{ border-color:var(--rose-light) }
+  .hi-author:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .hi-author[aria-pressed="true"]{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .hi-author[aria-pressed="true"]{ color:#241419 } }
+  .hi-form{ max-width:560px; margin:0 auto; text-align:left }
+  .hi-idea{
+    max-width:520px; margin:16px auto 0; background:var(--bg-soft); border:1px dashed var(--gold-soft);
+    border-radius:var(--radius-md); padding:14px 18px; font-family:"Cormorant Garamond",serif;
+    font-size:1.15rem; line-height:1.5; color:var(--ink);
+  }
+  .hi-idea[hidden]{ display:none }
+  .hi-actions{ margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+  .hi-full[hidden]{ display:none }
+  .hi-full .hi-book{ margin-top:18px }
+  .hi-archive{ max-width:560px; margin:22px auto 0; text-align:left }
+  .hi-archive[hidden]{ display:none }
+  .hi-archive-item{ background:var(--surface-warm); border:1px solid var(--line); border-radius:var(--radius-md); padding:14px 18px; margin-bottom:10px }
+  .hi-archive-date{ font-size:.82rem; font-weight:700; color:var(--gold); margin:0 0 4px }
+  .hi-archive-text{ font-family:"Cormorant Garamond",serif; font-size:1.08rem; line-height:1.55; margin:0; color:var(--ink) }
+
+  /* Mímicas para dos */
+  .mm-stage{
+    max-width:560px; margin:0 auto; background:var(--surface-warm); border:1px solid var(--line);
+    border-radius:var(--radius-md); padding:26px 20px;
+  }
+  .mm-cover-emoji{ font-size:3rem; line-height:1 }
+  .mm-word{
+    font-family:"Playfair Display",serif; font-weight:700; font-size:1.7rem; line-height:1.3;
+    color:var(--rose-deep); margin:6px 0 2px;
+  }
+  .mm-timer{
+    font-family:"Playfair Display",serif; font-size:3rem; font-weight:700; color:var(--ink);
+    font-variant-numeric:tabular-nums; line-height:1.1; margin:4px 0;
+  }
+  .mm-timer.is-low{ color:var(--rose-deep) }
+  .mm-times{ display:flex; gap:9px; justify-content:center; flex-wrap:wrap; margin:0 auto 16px; max-width:560px }
+  .mm-mark{ display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:520px; margin:18px auto 0 }
+  @media(max-width:480px){ .mm-mark{ grid-template-columns:1fr } }
+  .mm-big-btn{
+    min-height:64px; border-radius:var(--radius-md); cursor:pointer; border:none;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:1.08rem; padding:16px 14px;
+    transition:transform .15s ease;
+  }
+  .mm-big-btn:hover{ transform:translateY(-2px) }
+  .mm-big-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  .mm-big-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none }
+  .mm-yes{ background:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .mm-yes{ color:#241419 } }
+  .mm-no{ background:transparent; color:var(--rose-deep); border:1.5px solid var(--rose-deep) }
+  .mm-msg{ min-height:1.5em; font-weight:700; color:var(--rose-deep); margin:14px auto 0; max-width:520px }
+
+  /* Respira conmigo */
+  .rsp-modes{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin:0 auto 6px; max-width:560px }
+  .rsp-mode{
+    padding:12px 18px; min-height:50px; border-radius:999px; cursor:pointer;
+    background:var(--surface); border:1.5px solid var(--line); color:var(--ink);
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.98rem;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .rsp-mode:hover{ border-color:var(--rose-light) }
+  .rsp-mode:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .rsp-mode[aria-pressed="true"]{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff }
+  @media (prefers-color-scheme: dark){ .rsp-mode[aria-pressed="true"]{ color:#241419 } }
+  .rsp-stage{ min-height:288px; display:grid; place-items:center; padding:10px 0 2px }
+  .rsp-circle{
+    width:168px; height:168px; border-radius:50%; display:grid; place-items:center; text-align:center;
+    background:radial-gradient(circle at 35% 30%, var(--rose-pale), var(--bg-soft));
+    border:2px solid var(--gold-soft); box-shadow:0 10px 30px rgba(158,47,78,.12);
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.35rem; color:var(--rose-deep);
+    transition-property:transform; transition-timing-function:linear; transform:scale(1);
+    padding:18px;
+  }
+  .rsp-count{ font-weight:700; color:var(--ink-soft); min-height:1.6em; margin:6px 0 0 }
+  .rsp-controls{ margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+  .rsp-stop{
+    background:transparent; color:var(--rose-deep); border:1.5px solid var(--rose-deep);
+    border-radius:999px; padding:12px 26px; font-family:"Quicksand",sans-serif; font-weight:700;
+    cursor:pointer; font-size:.95rem; min-height:48px;
+  }
+  .rsp-stop:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+  .rsp-stop[hidden]{ display:none }
+  .rsp-final{ max-width:520px; margin:18px auto 0 }
+  .rsp-final[hidden]{ display:none }
+
   @media (prefers-reduced-motion: reduce){
     body::before, h1 .name, .hero-cta, .album-btn, .game-start-btn, #rainBtn,
     .games-section .game-card.active, .fx-spark, .fx-bit, .fx-celebrate{ animation:none !important }
     .polaroid{ transition:none }
+    .gw-avatar, .gw-hpfill, .gw-level-btn, .gw-act, button.jd-plot{ transition:none }
   }
 </style>
 </head>
@@ -2664,6 +2893,12 @@
           <span class="game-menu-desc">Una oración que digo por ti y una cancioncita bajita para arrullarte, mi amor, para que el descanso te encuentre tranquila.</span>
           <span class="game-menu-play">Escuchar ♥</span>
         </button>
+        <button class="game-menu-card" type="button" data-open-game="screenRespira">
+          <span class="game-menu-icon" aria-hidden="true">☁</span>
+          <span class="game-menu-title">Respira conmigo</span>
+          <span class="game-menu-desc">Un rinconcito de calma para respirar juntitos, despacito: para tranquilizarte, para dormir mejor o para cuando el corazón se sienta triste.</span>
+          <span class="game-menu-play">Respirar ♥</span>
+        </button>
       </div>
     </div>
 
@@ -2697,6 +2932,9 @@
         <button class="map-entry sub" type="button" data-open-game="screenCatch"><span><span class="map-entry-name">Atrapa corazones</span><span class="map-entry-desc">Corazones que caen por 30 segundos: atrapa todos los que puedas.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry sub" type="button" data-open-game="screenQuiz"><span><span class="map-entry-name">Preguntas sobre nosotros</span><span class="map-entry-desc">Cinco preguntitas de nuestra historia.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry sub" type="button" data-open-game="screenConoces"><span><span class="map-entry-name">¿Cuánto me conoces?</span><span class="map-entry-desc">Preguntitas sobre mí: mis gustos, mis sueños y lo que más amo de ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenGuerrera"><span><span class="map-entry-name">Naomi, la guerrera del amor</span><span class="map-entry-desc">El juego de aventura: vence a los enemigos del amor nivel por nivel y rescata a Hagot de la torre.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenHistoriaInv"><span><span class="map-entry-name">Nuestra historia inventada</span><span class="map-entry-desc">Un cuento que inventamos entre los dos, frase a frase y por turnos, guardado en el dispositivo.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry sub" type="button" data-open-game="screenMimicas"><span><span class="map-entry-name">Mímicas para dos</span><span class="map-entry-desc">Uno actúa una palabra sin hablar y el otro la adivina contra el reloj, con marcador de la partida.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry sub" type="button" data-open-game="screenMemo"><span><span class="map-entry-name">Memorama</span><span class="map-entry-desc">Encuentra las parejitas de nuestras fotos y dibujitos.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry sub" type="button" data-open-game="screenWheel"><span><span class="map-entry-name">Rueda de sorpresas</span><span class="map-entry-desc">Gira la rueda y gana un premio romántico para reclamar conmigo.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry sub" type="button" data-open-game="screenChest"><span><span class="map-entry-name">Cofre de promesas</span><span class="map-entry-desc">Cofrecitos cerrados con promesas mías para ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
@@ -2752,6 +2990,7 @@
         <button class="map-entry" type="button" data-open-game="screenCupones"><span><span class="map-entry-name">Cupones de amor</span><span class="map-entry-desc">Cupones tuyos para canjear conmigo cuando quieras.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry" type="button" data-open-game="screenBuenasNoches"><span><span class="map-entry-name">Cartitas de buenas noches</span><span class="map-entry-desc">Una notita tierna para cada noche de la semana.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry" type="button" data-open-game="screenPoema"><span><span class="map-entry-name">Un poema para ti</span><span class="map-entry-desc">Poemas cortitos en verso, escritos solo para ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenJardin"><span><span class="map-entry-name">Nuestro jardín</span><span class="map-entry-desc">Un jardincito para sembrar cosas buenas, regarlas cada día y verlas florecer.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
       </div>
 
       <h4 class="menu-group-title">Navidad</h4>
@@ -2771,6 +3010,7 @@
         <button class="map-entry" type="button" data-open-game="screenTriste"><span><span class="map-entry-name">Cuando estés triste</span><span class="map-entry-desc">Una cartita de consuelo para los días grises.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry" type="button" data-open-game="screenExtranes"><span><span class="map-entry-name">Cuando me extrañes</span><span class="map-entry-desc">Un mensaje para cuando no esté cerquita de ti.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
         <button class="map-entry" type="button" data-open-game="screenDormir"><span><span class="map-entry-name">Cuando no puedas dormir</span><span class="map-entry-desc">Una oración por ti y una cancioncita bajita para arrullarte.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
+        <button class="map-entry" type="button" data-open-game="screenRespira"><span><span class="map-entry-name">Respira conmigo</span><span class="map-entry-desc">Respiración guiada y suavecita para calmarte, dormir o consolar el corazón.</span></span><span class="map-entry-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
 
@@ -2833,6 +3073,24 @@
           <span class="game-menu-title">¿Cuánto me conoces?</span>
           <span class="game-menu-desc">Un jueguito de preguntitas sobre mí, mi amor: mis gustos, mis sueños y lo que más amo de ti. A ver cuántas aciertas.</span>
           <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenGuerrera">
+          <span class="game-menu-icon" aria-hidden="true">⚔</span>
+          <span class="game-menu-title">Naomi, la guerrera del amor</span>
+          <span class="game-menu-desc">Un jueguito de aventura solo para ti, mi heroína: vence a la Tristeza, la Duda, el Miedo, el Enojo y el Odio con tus poderes del corazón… y al final rescátame de la torre.</span>
+          <span class="game-menu-play">¡A luchar por amor! ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenHistoriaInv">
+          <span class="game-menu-icon" aria-hidden="true">✎</span>
+          <span class="game-menu-title">Nuestra historia inventada</span>
+          <span class="game-menu-desc">Un cuento que inventamos entre los dos, frase a frase y por turnos: la página pone la primera línea y de ahí lo seguimos juntitos, guardado en este dispositivo.</span>
+          <span class="game-menu-play">Inventar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenMimicas">
+          <span class="game-menu-icon" aria-hidden="true">🎭</span>
+          <span class="game-menu-title">Mímicas para dos</span>
+          <span class="game-menu-desc">Uno actúa una palabrita sin hablar y el otro la adivina contra el reloj: con temporizador, marcador y botones grandotes para jugar en persona.</span>
+          <span class="game-menu-play">Actuar ♥</span>
         </button>
       </div>
     </div>
@@ -3735,6 +3993,12 @@
           <span class="game-menu-title">Un poema para ti</span>
           <span class="game-menu-desc">Poemas cortitos que te escribí en verso, sin ser poeta de libros: cada uno guarda un pedacito distinto de lo que siento por ti.</span>
           <span class="game-menu-play">Leer los poemas ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenJardin">
+          <span class="game-menu-icon" aria-hidden="true">🌱</span>
+          <span class="game-menu-title">Nuestro jardín</span>
+          <span class="game-menu-desc">Un jardincito para que lo cuides tú, mi vida: siembra semillas de cosas buenas, riégalas día con día y mira cómo florecen con un mensajito para ti.</span>
+          <span class="game-menu-play">A sembrar ♥</span>
         </button>
       </div>
     </div>
@@ -5031,6 +5295,185 @@
       </div>
     </div>
 
+    <!-- Naomi, la guerrera del amor -->
+    <div class="game-card" id="screenGuerrera">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Naomi, la guerrera del amor ⚔</h3>
+      <p class="game-desc">Escuché que en lo alto de una torre me tienen encerrado, mi amor… y que solo una guerrera de corazón valiente puede llegar hasta mí. Esa guerrera eres tú. Vence un nivel a la vez a los enemigos del amor: ataca con tu Golpe de amor, protégete con tu Escudo de fe, usa tus poderes especiales con calma y abrázate fuerte cuando necesites recuperar vida. Sin prisa, mi heroína: yo te espero en la torre. ♥</p>
+
+      <div id="gwLevels">
+        <p class="gw-progress" id="gwProgress" role="status"></p>
+        <div class="gw-levels" id="gwLevelList"></div>
+        <p class="game-desc" style="margin-top:14px">Cada enemigo que vences se transforma en algo bueno, mi vida. Y cuando ganes un nivel, el siguiente se abre para ti. Tu avance se guarda en este dispositivo.</p>
+      </div>
+
+      <div id="gwBattle" hidden>
+        <div class="gw-arena">
+          <div class="gw-fighters">
+            <div class="gw-fighter">
+              <div class="gw-avatar" id="gwAvatarN" aria-hidden="true">🦸‍♀️</div>
+              <p class="gw-fighter-name">Naomi, la guerrera</p>
+              <div class="gw-hpbar"><div class="gw-hpfill" id="gwHpN"></div></div>
+              <p class="gw-hptext" id="gwHpTextN" role="status"></p>
+            </div>
+            <div class="gw-vs" aria-hidden="true">vs</div>
+            <div class="gw-fighter">
+              <div class="gw-avatar foe" id="gwAvatarE" aria-hidden="true"></div>
+              <p class="gw-fighter-name" id="gwNameE"></p>
+              <div class="gw-hpbar"><div class="gw-hpfill foe" id="gwHpE"></div></div>
+              <p class="gw-hptext" id="gwHpTextE" role="status"></p>
+            </div>
+          </div>
+        </div>
+        <p class="gw-log" id="gwLog" role="status"></p>
+        <div class="gw-actions" id="gwActions">
+          <button class="gw-act gw-act-attack" id="gwBtnAttack" type="button">♥ Golpe de amor<small>Quita entre 10 y 16 de vida</small></button>
+          <button class="gw-act gw-act-shield" id="gwBtnShield" type="button">✦ Escudo de fe<small>El siguiente golpe enemigo casi no duele</small></button>
+          <button class="gw-act" id="gwBtnPower" type="button">☀ Poder especial<small>Elige uno de tus cinco poderes</small></button>
+          <button class="gw-act gw-act-heal" id="gwBtnHug" type="button">♡ Abrazo que cura<small>Recuperas 26 de vida · te quedan <span id="gwHugsLeft">2</span></small></button>
+        </div>
+        <div class="gw-powers" id="gwPowers" hidden></div>
+        <div style="margin-top:18px">
+          <button class="rsp-stop" id="gwBtnFlee" type="button">Salir de este nivel</button>
+        </div>
+      </div>
+
+      <div id="gwResult" hidden>
+        <div class="gw-result">
+          <h4 class="gw-result-title" id="gwResultTitle"></h4>
+          <p id="gwResultText"></p>
+          <div class="gw-final-scene" id="gwFinalScene" hidden>
+            <div class="gw-final-hearts" aria-hidden="true">♥ ♥ ♥</div>
+            <h4>¡Me rescataste, mi amor!</h4>
+            <p>La puerta de la torre se abrió de par en par, y ahí estabas tú: sin armadura de metal, pero con el corazón más valiente que existe. Bajamos la torre tomados de la mano, pasito a pasito, riéndonos como dos niños… y al llegar abajo no nos esperaba un «fin», nos esperaba un altar.</p>
+            <p>Porque esta historia no termina con un rescate: empieza con una boda. El 19 de diciembre, tú y yo, frente a Dios y a los que amamos, empezamos nuestro para siempre.</p>
+            <p class="gw-final-verse">«Así que no son ya más dos, sino una sola carne; por tanto, lo que Dios juntó, no lo separe el hombre».</p>
+            <p class="gw-final-src">Mateo 19:6 · Santa Biblia Reina-Valera 2009</p>
+            <p>Y por el sellamiento en el templo, nuestro matrimonio no es «hasta que la muerte los separe»: es por el tiempo y por toda la eternidad.</p>
+            <p class="gw-final-sign">Naomi: gracias por pelear por nosotros con las armas más fuertes que hay: tu fe, tu paciencia, tu perdón y tu corazón. Te quiero a mi lado siempre, hombro a hombro, en esta vida y en la eternidad. Te amo. — Tu Hagot, el rescatado más feliz del mundo ♥</p>
+          </div>
+          <div class="rsp-controls">
+            <button class="game-start-btn" id="gwBtnNext" type="button" hidden>Siguiente nivel ♥</button>
+            <button class="game-start-btn" id="gwBtnRetry" type="button" hidden>Intentar de nuevo ♥</button>
+            <button class="game-next-btn" id="gwBtnLevels" type="button">Ver los niveles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recreación: Nuestra historia inventada -->
+    <div class="game-card" id="screenHistoriaInv">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestra historia inventada ✎</h3>
+      <p class="game-desc">Un cuento que inventamos entre los dos, mi amor, frase a frase. La primera línea ya está puesta; de ahí nos turnamos: eliges quién escribe, agregas una frase y el cuento va creciendo entre los dos. Todo se guarda en este dispositivo, para seguirlo juntitos cuando queramos. ♥</p>
+      <div class="hi-book" id="hiBook"></div>
+      <p class="hi-turn" id="hiTurn" role="status"></p>
+      <div class="hi-authors" role="group" aria-label="¿Quién escribe esta frase?">
+        <button class="hi-author" id="hiAuthorN" type="button" aria-pressed="true">Escribe Naomi ✿</button>
+        <button class="hi-author" id="hiAuthorH" type="button" aria-pressed="false">Escribe Hagot ♥</button>
+      </div>
+      <div class="hi-form">
+        <label class="diary-label" for="hiInput">Tu frase para seguir el cuento:</label>
+        <textarea class="diary-input" id="hiInput" rows="3" maxlength="300" placeholder="Y entonces…"></textarea>
+      </div>
+      <p class="diary-msg" id="hiMsg" role="status"></p>
+      <div class="hi-actions">
+        <button class="game-start-btn" id="hiAddBtn" type="button">Agregar mi frase ♥</button>
+        <button class="game-next-btn" id="hiIdeaBtn" type="button">¿Sin ideas? Dame una ✦</button>
+      </div>
+      <div class="hi-idea" id="hiIdea" hidden></div>
+      <div class="hi-actions">
+        <button class="rsp-stop" id="hiFullBtn" type="button">Leer el cuento completo</button>
+        <button class="rsp-stop" id="hiNewBtn" type="button">Empezar un cuento nuevo</button>
+      </div>
+      <div class="hi-full" id="hiFull" hidden>
+        <div class="hi-book">
+          <p id="hiFullText"></p>
+        </div>
+      </div>
+      <div class="hi-archive" id="hiArchive" hidden>
+        <h4 class="menu-group-title">Nuestros cuentos anteriores</h4>
+        <div id="hiArchiveList"></div>
+      </div>
+    </div>
+
+    <!-- Recreación: Mímicas para dos -->
+    <div class="game-card" id="screenMimicas">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Mímicas para dos 🎭</h3>
+      <p class="game-desc">Un jueguito para jugar juntitos en persona, mi amor: uno actúa sin hablar ni hacer sonidos, y el otro tiene que adivinar qué es antes de que se acabe el tiempo. La palabra queda escondida hasta que quien actúa toque el botón, para que nadie haga trampa. ♥</p>
+      <div class="game-hud" aria-label="Marcador de Mímicas para dos">
+        <span class="hud-item">Acertadas<strong id="mmGood">0</strong></span>
+        <span class="hud-item">Sin acertar<strong id="mmBad">0</strong></span>
+        <span class="hud-item">Ronda<strong id="mmRound">1</strong></span>
+      </div>
+      <p class="game-desc" style="margin-bottom:10px">¿Cuántos segundos por palabra?</p>
+      <div class="mm-times" role="group" aria-label="Segundos por palabra">
+        <button class="rsp-mode" type="button" data-mm-time="30" aria-pressed="false">30 segundos</button>
+        <button class="rsp-mode" type="button" data-mm-time="60" aria-pressed="true">60 segundos</button>
+        <button class="rsp-mode" type="button" data-mm-time="90" aria-pressed="false">90 segundos</button>
+      </div>
+      <div class="mm-stage">
+        <div id="mmCover">
+          <div class="mm-cover-emoji" aria-hidden="true">🙈</div>
+          <p class="game-desc" style="margin:12px auto 16px">Pásale el teléfono a quien va a actuar. Cuando esté listo y la otra persona no esté viendo, que toque el botón.</p>
+          <button class="game-start-btn" id="mmShowBtn" type="button">Ya estoy listo: muéstrame la palabra ♥</button>
+        </div>
+        <div id="mmPlay" hidden>
+          <p class="game-desc" style="margin-bottom:0">Actúa esto, sin hablar:</p>
+          <p class="mm-word" id="mmWord"></p>
+          <p class="mm-timer" id="mmTimer" role="timer">60</p>
+          <p class="game-desc" id="mmTimerState" role="status" style="margin-bottom:0">El tiempo corre… ¡a actuar!</p>
+        </div>
+      </div>
+      <p class="mm-msg" id="mmMsg" role="status"></p>
+      <div class="mm-mark">
+        <button class="mm-big-btn mm-yes" id="mmYesBtn" type="button" disabled>¡La adivinó! ♥</button>
+        <button class="mm-big-btn mm-no" id="mmNoBtn" type="button" disabled>No la adivinó</button>
+      </div>
+      <div class="rsp-controls">
+        <button class="rsp-stop" id="mmRestartBtn" type="button">Reiniciar el marcador</button>
+      </div>
+    </div>
+
+    <!-- Nuestro jardín -->
+    <div class="game-card" id="screenJardin">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro jardín 🌱</h3>
+      <p class="game-desc">Este jardincito es tuyo, mi vida, para que lo cuides a tu ritmo. Elige una semilla de algo bueno y toca una parcelita vacía para sembrarla. Después, toca tu plantita una vez al día para regarla: crece un poquito cada día —semilla, brote, planta— y al florecer te regala un mensajito. Sin prisa: así crecen las cosas que más valen. ♥</p>
+      <div class="jd-seeds" id="jdSeeds" role="group" aria-label="Elige una semilla para sembrar"></div>
+      <div class="jd-grid" id="jdGrid"></div>
+      <p class="game-desc" id="jdStatus" role="status" style="margin:16px auto 0"></p>
+      <div class="jd-msg" id="jdMsg" hidden>
+        <h4 class="jd-msg-title" id="jdMsgTitle"></h4>
+        <p id="jdMsgText"></p>
+        <button class="game-next-btn" id="jdMsgBtn" type="button" hidden>Guardar la flor y sembrar otra ♥</button>
+      </div>
+    </div>
+
+    <!-- Respira conmigo -->
+    <div class="game-card" id="screenRespira">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Respira conmigo ☁</h3>
+      <p class="game-desc">Un rinconcito de calma, mi amor, para cuando el día se sienta pesado. Elige cómo te sientes, toca «Empezar» y respira al ritmo del circulito: crece cuando entra el aire y se hace chiquito cuando sale. Yo respiro contigo desde aquí, cerquita de tu corazón. ♥</p>
+      <div class="rsp-modes" id="rspModes" role="group" aria-label="Elige un modo de respiración">
+        <button class="rsp-mode" type="button" data-rsp-mode="calma" aria-pressed="true">Calma</button>
+        <button class="rsp-mode" type="button" data-rsp-mode="dormir" aria-pressed="false">Antes de dormir</button>
+        <button class="rsp-mode" type="button" data-rsp-mode="triste" aria-pressed="false">Cuando estés triste</button>
+      </div>
+      <div class="rsp-stage">
+        <div class="rsp-circle" id="rspCircle"><span id="rspWord">Cuando quieras, empezamos, mi amor</span></div>
+      </div>
+      <p class="rsp-count" id="rspCount" role="status"></p>
+      <div class="rsp-controls">
+        <button class="game-start-btn" id="rspStart" type="button">Empezar ♥</button>
+        <button class="rsp-stop" id="rspStop" type="button" hidden>Detener</button>
+      </div>
+      <div class="rsp-final" id="rspFinal" hidden>
+        <p class="game-final" id="rspFinalText"></p>
+      </div>
+    </div>
+
   </section>
 
   <!-- ABRAZO -->
@@ -5475,7 +5918,7 @@
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenMapa', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist', 'screenSegundaMilla', 'screenPrimerBaile', 'screenArbolDeseos', 'screenKaraoke', 'screenMenuDomingo', 'screenTriviaMormon', 'screenAdivinaProfeta', 'screenEstudioFamiliar', 'screenAdivinaHimno', 'screenRetoGratitud'];
+  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenMapa', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist', 'screenSegundaMilla', 'screenPrimerBaile', 'screenArbolDeseos', 'screenKaraoke', 'screenMenuDomingo', 'screenTriviaMormon', 'screenAdivinaProfeta', 'screenEstudioFamiliar', 'screenAdivinaHimno', 'screenRetoGratitud', 'screenGuerrera', 'screenJardin', 'screenRespira', 'screenHistoriaInv', 'screenMimicas'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -5494,8 +5937,10 @@
     screenAhorcado: 'screenDetallitos', screenAniversario: 'screenDetallitos',
     screenQueAmo: 'screenDetallitos',
     screenCupones: 'screenDetallitos', screenBuenasNoches: 'screenDetallitos',
-    screenPoema: 'screenDetallitos',
+    screenPoema: 'screenDetallitos', screenJardin: 'screenDetallitos',
     screenGames: 'screenMenuJuegos', screenConoces: 'screenGames',
+    screenGuerrera: 'screenGames',
+    screenHistoriaInv: 'screenGames', screenMimicas: 'screenGames',
     screenSegundaMilla: 'screenMenuDomingo', screenMenuDomingo: 'screenMenuJuegos',
     screenTriviaMormon: 'screenMenuDomingo', screenAdivinaProfeta: 'screenMenuDomingo',
     screenEstudioFamiliar: 'screenMenuDomingo', screenAdivinaHimno: 'screenMenuDomingo',
@@ -5510,7 +5955,7 @@
     screenNacimiento: 'screenMenuNavidad', screenEscriturasNavidad: 'screenMenuNavidad',
     screenEnojada: 'screenMenuSueltos',
     screenTriste: 'screenMenuSueltos', screenExtranes: 'screenMenuSueltos',
-    screenDormir: 'screenMenuSueltos',
+    screenDormir: 'screenMenuSueltos', screenRespira: 'screenMenuSueltos',
     screenPlaylist: 'screenMenuJuegos', screenKaraoke: 'screenMenuJuegos',
     screenPrimerBaile: 'screenMenuHistoria', screenArbolDeseos: 'screenMenuHistoria',
     screenMenuJuegos: 'screenMenu', screenMenuHistoria: 'screenMenu',
@@ -10414,7 +10859,12 @@
     screenKaraoke: 'screenKaraoke',
     screenPrimerBaile: 'screenPrimerBaile',
     screenArbolDeseos: 'screenArbolDeseos',
-    screenPlaylist: 'screenPlaylist'
+    screenPlaylist: 'screenPlaylist',
+    screenGuerrera: 'screenGames',
+    screenHistoriaInv: 'screenGames',
+    screenMimicas: 'screenGames',
+    screenJardin: 'screenDetallitos',
+    screenRespira: 'screenRespira'
   };
   function updateNavCurrent(){
     var active = document.querySelector('.game-card.active');
@@ -11164,6 +11614,861 @@
     renderEnamoraCount();
   }
 
+  // ===== Naomi, la guerrera del amor =====
+  var GW_KEY = 'guerrera-del-amor-naomi-v1';
+  var GW_LEVELS = [
+    { name:'La Tristeza', icon:'🌦', sub:'Nivel 1 · La nubecita gris', hp:55, dmgMin:5, dmgMax:8,
+      intro:'Una nubecita gris se plantó en tu camino, mi amor: quiere convencerte de que el sol ya no va a salir. Pero tú sabes que sí sale… y que sale para ti.',
+      attack:'La Tristeza deja caer una llovizna fría sobre ti.',
+      winTitle:'¡La Tristeza se transformó!',
+      win:'Al recibir tanto amor, la nubecita se abrió y dejó pasar el sol: la Tristeza se convirtió en Consuelo. Resulta que hasta las nubes grises, cuando se les ama, riegan flores.' },
+    { name:'La Duda', icon:'?', sub:'Nivel 2 · La vocecita del «¿y si no?»', hp:65, dmgMin:6, dmgMax:9,
+      intro:'Una vocecita insistente te sigue los pasos preguntando «¿y si no puedes? ¿y si no sale bien?». Respira, mi guerrera: esa voz se calla cuando das el primer paso.',
+      attack:'La Duda te susurra al oído: «¿y si no puedes?»',
+      winTitle:'¡La Duda se transformó!',
+      win:'Cada «¿y si no?» se te volvió un «¿y si sí?»: la Duda se convirtió en Confianza. Así se camina la vida, mi amor: un paso de fe a la vez.' },
+    { name:'El Miedo', icon:'🌑', sub:'Nivel 3 · La sombra que se agranda', hp:75, dmgMin:7, dmgMax:10,
+      intro:'Una sombra enorme tapa el camino… pero mírala bien: es grande solo porque está cerca de la luz. Avanza despacito, que las sombras no pueden tocarte el corazón.',
+      attack:'El Miedo alarga su sombra hacia ti, queriendo verte temblar.',
+      winTitle:'¡El Miedo se transformó!',
+      win:'Diste un paso, y otro, y la sombra se hizo chiquita hasta caber bajo tu zapato: el Miedo se convirtió en Valor. Valiente no es la que no tiembla, mi amor: es la que avanza temblando.' },
+    { name:'El Enojo', icon:'🔥', sub:'Nivel 4 · La llamita impaciente', hp:85, dmgMin:8, dmgMax:11,
+      intro:'Una llamita impaciente brinca de un lado a otro, quemando antes de calentar. No la pelees con fuego, mi vida: a esta se le gana con agua mansa y palabras suaves.',
+      attack:'El Enojo avienta una chispa impaciente que salta hacia ti.',
+      winTitle:'¡El Enojo se transformó!',
+      win:'La llamita, al sentirse escuchada, bajó la voz y se volvió fogata buena: el Enojo se convirtió en Calma. Ahora calienta en vez de quemar, como las tardes juntitos en casa.' },
+    { name:'El Odio', icon:'🖤', sub:'Nivel 5 · El corazón endurecido', hp:95, dmgMin:9, dmgMax:12,
+      intro:'Este es el más pesado de todos, mi amor: un corazón que se endureció porque olvidó cómo se siente ser amado. No se rompe a golpes: se ablanda a fuerza de amor terco, del tuyo.',
+      attack:'El Odio lanza una palabra fría y pesada, de esas que quieren quedarse a vivir en el pecho.',
+      winTitle:'¡El Odio se transformó!',
+      win:'Golpe a golpe de amor, la piedra se fue haciendo corazón otra vez: el Odio se convirtió en Amor, y hasta te dio las gracias entre lágrimas. Nadie es caso perdido para un corazón como el tuyo, mi guerrera.' },
+    { name:'El Guardián de la Torre', icon:'🗝', sub:'Nivel final · La torre donde espera Hagot', hp:110, dmgMin:9, dmgMax:12,
+      intro:'En lo alto de la torre, el Guardián de la Puerta Cerrada custodia la llave y no me deja salir. No es malo, mi amor: es que nunca ha visto un amor de verdad y no cree que exista. Muéstrale uno.',
+      attack:'El Guardián golpea la puerta de la torre, tratando de asustarte.',
+      winTitle:'¡La torre se abrió!',
+      win:'El Guardián, con los ojos llorosos, te entregó la llave: «Si esto es el amor… entonces sí existe, y es más fuerte que mi puerta». Y la puerta se abrió, mi amor.' }
+  ];
+  var GW_POWERS = [
+    { name:'La Oración', verse:'«Orad sin cesar».', src:'1 Tesalonicenses 5:17 · Santa Biblia Reina-Valera 2009', fx:'Recuperas 20 de vida: hablar con el Padre Celestial siempre fortalece.', cd:4, kind:'oracion' },
+    { name:'La Paciencia', verse:'«En vuestra paciencia poseeréis vuestras almas».', src:'Lucas 21:19 · Santa Biblia Reina-Valera 2009', fx:'El enemigo falla sus próximos 2 ataques: no todo se gana a golpes.', cd:5, kind:'paciencia' },
+    { name:'El Perdón', verse:'«Perdonándoos unos a otros, como Dios también os perdonó a vosotros en Cristo».', src:'Efesios 4:32 · Santa Biblia Reina-Valera 2009', fx:'Quita 18 de vida al enemigo y lo debilita: sus golpes bajan 2 de fuerza.', cd:5, kind:'perdon' },
+    { name:'La Gratitud', verse:'«Dad gracias en todo, porque esta es la voluntad de Dios».', src:'1 Tesalonicenses 5:18 · Santa Biblia Reina-Valera 2009', fx:'Recuperas 10 de vida y tu próximo Golpe de amor pega el doble.', cd:4, kind:'gratitud' },
+    { name:'La Fe', verse:'«Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve».', src:'Hebreos 11:1 · Santa Biblia Reina-Valera 2009', fx:'Un golpe de fe purita: quita 24 de vida al enemigo.', cd:4, kind:'fe' }
+  ];
+  var gwSave = { unlocked:1, wins:{}, finished:false };
+  try{
+    var gwSavedRaw = window.localStorage.getItem(GW_KEY);
+    if(gwSavedRaw){
+      var gwParsed = JSON.parse(gwSavedRaw);
+      if(gwParsed && typeof gwParsed.unlocked === 'number') gwSave = gwParsed;
+    }
+  }catch(e){}
+  if(!gwSave.wins) gwSave.wins = {};
+  function gwPersist(){ try{ window.localStorage.setItem(GW_KEY, JSON.stringify(gwSave)); }catch(e){} }
+  function gwRand(min, max){ return min + Math.floor(Math.random() * (max - min + 1)); }
+
+  var gwLevelsEl = document.getElementById('gwLevels');
+  var gwLevelList = document.getElementById('gwLevelList');
+  var gwProgress = document.getElementById('gwProgress');
+  var gwBattleEl = document.getElementById('gwBattle');
+  var gwResultEl = document.getElementById('gwResult');
+  var gwLog = document.getElementById('gwLog');
+  var gwHpN = document.getElementById('gwHpN');
+  var gwHpE = document.getElementById('gwHpE');
+  var gwHpTextN = document.getElementById('gwHpTextN');
+  var gwHpTextE = document.getElementById('gwHpTextE');
+  var gwAvatarN = document.getElementById('gwAvatarN');
+  var gwAvatarE = document.getElementById('gwAvatarE');
+  var gwNameE = document.getElementById('gwNameE');
+  var gwPowersEl = document.getElementById('gwPowers');
+  var gwHugsLeft = document.getElementById('gwHugsLeft');
+  var gwBtnAttack = document.getElementById('gwBtnAttack');
+  var gwBtnShield = document.getElementById('gwBtnShield');
+  var gwBtnPower = document.getElementById('gwBtnPower');
+  var gwBtnHug = document.getElementById('gwBtnHug');
+  var gwBtnFlee = document.getElementById('gwBtnFlee');
+  var gwResultTitle = document.getElementById('gwResultTitle');
+  var gwResultText = document.getElementById('gwResultText');
+  var gwFinalScene = document.getElementById('gwFinalScene');
+  var gwBtnNext = document.getElementById('gwBtnNext');
+  var gwBtnRetry = document.getElementById('gwBtnRetry');
+  var gwBtnLevels = document.getElementById('gwBtnLevels');
+
+  var gw = null; // estado de la batalla en curso
+  var gwTimer = null;
+  var gwLastLevel = 0; // último nivel jugado (para «Siguiente nivel» y «Intentar de nuevo»)
+
+  function gwRenderLevels(){
+    if(!gwLevelList) return;
+    var won = 0;
+    for(var k in gwSave.wins){ if(Object.prototype.hasOwnProperty.call(gwSave.wins, k) && gwSave.wins[k]) won++; }
+    if(gwProgress){
+      gwProgress.textContent = gwSave.finished
+        ? '¡Ya me rescataste, mi amor! La torre quedó atrás… y la boda nos espera. Niveles ganados: 6 de 6 ♥'
+        : 'Niveles ganados: ' + won + ' de 6 · Tu avance se guarda en este dispositivo ♥';
+    }
+    gwLevelList.innerHTML = '';
+    GW_LEVELS.forEach(function(lv, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'gw-level-btn' + (gwSave.wins[i] ? ' is-won' : '');
+      var locked = i >= gwSave.unlocked;
+      b.disabled = locked;
+      b.innerHTML = '<span class="gw-level-ico" aria-hidden="true">' + (locked ? '🔒' : lv.icon) + '</span>' +
+        '<span><span class="gw-level-name">' + lv.name + '</span><span class="gw-level-sub">' + lv.sub + '</span></span>' +
+        '<span class="gw-level-state">' + (gwSave.wins[i] ? 'Ganado ♥' : (locked ? 'Bloqueado' : '¡A luchar!')) + '</span>';
+      b.setAttribute('aria-label', lv.name + (locked ? ' (bloqueado: gana el nivel anterior)' : ''));
+      if(!locked){
+        b.addEventListener('click', function(){ gwStartLevel(i); });
+      }
+      gwLevelList.appendChild(b);
+    });
+  }
+  function gwShowLevels(){
+    if(gwTimer){ clearTimeout(gwTimer); gwTimer = null; }
+    gw = null;
+    if(gwBattleEl) gwBattleEl.hidden = true;
+    if(gwResultEl) gwResultEl.hidden = true;
+    if(gwLevelsEl) gwLevelsEl.hidden = false;
+    gwRenderLevels();
+  }
+  function gwRenderBattle(){
+    if(!gw) return;
+    var lv = GW_LEVELS[gw.level];
+    if(gwAvatarE) gwAvatarE.textContent = lv.icon;
+    if(gwNameE) gwNameE.textContent = lv.name;
+    if(gwHpN) gwHpN.style.width = Math.max(0, Math.round(gw.naomi / 100 * 100)) + '%';
+    if(gwHpE) gwHpE.style.width = Math.max(0, Math.round(gw.foe / lv.hp * 100)) + '%';
+    if(gwHpTextN) gwHpTextN.textContent = 'Vida: ' + Math.max(0, gw.naomi) + ' de 100';
+    if(gwHpTextE) gwHpTextE.textContent = 'Vida: ' + Math.max(0, gw.foe) + ' de ' + lv.hp;
+    if(gwHugsLeft) gwHugsLeft.textContent = gw.hugs;
+    if(gwBtnHug) gwBtnHug.disabled = gw.busy || gw.hugs <= 0;
+    if(gwBtnAttack) gwBtnAttack.disabled = gw.busy;
+    if(gwBtnShield) gwBtnShield.disabled = gw.busy;
+    if(gwBtnPower) gwBtnPower.disabled = gw.busy;
+  }
+  function gwHitFx(el){
+    if(!el) return;
+    el.classList.add('is-hit');
+    setTimeout(function(){ el.classList.remove('is-hit'); }, 240);
+  }
+  function gwStartLevel(i){
+    gwLastLevel = i;
+    var lv = GW_LEVELS[i];
+    gw = {
+      level:i, naomi:100, foe:lv.hp, hugs:2, shield:false, foeCalm:0, foeWeak:0,
+      doubleNext:false, busy:false, cds:GW_POWERS.map(function(){ return 0; })
+    };
+    if(gwLevelsEl) gwLevelsEl.hidden = true;
+    if(gwResultEl) gwResultEl.hidden = true;
+    if(gwBattleEl) gwBattleEl.hidden = false;
+    if(gwPowersEl) gwPowersEl.hidden = true;
+    if(gwLog) gwLog.textContent = lv.intro;
+    gwRenderBattle();
+    window.scrollTo(0, 0);
+  }
+  function gwAfterPlayer(){
+    gwRenderBattle();
+    if(gw.foe <= 0){ gwWin(); return; }
+    gw.busy = true;
+    gwRenderBattle();
+    gwTimer = setTimeout(gwEnemyTurn, 900);
+  }
+  function gwEnemyTurn(){
+    gwTimer = null;
+    if(!gw) return;
+    var scr = document.getElementById('screenGuerrera');
+    if(!scr || !scr.classList.contains('active')){ gw.busy = false; return; }
+    var lv = GW_LEVELS[gw.level];
+    if(gw.foeCalm > 0){
+      gw.foeCalm--;
+      if(gwLog) gwLog.textContent = lv.name + ' se quedó quietecito, respirando: tu paciencia lo desarmó por completo. Tu turno, mi guerrera. ♥';
+    } else {
+      var dmg = gwRand(lv.dmgMin, lv.dmgMax) - gw.foeWeak;
+      if(dmg < 1) dmg = 1;
+      if(gw.shield){
+        dmg = Math.max(1, Math.round(dmg * 0.3));
+        gw.shield = false;
+        if(gwLog) gwLog.textContent = lv.attack + ' Pero tu Escudo de fe lo recibió casi todo: solo te quitó ' + dmg + ' de vida. ¡Bien hecho, mi amor!';
+      } else {
+        if(gwLog) gwLog.textContent = lv.attack + ' Te quitó ' + dmg + ' de vida. Tú puedes, mi guerrera: yo creo en ti.';
+      }
+      gw.naomi -= dmg;
+      gwHitFx(gwAvatarN);
+    }
+    // Los tiempos de espera de los poderes bajan un turno
+    gw.cds = gw.cds.map(function(c){ return c > 0 ? c - 1 : 0; });
+    gw.busy = false;
+    gwRenderBattle();
+    gwRenderPowers();
+    if(gw.naomi <= 0) gwLose();
+  }
+  function gwRenderPowers(){
+    if(!gwPowersEl || !gw) return;
+    gwPowersEl.innerHTML = '';
+    GW_POWERS.forEach(function(p, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'gw-power';
+      var cd = gw.cds[i];
+      b.disabled = gw.busy || cd > 0;
+      b.innerHTML = '<span class="gw-power-name">' + p.name + '</span>' +
+        '<span class="gw-power-verse">' + p.verse + '</span>' +
+        '<span class="gw-power-src">' + p.src + '</span>' +
+        '<span class="gw-power-fx">' + p.fx + '</span>' +
+        (cd > 0 ? '<span class="gw-power-cd">Disponible en ' + cd + (cd === 1 ? ' turno' : ' turnos') + '…</span>' : '');
+      if(!b.disabled){
+        b.addEventListener('click', function(){ gwUsePower(i); });
+      }
+      gwPowersEl.appendChild(b);
+    });
+  }
+  function gwUsePower(i){
+    if(!gw || gw.busy || gw.cds[i] > 0) return;
+    var p = GW_POWERS[i];
+    var lv = GW_LEVELS[gw.level];
+    gw.cds[i] = p.cd;
+    if(gwPowersEl) gwPowersEl.hidden = true;
+    if(p.kind === 'oracion'){
+      gw.naomi = Math.min(100, gw.naomi + 20);
+      if(gwLog) gwLog.textContent = 'Oraste con todo tu corazón, mi amor, y el cielo te abrazó de vuelta: recuperaste 20 de vida. Así se pelea también: de rodillas.';
+    } else if(p.kind === 'paciencia'){
+      gw.foeCalm = 2;
+      if(gwLog) gwLog.textContent = 'Respiraste hondo y esperaste con el corazón tranquilo: ' + lv.name + ' se desarma ante tu paciencia y fallará sus próximos 2 ataques.';
+    } else if(p.kind === 'perdon'){
+      gw.foe -= 18;
+      gw.foeWeak += 2;
+      gwHitFx(gwAvatarE);
+      if(gwLog) gwLog.textContent = 'Perdonaste de corazón, y el perdón hizo lo que ningún golpe logra: ' + lv.name + ' perdió 18 de vida y sus golpes bajaron 2 de fuerza. Perdonar también es de guerreras.';
+    } else if(p.kind === 'gratitud'){
+      gw.naomi = Math.min(100, gw.naomi + 10);
+      gw.doubleNext = true;
+      if(gwLog) gwLog.textContent = 'Diste gracias en medio de la batalla, mi vida: recuperaste 10 de vida y tu próximo Golpe de amor pegará el doble. La gratitud es un superpoder silencioso.';
+    } else if(p.kind === 'fe'){
+      gw.foe -= 24;
+      gwHitFx(gwAvatarE);
+      if(gwLog) gwLog.textContent = '¡Golpe de fe! Creíste sin ver, y tu fe movió lo que parecía imposible: ' + lv.name + ' perdió 24 de vida.';
+    }
+    gwAfterPlayer();
+  }
+  function gwWin(){
+    var lv = GW_LEVELS[gw.level];
+    var wasLast = gw.level === GW_LEVELS.length - 1;
+    gwSave.wins[gw.level] = true;
+    if(gw.level + 2 > gwSave.unlocked) gwSave.unlocked = Math.min(GW_LEVELS.length, gw.level + 2);
+    if(wasLast) gwSave.finished = true;
+    gwPersist();
+    gw = null;
+    if(gwBattleEl) gwBattleEl.hidden = true;
+    if(gwResultEl) gwResultEl.hidden = false;
+    if(gwResultTitle) gwResultTitle.textContent = lv.winTitle;
+    if(gwResultText) gwResultText.textContent = lv.win;
+    if(gwFinalScene) gwFinalScene.hidden = !wasLast;
+    if(gwBtnNext) gwBtnNext.hidden = wasLast;
+    if(gwBtnRetry) gwBtnRetry.hidden = true;
+    window.scrollTo(0, 0);
+  }
+  function gwLose(){
+    var lv = GW_LEVELS[gw.level];
+    gw = null;
+    if(gwBattleEl) gwBattleEl.hidden = true;
+    if(gwResultEl) gwResultEl.hidden = false;
+    if(gwResultTitle) gwResultTitle.textContent = 'Esta vez no, mi guerrera… y no pasa nada ♥';
+    if(gwResultText) gwResultText.textContent = 'Las guerreras de verdad no son las que nunca caen: son las que se levantan, se sacuden el polvito y vuelven a intentarlo. ' + lv.name + ' puede esperar; yo te espero en la torre, sin prisa y sin irme a ningún lado. Descansa, respira… y cuando estés lista, aquí estoy.';
+    if(gwFinalScene) gwFinalScene.hidden = true;
+    if(gwBtnNext) gwBtnNext.hidden = true;
+    if(gwBtnRetry) gwBtnRetry.hidden = false;
+    window.scrollTo(0, 0);
+  }
+  if(gwBtnAttack) gwBtnAttack.addEventListener('click', function(){
+    if(!gw || gw.busy) return;
+    if(gwPowersEl) gwPowersEl.hidden = true;
+    var dmg = gwRand(10, 16);
+    if(gw.doubleNext){ dmg *= 2; gw.doubleNext = false; }
+    gw.foe -= dmg;
+    gwHitFx(gwAvatarE);
+    if(gwLog) gwLog.textContent = '¡Golpe de amor! Directo al corazón de ' + GW_LEVELS[gw.level].name + ': le quitaste ' + dmg + ' de vida. Suavecito pero firme, como todo lo tuyo, mi amor.';
+    gwAfterPlayer();
+  });
+  if(gwBtnShield) gwBtnShield.addEventListener('click', function(){
+    if(!gw || gw.busy) return;
+    if(gwPowersEl) gwPowersEl.hidden = true;
+    gw.shield = true;
+    if(gwLog) gwLog.textContent = 'Levantaste tu Escudo de fe, mi amor: el siguiente golpe enemigo casi no te va a doler. Tu fe siempre ha sido tu mejor defensa.';
+    gwAfterPlayer();
+  });
+  if(gwBtnPower) gwBtnPower.addEventListener('click', function(){
+    if(!gw || gw.busy) return;
+    gwRenderPowers();
+    if(gwPowersEl) gwPowersEl.hidden = !gwPowersEl.hidden;
+  });
+  if(gwBtnHug) gwBtnHug.addEventListener('click', function(){
+    if(!gw || gw.busy || gw.hugs <= 0) return;
+    if(gwPowersEl) gwPowersEl.hidden = true;
+    gw.hugs--;
+    gw.naomi = Math.min(100, gw.naomi + 26);
+    if(gwLog) gwLog.textContent = 'Te abrazaste fuerte, como te abrazo yo, y el corazón se te llenó de nuevo: recuperaste 26 de vida. Te quedan ' + gw.hugs + (gw.hugs === 1 ? ' abrazo' : ' abrazos') + ', úsalos con cariño.';
+    gwAfterPlayer();
+  });
+  if(gwBtnFlee) gwBtnFlee.addEventListener('click', gwShowLevels);
+  if(gwBtnLevels) gwBtnLevels.addEventListener('click', gwShowLevels);
+  if(gwBtnNext) gwBtnNext.addEventListener('click', function(){
+    gwStartLevel(Math.min(GW_LEVELS.length - 1, gwLastLevel + 1));
+  });
+  if(gwBtnRetry) gwBtnRetry.addEventListener('click', function(){
+    gwStartLevel(gwLastLevel);
+  });
+  gwRenderLevels();
+
+  // ===== Nuestra historia inventada =====
+  // Un cuento que Naomi y Hagot inventan juntos, frase a frase y por turnos.
+  // Se guarda en este dispositivo, con los cuentos terminados en un archivito.
+  var HI_KEY = 'historia-inventada-naomi-v1';
+  var HI_OPENINGS = [
+    'Había una vez una luna chiquita que cada noche bajaba un ratito a la Tierra para escuchar las historias de quienes se aman de verdad.',
+    'En un pueblito donde las campanas sonaban dos veces —una para llamar y otra para despedirse— vivía un relojero que guardaba el tiempo en frascos de cristal.',
+    'La mañana en que el mar amaneció de color rosa, una niña encontró en la arena una llave que no abría ninguna puerta… todavía.',
+    'Don Aurelio, el farero más viejo de la costa, juraba que su faro no alumbraba barcos: alumbraba el camino de vuelta a casa para quien se hubiera perdido.',
+    'En el último vagón de un tren que ya no pasaba por ninguna estación viajaba un zorro de bufanda azul que coleccionaba amaneceres.'
+  ];
+  var HI_IDEAS = [
+    'Y entonces apareció un personaje nuevo que nadie esperaba…',
+    'De pronto, algo pequeño y brillante cayó del cielo justo frente a ellos.',
+    'Pero había un problema: solo quedaba una hora antes de que amaneciera.',
+    'Un animalito se acercó y, para sorpresa de todos, empezó a hablar.',
+    'En el bolsillo apareció una notita que decía: «Sigan la música».',
+    'El camino se dividió en dos, y cada sendero llevaba a un lugar distinto.',
+    'Empezó a llover, pero aquella lluvia olía a flores.',
+    'Alguien tocó la puerta tres veces, muy despacito.',
+    'Descubrieron que el mapa estaba al revés… y que así sí se entendía todo.',
+    'La luna les guiñó un ojo y les señaló una escalera escondida entre las nubes.',
+    'Sin decir una palabra, se tomaron de la mano y decidieron confiar.',
+    'Justo en ese momento sonó una campanita que nadie había visto antes.'
+  ];
+  var hiData = { lines: null, archive: [] };
+  try{
+    var hiRaw = window.localStorage.getItem(HI_KEY);
+    if(hiRaw){
+      var hiParsed = JSON.parse(hiRaw);
+      if(hiParsed && Array.isArray(hiParsed.archive)) hiData = hiParsed;
+    }
+  }catch(e){}
+  if(!Array.isArray(hiData.archive)) hiData.archive = [];
+  function hiPersist(){ try{ window.localStorage.setItem(HI_KEY, JSON.stringify(hiData)); }catch(e){} }
+  function hiFreshLines(){
+    var op = HI_OPENINGS[Math.floor(Math.random() * HI_OPENINGS.length)];
+    return [{ who:'Inicio', text: op }];
+  }
+  if(!Array.isArray(hiData.lines) || !hiData.lines.length){
+    hiData.lines = hiFreshLines();
+    hiPersist();
+  }
+  var hiAuthor = 'Naomi';
+  var hiLastIdea = -1;
+  var hiNewArmed = false;
+  var hiBook = document.getElementById('hiBook');
+  var hiTurn = document.getElementById('hiTurn');
+  var hiAuthorN = document.getElementById('hiAuthorN');
+  var hiAuthorH = document.getElementById('hiAuthorH');
+  var hiInput = document.getElementById('hiInput');
+  var hiMsg = document.getElementById('hiMsg');
+  var hiAddBtn = document.getElementById('hiAddBtn');
+  var hiIdeaBtn = document.getElementById('hiIdeaBtn');
+  var hiIdea = document.getElementById('hiIdea');
+  var hiFullBtn = document.getElementById('hiFullBtn');
+  var hiFull = document.getElementById('hiFull');
+  var hiFullText = document.getElementById('hiFullText');
+  var hiNewBtn = document.getElementById('hiNewBtn');
+  var hiArchive = document.getElementById('hiArchive');
+  var hiArchiveList = document.getElementById('hiArchiveList');
+  function hiFullStoryText(lines){
+    return lines.map(function(l){ return l.text; }).join(' ');
+  }
+  function hiRender(){
+    if(hiBook){
+      hiBook.innerHTML = '';
+      hiData.lines.forEach(function(l){
+        var p = document.createElement('p');
+        var tag = document.createElement('span');
+        tag.className = 'hi-who-tag';
+        tag.textContent = l.who === 'Inicio' ? 'Así empieza' : l.who;
+        p.appendChild(tag);
+        p.appendChild(document.createTextNode(l.text));
+        hiBook.appendChild(p);
+      });
+    }
+    if(hiTurn){
+      var extra = hiData.lines.length - 1;
+      hiTurn.textContent = (extra > 0 ? 'Ya llevamos ' + extra + (extra === 1 ? ' frase' : ' frases') + ' entre los dos. ' : '') +
+        'Ahora escribe: ' + hiAuthor + '. Si escribe el otro, toca su nombre.';
+    }
+    if(hiAuthorN) hiAuthorN.setAttribute('aria-pressed', hiAuthor === 'Naomi' ? 'true' : 'false');
+    if(hiAuthorH) hiAuthorH.setAttribute('aria-pressed', hiAuthor === 'Hagot' ? 'true' : 'false');
+    if(hiFullText) hiFullText.textContent = hiFullStoryText(hiData.lines);
+    if(hiArchive && hiArchiveList){
+      hiArchive.hidden = !hiData.archive.length;
+      hiArchiveList.innerHTML = '';
+      hiData.archive.slice().reverse().forEach(function(item){
+        var box = document.createElement('div');
+        box.className = 'hi-archive-item';
+        var d = document.createElement('p');
+        d.className = 'hi-archive-date';
+        d.textContent = item.date || '';
+        var t = document.createElement('p');
+        t.className = 'hi-archive-text';
+        t.textContent = hiFullStoryText(item.lines || []);
+        box.appendChild(d);
+        box.appendChild(t);
+        hiArchiveList.appendChild(box);
+      });
+    }
+  }
+  function hiSetAuthor(who){
+    hiAuthor = who;
+    hiNewArmed = false;
+    if(hiNewBtn) hiNewBtn.textContent = 'Empezar un cuento nuevo';
+    hiRender();
+  }
+  if(hiAuthorN) hiAuthorN.addEventListener('click', function(){ hiSetAuthor('Naomi'); });
+  if(hiAuthorH) hiAuthorH.addEventListener('click', function(){ hiSetAuthor('Hagot'); });
+  if(hiAddBtn) hiAddBtn.addEventListener('click', function(){
+    var text = hiInput ? hiInput.value.trim() : '';
+    if(!text){
+      if(hiMsg) hiMsg.textContent = 'Escribe primero tu frase, mi amor, aunque sea cortita. ♥';
+      return;
+    }
+    if(!/[.!?…]$/.test(text)) text += '.';
+    hiData.lines.push({ who: hiAuthor, text: text });
+    hiPersist();
+    if(hiInput) hiInput.value = '';
+    if(hiMsg) hiMsg.textContent = '¡Frase agregada! El cuento crece, escrito a dos corazones. ♥';
+    hiNewArmed = false;
+    if(hiNewBtn) hiNewBtn.textContent = 'Empezar un cuento nuevo';
+    hiAuthor = (hiAuthor === 'Naomi') ? 'Hagot' : 'Naomi'; // sigue el otro
+    hiRender();
+  });
+  if(hiIdeaBtn) hiIdeaBtn.addEventListener('click', function(){
+    var i;
+    do{ i = Math.floor(Math.random() * HI_IDEAS.length); } while(HI_IDEAS.length > 1 && i === hiLastIdea);
+    hiLastIdea = i;
+    if(hiIdea){
+      hiIdea.textContent = 'Idea para seguir: ' + HI_IDEAS[i];
+      hiIdea.hidden = false;
+    }
+  });
+  if(hiFullBtn) hiFullBtn.addEventListener('click', function(){
+    if(!hiFull) return;
+    hiFull.hidden = !hiFull.hidden;
+    hiFullBtn.textContent = hiFull.hidden ? 'Leer el cuento completo' : 'Esconder el cuento completo';
+    if(!hiFull.hidden) hiRender();
+  });
+  if(hiNewBtn) hiNewBtn.addEventListener('click', function(){
+    if(!hiNewArmed){
+      hiNewArmed = true;
+      hiNewBtn.textContent = 'Toca otra vez para guardar este cuento y empezar otro ♥';
+      if(hiMsg) hiMsg.textContent = 'Este cuento se guardará en «Nuestros cuentos anteriores» para que nunca se pierda.';
+      return;
+    }
+    if(hiData.lines.length > 1){
+      var fecha = '';
+      try{ fecha = new Date().toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' }); }catch(e){}
+      hiData.archive.push({ date: fecha, lines: hiData.lines });
+    }
+    hiData.lines = hiFreshLines();
+    hiPersist();
+    hiNewArmed = false;
+    hiNewBtn.textContent = 'Empezar un cuento nuevo';
+    hiAuthor = 'Naomi';
+    if(hiInput) hiInput.value = '';
+    if(hiIdea) hiIdea.hidden = true;
+    if(hiMsg) hiMsg.textContent = '¡Cuento nuevo, mi amor! La primera línea ya está puesta: a inventar. ♥';
+    hiRender();
+    window.scrollTo(0, 0);
+  });
+  hiRender();
+
+  // ===== Mímicas para dos =====
+  // Uno actúa una palabra o frase sin hablar; el otro adivina contra el reloj.
+  var MM_WORDS = [
+    'Besar la frente de alguien que duerme',
+    'Hacer cosquillas sin piedad',
+    'Cargar las bolsas del mandado',
+    'Peinar a una abuelita con mucho cuidado',
+    'Hornear un pastel que se está quemando',
+    'Regar las plantas cantando bajito',
+    'Buscar las llaves por toda la casa',
+    'Abrazar a alguien que está llorando',
+    'Bailar sin música en la cocina',
+    'Orar de rodillas antes de dormir',
+    'Leer las Escrituras en voz alta',
+    'Tocar la guitarra bajo la luna',
+    'Servir chocolate caliente a toda la familia',
+    'Doblar la ropa recién lavada',
+    'Empujar un columpio cada vez más alto',
+    'Soplar las velitas de un pastel enorme',
+    'Escribir una cartita a escondidas',
+    'Arrullar a un bebé que no deja de llorar',
+    'Barrer el patio muy temprano',
+    'Compartir el último pedazo de pastel',
+    'Remar un botecito en un lago tranquilo',
+    'Plantar un arbolito entre dos',
+    'Acomodar las sillas después de una reunión',
+    'Tejer una bufanda larguísima',
+    'Mirar las estrellas acostados en el pasto',
+    'Aplaudir bajito para no despertar a nadie',
+    'Caminar de puntitas por la casa dormida',
+    'Hacer burbujas de jabón gigantes',
+    'Pintar un cuadro de un atardecer',
+    'Amarrarse las agujetas con los ojos cerrados'
+  ];
+  var mmGood = 0, mmBad = 0, mmRound = 1;
+  var mmSecs = 60, mmLeft = 0, mmTimer = null, mmEndAt = 0;
+  var mmOrder = [], mmIdx = 0, mmCurrent = '';
+  var mmGoodEl = document.getElementById('mmGood');
+  var mmBadEl = document.getElementById('mmBad');
+  var mmRoundEl = document.getElementById('mmRound');
+  var mmCover = document.getElementById('mmCover');
+  var mmPlay = document.getElementById('mmPlay');
+  var mmWordEl = document.getElementById('mmWord');
+  var mmTimerEl = document.getElementById('mmTimer');
+  var mmTimerState = document.getElementById('mmTimerState');
+  var mmMsg = document.getElementById('mmMsg');
+  var mmShowBtn = document.getElementById('mmShowBtn');
+  var mmYesBtn = document.getElementById('mmYesBtn');
+  var mmNoBtn = document.getElementById('mmNoBtn');
+  var mmRestartBtn = document.getElementById('mmRestartBtn');
+  function mmShuffle(){
+    mmOrder = MM_WORDS.map(function(_, i){ return i; });
+    for(var i = mmOrder.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = mmOrder[i]; mmOrder[i] = mmOrder[j]; mmOrder[j] = t;
+    }
+    mmIdx = 0;
+  }
+  mmShuffle();
+  function mmHud(){
+    if(mmGoodEl) mmGoodEl.textContent = mmGood;
+    if(mmBadEl) mmBadEl.textContent = mmBad;
+    if(mmRoundEl) mmRoundEl.textContent = mmRound;
+  }
+  function mmStopTimer(){
+    if(mmTimer){ clearInterval(mmTimer); mmTimer = null; }
+  }
+  function mmShowCover(){
+    mmStopTimer();
+    if(mmCover) mmCover.hidden = false;
+    if(mmPlay) mmPlay.hidden = true;
+    if(mmYesBtn) mmYesBtn.disabled = true;
+    if(mmNoBtn) mmNoBtn.disabled = true;
+    mmHud();
+  }
+  function mmTick(){
+    var screen = document.getElementById('screenMimicas');
+    if(!screen || !screen.classList.contains('active')){ mmShowCover(); return; }
+    mmLeft = Math.max(0, Math.ceil((mmEndAt - Date.now()) / 1000));
+    if(mmTimerEl){
+      mmTimerEl.textContent = mmLeft;
+      mmTimerEl.classList.toggle('is-low', mmLeft <= 10);
+    }
+    if(mmLeft <= 0){
+      mmStopTimer();
+      if(mmTimerState) mmTimerState.textContent = '¡Se acabó el tiempo! Marquen si la adivinó o no, sin pena. ♥';
+    }
+  }
+  function mmMark(good){
+    mmStopTimer();
+    if(good){
+      mmGood++;
+      if(mmMsg) mmMsg.textContent = '¡Sí era «' + mmCurrent + '»! Punto para ustedes, qué buen equipo hacen. ♥';
+    }else{
+      mmBad++;
+      if(mmMsg) mmMsg.textContent = 'Esa estuvo difícil: era «' + mmCurrent + '». A la siguiente, seguro que sí. ♥';
+    }
+    mmRound++;
+    mmIdx++;
+    if(mmIdx >= mmOrder.length) mmShuffle();
+    mmShowCover();
+  }
+  if(mmShowBtn) mmShowBtn.addEventListener('click', function(){
+    if(mmIdx >= mmOrder.length) mmShuffle();
+    mmCurrent = MM_WORDS[mmOrder[mmIdx]];
+    if(mmWordEl) mmWordEl.textContent = mmCurrent;
+    if(mmCover) mmCover.hidden = true;
+    if(mmPlay) mmPlay.hidden = false;
+    if(mmMsg) mmMsg.textContent = '';
+    if(mmYesBtn) mmYesBtn.disabled = false;
+    if(mmNoBtn) mmNoBtn.disabled = false;
+    if(mmTimerState) mmTimerState.textContent = 'El tiempo corre… ¡a actuar!';
+    mmEndAt = Date.now() + mmSecs * 1000;
+    mmLeft = mmSecs;
+    if(mmTimerEl){ mmTimerEl.textContent = mmLeft; mmTimerEl.classList.remove('is-low'); }
+    mmStopTimer();
+    mmTimer = setInterval(mmTick, 250);
+  });
+  if(mmYesBtn) mmYesBtn.addEventListener('click', function(){ mmMark(true); });
+  if(mmNoBtn) mmNoBtn.addEventListener('click', function(){ mmMark(false); });
+  if(mmRestartBtn) mmRestartBtn.addEventListener('click', function(){
+    mmGood = 0; mmBad = 0; mmRound = 1;
+    if(mmMsg) mmMsg.textContent = 'Marcador nuevo, partida nueva. ¡A jugar, mi amor! ♥';
+    mmShowCover();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-mm-time]'), function(btn){
+    btn.addEventListener('click', function(){
+      mmSecs = parseInt(btn.getAttribute('data-mm-time'), 10) || 60;
+      Array.prototype.forEach.call(document.querySelectorAll('[data-mm-time]'), function(b){
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+    });
+  });
+  mmShowCover();
+
+  // ===== Nuestro jardín =====
+  var JD_KEY = 'nuestro-jardin-naomi-v1';
+  var JD_SEEDS = [
+    { name:'Amor', flower:'🌹', msg:'El amor que se riega todos los días no se marchita: echa raíz, da sombra y un día da fruto. Gracias por regar el nuestro con tanta constancia, mi vida: contigo, hasta el desierto florece.' },
+    { name:'Fe', flower:'🌻', msg:'La fe es como esta flor: busca la luz aun antes de verla salir. Tu fe, mi amor, ha iluminado nuestra casa entera más veces de las que imaginas. Nunca dejes de mirar hacia la Luz.' },
+    { name:'Paciencia', flower:'🌷', msg:'La paciencia no es esperar con los brazos cruzados: es amar mientras se espera. Todo lo que vale la pena llega a su tiempo, ni un minuto antes ni uno después… como esta flor, que hoy por fin se abrió para ti.' },
+    { name:'Perdón', flower:'🌸', msg:'Perdonar es como abrir la mano que apretaba una flor: al soltarla, su perfume se queda en los dos. Gracias por tu corazón que perdona rápido y ama sin guardar cuentas, mi amor.' },
+    { name:'Gratitud', flower:'🌼', msg:'La gratitud convierte lo que tenemos en suficiente, y lo suficiente en abundancia. Hoy agradezco a Dios por lo grande y por lo chiquito… y en las dos listas, mi vida, vas tú primero.' },
+    { name:'Esperanza', flower:'🪻', msg:'La esperanza es la semilla que se siembra de noche, confiando en la mañana. Lo que viene para nosotros, mi amor, es más bonito de lo que alcanzamos a imaginar: ya lo verás, ya lo veremos.' }
+  ];
+  var JD_STAGE_NAMES = ['Semilla', 'Brote', 'Planta', '¡Floreció!'];
+  var JD_MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  var JD_PLOTS = 6;
+  var jdPlots = [];
+  for(var jdi = 0; jdi < JD_PLOTS; jdi++) jdPlots.push(null);
+  try{
+    var jdSavedRaw = window.localStorage.getItem(JD_KEY);
+    if(jdSavedRaw){
+      var jdParsed = JSON.parse(jdSavedRaw);
+      if(jdParsed && jdParsed.length){
+        for(var jdk = 0; jdk < JD_PLOTS && jdk < jdParsed.length; jdk++) jdPlots[jdk] = jdParsed[jdk];
+      }
+    }
+  }catch(e){}
+  var jdSeedSel = 0;
+  var jdHarvestIdx = -1;
+  var jdSeedsEl = document.getElementById('jdSeeds');
+  var jdGridEl = document.getElementById('jdGrid');
+  var jdStatus = document.getElementById('jdStatus');
+  var jdMsg = document.getElementById('jdMsg');
+  var jdMsgTitle = document.getElementById('jdMsgTitle');
+  var jdMsgText = document.getElementById('jdMsgText');
+  var jdMsgBtn = document.getElementById('jdMsgBtn');
+  function jdToday(){
+    var d = new Date();
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  }
+  function jdFormatDate(iso){
+    var parts = String(iso || '').split('-');
+    if(parts.length !== 3) return '';
+    var day = parseInt(parts[2], 10), mon = parseInt(parts[1], 10), yr = parseInt(parts[0], 10);
+    if(!day || mon < 1 || mon > 12) return '';
+    return day + ' de ' + JD_MONTHS[mon - 1] + ' de ' + yr;
+  }
+  function jdStage(plant){
+    if(!plant) return 0;
+    var n = (plant.days || []).length;
+    return n > 3 ? 3 : n;
+  }
+  function jdPersist(){ try{ window.localStorage.setItem(JD_KEY, JSON.stringify(jdPlots)); }catch(e){} }
+  function jdShowMsg(title, text, showBtn){
+    if(jdMsgTitle) jdMsgTitle.textContent = title;
+    if(jdMsgText) jdMsgText.textContent = text;
+    if(jdMsgBtn) jdMsgBtn.hidden = !showBtn;
+    if(jdMsg) jdMsg.hidden = false;
+  }
+  function jdRender(){
+    if(jdSeedsEl){
+      jdSeedsEl.innerHTML = '';
+      JD_SEEDS.forEach(function(seed, i){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'jd-seed';
+        b.setAttribute('aria-pressed', i === jdSeedSel ? 'true' : 'false');
+        b.textContent = seed.flower + ' Semilla de ' + seed.name;
+        b.addEventListener('click', function(){
+          jdSeedSel = i;
+          jdRender();
+          if(jdStatus) jdStatus.textContent = 'Semilla de ' + seed.name + ' elegida, mi amor: ahora toca una parcelita vacía para sembrarla. ♥';
+        });
+        jdSeedsEl.appendChild(b);
+      });
+    }
+    if(!jdGridEl) return;
+    jdGridEl.innerHTML = '';
+    jdPlots.forEach(function(plant, idx){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'jd-plot';
+      if(!plant){
+        b.innerHTML = '<span class="jd-plant" aria-hidden="true">✿</span><span class="jd-plot-name">Parcelita vacía</span><span class="jd-plot-hint">Toca para sembrar aquí</span>';
+        b.setAttribute('aria-label', 'Parcelita vacía: toca para sembrar la semilla elegida');
+      } else {
+        var seed = JD_SEEDS[plant.seed] || JD_SEEDS[0];
+        var stage = jdStage(plant);
+        var icon = stage === 0 ? '🌰' : (stage === 1 ? '🌱' : (stage === 2 ? '🌿' : seed.flower));
+        var wateredToday = (plant.days || []).indexOf(jdToday()) !== -1;
+        var hint = stage === 3 ? 'Toca para leer su mensajito' : (wateredToday ? 'Ya tomó su agüita hoy ♥' : 'Toca para regarla 💧');
+        b.innerHTML = '<span class="jd-plant" aria-hidden="true">' + icon + '</span>' +
+          '<span class="jd-plot-name">' + seed.name + '</span>' +
+          '<span class="jd-plot-stage">' + JD_STAGE_NAMES[stage] + '</span>' +
+          '<span class="jd-plot-date">Sembrada el ' + jdFormatDate(plant.planted) + '</span>' +
+          '<span class="jd-plot-hint">' + hint + '</span>';
+        b.setAttribute('aria-label', 'Plantita de ' + seed.name + ', etapa ' + JD_STAGE_NAMES[stage] + '. ' + hint);
+      }
+      b.addEventListener('click', function(){ jdTapPlot(idx); });
+      jdGridEl.appendChild(b);
+    });
+  }
+  function jdTapPlot(idx){
+    var plant = jdPlots[idx];
+    var today = jdToday();
+    if(jdMsg) jdMsg.hidden = true;
+    jdHarvestIdx = -1;
+    if(!plant){
+      jdPlots[idx] = { seed: jdSeedSel, planted: today, days: [] };
+      jdPersist();
+      jdRender();
+      if(jdStatus) jdStatus.textContent = '¡Sembraste ' + JD_SEEDS[jdSeedSel].name + ', mi vida! Vuelve mañana y riégala tocándola: crecerá un poquito cada día. ♥';
+      return;
+    }
+    var seed = JD_SEEDS[plant.seed] || JD_SEEDS[0];
+    var stage = jdStage(plant);
+    if(stage === 3){
+      jdHarvestIdx = idx;
+      jdShowMsg('Tu flor de ' + seed.name + ' te dejó este mensajito ' + seed.flower, seed.msg, true);
+      if(jdStatus) jdStatus.textContent = '¡Tu plantita de ' + seed.name + ' ya floreció, mi amor! ♥';
+      return;
+    }
+    if((plant.days || []).indexOf(today) !== -1){
+      if(jdStatus) jdStatus.textContent = 'Tu plantita de ' + seed.name + ' ya tomó su agüita de hoy, mi amor. Las cosas buenas crecen despacito: vuelve mañana y crecerá otro poquito. ♥';
+      return;
+    }
+    plant.days = plant.days || [];
+    plant.days.push(today);
+    jdPersist();
+    var newStage = jdStage(plant);
+    jdRender();
+    if(newStage === 3){
+      jdHarvestIdx = idx;
+      jdShowMsg('¡Tu flor de ' + seed.name + ' floreció! ' + seed.flower, seed.msg, true);
+      if(jdStatus) jdStatus.textContent = '¡Floreció, mi vida! Tu constancia de cada día dio su flor. ♥';
+    } else {
+      if(jdStatus) jdStatus.textContent = 'Regaste tu plantita de ' + seed.name + ', mi amor: hoy creció a su etapa de ' + JD_STAGE_NAMES[newStage].toLowerCase() + '. Así, día con día, como lo nuestro. ♥';
+    }
+  }
+  if(jdMsgBtn) jdMsgBtn.addEventListener('click', function(){
+    if(jdHarvestIdx >= 0){
+      jdPlots[jdHarvestIdx] = null;
+      jdPersist();
+    }
+    jdHarvestIdx = -1;
+    if(jdMsg) jdMsg.hidden = true;
+    jdRender();
+    if(jdStatus) jdStatus.textContent = 'La flor quedó guardada en tu corazón, mi amor, y la parcelita está libre para sembrar algo nuevo. ♥';
+  });
+  jdRender();
+
+  // ===== Respira conmigo =====
+  var RSP_MODES = {
+    calma: { inS:4, outS:4, breaths:6,
+      final:'Así, despacito, todo se acomoda, mi amor. Gracias por respirar conmigo: estoy contigo en cada respiro, en los días fáciles y en los que no lo son. Te amo.' },
+    dormir: { inS:4, outS:6, breaths:8,
+      final:'Que descanses, mi vida. Suelta el día poquito a poquito, como soltaste el aire: mañana será otro día y yo seguiré aquí, cerquita, cuidando tu sueño y tu corazón.' },
+    triste: { inS:3, outS:5, breaths:6,
+      final:'No tienes que estar bien ahorita, mi amor, ni tienes que explicarme nada. Solo quédate aquí, respirando conmigo, hasta que la nube pase… porque pasa, mi vida, siempre pasa, y yo no me voy a ningún lado.' }
+  };
+  var rspMode = 'calma';
+  var rspRunning = false;
+  var rspTimer = null;
+  var rspBreath = 0;
+  var rspCircle = document.getElementById('rspCircle');
+  var rspWord = document.getElementById('rspWord');
+  var rspCount = document.getElementById('rspCount');
+  var rspStart = document.getElementById('rspStart');
+  var rspStopBtn = document.getElementById('rspStop');
+  var rspFinal = document.getElementById('rspFinal');
+  var rspFinalText = document.getElementById('rspFinalText');
+  var rspModesEl = document.getElementById('rspModes');
+  function rspScreenActive(){
+    var scr = document.getElementById('screenRespira');
+    return !!(scr && scr.classList.contains('active'));
+  }
+  function rspSetCircle(scale, secs){
+    if(!rspCircle) return;
+    rspCircle.style.transitionDuration = secs + 's';
+    rspCircle.style.transform = 'scale(' + scale + ')';
+  }
+  function rspStopSession(showIdle){
+    if(rspTimer){ clearTimeout(rspTimer); rspTimer = null; }
+    rspRunning = false;
+    rspSetCircle(1, 0.6);
+    if(rspStart) rspStart.hidden = false;
+    if(rspStopBtn) rspStopBtn.hidden = true;
+    if(showIdle){
+      if(rspWord) rspWord.textContent = 'Cuando quieras, empezamos, mi amor';
+      if(rspCount) rspCount.textContent = '';
+    }
+  }
+  function rspFinish(){
+    rspStopSession(false);
+    var m = RSP_MODES[rspMode];
+    if(rspWord) rspWord.textContent = 'Lo hiciste muy bien, mi amor ♥';
+    if(rspCount) rspCount.textContent = 'Respiramos juntitos ' + m.breaths + ' veces.';
+    if(rspFinalText) rspFinalText.textContent = m.final;
+    if(rspFinal) rspFinal.hidden = false;
+  }
+  function rspInhale(){
+    if(!rspRunning) return;
+    if(!rspScreenActive()){ rspStopSession(false); return; }
+    var m = RSP_MODES[rspMode];
+    rspBreath++;
+    if(rspWord) rspWord.textContent = 'Inhala…';
+    if(rspCount) rspCount.textContent = 'Respiración ' + rspBreath + ' de ' + m.breaths + ' · despacito, mi amor';
+    rspSetCircle(1.45, m.inS);
+    rspTimer = setTimeout(rspExhale, m.inS * 1000);
+  }
+  function rspExhale(){
+    rspTimer = null;
+    if(!rspRunning) return;
+    if(!rspScreenActive()){ rspStopSession(false); return; }
+    var m = RSP_MODES[rspMode];
+    if(rspWord) rspWord.textContent = 'Exhala…';
+    rspSetCircle(1, m.outS);
+    rspTimer = setTimeout(function(){
+      rspTimer = null;
+      if(!rspRunning) return;
+      if(rspBreath >= RSP_MODES[rspMode].breaths) rspFinish();
+      else rspInhale();
+    }, m.outS * 1000);
+  }
+  if(rspModesEl){
+    Array.prototype.forEach.call(rspModesEl.querySelectorAll('[data-rsp-mode]'), function(btn){
+      btn.addEventListener('click', function(){
+        rspStopSession(true);
+        if(rspFinal) rspFinal.hidden = true;
+        rspMode = btn.getAttribute('data-rsp-mode');
+        Array.prototype.forEach.call(rspModesEl.querySelectorAll('[data-rsp-mode]'), function(b){
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+      });
+    });
+  }
+  if(rspStart) rspStart.addEventListener('click', function(){
+    if(rspRunning) return;
+    if(rspFinal) rspFinal.hidden = true;
+    rspRunning = true;
+    rspBreath = 0;
+    rspStart.hidden = true;
+    if(rspStopBtn) rspStopBtn.hidden = false;
+    rspInhale();
+  });
+  if(rspStopBtn) rspStopBtn.addEventListener('click', function(){
+    rspStopSession(true);
+    if(rspCount) rspCount.textContent = 'Nos detuvimos aquí, mi amor. Cuando quieras, volvemos a respirar juntitos. ♥';
+  });
+
 })();
 </script>
 <script>
@@ -11191,6 +12496,9 @@
     { n:'Atrapa corazones', w:'Recreación · Juegos', s:'screenCatch' },
     { n:'Preguntas sobre nosotros', w:'Recreación · Juegos', s:'screenQuiz' },
     { n:'¿Cuánto me conoces?', w:'Recreación · Juegos', s:'screenConoces' },
+    { n:'Naomi, la guerrera del amor', w:'Recreación · Juegos', s:'screenGuerrera' },
+    { n:'Nuestra historia inventada', w:'Recreación · Juegos', s:'screenHistoriaInv' },
+    { n:'Mímicas para dos', w:'Recreación · Juegos', s:'screenMimicas' },
     { n:'Memorama', w:'Recreación · Juegos', s:'screenMemo' },
     { n:'Rueda de sorpresas', w:'Recreación · Juegos', s:'screenWheel' },
     { n:'Cofre de promesas', w:'Recreación · Juegos', s:'screenChest' },
@@ -11238,6 +12546,7 @@
     { n:'Cupones de amor', w:'Detallitos para ti', s:'screenCupones' },
     { n:'Cartitas de buenas noches', w:'Detallitos para ti', s:'screenBuenasNoches' },
     { n:'Un poema para ti', w:'Detallitos para ti', s:'screenPoema' },
+    { n:'Nuestro jardín', w:'Detallitos para ti', s:'screenJardin' },
     { n:'Calendario de Adviento', w:'Navidad', s:'screenAdvent' },
     { n:'Nuestro arbolito de Navidad', w:'Navidad', s:'screenArbolito' },
     { n:'Cartita de deseos de Navidad', w:'Navidad', s:'screenCartitaNavidad' },
@@ -11248,7 +12557,8 @@
     { n:'Cuando estés enojada', w:'Apartados sueltos', s:'screenEnojada' },
     { n:'Cuando estés triste', w:'Apartados sueltos', s:'screenTriste' },
     { n:'Cuando me extrañes', w:'Apartados sueltos', s:'screenExtranes' },
-    { n:'Cuando no puedas dormir', w:'Apartados sueltos', s:'screenDormir' }
+    { n:'Cuando no puedas dormir', w:'Apartados sueltos', s:'screenDormir' },
+    { n:'Respira conmigo', w:'Apartados sueltos', s:'screenRespira' }
   ];
   function normalizar(t){
     return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[¿?¡!]/g, '').trim();

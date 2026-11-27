@@ -1091,6 +1091,8 @@
     cursor:pointer; line-height:1; -webkit-tap-highlight-color:transparent; z-index:3;
   }
   .tree-orn:focus-visible{ outline:3px solid var(--gold); outline-offset:1px; border-radius:50% }
+  .tree-orn{ touch-action:none }
+  .tree-orn.is-selected{ outline:3px solid var(--gold); outline-offset:1px; border-radius:50%; z-index:4 }
   .orn-ball{ display:block; width:22px; height:22px; border-radius:50%; box-shadow:inset -3px -4px 6px rgba(0,0,0,.25), 0 2px 5px rgba(74,35,48,.3) }
   .orn-pink{ background:radial-gradient(circle at 32% 30%, #FBD3DE, #E87A97 55%, #B03A5B) }
   .orn-gold{ background:radial-gradient(circle at 32% 30%, #FFF0C2, #E3C87E 55%, #A87C22) }
@@ -1122,6 +1124,150 @@
   }
   .nat-fig.is-star{ width:11%; min-width:34px }
   .nat-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px }
+  .nat-fig.is-selected{ outline:3px solid var(--gold); outline-offset:2px; border-radius:10px; z-index:4 }
+  .nat-tray{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px }
+  .nat-chip{
+    position:relative; display:flex; flex-direction:column; align-items:center; gap:2px;
+    width:76px; padding:8px 4px 7px; cursor:grab;
+    background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px;
+    font-family:"Quicksand",sans-serif; touch-action:none;
+    user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent;
+  }
+  .nat-chip:active{ cursor:grabbing }
+  .nat-chip:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .nat-chip svg{ width:32px; height:auto; display:block; pointer-events:none }
+  .nat-chip .nat-chip-name{ font-size:.62rem; font-weight:700; color:var(--ink); line-height:1.15; text-align:center; pointer-events:none }
+  .nat-chip.is-placed{ border-color:var(--gold); background:var(--rose-pale) }
+  .nat-chip.is-placed::after{ content:"✓"; position:absolute; top:3px; right:7px; font-size:.72rem; font-weight:800; color:var(--rose-deep) }
+  .nat-chip.is-selected{ border-color:var(--rose-deep); box-shadow:0 0 0 2px var(--gold) }
+  .nat-ghost{
+    position:fixed; z-index:200; width:54px; pointer-events:none; opacity:.92;
+    transform:translate(-50%,-88%); filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));
+  }
+  .nat-ghost svg{ width:100%; height:auto; display:block }
+
+  /* La Segunda Milla: dados y tablero */
+  .sm-turn{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.2rem; color:var(--rose-deep); text-align:center; margin:4px 0 12px }
+  .sm-dice-row{ display:flex; gap:16px; justify-content:center; align-items:center; margin:10px 0 6px }
+  .die{
+    width:66px; height:66px; padding:10px; border-radius:15px;
+    background:var(--surface); border:2px solid var(--gold);
+    box-shadow:var(--shadow);
+    display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr);
+  }
+  .die .pip{ width:11px; height:11px; border-radius:50%; background:var(--rose-deep); place-self:center; visibility:hidden }
+  .die[data-v="1"] .p5,
+  .die[data-v="2"] .p1, .die[data-v="2"] .p9,
+  .die[data-v="3"] .p1, .die[data-v="3"] .p5, .die[data-v="3"] .p9,
+  .die[data-v="4"] .p1, .die[data-v="4"] .p3, .die[data-v="4"] .p7, .die[data-v="4"] .p9,
+  .die[data-v="5"] .p1, .die[data-v="5"] .p3, .die[data-v="5"] .p5, .die[data-v="5"] .p7, .die[data-v="5"] .p9,
+  .die[data-v="6"] .p1, .die[data-v="6"] .p3, .die[data-v="6"] .p4, .die[data-v="6"] .p6, .die[data-v="6"] .p7, .die[data-v="6"] .p9{ visibility:visible }
+  .die.rolling{ animation:dieShake .12s ease-in-out infinite }
+  @keyframes dieShake{
+    0%{ transform:rotate(-7deg) translateY(0) }
+    50%{ transform:rotate(6deg) translateY(-5px) }
+    100%{ transform:rotate(-5deg) translateY(1px) }
+  }
+  @media (prefers-reduced-motion: reduce){ .die.rolling{ animation:none } }
+  .sm-sum{ text-align:center; font-weight:700; color:var(--ink); margin:8px 0 0; min-height:1.4em }
+  .sm-tier{ color:var(--rose-deep) }
+  .sm-board{ display:grid; grid-template-columns:repeat(6,1fr); gap:5px; max-width:520px; margin:18px auto 4px }
+  .sm-cell{
+    aspect-ratio:1; border:1px solid var(--line); border-radius:9px; background:var(--bg-soft);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:2px;
+  }
+  .sm-cell .sm-num{ font-size:.6rem; font-weight:700; color:var(--ink-soft); line-height:1 }
+  .sm-cell.is-meta{ border-color:var(--gold); background:var(--gold-soft) }
+  .sm-cell.is-meta .sm-num{ color:var(--rose-deep) }
+  .sm-pawns{ display:flex; gap:2px; min-height:17px; align-items:center }
+  .sm-pawn{ width:17px; height:17px; border-radius:50%; font-size:.58rem; font-weight:800; line-height:1; display:grid; place-items:center; color:#fff; box-shadow:0 1px 3px rgba(74,35,48,.35) }
+  .sm-pawn.pawn-n{ background:var(--rose-deep) }
+  .sm-pawn.pawn-h{ background:#2F5C8E }
+  @media (prefers-color-scheme: dark){ .sm-pawn.pawn-n{ color:#241419 } }
+  .sm-legend{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:10px; font-size:.88rem; font-weight:700; color:var(--ink) }
+  .sm-legend .sm-pawn{ display:inline-grid; vertical-align:-3px; margin-right:5px }
+  .sm-pos{ text-align:center; font-weight:700; color:var(--ink-soft); margin:8px 0 0 }
+
+  /* Nuestro primer baile */
+  .baile-practice{
+    background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
+    padding:24px 22px; max-width:560px; margin:0 auto; text-align:center;
+  }
+  .baile-step-count{ font-size:.8rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin:0 0 6px }
+  .baile-step-title{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.45rem; color:var(--rose-deep); margin:0 0 8px; line-height:1.25 }
+  .baile-step-desc{ font-size:1rem; line-height:1.6; color:var(--ink); margin:0 }
+  .baile-nav{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px }
+  .baile-list{ display:grid; gap:10px; max-width:560px; margin:0 auto; text-align:left }
+  .baile-item{ background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px; padding:14px 16px }
+  .baile-item.is-current{ border-color:var(--gold); background:var(--rose-pale) }
+  .baile-item-head{ display:flex; align-items:baseline; gap:9px; flex-wrap:wrap }
+  .baile-item-num{ font-family:"Playfair Display",serif; font-weight:800; color:var(--gold); font-size:1.05rem }
+  .baile-item-title{ font-weight:800; color:var(--ink); font-size:1rem }
+  .baile-item-desc{ margin:6px 0 10px; font-size:.94rem; line-height:1.55; color:var(--ink) }
+  .baile-swap{
+    padding:8px 14px; min-height:40px; background:var(--surface); border:1.5px solid var(--rose-light); border-radius:999px;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:.85rem; color:var(--rose-deep); cursor:pointer;
+  }
+  .baile-swap:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .baile-name{ text-align:center; font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.25rem; color:var(--ink); margin:0 0 14px }
+  .baile-name strong{ font-family:"Playfair Display",serif; font-style:normal; color:var(--rose-deep) }
+
+  /* El árbol de los deseos */
+  .wish-stage{
+    position:relative; max-width:430px; margin:0 auto; aspect-ratio:3/3.4;
+    background:linear-gradient(180deg, var(--bg-soft), var(--surface-warm));
+    border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden;
+  }
+  .wish-stage svg.tree-art{ position:absolute; inset:0; width:100%; height:100% }
+  .wish-orn{
+    position:absolute; transform:translate(-50%,-50%); z-index:3;
+    width:30px; height:30px; border-radius:50% 50% 50% 4px; rotate:-45deg;
+    background:radial-gradient(circle at 35% 35%, #FBD3DE, #E87A97 60%, #B03A5B);
+    border:1.5px solid var(--gold); box-shadow:0 2px 6px rgba(74,35,48,.35);
+    display:grid; place-items:center; cursor:pointer; padding:0;
+  }
+  .wish-orn span{ rotate:45deg; font-size:.62rem; font-weight:800; color:#fff; line-height:1 }
+  .wish-orn.is-selected{ box-shadow:0 0 0 3px var(--gold), 0 2px 6px rgba(74,35,48,.35) }
+  .wish-orn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px }
+  .wish-list{ display:grid; gap:10px; max-width:560px; margin:0 auto; text-align:left }
+  .wish-item{ background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:12px }
+  .wish-item.is-selected{ border-color:var(--gold); background:var(--rose-pale) }
+  .wish-item-num{
+    flex:0 0 auto; width:28px; height:28px; border-radius:50% 50% 50% 4px; rotate:-45deg;
+    background:radial-gradient(circle at 35% 35%, #FBD3DE, #E87A97 60%, #B03A5B);
+    border:1.5px solid var(--gold); display:grid; place-items:center;
+  }
+  .wish-item-num span{ rotate:45deg; font-size:.68rem; font-weight:800; color:#fff; line-height:1 }
+  .wish-item-text{ flex:1 1 auto; font-weight:700; color:var(--ink); line-height:1.4 }
+
+  /* Nuestro karaoke */
+  .karaoke-song{ max-width:620px; margin:0 auto 30px; text-align:center }
+  .karaoke-song:last-child{ margin-bottom:4px }
+  .karaoke-title{ font-family:"Playfair Display",serif; font-weight:700; font-size:1.4rem; color:var(--rose-deep); margin:0 0 4px }
+  .karaoke-artist{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:1.15rem; color:var(--ink-soft); margin:0 0 14px }
+  .karaoke-frame{ position:relative; max-width:560px; margin:16px auto 0; aspect-ratio:16/9; border-radius:14px; overflow:hidden; border:1.5px solid var(--gold); box-shadow:var(--shadow); background:#000 }
+  .karaoke-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+  .karaoke-start{ max-width:560px; margin:18px auto 0; text-align:left; background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md); padding:20px 22px }
+  .karaoke-start h4{ margin:0 0 8px; font-family:"Playfair Display",serif; font-size:1.05rem; color:var(--rose-deep) }
+  .karaoke-start p{ font-family:"Cormorant Garamond",serif; font-size:1.25rem; line-height:1.55; margin:0; color:var(--ink) }
+
+  /* Recreación domingo */
+  .prof-clues{ display:grid; gap:10px; max-width:560px; margin:0 auto 6px; text-align:left }
+  .prof-clue{
+    background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px; padding:13px 16px;
+    font-size:.98rem; line-height:1.55; color:var(--ink);
+  }
+  .prof-clue strong{ color:var(--rose-deep) }
+  .prof-clue.is-hidden-clue{ text-align:center; color:var(--ink-soft); font-weight:700; letter-spacing:.03em }
+  .study-qs{ max-width:560px; margin:0 auto; text-align:left; display:grid; gap:10px }
+  .study-q{ background:var(--bg-soft); border:1.5px solid var(--line); border-radius:14px; padding:13px 16px; font-size:.98rem; line-height:1.55; color:var(--ink) }
+  .study-q strong{ color:var(--rose-deep) }
+  .grat-card{
+    background:var(--surface-warm); border:1.5px solid var(--gold); border-radius:var(--radius-md);
+    padding:26px 24px; max-width:560px; margin:0 auto; text-align:center;
+  }
+  .grat-text{ font-family:"Cormorant Garamond",serif; font-size:1.45rem; line-height:1.5; color:var(--ink); margin:0 }
+  .grat-count{ font-weight:700; color:var(--rose-deep); margin:16px 0 0 }
 
   .scr-list{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:18px }
   .scr-chip{
@@ -2263,6 +2409,18 @@
           <span class="game-menu-desc">La playlist que armé para ti en Apple Music, mi amor: «Cumpleaños Naomi», para escucharla juntitos cuando quieras.</span>
           <span class="game-menu-play">Escuchar ♥</span>
         </button>
+        <button class="game-menu-card" type="button" data-open-game="screenKaraoke">
+          <span class="game-menu-icon" aria-hidden="true">🎤</span>
+          <span class="game-menu-title">Nuestro karaoke</span>
+          <span class="game-menu-desc">Nuestras dos canciones para cantarlas juntitos, mi amor: la de cómo inició nuestra historia y la de cómo empezará nuestra eternidad.</span>
+          <span class="game-menu-play">Cantar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenMenuDomingo">
+          <span class="game-menu-icon" aria-hidden="true">☀</span>
+          <span class="game-menu-title">Recreación domingo</span>
+          <span class="game-menu-desc">Juegos y actividades tranquilos para nuestros domingos en familia, mi amor: con las Escrituras, con gratitud y con mucha fe.</span>
+          <span class="game-menu-play">Entrar ♥</span>
+        </button>
       </div>
     </div>
 
@@ -2300,6 +2458,18 @@
           <span class="game-menu-title">Nuestra fe y nuestro matrimonio eterno</span>
           <span class="game-menu-desc">Escrituras y palabras de profetas y apóstoles sobre nuestro amor eterno.</span>
           <span class="game-menu-play">Leer ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenPrimerBaile">
+          <span class="game-menu-icon" aria-hidden="true">♪</span>
+          <span class="game-menu-title">Nuestro primer baile</span>
+          <span class="game-menu-desc">Nuestra guía paso a paso para practicar el primer baile de casados, mi amor, con «Vamos bien» sonando. Y si un paso no nos gusta, lo cambiamos.</span>
+          <span class="game-menu-play">Practicar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenArbolDeseos">
+          <span class="game-menu-icon" aria-hidden="true">✦</span>
+          <span class="game-menu-title">El árbol de los deseos</span>
+          <span class="game-menu-desc">Un arbolito para colgar nuestros sueños, mi vida: la luna de miel, la casita, el viaje al templo… y todos los que soñemos juntos.</span>
+          <span class="game-menu-play">Soñar ♥</span>
         </button>
       </div>
     </div>
@@ -3090,7 +3260,7 @@
     <div class="game-card" id="screenArbolito">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Nuestro arbolito de Navidad 🎄</h3>
-      <p class="game-desc">Este arbolito es de los dos, mi amor. Elige un adorno y toca el arbolito para ponerlo donde quieras: esferas, lucecitas y la estrella hasta arriba. Todo lo que pongas se queda guardado en este dispositivo, tal como lo dejaste. Si quieres quitar un adorno, tócalo y desaparece.</p>
+      <p class="game-desc">Este arbolito es de los dos, mi amor. Elige un adorno y toca el arbolito para ponerlo donde quieras: esferas, lucecitas y la estrella hasta arriba. Todo lo que pongas se queda guardado en este dispositivo, tal como lo dejaste. Los adornos que ya pusiste se quedan ahí: si tocas uno, se selecciona, y ya seleccionado puedes arrastrarlo para moverlo o borrarlo con el botón de borrar.</p>
       <div class="tree-tools" role="group" aria-label="Elige un adorno">
         <button class="tree-tool" type="button" data-orn-tool="pink" aria-pressed="true"><span class="sw sw-pink" aria-hidden="true"></span>Esfera rosa</button>
         <button class="tree-tool" type="button" data-orn-tool="gold" aria-pressed="false"><span class="sw sw-gold" aria-hidden="true"></span>Esfera dorada</button>
@@ -3115,6 +3285,7 @@
       </div>
       <p class="tree-count" id="treeCount" role="status"></p>
       <div class="tree-actions">
+        <button class="music-stop" type="button" id="treeDeleteBtn" hidden>Borrar el adorno seleccionado</button>
         <button class="music-stop" type="button" id="treeUndoBtn">Quitar el último adorno</button>
         <button class="music-stop" type="button" id="treeClearBtn">Empezar de nuevo</button>
       </div>
@@ -3124,7 +3295,7 @@
     <div class="game-card" id="screenNacimiento">
       <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
       <h3 class="game-title">Arma tu nacimiento ✦</h3>
-      <p class="game-desc">Aquí está nuestro nacimiento, mi amor, para acomodarlo como tú quieras: arrastra con el dedo a María, a José, al Niño Jesús en su pesebre, al ángel, al pastor, a los tres Reyes Magos, al burrito, a la ovejita y a la estrella. Como lo dejes, así se queda guardado en este dispositivo.</p>
+      <p class="game-desc">Aquí está nuestro nacimiento, mi amor, para armarlo como tú quieras: el pesebre empieza vacío y tú eliges qué figuritas poner y dónde: a María, a José, al Niño Jesús en su pesebre, al ángel, al pastor, a los tres Reyes Magos, al burrito, a la ovejita y a la estrella. Toca una figurita de la bandeja o arrástrala hasta su lugar; las que ya pusiste se quedan ahí, y al tocarlas se seleccionan para que puedas moverlas o borrarlas. Como lo dejes, así se queda guardado en este dispositivo.</p>
       <div class="nat-scene" id="natScene">
         <svg class="nat-bg" viewBox="0 0 400 310" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <circle cx="30" cy="30" r="1.7" fill="#FFFFFF" opacity=".85"/><circle cx="82" cy="16" r="1.2" fill="#FFFFFF" opacity=".7"/><circle cx="142" cy="42" r="1.4" fill="#FFFFFF" opacity=".8"/><circle cx="212" cy="20" r="1.2" fill="#FFFFFF" opacity=".7"/><circle cx="298" cy="34" r="1.7" fill="#FFFFFF" opacity=".85"/><circle cx="362" cy="18" r="1.3" fill="#FFFFFF" opacity=".75"/><circle cx="330" cy="72" r="1.1" fill="#FFFFFF" opacity=".6"/><circle cx="58" cy="82" r="1.1" fill="#FFFFFF" opacity=".6"/><circle cx="182" cy="70" r="1.2" fill="#FFFFFF" opacity=".65"/><circle cx="252" cy="82" r="1" fill="#FFFFFF" opacity=".6"/>
@@ -3138,7 +3309,9 @@
           <ellipse cx="200" cy="292" rx="230" ry="26" fill="#000000" opacity=".14"/>
         </svg>
       </div>
+      <div class="nat-tray" id="natTray" role="group" aria-label="Figuritas para poner en el nacimiento"></div>
       <div class="nat-actions">
+        <button class="music-stop" type="button" id="natDeleteBtn" hidden>Borrar la figurita seleccionada</button>
         <button class="music-stop" type="button" id="natResetBtn">Acomodarlo como al principio</button>
       </div>
       <p class="diary-note">Arrastra cada figurita con el dedo (o con el ratón) y suéltala donde quieras, mi vida. ♥</p>
@@ -4381,6 +4554,297 @@
         <span class="playlist-hint">Si el reproductor no carga aquí, toca el botón de arriba y escúchala directo en Apple Music, mi amor.</span>
       </div>
     </div>
+    <!-- Recreación domingo: La Segunda Milla -->
+    <div class="game-card" id="screenSegundaMilla">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">La Segunda Milla: Trivia de la Biblia ⚄</h3>
+      <p class="game-desc">«A cualquiera que te obligue a llevar carga por una milla, ve con él dos» (Mateo 5:41). Jueguen entre los dos, mi amor: por turnos lanzan los dados y responden una pregunta de toda la Biblia, de la Santa Biblia Reina-Valera 2009. Entre más alta salga la suma, más difícil la pregunta; si aciertan, avanzan las millas que marcaron los dados, y si no, se quedan en su lugar. ¡El primero en llegar a la milla 30 gana!</p>
+      <p class="sm-turn" id="smTurn" role="status"></p>
+      <div class="sm-dice-row">
+        <div class="die" id="smDie1" data-v="6" aria-hidden="true"><span class="pip p1"></span><span class="pip p2"></span><span class="pip p3"></span><span class="pip p4"></span><span class="pip p5"></span><span class="pip p6"></span><span class="pip p7"></span><span class="pip p8"></span><span class="pip p9"></span></div>
+        <div class="die" id="smDie2" data-v="6" aria-hidden="true"><span class="pip p1"></span><span class="pip p2"></span><span class="pip p3"></span><span class="pip p4"></span><span class="pip p5"></span><span class="pip p6"></span><span class="pip p7"></span><span class="pip p8"></span><span class="pip p9"></span></div>
+      </div>
+      <p class="sm-sum" id="smSum" role="status"></p>
+      <div style="text-align:center; margin-top:12px">
+        <button class="game-start-btn" id="smRollBtn" type="button">⚄ ¡Lanzar los dados!</button>
+      </div>
+      <div id="smQuizBody" hidden>
+        <p class="quiz-q" id="smQuestion"></p>
+        <div class="quiz-options" id="smOptions"></div>
+        <p class="quiz-feedback" id="smFeedback" role="status"></p>
+        <button class="game-next-btn" id="smNextBtn" type="button" hidden>Seguir jugando ♥</button>
+      </div>
+      <div id="smEnd" hidden>
+        <p class="game-final" id="smFinalMsg"></p>
+        <button class="game-start-btn" id="smRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+      <div class="sm-board" id="smBoard" aria-hidden="true"></div>
+      <div class="sm-legend"><span><span class="sm-pawn pawn-n">N</span>Naomi</span><span><span class="sm-pawn pawn-h">H</span>Hagot</span></div>
+      <p class="sm-pos" id="smPos" role="status"></p>
+    </div>
+
+    <!-- Submenú: Recreación domingo -->
+    <div class="game-card hub-card submenu-screen" id="screenMenuDomingo">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Recreación domingo</h3>
+      <div class="game-menu menu-grid">
+        <button class="game-menu-card" type="button" data-open-game="screenSegundaMilla">
+          <span class="game-menu-icon" aria-hidden="true">⚄</span>
+          <span class="game-menu-title">La Segunda Milla: Trivia de la Biblia</span>
+          <span class="game-menu-desc">Para jugar entre los dos, mi amor: lanzamos los dados, respondemos preguntas de toda la Biblia y avanzamos millas. ¡El primero en llegar a la meta gana!</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenTriviaMormon">
+          <span class="game-menu-icon" aria-hidden="true">✦</span>
+          <span class="game-menu-title">Trivia del Libro de Mormón</span>
+          <span class="game-menu-desc">Diez preguntitas de las historias del Libro de Mormón, mi vida: Nefi, Alma, el capitán Moroni y muchos más. ¿Cuántas aciertas?</span>
+          <span class="game-menu-play">Jugar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenAdivinaProfeta">
+          <span class="game-menu-icon" aria-hidden="true">?</span>
+          <span class="game-menu-title">Adivina el profeta o apóstol</span>
+          <span class="game-menu-desc">Te doy pistas de un profeta o apóstol de esta dispensación, mi amor. ¡Adivínalo con las menos pistas que puedas!</span>
+          <span class="game-menu-play">Adivinar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenEstudioFamiliar">
+          <span class="game-menu-icon" aria-hidden="true">❦</span>
+          <span class="game-menu-title">Estudio de las Escrituras en familia</span>
+          <span class="game-menu-desc">Un pasaje para leer juntitos cada domingo, con preguntitas para platicar en familia y algo bonito para hacer juntos en la semana.</span>
+          <span class="game-menu-play">Estudiar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenAdivinaHimno">
+          <span class="game-menu-icon" aria-hidden="true">♪</span>
+          <span class="game-menu-title">Adivina el himno</span>
+          <span class="game-menu-desc">Te doy una pista o una línea de un himno, mi vida, y tú adivinas cuál es. ¡A ver si no terminamos cantándolo!</span>
+          <span class="game-menu-play">Adivinar ♥</span>
+        </button>
+        <button class="game-menu-card" type="button" data-open-game="screenRetoGratitud">
+          <span class="game-menu-icon" aria-hidden="true">♥</span>
+          <span class="game-menu-title">Reto de gratitud dominical</span>
+          <span class="game-menu-desc">Un retito de gratitud para cada domingo, mi amor: algo sencillo para agradecer juntos y contar nuestras bendiciones.</span>
+          <span class="game-menu-play">Aceptar el reto ♥</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Recreación domingo: Trivia del Libro de Mormón -->
+    <div class="game-card" id="screenTriviaMormon">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Trivia del Libro de Mormón ✦</h3>
+      <p class="game-desc">Diez preguntitas de las historias del Libro de Mormón, mi vida, para nuestro domingo tranquilo: profetas, viajes, batallas y milagros de aquel pueblo que también amaba a Jesucristo. ¡A ver cuántas aciertas!</p>
+      <div id="tmStartWrap">
+        <button class="game-start-btn" id="tmStartBtn" type="button">✦ ¡Empezar!</button>
+      </div>
+      <div id="tmBody" hidden>
+        <div class="quiz-meta">
+          <span id="tmProgress">Pregunta 1 de 10</span>
+          <span>Aciertos: <strong id="tmScore">0</strong></span>
+        </div>
+        <p class="quiz-q" id="tmQuestion"></p>
+        <div class="quiz-options" id="tmOptions"></div>
+        <p class="quiz-feedback" id="tmFeedback" role="status"></p>
+        <button class="game-next-btn" id="tmNextBtn" type="button" hidden>Siguiente pregunta ♥</button>
+      </div>
+      <div id="tmEnd" hidden>
+        <p class="game-final" id="tmFinalMsg"></p>
+        <button class="game-start-btn" id="tmRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+    </div>
+
+    <!-- Recreación domingo: Adivina el profeta o apóstol -->
+    <div class="game-card" id="screenAdivinaProfeta">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Adivina el profeta o apóstol ☀</h3>
+      <p class="game-desc">Te voy dando pistas de un profeta o apóstol de esta dispensación, mi amor: entre menos pistas necesites, más puntos ganas. Si te atoras, pide otra pista y sigue intentando. ¡Son cinco rondas!</p>
+      <div id="apStartWrap">
+        <button class="game-start-btn" id="apStartBtn" type="button">☀ ¡Empezar!</button>
+      </div>
+      <div id="apBody" hidden>
+        <div class="quiz-meta">
+          <span id="apProgress">Ronda 1 de 5</span>
+          <span>Puntos: <strong id="apScore">0</strong></span>
+        </div>
+        <div class="prof-clues" id="apClues"></div>
+        <div style="text-align:center">
+          <button class="music-stop" type="button" id="apClueBtn">Dame otra pista</button>
+        </div>
+        <div class="quiz-options" id="apOptions"></div>
+        <p class="quiz-feedback" id="apFeedback" role="status"></p>
+        <button class="game-next-btn" id="apNextBtn" type="button" hidden>Siguiente ronda ♥</button>
+      </div>
+      <div id="apEnd" hidden>
+        <p class="game-final" id="apFinalMsg"></p>
+        <button class="game-start-btn" id="apRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+    </div>
+
+    <!-- Recreación domingo: Estudio de las Escrituras en familia -->
+    <div class="game-card" id="screenEstudioFamiliar">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Estudio de las Escrituras en familia ❦</h3>
+      <p class="game-desc">Para nuestro domingo en familia, mi amor: elige un tema, lean el pasaje juntitos y platiquen con las preguntitas. Sin prisa, con el corazón tranquilo y algo calientito para tomar.</p>
+      <div class="scr-list" id="efChips" role="group" aria-label="Elige un tema de estudio"></div>
+      <div class="scr-panel">
+        <p class="scr-ref" id="efRef"></p>
+        <p class="scr-text" id="efText"></p>
+      </div>
+      <h4 class="faith-h">Para platicar en familia ♥</h4>
+      <div class="study-qs" id="efQs"></div>
+      <h4 class="faith-h">Para hacer juntos esta semana</h4>
+      <p class="study-q" id="efAct" style="max-width:560px; margin:0 auto"></p>
+      <div class="scr-nav">
+        <button class="music-stop" type="button" id="efPrevBtn">← Tema anterior</button>
+        <button class="music-stop" type="button" id="efNextBtn">Tema siguiente →</button>
+      </div>
+      <p class="scr-count" id="efCount"></p>
+    </div>
+
+    <!-- Recreación domingo: Adivina el himno -->
+    <div class="game-card" id="screenAdivinaHimno">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Adivina el himno ♪</h3>
+      <p class="game-desc">Te doy una línea o una pista de un himno de la Iglesia, mi vida, y tú adivinas cuál es. Ocho himnos por partida… y si al final terminamos cantando uno juntitos, mejor todavía.</p>
+      <div id="ahStartWrap">
+        <button class="game-start-btn" id="ahStartBtn" type="button">♪ ¡Empezar!</button>
+      </div>
+      <div id="ahBody" hidden>
+        <div class="quiz-meta">
+          <span id="ahProgress">Himno 1 de 8</span>
+          <span>Aciertos: <strong id="ahScore">0</strong></span>
+        </div>
+        <p class="quiz-q" id="ahQuestion"></p>
+        <div class="quiz-options" id="ahOptions"></div>
+        <p class="quiz-feedback" id="ahFeedback" role="status"></p>
+        <button class="game-next-btn" id="ahNextBtn" type="button" hidden>Siguiente himno ♥</button>
+      </div>
+      <div id="ahEnd" hidden>
+        <p class="game-final" id="ahFinalMsg"></p>
+        <button class="game-start-btn" id="ahRestartBtn" type="button">Jugar otra vez ♥</button>
+      </div>
+    </div>
+
+    <!-- Recreación domingo: Reto de gratitud dominical -->
+    <div class="game-card" id="screenRetoGratitud">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Reto de gratitud dominical ♥</h3>
+      <p class="game-desc">Un retito sencillo para cada domingo, mi amor: algo chiquito para agradecer juntos y recordar que todo lo bueno viene de Dios. Este es el reto de hoy; cuando lo cumplan, márcalo y a contar bendiciones.</p>
+      <div class="grat-card">
+        <p class="grat-text" id="rgText"></p>
+        <p class="grat-count" id="rgCount" role="status"></p>
+      </div>
+      <div class="tree-actions">
+        <button class="game-start-btn" type="button" id="rgDoneBtn">♥ ¡Lo cumplimos!</button>
+        <button class="music-stop" type="button" id="rgAnotherBtn">Otro reto</button>
+      </div>
+      <div class="scr-panel" style="margin-top:22px">
+        <p class="scr-text">«Alabad a Jehová, porque él es bueno; porque para siempre es su misericordia».</p>
+        <p class="scr-ref" style="margin:10px 0 0">Salmos 107:1</p>
+      </div>
+      <div class="scr-panel" style="margin-top:14px">
+        <p class="scr-text">«El gozo que sentimos tiene poco que ver con las circunstancias de nuestras vidas y mucho que ver con el enfoque de nuestras vidas».</p>
+        <p class="scr-ref" style="margin:10px 0 0">Presidente Russell M. Nelson · Conferencia General, octubre de 2016</p>
+      </div>
+    </div>
+
+    <!-- Nuestra historia y familia: Nuestro primer baile -->
+    <div class="game-card" id="screenPrimerBaile">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro primer baile ♪</h3>
+      <p class="game-desc">Nuestra guía paso a paso para practicar el primer baile de casados, mi amor, con «Vamos bien» sonando. Vayan paso por paso, sin prisa y riéndose mucho. Y si un paso no les gusta, cámbienlo por otro con su botón, o cambien toda la coreografía por otra: como lo dejen, así se queda guardado en este dispositivo.</p>
+      <div style="max-width:430px; margin:0 auto 20px">
+        <button class="music-btn" id="baileMusicBtn" type="button" data-video="H_BoCkFuaF0" aria-pressed="false">
+          <span class="music-play-icon" aria-hidden="true">▶</span>
+          <span class="music-btn-title">Nuestra canción para practicar</span>
+          <span class="music-btn-song">“Vamos bien” · Majo y Dan</span>
+          <span class="music-btn-state">Toca para escuchar ♥</span>
+        </button>
+      </div>
+      <p class="baile-name">Coreografía: <strong id="baileName"></strong></p>
+      <div style="text-align:center; margin-bottom:16px">
+        <button class="music-stop" type="button" id="baileAllBtn">Cambiar toda la coreografía</button>
+      </div>
+      <div class="baile-practice">
+        <p class="baile-step-count" id="baileCount"></p>
+        <h4 class="baile-step-title" id="baileTitle"></h4>
+        <p class="baile-step-desc" id="baileDesc"></p>
+        <div class="baile-nav">
+          <button class="music-stop" type="button" id="bailePrevBtn">← Paso anterior</button>
+          <button class="music-stop" type="button" id="baileSwapBtn">Cambiar este paso</button>
+          <button class="music-stop" type="button" id="baileNextBtn">Paso siguiente →</button>
+        </div>
+      </div>
+      <h4 class="faith-h">Todos los pasos ♥</h4>
+      <div class="baile-list" id="baileList"></div>
+      <p class="diary-note">Los cambios que hagan se guardan en este dispositivo, mi vida. ♥</p>
+    </div>
+
+    <!-- Nuestra historia y familia: El árbol de los deseos -->
+    <div class="game-card" id="screenArbolDeseos">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">El árbol de los deseos ✦</h3>
+      <p class="game-desc">Un arbolito para colgar nuestros sueños, mi amor: cada deseo es un corazoncito que cuelga de sus ramas. Ya están colgados los primeros; escriban los que quieran y cuélguenlos también. Todo se queda guardado en este dispositivo.</p>
+      <div class="wish-stage" id="wishStage">
+        <svg class="tree-art" viewBox="0 0 300 340" aria-hidden="true">
+          <ellipse cx="150" cy="322" rx="118" ry="14" fill="#FFFFFF" opacity=".65"/>
+          <rect x="139" y="282" width="22" height="38" rx="3" fill="#7A4A2B"/>
+          <path d="M150 26 L198 122 Q150 134 102 122 Z" fill="#1F5C3A"/>
+          <path d="M150 92 L222 204 Q150 218 78 204 Z" fill="#256B45"/>
+          <path d="M150 160 L246 292 Q150 308 54 292 Z" fill="#1F5C3A"/>
+          <path d="M114 116 Q150 130 186 116" stroke="#E3C87E" stroke-width="3.5" fill="none" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+          <path d="M94 194 Q150 212 206 194" stroke="#E3C87E" stroke-width="3.5" fill="none" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+          <path d="M76 280 Q150 298 224 280" stroke="#E3C87E" stroke-width="3.5" fill="none" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+        </svg>
+        <div id="wishOrns"></div>
+      </div>
+      <div class="diary-form">
+        <label class="diary-label" for="wishDreamInput">¿Qué otro sueño colgamos, mi amor?</label>
+        <input class="diary-input" id="wishDreamInput" type="text" maxlength="90" placeholder="Escribe un sueño para nuestro futuro…" autocomplete="off">
+        <div class="diary-save-wrap">
+          <button class="game-start-btn" id="wishDreamAddBtn" type="button">Colgar mi deseo ✦</button>
+        </div>
+        <p class="diary-msg" id="wishDreamMsg" role="status"></p>
+      </div>
+      <h4 class="faith-h">Nuestros sueños ♥</h4>
+      <div class="wish-list" id="wishDreamList"></div>
+    </div>
+
+    <!-- Recreación: Nuestro karaoke -->
+    <div class="game-card" id="screenKaraoke">
+      <div class="game-topbar"><button class="game-back" type="button" data-close-game>← Volver</button></div>
+      <h3 class="game-title">Nuestro karaoke 🎤</h3>
+      <p class="game-desc">A cantar juntitos, mi amor: aquí están nuestras dos canciones, las de siempre. Pon la que quieras, mira el video y cántala conmigo, abrazaditos, como si nadie nos escuchara.</p>
+      <div class="karaoke-song">
+        <h4 class="karaoke-title">Can’t Help Falling in Love</h4>
+        <p class="karaoke-artist">Elvis Presley · Cómo inició nuestra historia</p>
+        <div style="max-width:430px; margin:0 auto">
+          <button class="music-btn" id="karaokeBtn1" type="button" data-video="vGJTaP6anOU" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">Cómo inició nuestra historia</span>
+            <span class="music-btn-song">“Can’t Help Falling in Love” · Elvis Presley</span>
+            <span class="music-btn-state">Toca para escuchar ♥</span>
+          </button>
+        </div>
+        <div class="karaoke-frame"><iframe title="Video de Can’t Help Falling in Love, de Elvis Presley" src="https://www.youtube.com/embed/vGJTaP6anOU" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="karaoke-start">
+          <h4>El comienzo, para ir entrando en calor ♥</h4>
+          <p>Wise men say only fools rush in,<br>but I can’t help falling in love with you.<br>Shall I stay? Would it be a sin<br>if I can’t help falling in love with you?</p>
+        </div>
+      </div>
+      <div class="karaoke-song">
+        <h4 class="karaoke-title">Vamos bien</h4>
+        <p class="karaoke-artist">Majo y Dan · Cómo empezará nuestra eternidad</p>
+        <div style="max-width:430px; margin:0 auto">
+          <button class="music-btn" id="karaokeBtn2" type="button" data-video="H_BoCkFuaF0" aria-pressed="false">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-btn-title">Cómo empezará nuestra eternidad</span>
+            <span class="music-btn-song">“Vamos bien” · Majo y Dan</span>
+            <span class="music-btn-state">Toca para escuchar ♥</span>
+          </button>
+        </div>
+        <div class="karaoke-frame"><iframe title="Video de Vamos bien, de Majo y Dan" src="https://www.youtube.com/embed/H_BoCkFuaF0" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ABRAZO -->
@@ -4800,10 +5264,32 @@
     });
   }
 
+  // Botones de música extra (Nuestro primer baile y Nuestro karaoke):
+  // usan este mismo reproductor y se mantienen sincronizados con refreshMusicUI.
+  var extraMusicBtns = [
+    { el: document.getElementById('baileMusicBtn'), video: 'H_BoCkFuaF0', label: '“Vamos bien” · Majo y Dan' },
+    { el: document.getElementById('karaokeBtn1'), video: 'vGJTaP6anOU', label: '“Can’t Help Falling in Love” · Elvis Presley' },
+    { el: document.getElementById('karaokeBtn2'), video: 'H_BoCkFuaF0', label: '“Vamos bien” · Majo y Dan' }
+  ];
+  extraMusicBtns.forEach(function(item){
+    if(!item.el) return;
+    musicBtns.push(item);
+    item.el.addEventListener('click', function(){
+      if(currentVideo === item.video && ytPlayer){
+        if(musicPlaying){ try{ ytPlayer.pauseVideo(); }catch(e){} musicPlaying = false; }
+        else { try{ ytPlayer.playVideo(); }catch(e){} musicPlaying = true; }
+        refreshMusicUI();
+        return;
+      }
+      playVideo(item.video);
+    });
+  });
+  refreshMusicUI();
+
   // ===== Juegos para Naomi =====
   // --- Navegación: cada juego vive en su propia pantalla ---
   var gamesSection = document.getElementById('juegos');
-  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist'];
+  var gameCardIds = ['screenMenu', 'screenMenuJuegos', 'screenMenuHistoria', 'screenMenuDetallitos', 'screenMenuNavidad', 'screenMenuSueltos', 'screenGames', 'screenCatch', 'screenQuiz', 'screenMemo', 'screenWheel', 'screenChest', 'screenPuzzle', 'screenWords', 'screenCapsule', 'screenTreasure', 'screenFaith', 'screenAdvent', 'screenArbolito', 'screenCartitaNavidad', 'screenTriviaNavidad', 'screenDeseosAnio', 'screenNacimiento', 'screenEscriturasNavidad', 'screenDetallitos', 'screenIdiomas', 'screenPensamiento', 'screenCitas', 'screenPacto', 'screenAdivina', 'screenDiario', 'screenCancion', 'screenSuenos', 'screenOracion', 'screenArbol', 'screenVerdadReto', 'screenCartita', 'screenRetoSemana', 'screenCuento', 'screenBingo', 'screenConversemos', 'screenDiaPerfecto', 'screenRazones', 'screenAhorcado', 'screenAniversario', 'screenQueAmo', 'screenCupones', 'screenBuenasNoches', 'screenPoema', 'screenEnojada', 'screenTriste', 'screenExtranes', 'screenDormir', 'screenHistoria', 'screenEnamora', 'screenArbolFamiliar', 'screenConoces', 'screenPlaylist', 'screenSegundaMilla', 'screenPrimerBaile', 'screenArbolDeseos', 'screenKaraoke', 'screenMenuDomingo', 'screenTriviaMormon', 'screenAdivinaProfeta', 'screenEstudioFamiliar', 'screenAdivinaHimno', 'screenRetoGratitud'];
   // --- Regreso paso a paso: cada pantalla vuelve a su apartado, cada apartado
   // --- vuelve al menú de secciones y el menú vuelve a la página principal ---
   var NAV_PARENT = {
@@ -4824,6 +5310,10 @@
     screenCupones: 'screenDetallitos', screenBuenasNoches: 'screenDetallitos',
     screenPoema: 'screenDetallitos',
     screenGames: 'screenMenuJuegos', screenConoces: 'screenGames',
+    screenSegundaMilla: 'screenMenuDomingo', screenMenuDomingo: 'screenMenuJuegos',
+    screenTriviaMormon: 'screenMenuDomingo', screenAdivinaProfeta: 'screenMenuDomingo',
+    screenEstudioFamiliar: 'screenMenuDomingo', screenAdivinaHimno: 'screenMenuDomingo',
+    screenRetoGratitud: 'screenMenuDomingo',
     screenFaith: 'screenMenuHistoria', screenCapsule: 'screenMenuHistoria',
     screenHistoria: 'screenMenuHistoria',
     screenEnamora: 'screenMenuHistoria', screenArbolFamiliar: 'screenMenuHistoria',
@@ -4835,7 +5325,8 @@
     screenEnojada: 'screenMenuSueltos',
     screenTriste: 'screenMenuSueltos', screenExtranes: 'screenMenuSueltos',
     screenDormir: 'screenMenuSueltos',
-    screenPlaylist: 'screenMenuJuegos',
+    screenPlaylist: 'screenMenuJuegos', screenKaraoke: 'screenMenuJuegos',
+    screenPrimerBaile: 'screenMenuHistoria', screenArbolDeseos: 'screenMenuHistoria',
     screenMenuJuegos: 'screenMenu', screenMenuHistoria: 'screenMenu',
     screenMenuDetallitos: 'screenMenu', screenMenuNavidad: 'screenMenu',
     screenMenuSueltos: 'screenMenu',
@@ -7410,6 +7901,7 @@
     var treeStage = document.getElementById('treeStage');
     var treeOrnsWrap = document.getElementById('treeOrns');
     var treeCount = document.getElementById('treeCount');
+    var treeDeleteBtn = document.getElementById('treeDeleteBtn');
     var treeOrns = [];
     try{
       var treeSaved = window.localStorage.getItem(TREE_KEY);
@@ -7419,30 +7911,108 @@
       }
     }catch(e){ treeOrns = []; }
     var treeTool = 'pink';
+    var treeSel = -1;
     function persistTree(){
       try{ window.localStorage.setItem(TREE_KEY, JSON.stringify(treeOrns)); }catch(e){}
     }
     var ORN_CLASS = { pink: 'orn-ball orn-pink', gold: 'orn-ball orn-gold', red: 'orn-ball orn-red', blue: 'orn-ball orn-blue', light: 'orn-light', star: 'orn-star' };
     var ORN_LABEL = { pink: 'Esfera rosa', gold: 'Esfera dorada', red: 'Esfera roja', blue: 'Esfera azul', light: 'Lucecita', star: 'Estrella' };
+    function updateTreeDeleteBtn(){
+      if(treeDeleteBtn) treeDeleteBtn.hidden = !(treeSel >= 0 && treeSel < treeOrns.length);
+    }
+    function syncTreeSel(){
+      if(treeOrnsWrap){
+        Array.prototype.forEach.call(treeOrnsWrap.children, function(el, i){
+          var on = i === treeSel;
+          var orn = treeOrns[i];
+          el.classList.toggle('is-selected', on);
+          el.setAttribute('aria-pressed', on ? 'true' : 'false');
+          if(orn) el.setAttribute('aria-label', (ORN_LABEL[orn.t] || 'Adorno') + (on ? ': seleccionado, arrástralo para moverlo o bórralo con el botón de borrar' : ': toca para seleccionarlo'));
+        });
+      }
+      updateTreeDeleteBtn();
+    }
     function renderTree(){
       if(!treeOrnsWrap) return;
       treeOrnsWrap.innerHTML = '';
       treeOrns.forEach(function(orn, idx){
         var b = document.createElement('button');
         b.type = 'button';
-        b.className = 'tree-orn';
+        b.className = 'tree-orn' + (idx === treeSel ? ' is-selected' : '');
         b.style.left = orn.x + '%';
         b.style.top = orn.y + '%';
-        b.setAttribute('aria-label', (ORN_LABEL[orn.t] || 'Adorno') + ': toca para quitarlo');
+        b.setAttribute('aria-pressed', idx === treeSel ? 'true' : 'false');
+        b.setAttribute('aria-label', (ORN_LABEL[orn.t] || 'Adorno') + (idx === treeSel ? ': seleccionado, arrástralo para moverlo o bórralo con el botón de borrar' : ': toca para seleccionarlo'));
         var s = document.createElement('span');
         s.className = ORN_CLASS[orn.t] || 'orn-ball orn-pink';
         if(orn.t === 'star') s.textContent = '★';
         b.appendChild(s);
-        b.addEventListener('click', function(e){
-          e.stopPropagation();
-          treeOrns.splice(idx, 1);
-          persistTree();
-          renderTree();
+        var drag = null;
+        function moveOrn(e){
+          var rect = treeStage.getBoundingClientRect();
+          if(!rect.width || !rect.height) return;
+          var x = (e.clientX - rect.left) / rect.width * 100;
+          var y = (e.clientY - rect.top) / rect.height * 100;
+          if(x < 3) x = 3; if(x > 97) x = 97;
+          if(y < 2) y = 2; if(y > 98) y = 98;
+          orn.x = Math.round(x * 10) / 10;
+          orn.y = Math.round(y * 10) / 10;
+          b.style.left = orn.x + '%';
+          b.style.top = orn.y + '%';
+        }
+        b.addEventListener('pointerdown', function(e){
+          drag = { x: e.clientX, y: e.clientY, moved: false };
+          try{ b.setPointerCapture(e.pointerId); }catch(err){}
+          e.preventDefault();
+        });
+        b.addEventListener('pointermove', function(e){
+          if(!drag) return;
+          if(!drag.moved && Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < 7) return;
+          drag.moved = true;
+          if(treeSel !== idx){ treeSel = idx; syncTreeSel(); }
+          moveOrn(e);
+        });
+        b.addEventListener('pointerup', function(){
+          if(!drag) return;
+          var wasDrag = drag.moved;
+          drag = null;
+          if(wasDrag) persistTree();
+          else{
+            treeSel = (treeSel === idx) ? -1 : idx;
+            syncTreeSel();
+          }
+        });
+        b.addEventListener('pointercancel', function(){
+          if(drag && drag.moved) persistTree();
+          drag = null;
+        });
+        b.addEventListener('click', function(e){ e.stopPropagation(); });
+        b.addEventListener('keydown', function(e){
+          var step = 2, used = true;
+          if(e.key === 'ArrowLeft') orn.x -= step;
+          else if(e.key === 'ArrowRight') orn.x += step;
+          else if(e.key === 'ArrowUp') orn.y -= step;
+          else if(e.key === 'ArrowDown') orn.y += step;
+          else if(e.key === 'Delete' || e.key === 'Backspace'){
+            treeOrns.splice(idx, 1);
+            if(treeSel === idx) treeSel = -1;
+            else if(treeSel > idx) treeSel--;
+            persistTree();
+            renderTree();
+            e.preventDefault();
+            return;
+          }
+          else used = false;
+          if(used){
+            if(orn.x < 3) orn.x = 3; if(orn.x > 97) orn.x = 97;
+            if(orn.y < 2) orn.y = 2; if(orn.y > 98) orn.y = 98;
+            treeSel = idx;
+            b.style.left = orn.x + '%';
+            b.style.top = orn.y + '%';
+            persistTree();
+            syncTreeSel();
+            e.preventDefault();
+          }
         });
         treeOrnsWrap.appendChild(b);
       });
@@ -7451,6 +8021,7 @@
           ? ('Nuestro arbolito ya tiene ' + treeOrns.length + (treeOrns.length === 1 ? ' adorno' : ' adornos') + ', mi amor. 🎄')
           : 'Nuestro arbolito está esperando sus primeros adornos, mi amor. 🎄';
       }
+      updateTreeDeleteBtn();
     }
     Array.prototype.forEach.call(document.querySelectorAll('[data-orn-tool]'), function(btn){
       btn.addEventListener('click', function(){
@@ -7472,19 +8043,30 @@
           treeOrns = treeOrns.filter(function(o){ return o.t !== 'star'; });
         }
         treeOrns.push({ t: treeTool, x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 });
+        treeSel = -1;
         persistTree();
         renderTree();
       });
     }
+    if(treeDeleteBtn) treeDeleteBtn.addEventListener('click', function(){
+      if(treeSel >= 0 && treeSel < treeOrns.length){
+        treeOrns.splice(treeSel, 1);
+        treeSel = -1;
+        persistTree();
+        renderTree();
+      }
+    });
     var treeUndoBtn = document.getElementById('treeUndoBtn');
     if(treeUndoBtn) treeUndoBtn.addEventListener('click', function(){
       treeOrns.pop();
+      if(treeSel >= treeOrns.length) treeSel = -1;
       persistTree();
       renderTree();
     });
     var treeClearBtn = document.getElementById('treeClearBtn');
     if(treeClearBtn) treeClearBtn.addEventListener('click', function(){
       treeOrns = [];
+      treeSel = -1;
       persistTree();
       renderTree();
     });
@@ -7493,6 +8075,8 @@
     // --- Arma tu nacimiento ---
     var NAT_KEY = 'nacimiento-naomi';
     var natScene = document.getElementById('natScene');
+    var natTray = document.getElementById('natTray');
+    var natDeleteBtn = document.getElementById('natDeleteBtn');
     var NAT_FIGS = [
       { id: 'estrella', name: 'La estrella', x: 50, y: 16, cls: 'is-star', svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><polygon points="30,4 37,25 59,25 41,38 47,60 30,47 13,60 19,38 1,25 23,25" fill="#FFD166" stroke="#E3C87E" stroke-width="2"/></svg>' },
       { id: 'angel', name: 'El ángel', x: 83, y: 32, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><ellipse cx="13" cy="32" rx="9" ry="16" fill="#DCE9F7" transform="rotate(-18 13 32)"/><ellipse cx="47" cy="32" rx="9" ry="16" fill="#DCE9F7" transform="rotate(18 47 32)"/><path d="M30 18 L48 72 Q30 78 12 72 Z" fill="#FBF6E9"/><circle cx="30" cy="13" r="8" fill="#F7D3AC"/><ellipse cx="30" cy="2.6" rx="7" ry="2.4" fill="none" stroke="#E3C87E" stroke-width="2"/></svg>' },
@@ -7506,88 +8090,1132 @@
       { id: 'burrito', name: 'El burrito', x: 12, y: 84, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><rect x="17" y="53" width="4.5" height="15" fill="#83838C"/><rect x="37" y="53" width="4.5" height="15" fill="#83838C"/><ellipse cx="28" cy="46" rx="18" ry="11.5" fill="#9A9AA2"/><circle cx="45" cy="34" r="8.5" fill="#9A9AA2"/><path d="M40 27 l-3 -9 6 3 Z" fill="#83838C"/><path d="M47 26 l1 -10 5 5 Z" fill="#83838C"/><circle cx="48" cy="33" r="1.4" fill="#333333"/><path d="M11 41 q-5 8 -2 15" stroke="#83838C" stroke-width="3" fill="none" stroke-linecap="round"/></svg>' },
       { id: 'oveja', name: 'La ovejita', x: 31, y: 86, svg: '<svg viewBox="0 0 60 78" aria-hidden="true"><rect x="19" y="53" width="4" height="13" fill="#4A3A30"/><rect x="35" y="53" width="4" height="13" fill="#4A3A30"/><circle cx="21" cy="43" r="9" fill="#FBF6E9"/><circle cx="30" cy="37" r="10" fill="#FBF6E9"/><circle cx="39" cy="43" r="9" fill="#FBF6E9"/><circle cx="30" cy="47" r="10" fill="#FBF6E9"/><ellipse cx="46" cy="41" rx="6" ry="7.5" fill="#4A3A30"/><circle cx="48" cy="39" r="1.2" fill="#FFFFFF"/></svg>' }
     ];
-    var natPos = {};
-    NAT_FIGS.forEach(function(f){ natPos[f.id] = { x: f.x, y: f.y }; });
+    // La escena empieza vacía: solo quedan puestas las figuritas que Naomi haya colocado.
+    var natPlaced = {};
     try{
       var natSaved = window.localStorage.getItem(NAT_KEY);
       if(natSaved){
         var natParsed = JSON.parse(natSaved);
-        if(natParsed){
+        if(natParsed && natParsed.v === 2 && natParsed.placed){
           NAT_FIGS.forEach(function(f){
-            if(natParsed[f.id] && typeof natParsed[f.id].x === 'number' && typeof natParsed[f.id].y === 'number'){
-              natPos[f.id] = natParsed[f.id];
+            var p = natParsed.placed[f.id];
+            if(p && typeof p.x === 'number' && typeof p.y === 'number') natPlaced[f.id] = { x: p.x, y: p.y };
+          });
+        } else if(natParsed){
+          // Formato anterior (todas las posiciones): se conservan solo las figuritas
+          // que Naomi sí movió de su lugar inicial, como las que ella acomodó.
+          NAT_FIGS.forEach(function(f){
+            var p = natParsed[f.id];
+            if(p && typeof p.x === 'number' && typeof p.y === 'number' && (Math.abs(p.x - f.x) > 0.05 || Math.abs(p.y - f.y) > 0.05)){
+              natPlaced[f.id] = { x: p.x, y: p.y };
             }
           });
         }
       }
-    }catch(e){}
+    }catch(e){ natPlaced = {}; }
+    var natSel = null;
     function persistNat(){
-      try{ window.localStorage.setItem(NAT_KEY, JSON.stringify(natPos)); }catch(e){}
+      try{ window.localStorage.setItem(NAT_KEY, JSON.stringify({ v: 2, placed: natPlaced })); }catch(e){}
     }
-    if(natScene){
+    function clampNatPos(x, y){
+      if(x < 4) x = 4; if(x > 96) x = 96;
+      if(y < 8) y = 8; if(y > 98) y = 98;
+      return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+    }
+    function updateNatDeleteBtn(){
+      if(natDeleteBtn) natDeleteBtn.hidden = !(natSel && natPlaced[natSel]);
+    }
+    function syncNatChips(){
+      if(!natTray) return;
+      Array.prototype.forEach.call(natTray.children, function(chip){
+        var id = chip.getAttribute('data-nat-chip');
+        chip.classList.toggle('is-placed', !!natPlaced[id]);
+        chip.classList.toggle('is-selected', natSel === id);
+      });
+    }
+    function syncNatSel(){
       NAT_FIGS.forEach(function(f){
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'nat-fig' + (f.cls ? ' ' + f.cls : '');
-        b.setAttribute('aria-label', f.name + ': arrastra para moverlo');
-        b.innerHTML = f.svg + '<span class="nat-name">' + f.name + '</span>';
-        b.style.left = natPos[f.id].x + '%';
-        b.style.top = natPos[f.id].y + '%';
-        var dragging = false;
-        function moveFig(e){
-          var rect = natScene.getBoundingClientRect();
-          if(!rect.width || !rect.height) return;
-          var x = (e.clientX - rect.left) / rect.width * 100;
-          var y = (e.clientY - rect.top) / rect.height * 100;
-          if(x < 4) x = 4; if(x > 96) x = 96;
-          if(y < 8) y = 8; if(y > 98) y = 98;
-          natPos[f.id] = { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
-          b.style.left = natPos[f.id].x + '%';
-          b.style.top = natPos[f.id].y + '%';
+        if(!f.el) return;
+        var on = natSel === f.id;
+        f.el.classList.toggle('is-selected', on);
+        f.el.setAttribute('aria-pressed', on ? 'true' : 'false');
+        f.el.setAttribute('aria-label', f.name + (on ? ': seleccionada, arrástrala para moverla o bórrala con el botón de borrar' : ': toca para seleccionarla'));
+      });
+      syncNatChips();
+      updateNatDeleteBtn();
+    }
+    function placeNatFig(f, x, y){
+      natPlaced[f.id] = clampNatPos(x, y);
+      natSel = f.id;
+      persistNat();
+      renderNat();
+    }
+    function removeNatFig(id){
+      delete natPlaced[id];
+      if(natSel === id) natSel = null;
+      persistNat();
+      renderNat();
+    }
+    function renderNat(){
+      if(natScene){
+        NAT_FIGS.forEach(function(f){
+          if(f.el && f.el.parentNode) f.el.parentNode.removeChild(f.el);
+          f.el = null;
+        });
+        NAT_FIGS.forEach(function(f){
+          var p = natPlaced[f.id];
+          if(!p) return;
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'nat-fig' + (f.cls ? ' ' + f.cls : '') + (natSel === f.id ? ' is-selected' : '');
+          b.setAttribute('aria-pressed', natSel === f.id ? 'true' : 'false');
+          b.setAttribute('aria-label', f.name + (natSel === f.id ? ': seleccionada, arrástrala para moverla o bórrala con el botón de borrar' : ': toca para seleccionarla'));
+          b.innerHTML = f.svg + '<span class="nat-name">' + f.name + '</span>';
+          b.style.left = p.x + '%';
+          b.style.top = p.y + '%';
+          var drag = null;
+          function moveFig(e){
+            var rect = natScene.getBoundingClientRect();
+            if(!rect.width || !rect.height) return;
+            var c = clampNatPos((e.clientX - rect.left) / rect.width * 100, (e.clientY - rect.top) / rect.height * 100);
+            natPlaced[f.id] = c;
+            b.style.left = c.x + '%';
+            b.style.top = c.y + '%';
+          }
+          b.addEventListener('pointerdown', function(e){
+            drag = { x: e.clientX, y: e.clientY, moved: false };
+            try{ b.setPointerCapture(e.pointerId); }catch(err){}
+            e.preventDefault();
+          });
+          b.addEventListener('pointermove', function(e){
+            if(!drag) return;
+            if(!drag.moved && Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < 7) return;
+            drag.moved = true;
+            if(natSel !== f.id){ natSel = f.id; syncNatSel(); }
+            moveFig(e);
+          });
+          b.addEventListener('pointerup', function(){
+            if(!drag) return;
+            var wasDrag = drag.moved;
+            drag = null;
+            if(wasDrag) persistNat();
+            else{
+              natSel = (natSel === f.id) ? null : f.id;
+              syncNatSel();
+            }
+          });
+          b.addEventListener('pointercancel', function(){
+            if(drag && drag.moved) persistNat();
+            drag = null;
+          });
+          b.addEventListener('click', function(e){ e.stopPropagation(); });
+          b.addEventListener('keydown', function(e){
+            var cur = natPlaced[f.id];
+            if(!cur) return;
+            var step = 2, used = true;
+            if(e.key === 'ArrowLeft') cur.x -= step;
+            else if(e.key === 'ArrowRight') cur.x += step;
+            else if(e.key === 'ArrowUp') cur.y -= step;
+            else if(e.key === 'ArrowDown') cur.y += step;
+            else if(e.key === 'Delete' || e.key === 'Backspace'){
+              removeNatFig(f.id);
+              e.preventDefault();
+              return;
+            }
+            else used = false;
+            if(used){
+              var c = clampNatPos(cur.x, cur.y);
+              natPlaced[f.id] = c;
+              natSel = f.id;
+              b.style.left = c.x + '%';
+              b.style.top = c.y + '%';
+              persistNat();
+              syncNatSel();
+              e.preventDefault();
+            }
+          });
+          natScene.appendChild(b);
+          f.el = b;
+        });
+      }
+      syncNatChips();
+      updateNatDeleteBtn();
+    }
+    if(natTray){
+      NAT_FIGS.forEach(function(f){
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'nat-chip' + (natPlaced[f.id] ? ' is-placed' : '');
+        chip.setAttribute('data-nat-chip', f.id);
+        chip.setAttribute('aria-label', f.name + ': toca para ponerla en el nacimiento o arrástrala hasta su lugar');
+        chip.innerHTML = f.svg + '<span class="nat-chip-name">' + f.name + '</span>';
+        var drag = null, ghost = null;
+        function dropGhost(){
+          if(ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
+          ghost = null;
         }
-        b.addEventListener('pointerdown', function(e){
-          dragging = true;
-          try{ b.setPointerCapture(e.pointerId); }catch(err){}
-          moveFig(e);
+        chip.addEventListener('pointerdown', function(e){
+          drag = { x: e.clientX, y: e.clientY, moved: false };
+          try{ chip.setPointerCapture(e.pointerId); }catch(err){}
           e.preventDefault();
         });
-        b.addEventListener('pointermove', function(e){
-          if(dragging) moveFig(e);
+        chip.addEventListener('pointermove', function(e){
+          if(!drag) return;
+          if(!drag.moved && Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < 7) return;
+          drag.moved = true;
+          if(!ghost){
+            ghost = document.createElement('div');
+            ghost.className = 'nat-ghost';
+            ghost.setAttribute('aria-hidden', 'true');
+            ghost.innerHTML = f.svg;
+            document.body.appendChild(ghost);
+          }
+          ghost.style.left = e.clientX + 'px';
+          ghost.style.top = e.clientY + 'px';
         });
-        b.addEventListener('pointerup', function(){
-          if(dragging){ dragging = false; persistNat(); }
-        });
-        b.addEventListener('pointercancel', function(){
-          if(dragging){ dragging = false; persistNat(); }
-        });
-        b.addEventListener('keydown', function(e){
-          var step = 2, p = natPos[f.id], used = true;
-          if(e.key === 'ArrowLeft') p.x -= step;
-          else if(e.key === 'ArrowRight') p.x += step;
-          else if(e.key === 'ArrowUp') p.y -= step;
-          else if(e.key === 'ArrowDown') p.y += step;
-          else used = false;
-          if(used){
-            if(p.x < 4) p.x = 4; if(p.x > 96) p.x = 96;
-            if(p.y < 8) p.y = 8; if(p.y > 98) p.y = 98;
-            b.style.left = p.x + '%';
-            b.style.top = p.y + '%';
-            persistNat();
-            e.preventDefault();
+        chip.addEventListener('pointerup', function(e){
+          if(!drag) return;
+          var wasDrag = drag.moved;
+          drag = null;
+          dropGhost();
+          if(wasDrag){
+            if(natScene){
+              var rect = natScene.getBoundingClientRect();
+              if(rect.width && e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom){
+                placeNatFig(f, (e.clientX - rect.left) / rect.width * 100, (e.clientY - rect.top) / rect.height * 100);
+              }
+            }
+          } else if(natPlaced[f.id]){
+            natSel = (natSel === f.id) ? null : f.id;
+            syncNatSel();
+          } else {
+            placeNatFig(f, f.x, f.y);
           }
         });
-        natScene.appendChild(b);
-        f.el = b;
+        chip.addEventListener('pointercancel', function(){
+          drag = null;
+          dropGhost();
+        });
+        chip.addEventListener('click', function(e){
+          if(e.detail === 0){
+            if(natPlaced[f.id]){ natSel = f.id; syncNatSel(); }
+            else placeNatFig(f, f.x, f.y);
+          }
+        });
+        natTray.appendChild(chip);
       });
     }
+    if(natScene){
+      natScene.addEventListener('click', function(){
+        if(natSel){ natSel = null; syncNatSel(); }
+      });
+    }
+    if(natDeleteBtn) natDeleteBtn.addEventListener('click', function(){
+      if(natSel && natPlaced[natSel]) removeNatFig(natSel);
+    });
     var natResetBtn = document.getElementById('natResetBtn');
     if(natResetBtn) natResetBtn.addEventListener('click', function(){
-      NAT_FIGS.forEach(function(f){
-        natPos[f.id] = { x: f.x, y: f.y };
-        if(f.el){ f.el.style.left = f.x + '%'; f.el.style.top = f.y + '%'; }
-      });
+      natPlaced = {};
+      natSel = null;
       persistNat();
+      renderNat();
     });
+    renderNat();
+
+
+    function domShuffle(arr){
+      for(var i = arr.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+      }
+      return arr;
+    }
+
+    // ===== La Segunda Milla: Trivia de la Biblia =====
+    var SM_META = 30;
+    var SM_PLAYERS = [
+      { name: 'Naomi', cls: 'pawn-n', letter: 'N' },
+      { name: 'Hagot', cls: 'pawn-h', letter: 'H' }
+    ];
+    var SM_POOLS = {
+      facil: [
+        { q: '¿Quién construyó el arca para salvar a su familia del diluvio?', opts: ['Noé', 'Abraham', 'Moisés', 'Lot'], a: 0, fb: 'Dios mandó a Noé hacer un arca de madera de gofer, y en ella se salvó su familia y los animales.', ref: 'Génesis 6:14' },
+        { q: '¿Cuántos días y cuántas noches llovió sobre la tierra en el diluvio?', opts: ['Siete días', 'Cuarenta días y cuarenta noches', 'Doce días', 'Cien días'], a: 1, fb: '«Y hubo lluvia sobre la tierra cuarenta días y cuarenta noches».', ref: 'Génesis 7:12' },
+        { q: '¿Quién recibió las tablas de los Diez Mandamientos en el monte Sinaí?', opts: ['Aarón', 'Josué', 'Moisés', 'Elías'], a: 2, fb: 'Moisés subió al monte Sinaí y recibió las tablas de la ley de manos de Dios.', ref: 'Éxodo 31:18' },
+        { q: '¿Qué mar se dividió para que el pueblo de Israel cruzara en seco?', opts: ['El mar de Galilea', 'El mar Muerto', 'El mar Rojo', 'El mar Mediterráneo'], a: 2, fb: 'Dios dividió el mar Rojo y los hijos de Israel pasaron en seco, por en medio del mar.', ref: 'Éxodo 14:21-22' },
+        { q: '¿Quién venció al gigante Goliat con una honda y una piedra?', opts: ['Saúl', 'David', 'Sansón', 'Samuel'], a: 1, fb: 'El joven David, confiando en Jehová, venció al gigante con una piedra de su honda.', ref: '1 Samuel 17:49-50' },
+        { q: '¿Qué profeta fue tragado por un gran pez por huir de la presencia de Dios?', opts: ['Jonás', 'Joel', 'Amós', 'Oseas'], a: 0, fb: 'Jonás huyó hacia Tarsis y un gran pez lo tragó; estuvo tres días y tres noches en su vientre.', ref: 'Jonás 1:17' },
+        { q: '¿Cuántos apóstoles escogió Jesús para que estuvieran con Él?', opts: ['Siete', 'Diez', 'Doce', 'Setenta'], a: 2, fb: 'Jesús subió al monte y llamó a los que quiso: instituyó a doce para que estuviesen con Él.', ref: 'Marcos 3:13-14' },
+        { q: '¿Cuál fue el primer milagro de Jesús, en las bodas de Caná?', opts: ['Multiplicar los panes', 'Convertir el agua en vino', 'Calmar la tempestad', 'Sanar a un ciego'], a: 1, fb: 'En Caná de Galilea, Jesús convirtió el agua en vino: este fue el principio de sus señales.', ref: 'Juan 2:1-11' },
+        { q: '¿Qué apóstol negó tres veces a Jesús antes de que cantara el gallo?', opts: ['Juan', 'Andrés', 'Pedro', 'Tomás'], a: 2, fb: 'Pedro lo negó tres veces, y luego lloró amargamente; el Señor lo perdonó y lo fortaleció.', ref: 'Mateo 26:69-75' },
+        { q: '¿Cómo se llama el primer libro de la Biblia?', opts: ['Éxodo', 'Génesis', 'Salmos', 'Mateo'], a: 1, fb: '«En el principio creó Dios los cielos y la tierra»: así comienza el Génesis, el primer libro.', ref: 'Génesis 1:1' },
+        { q: '¿Cómo se llama el último libro de la Biblia?', opts: ['Judas', 'Hebreos', 'Apocalipsis', 'Daniel'], a: 2, fb: 'El Apocalipsis, la revelación que recibió el apóstol Juan, cierra la Biblia con la promesa de la victoria de Cristo.', ref: 'Apocalipsis 1:1' },
+        { q: '¿Quién fue el primer hombre que Dios creó?', opts: ['Noé', 'Adán', 'Abel', 'Enoc'], a: 1, fb: 'Jehová Dios formó al hombre del polvo de la tierra y sopló en su nariz aliento de vida.', ref: 'Génesis 2:7' },
+        { q: '¿Quién mató a su hermano Abel por envidia?', opts: ['Esaú', 'Caín', 'Rubén', 'Ismael'], a: 1, fb: 'Caín se levantó contra su hermano Abel y lo mató en el campo.', ref: 'Génesis 4:8' },
+        { q: '¿Qué animal engañó a Eva en el jardín de Edén?', opts: ['Un zorro', 'Una paloma', 'La serpiente', 'Un cordero'], a: 2, fb: 'La serpiente, el más astuto de los animales del campo, engañó a Eva con sus palabras.', ref: 'Génesis 3:1-5' },
+        { q: '¿Quién interpretó los sueños de Faraón y llegó a gobernar Egipto?', opts: ['Moisés', 'José', 'Daniel', 'Jacob'], a: 1, fb: 'José explicó los sueños de las vacas y las espigas, y Faraón lo puso sobre toda la tierra de Egipto.', ref: 'Génesis 41:38-41' },
+        { q: '¿Qué pidió el joven rey Salomón a Dios en vez de riquezas?', opts: ['Una larga vida', 'La victoria en la guerra', 'Sabiduría para gobernar', 'Un palacio de oro'], a: 2, fb: 'Salomón pidió un corazón entendido para juzgar al pueblo, y Dios se lo concedió, y también riquezas y gloria.', ref: '1 Reyes 3:9-13' },
+        { q: '¿Qué apóstol caminó con Jesús sobre las aguas del mar?', opts: ['Pedro', 'Felipe', 'Mateo', 'Bartolomé'], a: 0, fb: 'Pedro bajó de la barca y anduvo sobre las aguas para ir a Jesús; cuando dudó, el Señor lo sostuvo de la mano.', ref: 'Mateo 14:28-31' },
+        { q: '¿Quién era el hombre más fuerte de Israel, y su fuerza estaba en su cabello?', opts: ['Gedeón', 'Sansón', 'Saúl', 'Joab'], a: 1, fb: 'Sansón, juez de Israel, reveló a Dalila que su fuerza estaba en su cabello, que nunca había sido cortado.', ref: 'Jueces 16:17' }
+      ],
+      media: [
+        { q: '¿Cuántas plagas envió Dios sobre Egipto para que Faraón dejara salir a Israel?', opts: ['Tres', 'Siete', 'Diez', 'Doce'], a: 2, fb: 'Diez plagas, desde el agua convertida en sangre hasta la muerte de los primogénitos, mostraron el poder de Dios.', ref: 'Éxodo 7-12' },
+        { q: '¿Quién fue la madre del profeta Samuel?', opts: ['Ana', 'Penina', 'Rut', 'Abigail'], a: 0, fb: 'Ana, que no podía tener hijos, oró con amargura de alma y prometió dedicar su hijo a Jehová.', ref: '1 Samuel 1:10-20' },
+        { q: '¿Qué profeta subió al cielo en un torbellino, con un carro de fuego y caballos de fuego?', opts: ['Eliseo', 'Elías', 'Isaías', 'Ezequiel'], a: 1, fb: 'Elías subió al cielo en un torbellino, y Eliseo lo vio y recibió una doble porción de su espíritu.', ref: '2 Reyes 2:11' },
+        { q: '¿A quién habló Dios desde una zarza que ardía y no se consumía?', opts: ['A Abraham', 'A Jacob', 'A Moisés', 'A Samuel'], a: 2, fb: 'En el monte Horeb, el ángel de Jehová se apareció a Moisés en una llama de fuego en medio de una zarza.', ref: 'Éxodo 3:1-4' },
+        { q: '¿Cuántos años anduvo el pueblo de Israel por el desierto antes de entrar en la tierra prometida?', opts: ['Diez años', 'Veinte años', 'Cuarenta años', 'Setenta años'], a: 2, fb: 'Por su incredulidad, aquella generación anduvo cuarenta años por el desierto.', ref: 'Números 14:33-34' },
+        { q: '¿Quién guio a Israel después de la muerte de Moisés?', opts: ['Caleb', 'Josué', 'Aarón', 'Eleazar'], a: 1, fb: '«Moisés mi siervo ha muerto; ahora, pues, levántate y pasa este Jordán», dijo Jehová a Josué.', ref: 'Josué 1:1-2' },
+        { q: '¿Qué ciudad cayó cuando Israel marchó alrededor de ella y gritó al sonar las trompetas?', opts: ['Hai', 'Jericó', 'Gabaón', 'Hebrón'], a: 1, fb: 'El muro de Jericó se derrumbó cuando el pueblo gritó y los sacerdotes tocaron las bocinas.', ref: 'Josué 6:20' },
+        { q: '¿Quién fue vendido por sus propios hermanos como esclavo por veinte piezas de plata?', opts: ['Benjamín', 'José', 'Judá', 'Simeón'], a: 1, fb: 'Sus hermanos, envidiosos de sus sueños, lo vendieron a unos mercaderes que lo llevaron a Egipto.', ref: 'Génesis 37:28' },
+        { q: '¿Quién construyó el primer templo de Jerusalén?', opts: ['David', 'Salomón', 'Ezequías', 'Zorobabel'], a: 1, fb: 'David lo deseó, pero fue su hijo Salomón quien edificó la casa de Jehová en Jerusalén.', ref: '1 Reyes 6:1' },
+        { q: '¿Qué apóstol entregó a Jesús por treinta piezas de plata?', opts: ['Judas Iscariote', 'Tomás', 'Judas Tadeo', 'Simón el Zelote'], a: 0, fb: 'Judas Iscariote fue a los principales sacerdotes y les entregó a Jesús por treinta piezas de plata.', ref: 'Mateo 26:14-16' },
+        { q: '¿Quién ayudó a Jesús a llevar la cruz camino al Gólgota?', opts: ['José de Arimatea', 'Nicodemo', 'Simón de Cirene', 'El centurión'], a: 2, fb: 'Los soldados obligaron a Simón de Cirene, que venía del campo, a llevar la cruz detrás de Jesús.', ref: 'Mateo 27:32' },
+        { q: '¿Qué le pasó a la esposa de Lot cuando miró hacia atrás, hacia Sodoma?', opts: ['Quedó ciega', 'Se convirtió en una estatua de sal', 'Se perdió en el desierto', 'Murió de tristeza'], a: 1, fb: 'Aunque el ángel les dijo que no miraran atrás, ella miró y quedó convertida en una estatua de sal.', ref: 'Génesis 19:26' },
+        { q: '¿Qué recaudador de impuestos, de baja estatura, se subió a un sicómoro para ver pasar a Jesús?', opts: ['Mateo', 'Zaqueo', 'Leví', 'Nicodemo'], a: 1, fb: 'Zaqueo, jefe de los publicanos, corrió y se subió a un árbol sicómoro; Jesús lo llamó y entró en su casa.', ref: 'Lucas 19:2-5' },
+        { q: '¿Qué profeta pasó una noche en el foso de los leones y salió sin ninguna herida?', opts: ['Jeremías', 'Daniel', 'Miqueas', 'Habacuc'], a: 1, fb: 'Dios envió su ángel y cerró la boca de los leones: Daniel salió ileso porque había confiado en su Dios.', ref: 'Daniel 6:22' },
+        { q: '¿Quién fue el primer mártir cristiano, apedreado mientras veía los cielos abiertos?', opts: ['Santiago', 'Esteban', 'Felipe', 'Bernabé'], a: 1, fb: 'Esteban, lleno del Espíritu Santo, vio la gloria de Dios y a Jesús a su diestra, y oró por quienes lo apedreaban.', ref: 'Hechos 7:55-60' },
+        { q: '¿En qué río bautizaba Juan el Bautista a los que se arrepentían?', opts: ['En el Éufrates', 'En el Jordán', 'En el Nilo', 'En el Tigris'], a: 1, fb: 'Multitudes de Jerusalén y de Judea salían a Juan y eran bautizados por él en el Jordán.', ref: 'Mateo 3:5-6' },
+        { q: '¿Qué rey de Israel tocaba el arpa y con su música calmaba al rey Saúl?', opts: ['Salomón', 'David', 'Asa', 'Josafat'], a: 1, fb: 'Cuando David tocaba el arpa, Saúl sentía alivio y el espíritu malo se apartaba de él.', ref: '1 Samuel 16:23' },
+        { q: '¿Cómo se llamaba la mujer de Jericó que escondió a los espías de Josué en el terrado de su casa?', opts: ['Rahab', 'Jael', 'Dalila', 'Tamar'], a: 0, fb: 'Rahab escondió a los espías en el terrado de su casa y, por su fe, ella y su familia fueron salvados.', ref: 'Josué 2:1-6' }
+      ],
+      dificil: [
+        { q: '¿Cómo se llamaba el padre de Abraham?', opts: ['Nacor', 'Taré', 'Harán', 'Serug'], a: 1, fb: 'Taré fue padre de Abram, de Nacor y de Harán, y sacó a su familia de Ur de los caldeos.', ref: 'Génesis 11:26-27' },
+        { q: '¿Quién fue el primer sumo sacerdote de Israel, consagrado con vestiduras santas?', opts: ['Eleazar', 'Aarón', 'Nadab', 'Finees'], a: 1, fb: 'Aarón, hermano de Moisés, fue ungido y consagrado para servir como sacerdote, y sus hijos después de él.', ref: 'Éxodo 28:1-3' },
+        { q: '¿Qué rey vio una mano que escribía en la pared durante su banquete, y tembló de miedo?', opts: ['Nabucodonosor', 'Darío', 'Belsasar', 'Ciro'], a: 2, fb: 'Belsasar vio los dedos de una mano que escribía «Mene, Mene, Tequel, Uparsin» frente al candelabro del palacio.', ref: 'Daniel 5:5-25' },
+        { q: '¿Quién dirigió la reconstrucción de los muros de Jerusalén después del exilio, en solo cincuenta y dos días?', opts: ['Esdras', 'Zorobabel', 'Nehemías', 'Ageo'], a: 2, fb: 'Nehemías, copero del rey, volvió con el pueblo y reedificó el muro, con la espada en una mano y la herramienta en la otra.', ref: 'Nehemías 6:15-16' },
+        { q: '¿Cómo se llamaba la suegra de Rut, a quien ella prometió: «Tu pueblo será mi pueblo, y tu Dios mi Dios»?', opts: ['Orfa', 'Noemí', 'Ana', 'Elisabet'], a: 1, fb: 'Noemí había quedado viuda y sin hijos en Moab; Rut, su nuera, no quiso dejarla y volvió con ella a Belén.', ref: 'Rut 1:16-17' },
+        { q: '¿A qué apóstol llamó Pablo «el médico amado» en su carta a los Colosenses?', opts: ['Timoteo', 'Lucas', 'Marcos', 'Tito'], a: 1, fb: '«Os saluda Lucas el médico amado, y Demas», escribió Pablo; Lucas también escribió un evangelio y el libro de los Hechos.', ref: 'Colosenses 4:14' },
+        { q: '¿En qué isla estaba el apóstol Juan cuando recibió las visiones del Apocalipsis?', opts: ['Chipre', 'Creta', 'Patmos', 'Malta'], a: 2, fb: '«Yo Juan… estaba en la isla llamada Patmos, por causa de la palabra de Dios y el testimonio de Jesucristo».', ref: 'Apocalipsis 1:9' },
+        { q: '¿Cuántos años tenía Abraham cuando nació su hijo Isaac, el hijo de la promesa?', opts: ['Setenta y cinco', 'Ochenta y seis', 'Noventa años', 'Cien años'], a: 3, fb: '«Era Abraham de cien años cuando nació Isaac su hijo», y Sara rió de gozo por el milagro.', ref: 'Génesis 21:5' },
+        { q: '¿Qué profeta recibió la orden de Dios de casarse con Gomer, como señal para Israel?', opts: ['Oseas', 'Joel', 'Abdías', 'Jonás'], a: 0, fb: 'La vida de Oseas y su familia fue una señal viva del amor de Dios por un pueblo que se apartaba de Él.', ref: 'Oseas 1:2' },
+        { q: '¿Qué profetisa juzgaba a Israel sentada bajo una palmera?', opts: ['Hulda', 'Débora', 'María la profetisa', 'Noadías'], a: 1, fb: 'Débora, profetisa y esposa de Lapidot, juzgaba a Israel y acompañó a Barac a la batalla contra Sísara.', ref: 'Jueces 4:4-9' },
+        { q: '¿Quién fue elegido echando suertes para ocupar el lugar de Judas entre los doce apóstoles?', opts: ['José Barsabás', 'Matías', 'Bernabé', 'Silas'], a: 1, fb: 'Echaron suertes entre José y Matías, «y la suerte cayó sobre Matías; y fue contado con los once apóstoles».', ref: 'Hechos 1:23-26' },
+        { q: '¿Quién fue el primer gentil que recibió el Evangelio y se bautizó con toda su casa?', opts: ['El eunuco etíope', 'Lidia', 'Cornelio', 'El carcelero de Filipos'], a: 2, fb: 'Cornelio, centurión romano, envió por Pedro; el Espíritu Santo cayó sobre los gentiles y fueron bautizados.', ref: 'Hechos 10:44-48' },
+        { q: '¿Cómo se llamaba el siervo del sumo sacerdote al que Pedro cortó la oreja derecha en Getsemaní?', opts: ['Malco', 'Anás', 'Gamaliel', 'Alejandro'], a: 0, fb: '«Simón Pedro, que tenía una espada, la desenvainó, e hirió al siervo del sumo sacerdote, y le cortó la oreja derecha. Y el siervo se llamaba Malco».', ref: 'Juan 18:10' },
+        { q: 'Cuando Isaías anunció al rey Ezequías que moriría, ¿qué hizo el rey y qué hizo Dios?', opts: ['Se enojó y expulsó al profeta; Dios guardó silencio', 'Oró y lloró mucho; Dios le añadió quince años de vida', 'Huyó a Egipto; Dios lo alcanzó en el camino', 'Ofreció mil sacrificios; Dios le añadió dos años'], a: 1, fb: 'Ezequías volvió su rostro a la pared y oró; antes de que Isaías saliera del patio, Dios le prometió quince años más.', ref: '2 Reyes 20:1-6' },
+        { q: '¿Qué profeta fue alimentado por cuervos que le traían pan y carne junto al arroyo Querit?', opts: ['Eliseo', 'Elías', 'Obadías', 'Natán'], a: 1, fb: 'Durante la sequía, los cuervos le llevaban pan y carne por la mañana y por la tarde, y bebía del arroyo.', ref: '1 Reyes 17:4-6' },
+        { q: '¿Cómo murió el rey Saúl en el monte Gilboa?', opts: ['Lo mató un soldado filisteo', 'Cayó de su caballo', 'Se echó sobre su propia espada', 'Murió de una enfermedad'], a: 2, fb: 'Herido por los arqueros y temiendo caer en manos de los filisteos, Saúl se echó sobre su espada y murió.', ref: '1 Samuel 31:3-4' }
+      ],
+      muy: [
+        { q: '¿Cuántos años vivió Matusalén, el hombre más longevo de toda la Biblia?', opts: ['930 años', '950 años', '969 años', '990 años'], a: 2, fb: '«Y fueron todos los días de Matusalén novecientos sesenta y nueve años; y murió». Nadie vivió más que él.', ref: 'Génesis 5:27' },
+        { q: '¿Cómo se llamaba el padre de Noé, que profetizó consuelo sobre su hijo?', opts: ['Enoc', 'Lamec', 'Jared', 'Kenán'], a: 1, fb: 'Lamec engendró a Noé y dijo: «Este nos aliviará de nuestras obras y del trabajo de nuestras manos».', ref: 'Génesis 5:28-29' },
+        { q: '¿Qué rey de Israel reinó solamente siete días antes de morir en su palacio en llamas?', opts: ['Baasa', 'Zimri', 'Omri', 'Tibni'], a: 1, fb: 'Zimri conspiró contra el rey Ela y reinó siete días en Tirsa; al verse sitiado, prendió fuego al palacio consigo dentro.', ref: '1 Reyes 16:15-18' },
+        { q: '¿Cómo se llamaba la única hija de Jacob que las Escrituras mencionan por nombre?', opts: ['Dina', 'Raquel', 'Lea', 'Tamar'], a: 0, fb: 'Dina, hija de Lea y de Jacob, es la única hija mencionada por nombre entre los hijos de Jacob.', ref: 'Génesis 30:21' },
+        { q: '¿Cuál es el capítulo más corto de toda la Biblia?', opts: ['El Salmo 117', 'El Salmo 133', 'El Salmo 100', 'El Salmo 134'], a: 0, fb: 'El Salmo 117 tiene solo dos versículos: «Alabad a Jehová, naciones todas; pueblos todos, alabadle». El más largo es el Salmo 119.', ref: 'Salmos 117' },
+        { q: '¿En qué monte murió Aarón, el hermano de Moisés, y fue llorado treinta días?', opts: ['En el monte Sinaí', 'En el monte Nebo', 'En el monte Hor', 'En el monte Carmelo'], a: 2, fb: 'En el monte Hor, Moisés quitó a Aarón sus vestiduras y las vistió a Eleazar su hijo; toda la casa de Israel lo lloró treinta días.', ref: 'Números 20:25-29' },
+        { q: '¿Quién fue el padre del profeta Samuel?', opts: ['Elí', 'Elcana', 'Isaí', 'Penina'], a: 1, fb: 'Elcana, de Ramataim de Zofim, tenía dos mujeres; Ana, la madre de Samuel, era la que no tenía hijos.', ref: '1 Samuel 1:1-2' },
+        { q: '¿Cuántos hijos varones tuvo Jacob en total, cabezas de las tribus de Israel?', opts: ['Diez', 'Once', 'Doce', 'Trece'], a: 2, fb: 'Doce hijos: de Lea seis, de Raquel dos, y dos de cada una de las siervas, Bilha y Zilpa.', ref: 'Génesis 35:22-26' },
+        { q: '¿Qué nombre puso Eva a su tercer hijo, diciendo: «Dios me ha sustituido otro hijo en lugar de Abel»?', opts: ['Enoc', 'Enós', 'Set', 'Caínán'], a: 2, fb: 'Adán y Eva lo llamaron Set; y Set también tuvo un hijo, Enós, y entonces comenzaron a invocar el nombre de Jehová.', ref: 'Génesis 4:25-26' },
+        { q: '¿Qué joven se durmió durante el largo sermón de Pablo, cayó de una ventana del tercer piso y fue levantado vivo?', opts: ['Eutico', 'Tíquico', 'Trófimo', 'Onésimo'], a: 0, fb: 'Eutico cayó muerto, pero Pablo descendió, se echó sobre él y dijo: «No os alarméis, pues su alma está en él».', ref: 'Hechos 20:9-12' },
+        { q: '¿Cuántos años tenía el rey Josías cuando comenzó a reinar en Judá?', opts: ['Siete años', 'Ocho años', 'Doce años', 'Dieciséis años'], a: 1, fb: '«De ocho años era Josías cuando comenzó a reinar, y treinta y un años reinó en Jerusalén»; siendo aún joven, buscó al Dios de David.', ref: '2 Reyes 22:1' },
+        { q: '¿Qué significa «Ebenezer», el nombre que Samuel dio a la piedra que levantó entre Mizpa y Sen?', opts: ['«Dios es mi roca»', '«Hasta aquí nos ayudó Jehová»', '«El Señor proveerá»', '«Casa de Dios»'], a: 1, fb: 'Samuel tomó una piedra y le puso por nombre Ebenezer, diciendo: «Hasta aquí nos ayudó Jehová».', ref: '1 Samuel 7:12' }
+      ]
+    };
+    var smDie1 = document.getElementById('smDie1');
+    var smDie2 = document.getElementById('smDie2');
+    var smRollBtn = document.getElementById('smRollBtn');
+    var smSumEl = document.getElementById('smSum');
+    var smTurnEl = document.getElementById('smTurn');
+    var smPosEl = document.getElementById('smPos');
+    var smBoard = document.getElementById('smBoard');
+    var smQuizBody = document.getElementById('smQuizBody');
+    var smQuestion = document.getElementById('smQuestion');
+    var smOptions = document.getElementById('smOptions');
+    var smFeedback = document.getElementById('smFeedback');
+    var smNextBtn = document.getElementById('smNextBtn');
+    var smEnd = document.getElementById('smEnd');
+    var smFinalMsg = document.getElementById('smFinalMsg');
+    var smRestartBtn = document.getElementById('smRestartBtn');
+    var smPos = [0, 0];
+    var smTurnP = 0;
+    var smRolling = false;
+    var smSum = 0;
+    var smLocked = false;
+    var smWon = false;
+    var smUsed = { facil: [], media: [], dificil: [], muy: [] };
+    var smCells = [];
+    function smTierOf(sum){ if(sum <= 4) return 'facil'; if(sum <= 7) return 'media'; if(sum <= 10) return 'dificil'; return 'muy'; }
+    var SM_TIER_LABEL = { facil: 'pregunta fácil', media: 'pregunta media', dificil: 'pregunta difícil', muy: 'pregunta muy difícil' };
+    function smDraw(tier){
+      var pool = SM_POOLS[tier];
+      if(smUsed[tier].length >= pool.length) smUsed[tier] = [];
+      var avail = pool.filter(function(item){ return smUsed[tier].indexOf(pool.indexOf(item)) < 0; });
+      var item = avail[Math.floor(Math.random() * avail.length)];
+      smUsed[tier].push(pool.indexOf(item));
+      return item;
+    }
+    function smBuildBoard(){
+      if(!smBoard) return;
+      smBoard.innerHTML = '';
+      smCells = [];
+      for(var i = 0; i <= SM_META; i++){
+        var cell = document.createElement('div');
+        cell.className = 'sm-cell' + (i === SM_META ? ' is-meta' : '');
+        var num = document.createElement('span');
+        num.className = 'sm-num';
+        num.textContent = i === 0 ? 'Salida' : (i === SM_META ? '★ Meta' : String(i));
+        var pawns = document.createElement('div');
+        pawns.className = 'sm-pawns';
+        cell.appendChild(num);
+        cell.appendChild(pawns);
+        smBoard.appendChild(cell);
+        smCells.push(pawns);
+      }
+    }
+    function smRenderBoard(){
+      smCells.forEach(function(c){ c.innerHTML = ''; });
+      smPos.forEach(function(p, pi){
+        if(!smCells[p]) return;
+        var s = document.createElement('span');
+        s.className = 'sm-pawn ' + SM_PLAYERS[pi].cls;
+        s.textContent = SM_PLAYERS[pi].letter;
+        smCells[p].appendChild(s);
+      });
+      if(smPosEl) smPosEl.textContent = 'Naomi va en la milla ' + smPos[0] + ' · Hagot va en la milla ' + smPos[1] + ' · La meta es la milla ' + SM_META;
+      if(smTurnEl) smTurnEl.textContent = smWon ? '¡Ya tenemos ganador! 🎉' : ('Turno de ' + SM_PLAYERS[smTurnP].name + (smTurnP === 0 ? ' ♥' : ''));
+    }
+    function smShowQuestion(){
+      var tier = smTierOf(smSum);
+      var item = smDraw(tier);
+      smLocked = false;
+      smQuizBody.hidden = false;
+      smFeedback.textContent = '';
+      smNextBtn.hidden = true;
+      smQuestion.textContent = item.q;
+      smOptions.innerHTML = '';
+      var opts = item.opts.map(function(t, i){ return { t: t, ok: i === item.a }; });
+      domShuffle(opts);
+      opts.forEach(function(op){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'quiz-opt';
+        b.textContent = op.t;
+        if(op.ok) b.setAttribute('data-ok', '1');
+        b.addEventListener('click', function(){
+          if(smLocked) return;
+          smLocked = true;
+          Array.prototype.forEach.call(smOptions.querySelectorAll('.quiz-opt'), function(x){
+            x.disabled = true;
+            if(x.getAttribute('data-ok')) x.classList.add('is-correct');
+          });
+          var name = SM_PLAYERS[smTurnP].name;
+          if(op.ok){
+            smPos[smTurnP] = Math.min(SM_META, smPos[smTurnP] + smSum);
+            smFeedback.textContent = '¡Correcto, ' + name + '! Avanzas ' + smSum + ' millas. ' + item.fb + ' (' + item.ref + ')';
+            if(smPos[smTurnP] >= SM_META) smWon = true;
+          } else {
+            b.classList.add('is-wrong');
+            smFeedback.textContent = 'Esta vez no, ' + name + ': no avanzas. ' + item.fb + ' (' + item.ref + ')';
+          }
+          smNextBtn.textContent = smWon ? 'Ver el final ♥' : 'Seguir jugando ♥';
+          smNextBtn.hidden = false;
+          smRenderBoard();
+        });
+        smOptions.appendChild(b);
+      });
+    }
+    if(smRollBtn) smRollBtn.addEventListener('click', function(){
+      if(smRolling || smWon || !smQuizBody.hidden) return;
+      smRolling = true;
+      smRollBtn.disabled = true;
+      smSumEl.textContent = 'Lanzando los dados…';
+      if(smDie1) smDie1.classList.add('rolling');
+      if(smDie2) smDie2.classList.add('rolling');
+      var d1 = 1 + Math.floor(Math.random() * 6);
+      var d2 = 1 + Math.floor(Math.random() * 6);
+      var ticks = 0;
+      var maxTicks = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 2 : 9;
+      var iv = setInterval(function(){
+        ticks++;
+        if(smDie1) smDie1.setAttribute('data-v', String(1 + Math.floor(Math.random() * 6)));
+        if(smDie2) smDie2.setAttribute('data-v', String(1 + Math.floor(Math.random() * 6)));
+        if(ticks >= maxTicks){
+          clearInterval(iv);
+          if(smDie1){ smDie1.setAttribute('data-v', String(d1)); smDie1.classList.remove('rolling'); }
+          if(smDie2){ smDie2.setAttribute('data-v', String(d2)); smDie2.classList.remove('rolling'); }
+          smSum = d1 + d2;
+          var tier = smTierOf(smSum);
+          smSumEl.innerHTML = 'Salió <strong>' + d1 + ' + ' + d2 + ' = ' + smSum + '</strong> · <span class="sm-tier">' + (smSum === 12 ? '¡Pregunta casi imposible!' : 'Nivel: ' + SM_TIER_LABEL[tier]) + '</span>';
+          smRolling = false;
+          smShowQuestion();
+        }
+      }, 75);
+    });
+    if(smNextBtn) smNextBtn.addEventListener('click', function(){
+      if(smWon){
+        smQuizBody.hidden = true;
+        if(smEnd) smEnd.hidden = false;
+        var winner = SM_PLAYERS[smTurnP].name;
+        var loser = SM_PLAYERS[1 - smTurnP].name;
+        if(smFinalMsg) smFinalMsg.textContent = winner === 'Naomi'
+          ? '¡Ganaste tú, mi amor! Naomi llegó primero a la meta, milla ' + SM_META + ', y ' + loser + ' se quedó en la milla ' + smPos[1 - smTurnP] + '. Como dice la escritura, fuiste más allá de la segunda milla… y yo feliz de perder contra ti, mi vida. ¡A celebrar con un abrazo! ♥'
+          : '¡Ganó Hagot esta vez! Llegó primero a la meta, milla ' + SM_META + ', y Naomi se quedó en la milla ' + smPos[1 - smTurnP] + '. Pero aquí el premio es para los dos, mi amor: otra partida cuando quieras, y un beso por haber jugado conmigo. ♥';
+        if(smRollBtn) smRollBtn.hidden = true;
+        smRenderBoard();
+        return;
+      }
+      smTurnP = 1 - smTurnP;
+      smQuizBody.hidden = true;
+      smSumEl.textContent = '';
+      if(smRollBtn) smRollBtn.disabled = false;
+      smRenderBoard();
+    });
+    if(smRestartBtn) smRestartBtn.addEventListener('click', function(){
+      smPos = [0, 0];
+      smTurnP = 0;
+      smWon = false;
+      smSum = 0;
+      if(smEnd) smEnd.hidden = true;
+      smQuizBody.hidden = true;
+      smSumEl.textContent = '';
+      if(smRollBtn){ smRollBtn.hidden = false; smRollBtn.disabled = false; }
+      smRenderBoard();
+    });
+    smBuildBoard();
+    smRenderBoard();
+
+    // ===== Fábrica de trivias (Trivia del Libro de Mormón y Adivina el himno) =====
+    function makeDomQuiz(o){
+      var startWrap = document.getElementById(o.p + 'StartWrap');
+      var body = document.getElementById(o.p + 'Body');
+      var end = document.getElementById(o.p + 'End');
+      var progress = document.getElementById(o.p + 'Progress');
+      var scoreEl = document.getElementById(o.p + 'Score');
+      var qEl = document.getElementById(o.p + 'Question');
+      var optEl = document.getElementById(o.p + 'Options');
+      var fbEl = document.getElementById(o.p + 'Feedback');
+      var nextBtn = document.getElementById(o.p + 'NextBtn');
+      var finalEl = document.getElementById(o.p + 'FinalMsg');
+      var startBtn = document.getElementById(o.p + 'StartBtn');
+      var restartBtn = document.getElementById(o.p + 'RestartBtn');
+      if(!startWrap || !body || !optEl) return;
+      var state = { list: [], idx: 0, score: 0, locked: false };
+      function render(){
+        var item = state.list[state.idx];
+        state.locked = false;
+        if(progress) progress.textContent = o.progressLabel(state.idx + 1, state.list.length);
+        if(scoreEl) scoreEl.textContent = state.score;
+        if(qEl) qEl.textContent = item.q;
+        if(fbEl) fbEl.textContent = '';
+        if(nextBtn) nextBtn.hidden = true;
+        optEl.innerHTML = '';
+        var opts = item.opts.map(function(t, i){ return { t: t, ok: i === item.a }; });
+        domShuffle(opts);
+        opts.forEach(function(op){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-opt';
+          b.textContent = op.t;
+          if(op.ok) b.setAttribute('data-ok', '1');
+          b.addEventListener('click', function(){
+            if(state.locked) return;
+            state.locked = true;
+            Array.prototype.forEach.call(optEl.querySelectorAll('.quiz-opt'), function(x){
+              x.disabled = true;
+              if(x.getAttribute('data-ok')) x.classList.add('is-correct');
+            });
+            if(op.ok){
+              state.score++;
+              if(fbEl) fbEl.textContent = '¡Correcto, mi amor! ' + item.fb;
+            } else {
+              b.classList.add('is-wrong');
+              if(fbEl) fbEl.textContent = 'Casi, mi vida. ' + item.fb;
+            }
+            if(scoreEl) scoreEl.textContent = state.score;
+            if(nextBtn){
+              nextBtn.textContent = state.idx === state.list.length - 1 ? o.lastLabel : o.nextLabel;
+              nextBtn.hidden = false;
+            }
+          });
+          optEl.appendChild(b);
+        });
+      }
+      function start(){
+        var pool = o.bank.slice();
+        state.list = [];
+        while(state.list.length < Math.min(o.count, pool.length)){
+          state.list.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+        }
+        state.idx = 0;
+        state.score = 0;
+        startWrap.hidden = true;
+        if(end) end.hidden = true;
+        body.hidden = false;
+        render();
+      }
+      if(startBtn) startBtn.addEventListener('click', start);
+      if(restartBtn) restartBtn.addEventListener('click', start);
+      if(nextBtn) nextBtn.addEventListener('click', function(){
+        state.idx++;
+        if(state.idx >= state.list.length){
+          body.hidden = true;
+          if(end) end.hidden = false;
+          if(finalEl) finalEl.textContent = o.endMsg(state.score, state.list.length);
+        } else render();
+      });
+    }
+
+    // ===== Trivia del Libro de Mormón =====
+    makeDomQuiz({
+      p: 'tm', count: 10,
+      progressLabel: function(i, n){ return 'Pregunta ' + i + ' de ' + n; },
+      nextLabel: 'Siguiente pregunta ♥', lastLabel: 'Ver mi resultado ♥',
+      endMsg: function(s, n){
+        if(s === n) return '¡Perfecto, mi amor! ' + s + ' de ' + n + '. Conoces el Libro de Mormón como la palma de tu mano. Qué bonito es aprender de las Escrituras contigo, mi vida. ✦♥';
+        if(s >= 7) return '¡Muy bien, mi vida! ' + s + ' de ' + n + '. Se nota que amas estas historias. Sigamos estudiándolas juntitos cada domingo. ✦♥';
+        if(s >= 4) return 'Bien, mi amor: ' + s + ' de ' + n + '. Cada domingo aprenderemos un poquito más, tú y yo, pasaje a pasaje. ✦♥';
+        return 'Esta vez fueron ' + s + ' de ' + n + ', mi vida, pero lo importante es que lo intentamos juntos. La próxima nos va mejor, ya verás. ✦♥';
+      },
+      bank: [
+        { q: '¿Quién fue el profeta que salió de Jerusalén con su familia hacia el año 600 a.C., al comienzo del Libro de Mormón?', opts: ['Lehi', 'Alma', 'Mormón', 'Moroni'], a: 0, fb: 'Lehi, padre de Nefi y de Lamán, guio a su familia por el desierto hasta llegar a la tierra prometida (1 Nefi 1-18).' },
+        { q: '¿Qué objeto encontró Nefi a la puerta de su tienda, con direcciones grabadas según la fe de su familia?', opts: ['Una espada', 'La Liahona', 'Las planchas de bronce', 'El Urim y Tumim'], a: 1, fb: 'La Liahona, una esfera de bronce con dos agujas que señalaban el camino según su fe y diligencia (1 Nefi 16:10).' },
+        { q: '¿Qué pasó cuando a Nefi se le rompió su arco de acero fino mientras cazaba en el desierto?', opts: ['Volvió a Jerusalén por otro', 'Hizo un arco de madera y el Señor le mostró dónde cazar', 'Su familia dejó de comer', 'Lamán le prestó el suyo'], a: 1, fb: 'Nefi hizo un arco de madera, consultó al Señor y obtuvo alimento para todos (1 Nefi 16:18-32).' },
+        { q: '¿Qué contenían las planchas de bronce que Nefi obtuvo de Labán?', opts: ['Mapas del desierto', 'Las escrituras y la genealogía de sus padres', 'Las leyes de Jerusalén', 'Canciones de los judíos'], a: 1, fb: 'Contenían los cinco libros de Moisés, la historia de los judíos y las profecías, y la genealogía de Lehi (1 Nefi 5:11-14).' },
+        { q: '¿Quién oró desde la mañana hasta la noche y toda la noche, y su alma tuvo hambre de Dios?', opts: ['Enós', 'Jarom', 'Omni', 'Abinadí'], a: 0, fb: 'Enós, hijo de Jacob, clamó en ferviente oración y oyó la voz del Señor: «Tus pecados te son perdonados» (Enós 1:4-5).' },
+        { q: '¿Desde dónde habló el rey Benjamín a su pueblo para enseñarles del Salvador?', opts: ['Desde un monte', 'Desde una torre que mandó construir', 'Desde un barco', 'Desde el templo de Jerusalén'], a: 1, fb: 'Como el pueblo era mucho, el rey Benjamín mandó levantar una torre para que todos oyeran sus palabras (Mosíah 2:7).' },
+        { q: '¿Quién fue el primer juez mayor de los nefitas, hijo de Alma el viejo?', opts: ['Nefíah', 'Alma, hijo de Alma', 'Pahorán', 'Helamán'], a: 1, fb: 'Alma el joven recibió el oficio de primer juez mayor y también fue sumo sacerdote de la Iglesia (Mosíah 29:42).' },
+        { q: '¿Qué hizo Ammón, hijo del rey Mosíah, en las aguas de Sebús?', opts: ['Bautizó al rey Lamoni', 'Defendió los rebaños del rey y cortó los brazos de los ladrones', 'Construyó una fuente', 'Escondió las planchas'], a: 1, fb: 'Ammón se hizo siervo del rey Lamoni y defendió sus rebaños; su servicio abrió el corazón de todo un pueblo (Alma 17).' },
+        { q: '¿Qué hizo el pueblo de Ammón (los anti-nefi-lehitas) con sus armas de guerra?', opts: ['Las vendió a los nefitas', 'Las enterró e hizo convenio de no derramar más sangre', 'Las escondió en una cueva', 'Las fundió en campanas'], a: 1, fb: 'Enterraron sus armas muy hondo en la tierra como testimonio de su convenio con Dios (Alma 24:17-18).' },
+        { q: '¿Quién levantó el «estandarte de la libertad» sobre una prenda rasgada de su túnica?', opts: ['El capitán Moroni', 'Helamán', 'Teáncum', 'Lehi el capitán'], a: 0, fb: 'El capitán Moroni escribió en él: «En memoria de nuestro Dios, nuestra religión, y libertad, y nuestra paz, nuestras esposas y nuestros hijos» (Alma 46:12).' },
+        { q: '¿Quiénes fueron los dos mil jóvenes guerreros que lucharon con una fe extraordinaria?', opts: ['Los hijos de Mosíah', 'Los hijos de Helamán', 'Los hijos de Zarahemla', 'Los hijos de Limhi'], a: 1, fb: 'Los hijos de Helamán, enseñados por sus madres a no dudar, fueron preservados todos en la batalla (Alma 56:47-56).' },
+        { q: '¿Qué profeta predicó el arrepentimiento parado sobre la muralla de la ciudad de Zarahemla?', opts: ['Abinadí', 'Samuel el Lamanita', 'Neumón', 'Zenoc'], a: 1, fb: 'Samuel el Lamanita subió a la muralla y, aunque le tiraron piedras y flechas, no pudieron herirlo (Helamán 13:4; 16:2).' },
+        { q: '¿Quién vio el dedo del Señor al tocar las piedras para dar luz a los barcos de su pueblo?', opts: ['El hermano de Jared', 'Mormón', 'Éter', 'Coriántumr'], a: 0, fb: 'El hermano de Jared vio el dedo del Señor y después al Señor mismo, por su fe extraordinaria (Éter 3).' },
+        { q: '¿De qué gran ciudad y torre salieron los jareditas cuando el Señor confundió las lenguas?', opts: ['De Egipto', 'De la gran torre (de Babel)', 'De Jerusalén', 'De Babilonia la ciudad'], a: 1, fb: 'Jared y su hermano pidieron que su lengua no fuera confundida, y el Señor los guio a la tierra prometida (Éter 1:33-38).' },
+        { q: '¿Quién fue el último profeta que escribió en las planchas y las escondió en el cerro Cumorah?', opts: ['Mormón', 'Moroni', 'Nefi', 'Helamán'], a: 1, fb: 'Moroni, hijo de Mormón, terminó el registro, lo escondió y testificó: «Y si tenéis sabiduría, es porque Dios os la ha dado» (Moroni 10).' },
+        { q: '¿Cuántos libros tiene el Libro de Mormón en total?', opts: ['Doce', 'Quince', 'Diecisiete', 'Veinte'], a: 1, fb: 'Quince libros: desde 1 Nefi hasta Moroni, pasando por Mosíah, Alma, Helamán, Éter y los demás.' }
+      ]
+    });
+
+    // ===== Adivina el himno =====
+    makeDomQuiz({
+      p: 'ah', count: 8,
+      progressLabel: function(i, n){ return 'Himno ' + i + ' de ' + n; },
+      nextLabel: 'Siguiente himno ♥', lastLabel: 'Ver mi resultado ♥',
+      endMsg: function(s, n){
+        if(s === n) return '¡Todos, mi amor! ' + s + ' de ' + n + '. Cantas en la capilla con el corazón y se nota. El domingo que viene te siento junto a mí a cantar, mi vida. ♪♥';
+        if(s >= 5) return '¡Muy bien, mi vida! ' + s + ' de ' + n + '. Casi todos los himnos te los sabes. A practicar los que faltaron, cantando juntitos. ♪♥';
+        return 'Fueron ' + s + ' de ' + n + ', mi amor. No pasa nada: ahora tenemos la excusa perfecta para cantar más himnos en casa, tú y yo. ♪♥';
+      },
+      bank: [
+        { q: 'Empieza así: «Soy un hijo de Dios; Él me ha dado hogar…». ¿Qué himno es?', opts: ['Soy un hijo de Dios', 'Oh, mi Padre', 'Yo sé que vive mi Señor', 'Dios manda a profetas'], a: 0, fb: 'Es «Soy un hijo de Dios», el himno que nos recuerda quiénes somos y a quién pertenecemos.' },
+        { q: 'Empieza así: «¡Qué firme cimiento, oh santos de Dios…!». ¿Qué himno es?', opts: ['Firmes creced en la fe', 'Qué firme cimiento', 'El Señor es mi pastor', 'Venid a Cristo'], a: 1, fb: 'Es «Qué firme cimiento»: la promesa de que el Señor nunca nos dejará solos en la prueba.' },
+        { q: 'Este himno nos enseña a escoger lo correcto, y dice: «Haz tú lo justo; hay ángeles cerca…». ¿Cuál es?', opts: ['Escoge lo correcto', 'Haz tú lo justo', 'Sé humilde', 'Guarda los mandamientos'], a: 1, fb: 'Es «Haz tú lo justo»: escoger lo justo trae la protección y la compañía de los ángeles.' },
+        { q: 'Empieza así: «Cerca de ti, Señor, quiero morar…». ¿Qué himno es?', opts: ['Más cerca, Dios, de ti', 'Quédate conmigo', 'Cerca de ti, Señor', 'Divina luz'], a: 2, fb: 'Es «Cerca de ti, Señor», una oración cantada para sentir al Salvador cerquita del corazón.' },
+        { q: 'Es el testimonio cantado de que nuestro Redentor vive; se canta mucho en Pascua y en las reuniones de testimonio. ¿Qué himno es?', opts: ['Él vive, mi Salvador', 'Yo sé que vive mi Señor', 'Cristo ha resucitado', 'Venid, cantemos todos'], a: 1, fb: 'Es «Yo sé que vive mi Señor»: «Yo sé que vive mi Señor; qué grato es este sentir».' },
+        { q: 'Empieza dando gracias: «Te damos, Señor, nuestras gracias porque nos diste un profeta…». ¿Qué himno es?', opts: ['Dios manda a profetas', 'Gracias por profetas', 'Te damos, Señor, nuestras gracias', 'Venid, hijos del Señor'], a: 2, fb: 'Es «Te damos, Señor, nuestras gracias», el himno que cantamos agradecidos por tener profetas vivientes.' },
+        { q: 'En este himno, el Salvador calma la tempestad y también las tormentas de nuestra vida: «Paz, cálmense». ¿Cuál es?', opts: ['El Señor es mi luz', 'Paz, cálmense', 'No temas, yo estoy contigo', 'Jesús es mi luz'], a: 1, fb: 'Es «Paz, cálmense»: el mismo Jesús que calmó el mar puede calmar nuestro corazón.' },
+        { q: 'Se canta al caer la tarde, pidiendo al Señor que se quede con nosotros cuando llega la noche. ¿Qué himno es?', opts: ['Quédate conmigo', 'El día ya se va', 'Noche de paz', 'Ven, oh día prometido'], a: 0, fb: 'Es «Quédate conmigo», perfecto para terminar un domingo tranquilo en casa.' },
+        { q: 'Empieza así: «Más cerca, Dios, de ti, más cerca de ti…». ¿Qué himno es?', opts: ['Cerca de ti, Señor', 'Más cerca, Dios, de ti', 'Acompáñame', 'Oh, dulce oración'], a: 1, fb: 'Es «Más cerca, Dios, de ti», el deseo de acercarnos a Él un poquito más cada día.' },
+        { q: 'Este himno dice que el Señor es nuestra luz y que, siguiéndolo, no andaremos en tinieblas. ¿Cuál es?', opts: ['Jesús es mi luz', 'Brilla, oh luz divina', 'El Señor es mi luz', 'Venid a la luz'], a: 2, fb: 'Es «El Señor es mi luz»: su luz alumbra nuestro camino, también el de nuestro matrimonio.' },
+        { q: 'Es una invitación del Salvador a venir a Él los que están cansados y cargados, para hallar descanso. ¿Qué himno es?', opts: ['Venid a Cristo', 'Venid, los que tenéis sed', 'A Cristo venid', 'Oíd al Profeta'], a: 0, fb: 'Es «Venid a Cristo»: su invitación sigue abierta para nosotros, cada domingo y cada día.' },
+        { q: 'Este himno es una pregunta llena de amor sobre nuestro Padre Celestial que mora en los cielos y nos espera de vuelta. ¿Cuál es?', opts: ['Padre en los cielos', 'Oh, mi Padre', 'Hijos de Dios', 'Grande eres Tú'], a: 1, fb: 'Es «Oh, mi Padre»: nos recuerda que vivíamos con Él antes de venir a esta tierra.' }
+      ]
+    });
+
+    // ===== Adivina el profeta o apóstol =====
+    var AP_FIGURES = [
+      { name: 'José Smith', fact: 'José Smith fue el primer profeta de esta dispensación y el primer presidente de la Iglesia.', clues: ['En 1820, siendo un jovencito de 14 años, fue a orar a una arboleda porque no sabía a qué iglesia unirse.', 'Tradujo un registro antiguo escrito en planchas de oro, que hoy conocemos como el Libro de Mormón.', 'Murió como mártir en la cárcel de Carthage, Illinois, en 1844, junto con su hermano Hyrum.'] },
+      { name: 'Brigham Young', fact: 'Brigham Young fue el segundo presidente de la Iglesia y guio a los santos hasta el valle del Lago Salado.', clues: ['Era carpintero y pintor antes de bautizarse en la Iglesia.', 'Dirigió el gran éxodo de los pioneros hacia el oeste de los Estados Unidos.', 'Al ver el valle del Lago Salado en 1847, dijo: «Este es el lugar correcto».'] },
+      { name: 'Russell M. Nelson', fact: 'El presidente Russell M. Nelson es el decimoséptimo presidente de la Iglesia.', clues: ['Antes de ser apóstol, fue un reconocido cirujano de corazón y ayudó a desarrollar una máquina de corazón-pulmón.', 'Nació en 1924 en Salt Lake City, Utah.', 'Como presidente de la Iglesia ha anunciado la construcción de muchos templos por todo el mundo y nos ha invitado a «pensar de manera celestial».'] },
+      { name: 'Gordon B. Hinckley', fact: 'El presidente Gordon B. Hinckley sirvió como decimoquinto presidente de la Iglesia, de 1995 a 2008.', clues: ['Trabajó con los medios de comunicación de la Iglesia y ayudó a producir sus primeras películas y grabaciones.', 'Durante su presidencia se construyeron más templos que en toda la historia anterior de la Iglesia.', 'En 1995 leyó «La familia: Una proclamación para el mundo» en la reunión general de la Sociedad de Socorro.'] },
+      { name: 'Thomas S. Monson', fact: 'El presidente Thomas S. Monson fue el decimosexto presidente de la Iglesia y era conocido por sus relatos de servicio.', clues: ['Fue llamado obispo a los 22 años, de un barrio con muchas viudas a las que visitaba una por una.', 'Era famoso por contar historias en la conferencia general y por seguir las impresiones del Espíritu para ayudar a una persona en particular.', 'Nos enseñó: «Nunca permitas que un problema por resolver sea más importante que una persona a quien amar».'] },
+      { name: 'David O. McKay', fact: 'El presidente David O. McKay fue el noveno presidente de la Iglesia y un gran defensor del hogar.', clues: ['Fue maestro de escuela y director antes de ser llamado apóstol.', 'Siendo presidente, viajó por todo el mundo visitando a los santos; fue el primer presidente de la Iglesia en visitar muchos países.', 'Su frase más conocida es: «Ningún otro éxito puede compensar el fracaso en el hogar».'] },
+      { name: 'Spencer W. Kimball', fact: 'El presidente Spencer W. Kimball fue el duodécimo presidente de la Iglesia.', clues: ['Escribió el libro «El milagro del perdón», que ha ayudado a muchísimas personas a arrepentirse.', 'Su lema personal era una palabra: «Hazlo».', 'Siendo presidente, recibió la revelación de que todos los varones dignos podían recibir el sacerdocio, en 1978.'] },
+      { name: 'Ezra Taft Benson', fact: 'El presidente Ezra Taft Benson fue el decimotercer presidente de la Iglesia.', clues: ['Sirvió como secretario de Agricultura de los Estados Unidos bajo el presidente Eisenhower, siendo apóstol al mismo tiempo.', 'Nació en una granja en Whitney, Idaho, y amaba la tierra y la libertad.', 'Como presidente de la Iglesia, nos exhortó una y otra vez a leer y estudiar el Libro de Mormón.'] },
+      { name: 'Jeffrey R. Holland', fact: 'El élder Jeffrey R. Holland es apóstol desde 1994 y fue presidente de la Universidad Brigham Young.', clues: ['Fue presidente de la Universidad Brigham Young de 1980 a 1989.', 'Nació en St. George, Utah, y de joven fue un destacado deportista en su escuela.', 'Es conocido por discursos como «El costo —y las bendiciones— del discipulado» y por su amor por los que se sienten quebrantados.'] },
+      { name: 'Dallin H. Oaks', fact: 'El presidente Dallin H. Oaks sirve en la Primera Presidencia y fue juez de la Corte Suprema de Utah.', clues: ['Su padre, médico, murió cuando él era un niño de siete años, y su madre sacó adelante a la familia.', 'Fue presidente de la Universidad Brigham Young y después juez de la Corte Suprema de Utah.', 'Es conocido por enseñanzas claras sobre el equilibrio entre la justicia y la misericordia, y entre la verdad y el amor.'] }
+    ];
+    var apEls = {
+      startWrap: document.getElementById('apStartWrap'), body: document.getElementById('apBody'), end: document.getElementById('apEnd'),
+      progress: document.getElementById('apProgress'), score: document.getElementById('apScore'),
+      clues: document.getElementById('apClues'), clueBtn: document.getElementById('apClueBtn'),
+      options: document.getElementById('apOptions'), feedback: document.getElementById('apFeedback'),
+      nextBtn: document.getElementById('apNextBtn'), finalMsg: document.getElementById('apFinalMsg'),
+      startBtn: document.getElementById('apStartBtn'), restartBtn: document.getElementById('apRestartBtn')
+    };
+    var apState = { list: [], idx: 0, score: 0, cluesShown: 1, wrongs: 0, locked: false, wrongNames: [] };
+    function apRenderClues(){
+      if(!apEls.clues) return;
+      var fig = apState.list[apState.idx];
+      apEls.clues.innerHTML = '';
+      for(var i = 0; i < fig.clues.length; i++){
+        var d = document.createElement('div');
+        if(i < apState.cluesShown){
+          d.className = 'prof-clue';
+          var strong = document.createElement('strong');
+          strong.textContent = 'Pista ' + (i + 1) + ': ';
+          d.appendChild(strong);
+          d.appendChild(document.createTextNode(fig.clues[i]));
+        } else if(i === apState.cluesShown){
+          d.className = 'prof-clue is-hidden-clue';
+          d.textContent = 'Pista ' + (i + 1) + ' · · · todavía escondida';
+        }
+        if(i < apState.cluesShown || i === apState.cluesShown) apEls.clues.appendChild(d);
+      }
+      if(apEls.clueBtn) apEls.clueBtn.disabled = apState.locked || apState.cluesShown >= fig.clues.length;
+    }
+    function apRenderRound(){
+      var fig = apState.list[apState.idx];
+      apState.cluesShown = 1;
+      apState.wrongs = 0;
+      apState.locked = false;
+      apState.wrongNames = [];
+      if(apEls.progress) apEls.progress.textContent = 'Ronda ' + (apState.idx + 1) + ' de ' + apState.list.length;
+      if(apEls.score) apEls.score.textContent = apState.score;
+      if(apEls.feedback) apEls.feedback.textContent = '';
+      if(apEls.nextBtn) apEls.nextBtn.hidden = true;
+      apRenderClues();
+      if(!apEls.options) return;
+      apEls.options.innerHTML = '';
+      var names = [fig.name];
+      var others = AP_FIGURES.filter(function(f){ return f.name !== fig.name; });
+      domShuffle(others);
+      others.slice(0, 3).forEach(function(f){ names.push(f.name); });
+      domShuffle(names);
+      names.forEach(function(nm){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'quiz-opt';
+        b.textContent = nm;
+        if(nm === fig.name) b.setAttribute('data-ok', '1');
+        b.addEventListener('click', function(){
+          if(apState.locked || apState.wrongNames.indexOf(nm) >= 0) return;
+          if(nm === fig.name){
+            apState.locked = true;
+            var pts = Math.max(1, 4 - apState.cluesShown - apState.wrongs);
+            apState.score += pts;
+            b.classList.add('is-correct');
+            Array.prototype.forEach.call(apEls.options.querySelectorAll('.quiz-opt'), function(x){ x.disabled = true; });
+            if(apEls.score) apEls.score.textContent = apState.score;
+            if(apEls.feedback) apEls.feedback.textContent = '¡Sí, mi amor! Es ' + fig.name + '. Ganaste ' + pts + (pts === 1 ? ' punto' : ' puntos') + '. ' + fig.fact;
+            if(apEls.nextBtn){
+              apEls.nextBtn.textContent = apState.idx === apState.list.length - 1 ? 'Ver mi resultado ♥' : 'Siguiente ronda ♥';
+              apEls.nextBtn.hidden = false;
+            }
+            apRenderClues();
+          } else {
+            apState.wrongs++;
+            apState.wrongNames.push(nm);
+            b.disabled = true;
+            b.classList.add('is-wrong');
+            if(apState.wrongs >= 3){
+              apState.locked = true;
+              Array.prototype.forEach.call(apEls.options.querySelectorAll('.quiz-opt'), function(x){
+                x.disabled = true;
+                if(x.getAttribute('data-ok')) x.classList.add('is-correct');
+              });
+              if(apEls.feedback) apEls.feedback.textContent = 'Era ' + fig.name + ', mi vida. ' + fig.fact;
+              if(apEls.nextBtn){
+                apEls.nextBtn.textContent = apState.idx === apState.list.length - 1 ? 'Ver mi resultado ♥' : 'Siguiente ronda ♥';
+                apEls.nextBtn.hidden = false;
+              }
+              apRenderClues();
+            } else {
+              if(apEls.feedback) apEls.feedback.textContent = 'Ese no es, mi amor. Pide otra pista o inténtalo de nuevo.';
+            }
+          }
+        });
+        apEls.options.appendChild(b);
+      });
+    }
+    function apStart(){
+      var pool = AP_FIGURES.slice();
+      apState.list = [];
+      while(apState.list.length < 5) apState.list.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+      apState.idx = 0;
+      apState.score = 0;
+      if(apEls.startWrap) apEls.startWrap.hidden = true;
+      if(apEls.end) apEls.end.hidden = true;
+      if(apEls.body) apEls.body.hidden = false;
+      apRenderRound();
+    }
+    if(apEls.startBtn) apEls.startBtn.addEventListener('click', apStart);
+    if(apEls.restartBtn) apEls.restartBtn.addEventListener('click', apStart);
+    if(apEls.clueBtn) apEls.clueBtn.addEventListener('click', function(){
+      var fig = apState.list[apState.idx];
+      if(!fig || apState.locked) return;
+      if(apState.cluesShown < fig.clues.length){ apState.cluesShown++; apRenderClues(); }
+    });
+    if(apEls.nextBtn) apEls.nextBtn.addEventListener('click', function(){
+      apState.idx++;
+      if(apState.idx >= apState.list.length){
+        if(apEls.body) apEls.body.hidden = true;
+        if(apEls.end) apEls.end.hidden = false;
+        var s = apState.score;
+        if(apEls.finalMsg) apEls.finalMsg.textContent = s >= 13
+          ? '¡Impresionante, mi amor! ' + s + ' puntos. Conoces a los profetas y apóstoles como si los vieras cada conferencia… porque los ves. Qué bonito es seguirlos contigo. ☀♥'
+          : (s >= 8
+            ? '¡Muy bien, mi vida! ' + s + ' puntos. Casi todos salieron con poquitas pistas. A seguir escuchándolos juntitos cada conferencia general. ☀♥'
+            : 'Fueron ' + s + ' puntos, mi amor. Lo bueno es que ahora conocemos un poquito más a estos hombres de Dios. La próxima nos va mejor. ☀♥');
+      } else apRenderRound();
+    });
+
+    // ===== Estudio de las Escrituras en familia =====
+    var EF_TOPICS = [
+      { t: 'Servir a Dios en nuestro hogar', ref: 'Josué 24:15', text: '«Escogeos hoy a quién sirváis… pero yo y mi casa serviremos a Jehová».', qs: ['¿Qué significa para nosotros, ya como esposos, decir «yo y mi casa serviremos a Jehová»?', '¿Qué costumbres queremos que se vean en nuestra casa desde el primer día: oración, estudio, día de reposo…?', '¿Cómo podemos servir juntos a alguien de nuestra familia o de la capilla esta semana?'], act: 'Elijan juntos una frase corta para su hogar (por ejemplo, «En esta casa servimos a Jehová») y escríbanla en una tarjetita para ponerla donde la vean cada día.' },
+      { t: 'Confiar en el Señor', ref: 'Proverbios 3:5-6', text: '«Confía en Jehová con todo tu corazón, y no te apoyes en tu propia prudencia. Reconócelo en todos tus caminos, y él enderezará tus veredas».', qs: ['¿En qué decisiones de nuestra vida de casados necesitamos confiar más en el Señor que en nuestro propio entendimiento?', '¿Cuándo hemos visto que Él enderezó nuestras veredas en el pasado?', '¿Qué vereda queremos poner en Sus manos esta semana, en oración?'], act: 'Cada quien escriba en un papelito una preocupación y pónganla dentro de las Escrituras, como símbolo de entregársela al Señor esta semana.' },
+      { t: 'Dad gracias en todo', ref: '1 Tesalonicenses 5:18', text: '«Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús».', qs: ['¿Por qué creen que dar gracias «en todo» incluye también los días difíciles?', '¿Qué tres bendiciones de esta semana queremos agradecer hoy en voz alta?', '¿Cómo cambia nuestro hogar cuando agradecemos en vez de quejarnos?'], act: 'Hagan el reto de gratitud dominical de esta misma página y escríbanle una notita de gracias a alguien que les haya bendecido la vida.' },
+      { t: 'El vínculo perfecto del amor', ref: 'Colosenses 3:14', text: '«Y sobre todas estas cosas vestíos de amor, que es el vínculo perfecto».', qs: ['¿Por qué el amor es como un «vínculo» que mantiene unido todo lo demás en un matrimonio?', '¿Qué gestos chiquitos nos hacen sentir amados en un día normal?', '¿Qué hábito de amor queremos practicar esta semana el uno con el otro?'], act: 'Cada quien haga hoy, en secreto, un acto de servicio por el otro; en la noche, traten de adivinar cuál fue.' },
+      { t: 'Seguir adelante con firmeza en Cristo', ref: '2 Nefi 31:20', text: '«Debéis seguir adelante con firmeza en Cristo, teniendo un fulgor perfecto de esperanza y amor por Dios y por todos los hombres».', qs: ['¿Qué significa «seguir adelante» en los días en que estamos cansados o desanimados?', '¿Qué nos ayuda a mantener «un fulgor perfecto de esperanza» como matrimonio?', '¿A quién podemos animar esta semana que esté a punto de rendirse?'], act: 'Salgan a caminar juntos 15 minutos, sin teléfono, platicando solo de las cosas que les dan esperanza.' },
+      { t: 'Perdonar como queremos ser perdonados', ref: 'Doctrina y Convenios 64:10', text: '«Yo, el Señor, perdonaré a quien sea mi voluntad perdonar, mas a vosotros os es requerido perdonar a todos los hombres».', qs: ['¿Por qué el Señor nos pide perdonar a todos, y no solo a los que nos piden perdón?', 'En un matrimonio, ¿cómo se pide perdón de corazón y cómo se perdona de corazón?', '¿Hay algo chiquito que hoy podamos soltar y perdonar antes de que termine el día?'], act: 'Si hay alguna molestia guardada entre ustedes, háblenla hoy con calma, pídanse perdón y terminen con un abrazo largo.' },
+      { t: 'Orar siempre en familia', ref: '3 Nefi 18:21', text: '«Orad al Padre en vuestras familias, siempre en mi nombre, para que sean bendecidos vuestras esposas y vuestros hijos».', qs: ['¿Qué bendiciones promete el Salvador a las familias que oran juntas?', '¿Cómo queremos que sean nuestras oraciones de esposos: en la mañana, en la noche, antes de comer…?', '¿Por quién o por qué queremos orar juntos esta semana?'], act: 'Hagan hoy una oración de rodillas, tomados de la mano, dando gracias por tres cosas específicas y pidiendo por una necesidad de la familia.' },
+      { t: 'Guardar el día de reposo', ref: 'Doctrina y Convenios 59:9', text: '«Y para que te conserves más limpio de las manchas del mundo, irás a la casa de oración y ofrecerás tus sacramentos en mi día santo».', qs: ['¿Qué hace que un domingo se sienta realmente «día santo» en nuestro hogar?', '¿Qué actividades dominicales nos acercan más, y cuáles nos distraen sin darnos cuenta?', '¿Cómo queremos prepararnos desde el sábado para el día de reposo?'], act: 'Planeen juntos el próximo domingo: la reunión sacramental, una actividad tranquila en familia y un acto de servicio para alguien.' }
+    ];
+    var efIdx = 0;
+    var efChips = document.getElementById('efChips');
+    var efRef = document.getElementById('efRef');
+    var efText = document.getElementById('efText');
+    var efQs = document.getElementById('efQs');
+    var efAct = document.getElementById('efAct');
+    var efCount = document.getElementById('efCount');
+    function efRender(){
+      var topic = EF_TOPICS[efIdx];
+      if(efChips){
+        efChips.innerHTML = '';
+        EF_TOPICS.forEach(function(tp, i){
+          var c = document.createElement('button');
+          c.type = 'button';
+          c.className = 'scr-chip';
+          c.textContent = tp.t;
+          c.setAttribute('aria-pressed', i === efIdx ? 'true' : 'false');
+          c.addEventListener('click', function(){ efIdx = i; efRender(); });
+          efChips.appendChild(c);
+        });
+      }
+      if(efRef) efRef.textContent = topic.t + ' · ' + topic.ref;
+      if(efText) efText.textContent = topic.text;
+      if(efQs){
+        efQs.innerHTML = '';
+        topic.qs.forEach(function(q, i){
+          var d = document.createElement('div');
+          d.className = 'study-q';
+          var strong = document.createElement('strong');
+          strong.textContent = 'Pregunta ' + (i + 1) + '. ';
+          d.appendChild(strong);
+          d.appendChild(document.createTextNode(q));
+          efQs.appendChild(d);
+        });
+      }
+      if(efAct) efAct.textContent = topic.act;
+      if(efCount) efCount.textContent = 'Tema ' + (efIdx + 1) + ' de ' + EF_TOPICS.length;
+    }
+    var efPrevBtn = document.getElementById('efPrevBtn');
+    var efNextBtn = document.getElementById('efNextBtn');
+    if(efPrevBtn) efPrevBtn.addEventListener('click', function(){ efIdx = (efIdx + EF_TOPICS.length - 1) % EF_TOPICS.length; efRender(); });
+    if(efNextBtn) efNextBtn.addEventListener('click', function(){ efIdx = (efIdx + 1) % EF_TOPICS.length; efRender(); });
+    efRender();
+
+    // ===== Reto de gratitud dominical =====
+    var RG_RETOS = [
+      'Antes de comer, cada quien diga en voz alta tres cosas por las que está agradecido hoy, sin repetir las del otro.',
+      'Escríbanle un mensaje de gracias a alguien que les haya ayudado esta semana: un familiar, un amigo o un maestro.',
+      'En la oración de la noche, agradezcan solamente: hoy no pidan nada, solo den gracias por cinco cosas concretas.',
+      'Agradezcan por su cuerpo: salgan a caminar juntos y nombren, uno por uno, todo lo que su cuerpo les permite hacer.',
+      'Busquen una foto vieja que les haga sonreír y agradezcan juntos por ese momento y por las personas que salen en ella.',
+      'Agradezcan por su hogar: recorran su casita y nombren cinco cosas chiquitas de ella por las que dan gracias.',
+      'Hoy agradezcan por una prueba difícil que ya pasó y por lo que aprendieron de ella como pareja.',
+      'Preparen algo rico para compartir y llévenle una porción a un vecino o familiar, como agradecimiento por su amistad.',
+      'Cada quien agradezca en voz alta tres cosas del otro: una de su forma de ser, una de algo que hizo esta semana y una de su fe.',
+      'Agradezcan por sus padres y abuelos: llamen o visiten a uno de ellos y díganle gracias por algo específico.',
+      'Lean juntos el Salmo 100 y después digan, turnándose, «gracias, Señor, por…» hasta completar diez frases.',
+      'Agradezcan por la naturaleza: siéntense un momento afuera, sin teléfono, y nombren todo lo bonito que vean, escuchen y huelan.',
+      'Escriban en papelitos cinco bendiciones de su matrimonio y guárdenlos en un frasco: su frasco de gratitud para los días difíciles.',
+      'Agradezcan por el día de reposo: nombren lo que más les gustó de la reunión sacramental de hoy y por qué.'
+    ];
+    var RG_KEY = 'reto-gratitud-naomi';
+    var rgData = { count: 0, last: '' };
+    try{
+      var rgSaved = window.localStorage.getItem(RG_KEY);
+      if(rgSaved){
+        var rgParsed = JSON.parse(rgSaved);
+        if(rgParsed && typeof rgParsed.count === 'number') rgData = { count: rgParsed.count, last: rgParsed.last || '' };
+      }
+    }catch(e){}
+    function rgTodayStr(){
+      var d = new Date();
+      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    }
+    function rgPersist(){
+      try{ window.localStorage.setItem(RG_KEY, JSON.stringify(rgData)); }catch(e){}
+    }
+    var rgText = document.getElementById('rgText');
+    var rgCount = document.getElementById('rgCount');
+    var rgDoneBtn = document.getElementById('rgDoneBtn');
+    var rgAnotherBtn = document.getElementById('rgAnotherBtn');
+    var rgNow = new Date();
+    var rgDayOfYear = Math.floor((rgNow.getTime() - new Date(rgNow.getFullYear(), 0, 0).getTime()) / 86400000);
+    var rgCurrent = rgDayOfYear % RG_RETOS.length;
+    function rgRender(){
+      if(rgText) rgText.textContent = RG_RETOS[rgCurrent];
+      if(rgCount) rgCount.textContent = rgData.count
+        ? ('Ya cumplieron ' + rgData.count + (rgData.count === 1 ? ' reto' : ' retos') + ' de gratitud en familia, mi amor. ♥')
+        : 'Aún no marcan su primer reto cumplido, mi amor. ¡Hoy puede ser el primero! ♥';
+      if(rgDoneBtn){
+        var doneToday = rgData.last === rgTodayStr();
+        rgDoneBtn.disabled = doneToday;
+        rgDoneBtn.textContent = doneToday ? 'Ya lo cumplieron hoy ♥' : '♥ ¡Lo cumplimos!';
+      }
+    }
+    if(rgDoneBtn) rgDoneBtn.addEventListener('click', function(){
+      if(rgData.last === rgTodayStr()) return;
+      rgData.count++;
+      rgData.last = rgTodayStr();
+      rgPersist();
+      rgRender();
+    });
+    if(rgAnotherBtn) rgAnotherBtn.addEventListener('click', function(){
+      var next = rgCurrent;
+      while(next === rgCurrent) next = Math.floor(Math.random() * RG_RETOS.length);
+      rgCurrent = next;
+      rgRender();
+    });
+    rgRender();
+
+    // ===== Nuestro primer baile =====
+    var BAILE_SLOTS = [
+      [
+        { t: 'La posición inicial', d: 'Párense frente a frente en el centro de la pista, tomados de las manos. Él pone su mano derecha en la cintura de ella; ella, su mano izquierda en el hombro de él. Respiren, mírense a los ojos y sonrían: los primeros cuatro tiempos son solo para ustedes.' },
+        { t: 'La entrada caminando', d: 'Entren tomados de la mano, caminando tranquilos hasta el centro de la pista, como si pasearan. Al llegar, él la gira suavemente de la mano hasta quedar frente a frente, y toman la posición de baile.' },
+        { t: 'El saludo con reverencia', d: 'Ya en el centro, él hace una pequeña reverencia y ella responde con una inclinación de cabeza, tomados de la mano. Luego se abrazan en posición de baile. Un comienzo de cuento, ideal para las fotos.' }
+      ],
+      [
+        { t: 'El vaivén de lado a lado', d: 'Con pasos cortitos, balancéense de lado a lado al ritmo de la música: derecha, junta, izquierda, junta. Sin moverse del lugar, solo sintiendo la canción. Cuenten ocho tiempos y repitan; es la base de todo el baile.' },
+        { t: 'El paso básico en caja', d: 'Den pasos como dibujando un cuadrito en el piso: adelante, lado, junta; atrás, lado, junta. Él guía con pasos firmes y ella lo sigue, girando muy despacio, como una cajita musical.' },
+        { t: 'Caminar en círculo lento', d: 'Caminen juntos en un círculo amplio y lento: él hacia atrás, ella hacia adelante, en posición de baile. Cada cuatro pasos cambien la dirección del círculo, como si pasearan bajo las estrellas.' }
+      ],
+      [
+        { t: 'Su vuelta bajo el brazo', d: 'Él levanta su mano y ella gira una vuelta completa por debajo del brazo, sin soltarse. Al terminar, vuelven a la posición de baile y siguen con el vaivén dos tiempos más.' },
+        { t: 'Vuelta tomados de ambas manos', d: 'Suéltense de la posición de baile y tómense de ambas manos; ella gira una vuelta alejándose y regresando, como una puerta que se abre y se cierra. Terminen abrazados.' },
+        { t: 'Doble vuelta con sonrisa', d: 'Para los valientes: ella da dos vueltas seguidas bajo el brazo de él, despacio y con cuidado de no pisarse el vestido. Practíquenla primero sin música, contando «una, dos».' }
+      ],
+      [
+        { t: 'El paseo de la mano', d: 'Caminen de la mano por la pista, él un pasito atrás, como presentándola ante todos. A los ocho pasos, él la hace girar hacia adentro y quedan abrazados otra vez.' },
+        { t: 'El paseo abrazados', d: 'Caminen abrazados de medio lado, como si caminaran por la playa: cuatro pasos hacia un lado de la pista, una pausa mirándose, y cuatro pasos de regreso.' },
+        { t: 'El paseo con cambio de manos', d: 'Caminen de la mano; a mitad del paseo, él pasa la mano de ella de una mano a la otra por detrás de su espalda, mientras ella da un giro suave. Se ve elegante y es más fácil de lo que parece.' }
+      ],
+      [
+        { t: 'Girar juntos, despacito', d: 'Abrazados en posición de baile, giren juntos sobre su propio eje con pasitos cortos: una vuelta completa en ocho tiempos. Si se marean, miren un punto fijo entre vuelta y vuelta.' },
+        { t: 'La vuelta de él', d: 'Ahora le toca a él: ella levanta la mano y él gira una vuelta por debajo de su brazo. Terminen riéndose y de nuevo en posición de baile; a los invitados les encanta este paso.' },
+        { t: 'Vueltas encontradas', d: 'Primero gira ella bajo el brazo de él, y enseguida gira él bajo el brazo de ella, sin soltar las manos. Practíquenlo por partes: primero la de ella, luego la de él, y al final seguidas.' }
+      ],
+      [
+        { t: 'El abrazo y el balanceo', d: 'En la parte más suave de la canción, abrácense cerquita, mejilla con mejilla, y balancéense casi sin mover los pies. Este es el momento de decirse algo bonito al oído.' },
+        { t: 'Manos al corazón', d: 'Tómense de ambas manos frente a frente; él lleva las manos de ella hasta su corazón por dos tiempos, y luego las baja despacio. Un gesto sencillo que lo dice todo sin palabras.' },
+        { t: 'Pasitos en el lugar', d: 'Abrazados, den pasitos en el lugar marcando el ritmo: derecha, izquierda, derecha, izquierda, como si caminaran sin ir a ninguna parte. Perfecto para recuperar el aliento y sonreír a las fotos.' }
+      ],
+      [
+        { t: 'La inclinación (el dip)', d: 'Él la sostiene firme de la cintura y ella se inclina hacia atrás, poquito y con confianza, apoyada en su brazo. Practíquenlo con cuidado, inclinándose primero solo un poco; el secreto es que él no suelte nunca la cintura.' },
+        { t: 'La reverencia y el beso en la mano', d: 'Ella hace una pequeña reverencia y él, muy galante, le besa la mano. Luego vuelven a abrazarse. Un detalle clásico que derrite a cualquier invitado.' },
+        { t: 'El giro que cae en abrazo', d: 'Ella gira una última vuelta amplia y cae en el abrazo de él, que la recibe con los brazos abiertos. Quédense así dos tiempos, disfrutando el momento, antes del final.' }
+      ],
+      [
+        { t: 'La pose final y el beso', d: 'Terminen abrazados en el centro: él con un brazo en la cintura de ella y la otra mano tomándola de la mano, alzada con elegancia. Inclinen la cabeza el uno hacia el otro y… el beso que todos esperan.' },
+        { t: 'El agradecimiento a los invitados', d: 'Terminen tomados de la mano y hagan una pequeña reverencia juntos hacia los invitados, sonriendo. Luego él la abraza y le da un beso en la frente. Sencillo y muy emotivo.' },
+        { t: 'El final de campeones', d: 'Cierren con dos vueltas de ella, una tras otra, y un abrazo fuerte en el centro de la pista. Levanten las manos unidas como campeones… porque lo son: ya son esposos.' }
+      ]
+    ];
+    var BAILE_PRESETS = [
+      { name: 'Clásica y romántica', sel: [0, 0, 0, 0, 0, 0, 0, 0] },
+      { name: 'Sencilla y sin complicaciones', sel: [1, 1, 1, 1, 1, 1, 1, 1] },
+      { name: 'Alegre y con vueltas', sel: [2, 2, 2, 2, 2, 2, 2, 2] }
+    ];
+    var BAILE_KEY = 'primer-baile-naomi';
+    var baile = { sel: BAILE_PRESETS[0].sel.slice(), preset: 0 };
+    try{
+      var baileSaved = window.localStorage.getItem(BAILE_KEY);
+      if(baileSaved){
+        var baileParsed = JSON.parse(baileSaved);
+        if(baileParsed && baileParsed.sel && baileParsed.sel.length === BAILE_SLOTS.length){
+          var baileOk = true;
+          baileParsed.sel.forEach(function(v, i){ if(typeof v !== 'number' || v < 0 || v >= BAILE_SLOTS[i].length) baileOk = false; });
+          if(baileOk) baile = { sel: baileParsed.sel.slice(), preset: typeof baileParsed.preset === 'number' ? baileParsed.preset : -1 };
+        }
+      }
+    }catch(e){}
+    var baileStep = 0;
+    var baileNameEl = document.getElementById('baileName');
+    var baileCountEl = document.getElementById('baileCount');
+    var baileTitleEl = document.getElementById('baileTitle');
+    var baileDescEl = document.getElementById('baileDesc');
+    var baileListEl = document.getElementById('baileList');
+    function persistBaile(){
+      try{ window.localStorage.setItem(BAILE_KEY, JSON.stringify(baile)); }catch(e){}
+    }
+    function renderBaile(){
+      if(baileNameEl) baileNameEl.textContent = baile.preset >= 0 && BAILE_PRESETS[baile.preset] ? BAILE_PRESETS[baile.preset].name : 'Personalizada';
+      var cur = BAILE_SLOTS[baileStep][baile.sel[baileStep]];
+      if(baileCountEl) baileCountEl.textContent = 'Paso ' + (baileStep + 1) + ' de ' + BAILE_SLOTS.length;
+      if(baileTitleEl) baileTitleEl.textContent = cur.t;
+      if(baileDescEl) baileDescEl.textContent = cur.d;
+      if(baileListEl){
+        baileListEl.innerHTML = '';
+        BAILE_SLOTS.forEach(function(slot, i){
+          var step = slot[baile.sel[i]];
+          var item = document.createElement('div');
+          item.className = 'baile-item' + (i === baileStep ? ' is-current' : '');
+          var head = document.createElement('div');
+          head.className = 'baile-item-head';
+          var num = document.createElement('span');
+          num.className = 'baile-item-num';
+          num.textContent = (i + 1) + '.';
+          var title = document.createElement('span');
+          title.className = 'baile-item-title';
+          title.textContent = step.t;
+          head.appendChild(num);
+          head.appendChild(title);
+          var desc = document.createElement('p');
+          desc.className = 'baile-item-desc';
+          desc.textContent = step.d;
+          var swap = document.createElement('button');
+          swap.type = 'button';
+          swap.className = 'baile-swap';
+          swap.textContent = 'Cambiar este paso';
+          swap.setAttribute('aria-label', 'Cambiar el paso ' + (i + 1) + ' por otro paso');
+          swap.addEventListener('click', function(){ baileSwap(i); });
+          var go = document.createElement('button');
+          go.type = 'button';
+          go.className = 'baile-swap';
+          go.textContent = 'Practicar este paso';
+          go.setAttribute('aria-label', 'Ir a practicar el paso ' + (i + 1));
+          go.addEventListener('click', function(){ baileStep = i; renderBaile(); });
+          item.appendChild(head);
+          item.appendChild(desc);
+          item.appendChild(swap);
+          item.appendChild(document.createTextNode(' '));
+          item.appendChild(go);
+          baileListEl.appendChild(item);
+        });
+      }
+    }
+    function baileSwap(i){
+      baile.sel[i] = (baile.sel[i] + 1) % BAILE_SLOTS[i].length;
+      baile.preset = -1;
+      persistBaile();
+      renderBaile();
+    }
+    var baileAllBtn = document.getElementById('baileAllBtn');
+    if(baileAllBtn) baileAllBtn.addEventListener('click', function(){
+      baile.preset = baile.preset >= 0 ? (baile.preset + 1) % BAILE_PRESETS.length : 0;
+      baile.sel = BAILE_PRESETS[baile.preset].sel.slice();
+      persistBaile();
+      renderBaile();
+    });
+    var bailePrevBtn = document.getElementById('bailePrevBtn');
+    var baileNextBtn = document.getElementById('baileNextBtn');
+    var baileSwapBtn = document.getElementById('baileSwapBtn');
+    if(bailePrevBtn) bailePrevBtn.addEventListener('click', function(){ baileStep = (baileStep + BAILE_SLOTS.length - 1) % BAILE_SLOTS.length; renderBaile(); });
+    if(baileNextBtn) baileNextBtn.addEventListener('click', function(){ baileStep = (baileStep + 1) % BAILE_SLOTS.length; renderBaile(); });
+    if(baileSwapBtn) baileSwapBtn.addEventListener('click', function(){ baileSwap(baileStep); });
+    renderBaile();
+
+    // ===== El árbol de los deseos =====
+    var WD_KEY = 'arbol-deseos-naomi';
+    var WD_SEED = ['Nuestra luna de miel', 'Nuestra casita soñada', 'El viaje al Templo de Salt Lake City'];
+    var wdWishes = null;
+    try{
+      var wdSaved = window.localStorage.getItem(WD_KEY);
+      if(wdSaved){
+        var wdParsed = JSON.parse(wdSaved);
+        if(wdParsed && Object.prototype.toString.call(wdParsed) === '[object Array]') wdWishes = wdParsed;
+      }
+    }catch(e){}
+    if(!wdWishes) wdWishes = WD_SEED.slice();
+    var wdSel = -1;
+    var wishOrnsEl = document.getElementById('wishOrns');
+    var wishDreamListEl = document.getElementById('wishDreamList');
+    var wishDreamInput = document.getElementById('wishDreamInput');
+    var wishDreamAddBtn = document.getElementById('wishDreamAddBtn');
+    var wishDreamMsg = document.getElementById('wishDreamMsg');
+    function persistWishes(){
+      try{ window.localStorage.setItem(WD_KEY, JSON.stringify(wdWishes)); }catch(e){}
+    }
+    function wdPos(i, n){
+      var fy = (i + 0.5) / Math.max(n, 1);
+      var y = 15 + fy * 66;
+      var halfW = 5 + (y - 8) * 0.40;
+      var h1 = Math.abs(Math.sin(i * 127.1 + 13.7) * 43758.5453) % 1;
+      var h2 = Math.abs(Math.sin(i * 311.7 + 7.3) * 12543.123) % 1;
+      var x = 50 + (h1 * 2 - 1) * halfW * 0.9;
+      return { x: Math.round(x * 10) / 10, y: Math.round((y + (h2 * 2 - 1) * 3) * 10) / 10 };
+    }
+    function renderWishes(){
+      if(wishOrnsEl){
+        wishOrnsEl.innerHTML = '';
+        wdWishes.forEach(function(w, i){
+          var p = wdPos(i, wdWishes.length);
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'wish-orn' + (i === wdSel ? ' is-selected' : '');
+          b.style.left = p.x + '%';
+          b.style.top = p.y + '%';
+          b.setAttribute('aria-label', 'Deseo ' + (i + 1) + ': ' + w);
+          var s = document.createElement('span');
+          s.textContent = String(i + 1);
+          b.appendChild(s);
+          b.addEventListener('click', function(){
+            wdSel = (wdSel === i) ? -1 : i;
+            renderWishes();
+          });
+          wishOrnsEl.appendChild(b);
+        });
+      }
+      if(wishDreamListEl){
+        wishDreamListEl.innerHTML = '';
+        if(!wdWishes.length){
+          var empty = document.createElement('p');
+          empty.className = 'diary-empty';
+          empty.textContent = 'El arbolito está esperando su primer deseo, mi amor. Escriban uno y cuélguenlo juntitos. ✦';
+          wishDreamListEl.appendChild(empty);
+          return;
+        }
+        wdWishes.forEach(function(w, i){
+          var item = document.createElement('div');
+          item.className = 'wish-item' + (i === wdSel ? ' is-selected' : '');
+          var badge = document.createElement('span');
+          badge.className = 'wish-item-num';
+          var badgeNum = document.createElement('span');
+          badgeNum.textContent = String(i + 1);
+          badge.appendChild(badgeNum);
+          var text = document.createElement('span');
+          text.className = 'wish-item-text';
+          text.textContent = w;
+          var del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'diary-del';
+          del.textContent = 'Borrar';
+          del.setAttribute('aria-label', 'Borrar el deseo: ' + w);
+          del.addEventListener('click', function(){
+            wdWishes.splice(i, 1);
+            if(wdSel === i) wdSel = -1;
+            else if(wdSel > i) wdSel--;
+            persistWishes();
+            renderWishes();
+            if(wishDreamMsg) wishDreamMsg.textContent = 'Deseo borrado, mi amor.';
+          });
+          item.appendChild(badge);
+          item.appendChild(text);
+          item.appendChild(del);
+          wishDreamListEl.appendChild(item);
+        });
+      }
+    }
+    if(wishDreamAddBtn && wishDreamInput){
+      wishDreamAddBtn.addEventListener('click', function(){
+        var text = wishDreamInput.value.replace(/^\s+|\s+$/g, '');
+        if(!text){
+          if(wishDreamMsg) wishDreamMsg.textContent = 'Escribe primero el deseo, mi vida… ese sueño que guardan en el corazón. ✦';
+          wishDreamInput.focus();
+          return;
+        }
+        wdWishes.push(text);
+        wdSel = wdWishes.length - 1;
+        persistWishes();
+        wishDreamInput.value = '';
+        renderWishes();
+        if(wishDreamMsg) wishDreamMsg.textContent = 'Tu deseo ya cuelga del arbolito, mi amor. Que Dios nos lo conceda a Su tiempo. ✦♥';
+      });
+    }
+    renderWishes();
 
     // --- Cartita de deseos de Navidad ---
     var WISH_KEY = 'cartita-deseos-navidad-naomi';
@@ -8589,6 +10217,16 @@
     screenEnamora: 'screenEnamora',
     screenArbolFamiliar: 'screenArbolFamiliar',
     screenConoces: 'screenGames',
+    screenSegundaMilla: 'screenSegundaMilla',
+    screenMenuDomingo: 'screenMenuDomingo',
+    screenTriviaMormon: 'screenTriviaMormon',
+    screenAdivinaProfeta: 'screenAdivinaProfeta',
+    screenEstudioFamiliar: 'screenEstudioFamiliar',
+    screenAdivinaHimno: 'screenAdivinaHimno',
+    screenRetoGratitud: 'screenRetoGratitud',
+    screenKaraoke: 'screenKaraoke',
+    screenPrimerBaile: 'screenPrimerBaile',
+    screenArbolDeseos: 'screenArbolDeseos',
     screenPlaylist: 'screenPlaylist'
   };
   function updateNavCurrent(){
